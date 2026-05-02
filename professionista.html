@@ -315,7 +315,6 @@
         .btn-main.oro:hover { background: var(--oro-chiaro); }
         .btn-main.grigio { background: var(--grigio-chiaro); color: var(--grigio); }
 
-        /* PACCHETTI */
         .pacchetti-grid {
             display: flex;
             flex-direction: column;
@@ -354,11 +353,7 @@
             margin-bottom: 10px;
         }
 
-        .pacchetto-nome {
-            font-size: 17px;
-            font-weight: 700;
-            color: var(--blu-scuro);
-        }
+        .pacchetto-nome { font-size: 17px; font-weight: 700; color: var(--blu-scuro); }
 
         .pacchetto-prezzo {
             font-size: 22px;
@@ -374,20 +369,9 @@
             font-weight: 400;
         }
 
-        .pacchetto-features {
-            font-size: 13px;
-            color: var(--grigio);
-            line-height: 1.8;
-        }
-
-        .pacchetto-features li {
-            list-style: none;
-            padding: 2px 0;
-        }
-
+        .pacchetto-features { font-size: 13px; color: var(--grigio); line-height: 1.8; list-style: none; }
         .pacchetto-features li::before { content: "✓ "; color: var(--verde); font-weight: 700; }
 
-        /* UPLOAD */
         .upload-area {
             border: 2px dashed #e5e7eb;
             border-radius: 12px;
@@ -402,7 +386,6 @@
         .upload-area:hover { border-color: var(--blu); color: var(--blu); }
         .upload-area .upload-icon { font-size: 32px; margin-bottom: 8px; }
 
-        /* RAGGIO */
         .raggio-display {
             text-align: center;
             font-size: 28px;
@@ -419,7 +402,6 @@
             accent-color: var(--blu);
         }
 
-        /* SUCCESS */
         .success-box { text-align: center; padding: 20px 0; }
         .success-icon { font-size: 70px; margin-bottom: 20px; }
 
@@ -450,7 +432,6 @@
         .link-back { display: block; text-align: center; margin-top: 20px; color: var(--grigio); font-size: 14px; text-decoration: none; }
         .link-back:hover { color: var(--blu); }
 
-        /* ABBONAMENTO PAGINA */
         .abbonamento-card {
             border: 2px solid #e5e7eb;
             border-radius: 16px;
@@ -483,35 +464,42 @@
             border-radius: 20px;
             margin-left: 10px;
         }
+
+        /* PIVA RESULT */
+        .piva-result-box {
+            margin-top: 10px;
+            font-size: 13px;
+            border-radius: 10px;
+            padding: 12px 15px;
+            line-height: 1.7;
+        }
+
+        .piva-ok { background: #ECFDF5; border: 1px solid #6EE7B7; color: #065F46; }
+        .piva-error { background: #FEF2F2; border: 1px solid #FCA5A5; color: #991B1B; }
+        .piva-warning { background: #FEF3C7; border: 1px solid #F59E0B; color: #92400E; }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
     <nav>
         <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
     </nav>
 
-    <!-- HERO -->
     <div class="page-hero">
         <h1>Area <span>Professionista</span></h1>
         <p>Verificato • Professionale • Sicuro</p>
     </div>
 
-    <!-- CONTAINER -->
     <div class="container">
         <div class="card">
 
-            <!-- TABS -->
             <div class="tabs">
                 <button class="tab active" onclick="switchTab('registrati')">📝 Registrati</button>
                 <button class="tab" onclick="switchTab('accedi')">🔑 Accedi</button>
             </div>
 
-            <!-- ===== REGISTRAZIONE ===== -->
             <div id="tab-registrati">
 
-                <!-- STEP INDICATOR -->
                 <div class="steps-indicator">
                     <div class="step-dot active" id="dot1">1</div>
                     <div class="step-line" id="line1"></div>
@@ -524,7 +512,7 @@
                     <div class="step-dot" id="dot5">5</div>
                 </div>
 
-                <!-- STEP 1: DATI PERSONALI -->
+                <!-- STEP 1 -->
                 <div class="step-content active" id="step1">
 
                     <div class="avviso-blu">
@@ -594,18 +582,22 @@
                     <button class="btn-main" onclick="goStep2()">Continua →</button>
                 </div>
 
-                <!-- STEP 2: VISURA / DOCUMENTI -->
+                <!-- STEP 2 -->
                 <div class="step-content" id="step2">
 
                     <div id="box-visura">
                         <div class="avviso-oro">
                             <strong>📋 Verifica Visura Camerale</strong>
-                            Inserisci il numero di Partita IVA o Codice Fiscale aziendale. Il sistema verificherà automaticamente i tuoi dati tramite il registro delle Camere di Commercio italiane.
+                            Inserisci la tua Partita IVA per la verifica automatica. Carica anche la visura camerale che verrà controllata dal nostro team entro 24 ore.
                         </div>
 
                         <div class="form-group">
                             <label>Partita IVA</label>
-                            <input type="text" id="piva" placeholder="Es. 12345678901">
+                            <div class="otp-group">
+                                <input type="text" id="piva" placeholder="Es. 12345678901" maxlength="11">
+                                <button class="btn-otp" id="btn-verifica-piva" onclick="verificaPIVA()">Verifica</button>
+                            </div>
+                            <div id="piva-result"></div>
                         </div>
 
                         <div class="form-group">
@@ -628,7 +620,7 @@
                     <div id="box-semplificato" style="display:none">
                         <div class="avviso-verde">
                             <strong>✅ Registrazione Semplificata</strong>
-                            Per la categoria selezionata non è richiesta la visura camerale. Ti chiediamo solo un documento di identità valido per verificare la tua identità.
+                            Per la categoria selezionata non è richiesta la visura camerale. Ti chiediamo solo un documento di identità valido.
                         </div>
 
                         <div class="form-group">
@@ -647,7 +639,7 @@
                     <button class="btn-main grigio" onclick="goToStep(1)">← Indietro</button>
                 </div>
 
-                <!-- STEP 3: PROFILO -->
+                <!-- STEP 3 -->
                 <div class="step-content" id="step3">
 
                     <div class="avviso-verde">
@@ -704,12 +696,12 @@
                     <button class="btn-main grigio" onclick="goToStep(2)">← Indietro</button>
                 </div>
 
-                <!-- STEP 4: PACCHETTI CONTATTI -->
+                <!-- STEP 4 -->
                 <div class="step-content" id="step4">
 
                     <div class="avviso-blu">
                         <strong>💬 Come funziona il sistema contatti</strong>
-                        Quando vedi una richiesta di un cliente nella tua zona che ti interessa, acquisti il contatto e sblocchi la chat privata. Il cliente vede solo la tua richiesta di contatto, non i tuoi dati finché non accetti.
+                        Quando vedi una richiesta di un cliente nella tua zona che ti interessa, acquisti il contatto e sblocchi la chat privata. Il cliente non vede i tuoi dati finché non accetti.
                     </div>
 
                     <div style="margin-bottom:20px">
@@ -774,7 +766,7 @@
                                 <div class="abbonamento-nome">📆 Annuale <span class="risparmio-badge">RISPARMIA 30%</span></div>
                                 <div class="abbonamento-prezzo">€19,90<span style="font-size:13px;color:var(--grigio);font-family:'Inter',sans-serif;font-weight:400">/mese</span></div>
                             </div>
-                            <div class="abbonamento-desc">€239/anno • Pagina profilo con 5 foto + video • Posizione prioritaria nei risultati • Badge Premium</div>
+                            <div class="abbonamento-desc">€239/anno • Pagina profilo con 5 foto + video • Posizione prioritaria • Badge Premium</div>
                         </div>
 
                         <div class="abbonamento-card" onclick="selezionaAbbonamento(this, 'nessuno')">
@@ -790,7 +782,7 @@
                     <button class="btn-main grigio" onclick="goToStep(3)">← Indietro</button>
                 </div>
 
-                <!-- STEP 5: SUCCESSO -->
+                <!-- STEP 5 -->
                 <div class="step-content" id="step5">
                     <div class="success-box">
                         <div class="success-icon">🎉</div>
@@ -802,22 +794,22 @@
                             👁️ Vedrai solo: descrizione del lavoro e città. Mai i dati personali del cliente.<br><br>
                             💳 Acquisti il contatto → si sblocca la chat privata.<br><br>
                             📅 In chat concordate data e ora del sopralluogo.<br><br>
-                            ✅ Al termine del lavoro e dopo la <strong>conferma del pagamento</strong>, si aprirà automaticamente la schermata recensione reciproca. Entrambi dovrete recensirvi per mantenere l'account attivo.
+                            ✅ Al termine del lavoro e dopo la <strong>conferma del pagamento</strong>, si aprirà automaticamente la schermata recensione reciproca.
                         </div>
 
                         <div class="avviso-ban">
                             <strong>⚠️ Ricorda le regole:</strong>
                             🔴 3 sopralluoghi mancati per colpa tua → <strong>ban definitivo</strong><br><br>
-                            🟢 Se il cliente non si presenta o non permette il sopralluogo → <strong>viene bannato lui</strong>. Sei sempre tutelato!
+                            🟢 Se il cliente non si presenta → <strong>viene bannato lui</strong>. Sei sempre tutelato!
                         </div>
 
-                        <button class="btn-main oro" onclick="window.location.href='index.html'">🏠 Vai alla Dashboard</button>
+                        <button class="btn-main oro" onclick="window.location.href='dashboard-pro.html'">🏠 Vai alla Dashboard</button>
                     </div>
                 </div>
 
             </div>
 
-            <!-- ===== ACCEDI ===== -->
+            <!-- ACCEDI -->
             <div id="tab-accedi" style="display:none">
                 <div class="form-group">
                     <label>Email</label>
@@ -841,6 +833,7 @@
         let otpInviato = false;
         let pacchetto = '';
         let abbonamento = '';
+        let pivaVerificata = false;
 
         function switchTab(tab) {
             document.getElementById('tab-registrati').style.display = tab === 'registrati' ? 'block' : 'none';
@@ -870,6 +863,44 @@
             btn.classList.add('selected');
             categoriaSelezionata = btn.textContent;
             registrazioneSemplificata = semplificata;
+        }
+
+        async function verificaPIVA() {
+            const piva = document.getElementById('piva').value.trim();
+            const result = document.getElementById('piva-result');
+            const btn = document.getElementById('btn-verifica-piva');
+
+            if (!piva || piva.length !== 11) {
+                result.innerHTML = '<div class="piva-result-box piva-error">❌ Inserisci una P.IVA valida di 11 cifre</div>';
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = '⏳';
+            result.innerHTML = '<div class="piva-result-box" style="background:#F5F7FA;border:1px solid #e5e7eb;color:#6B7280">⏳ Verifica in corso...</div>';
+
+            try {
+                const response = await fetch('https://api.vatcomply.com/vat?vat_number=IT' + piva);
+                const data = await response.json();
+
+                if (data.valid) {
+                    result.innerHTML = `<div class="piva-result-box piva-ok">
+                        ✅ <strong>P.IVA valida e attiva!</strong><br>
+                        🏢 <strong>Ragione sociale:</strong> ${data.name || 'Verificata'}<br>
+                        📍 <strong>Indirizzo:</strong> ${data.address || 'Italia'}
+                    </div>`;
+                    pivaVerificata = true;
+                } else {
+                    result.innerHTML = '<div class="piva-result-box piva-error">❌ <strong>P.IVA non valida o non attiva.</strong> Controlla il numero inserito.</div>';
+                    pivaVerificata = false;
+                }
+            } catch (e) {
+                result.innerHTML = '<div class="piva-result-box piva-warning">⚠️ <strong>Verifica manuale in corso.</strong> Il nostro team controllerà la tua visura entro 24 ore dalla registrazione.</div>';
+                pivaVerificata = true;
+            }
+
+            btn.disabled = false;
+            btn.textContent = 'Verifica';
         }
 
         function selezionaPacchetto(el, nome) {
@@ -917,6 +948,10 @@
         }
 
         function goStep3() {
+            if (!registrazioneSemplificata && !pivaVerificata) {
+                alert('Verifica prima la tua Partita IVA!');
+                return;
+            }
             goToStep(3);
         }
 
