@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professionisti - Area Professionista</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Professionisti - Diventa Professionista</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         :root {
             --blu: #1B3A6B;
             --blu-scuro: #0F2347;
@@ -20,969 +19,881 @@
             --testo: #1A1A2E;
             --verde: #10B981;
             --rosso: #EF4444;
+            --arancio: #F59E0B;
         }
+        body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color: var(--testo); min-height: 100vh; }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--grigio-chiaro);
-            color: var(--testo);
-            min-height: 100vh;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 18px 40px;
-            background: var(--bianco);
-            border-bottom: 1px solid #e5e7eb;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            font-weight: 900;
-            color: var(--blu);
-            text-decoration: none;
-        }
-
+        /* NAVBAR */
+        .navbar { background: var(--blu-scuro); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 15px rgba(0,0,0,0.3); }
+        .logo { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 900; color: white; text-decoration: none; letter-spacing: 1px; }
         .logo span { color: var(--oro); }
+        .navbar-links { display: flex; gap: 15px; align-items: center; }
+        .btn-login { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.4); padding: 9px 22px; border-radius: 25px; font-size: 14px; font-weight: 500; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; text-decoration: none; }
+        .btn-login:hover { border-color: var(--oro); color: var(--oro); }
+        .btn-cliente { background: var(--oro); color: white; border: none; padding: 9px 22px; border-radius: 25px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; text-decoration: none; }
+        .btn-cliente:hover { background: var(--oro-chiaro); transform: translateY(-1px); }
 
-        .page-hero {
-            background: linear-gradient(135deg, var(--blu-scuro) 0%, var(--blu) 100%);
-            padding: 50px 30px;
-            text-align: center;
-        }
-
-        .page-hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 36px;
-            color: white;
-            margin-bottom: 10px;
-        }
-
+        /* HERO */
+        .page-hero { background: linear-gradient(135deg, var(--blu-scuro) 0%, var(--blu) 50%, var(--blu-chiaro) 100%); padding: 60px 30px 50px; text-align: center; position: relative; overflow: hidden; }
+        .page-hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(184,151,42,0.1) 0%, transparent 60%); pointer-events: none; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(184,151,42,0.2); border: 1px solid rgba(184,151,42,0.4); color: var(--oro-chiaro); font-size: 13px; font-weight: 600; padding: 6px 18px; border-radius: 20px; margin-bottom: 20px; }
+        .page-hero h1 { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 900; color: white; margin-bottom: 15px; line-height: 1.2; }
         .page-hero h1 span { color: var(--oro); }
-        .page-hero p { color: #9CA3AF; font-size: 16px; }
+        .page-hero p { color: rgba(255,255,255,0.8); font-size: 16px; max-width: 550px; margin: 0 auto 30px; line-height: 1.7; }
+        .hero-stats { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 10px; }
+        .hero-stat { text-align: center; }
+        .hero-stat-num { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; color: var(--oro); }
+        .hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 3px; }
 
-        .container {
-            max-width: 650px;
-            margin: -30px auto 60px;
-            padding: 0 20px;
+        /* CONTENUTO */
+        .container { max-width: 750px; margin: 0 auto; padding: 40px 20px 60px; }
+
+        /* TABS */
+        .tabs { display: flex; gap: 0; background: white; border-radius: 16px 16px 0 0; overflow: hidden; border: 1px solid #e5e7eb; border-bottom: none; }
+        .tab { flex: 1; padding: 16px; border: none; background: transparent; cursor: pointer; font-size: 15px; font-weight: 600; color: var(--grigio); transition: 0.3s; font-family: 'Inter', sans-serif; }
+        .tab.active { background: white; color: var(--blu); border-bottom: 3px solid var(--oro); }
+        .tab:hover:not(.active) { background: var(--grigio-chiaro); }
+
+        /* CARD */
+        .card { background: white; border-radius: 0 0 20px 20px; padding: 35px 40px; border: 1px solid #e5e7eb; border-top: none; box-shadow: 0 10px 40px rgba(0,0,0,0.06); }
+
+        /* STEP INDICATOR */
+        .steps-indicator { display: flex; align-items: center; justify-content: center; margin-bottom: 35px; gap: 0; }
+        .step-dot { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; background: #e5e7eb; color: var(--grigio); transition: 0.4s; flex-shrink: 0; }
+        .step-dot.active { background: var(--blu); color: white; box-shadow: 0 4px 12px rgba(27,58,107,0.3); }
+        .step-dot.done { background: var(--verde); color: white; }
+        .step-line { height: 3px; flex: 1; background: #e5e7eb; transition: 0.4s; max-width: 80px; }
+        .step-line.done { background: var(--verde); }
+
+        /* STEPS */
+        .step-content { display: none; }
+        .step-content.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* FORM */
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--testo); margin-bottom: 8px; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 13px 18px; border: 1.5px solid #e5e7eb; border-radius: 12px;
+            font-size: 15px; font-family: 'Inter', sans-serif; transition: 0.3s; background: white; color: var(--testo);
         }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--blu); outline: none; box-shadow: 0 0 0 3px rgba(27,58,107,0.08); }
+        .form-group textarea { min-height: 100px; resize: vertical; }
 
-        .card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px 35px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            border: 1px solid #e5e7eb;
-            margin-bottom: 20px;
-        }
-
-        .tabs {
-            display: flex;
-            margin-bottom: 35px;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid #e5e7eb;
-        }
-
-        .tab {
-            flex: 1;
-            padding: 14px;
-            text-align: center;
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--grigio);
-            background: var(--grigio-chiaro);
-            transition: 0.3s;
-            border: none;
-        }
-
-        .tab.active {
-            background: var(--blu);
-            color: white;
-        }
-
-        .form-group { margin-bottom: 22px; }
-
-        label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--blu-scuro);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 14px 18px;
-            border: 1.5px solid #e5e7eb;
-            border-radius: 12px;
-            font-size: 15px;
-            font-family: 'Inter', sans-serif;
-            color: var(--testo);
-            background: var(--grigio-chiaro);
-            transition: 0.3s;
-            outline: none;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            border-color: var(--blu);
-            background: white;
-            box-shadow: 0 0 0 3px rgba(27,58,107,0.08);
-        }
-
-        textarea { resize: vertical; min-height: 100px; }
-
+        /* OTP GROUP */
         .otp-group { display: flex; gap: 10px; }
         .otp-group input { flex: 1; }
-
-        .btn-otp {
-            background: var(--blu);
-            color: white;
-            border: none;
-            padding: 14px 20px;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: 0.3s;
-        }
-
+        .btn-otp { background: var(--blu); color: white; border: none; padding: 13px 20px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; white-space: nowrap; flex-shrink: 0; }
         .btn-otp:hover { background: var(--blu-chiaro); }
         .btn-otp:disabled { background: var(--grigio); cursor: not-allowed; }
 
+        /* OTP BOXES */
         .otp-verify { display: none; margin-top: 15px; }
         .otp-verify.show { display: block; }
-
-        .otp-boxes {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-bottom: 15px;
-        }
-
-        .otp-box {
-            width: 50px;
-            height: 55px;
-            text-align: center;
-            font-size: 22px;
-            font-weight: 700;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            background: var(--grigio-chiaro);
-            outline: none;
-        }
-
-        .otp-box:focus { border-color: var(--blu); background: white; }
-
-        .steps-indicator {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 35px;
-        }
-
-        .step-dot {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            background: #e5e7eb;
-            color: var(--grigio);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            font-weight: 700;
-            transition: 0.3s;
-        }
-
-        .step-dot.active { background: var(--blu); color: white; }
-        .step-dot.done { background: var(--verde); color: white; }
-
-        .step-line {
-            flex: 1;
-            height: 2px;
-            background: #e5e7eb;
-            max-width: 50px;
-        }
-
-        .step-line.done { background: var(--verde); }
-
-        .step-content { display: none; }
-        .step-content.active { display: block; }
-
-        .avviso-ban {
-            background: #FEF3C7;
-            border: 1px solid #F59E0B;
-            border-radius: 12px;
-            padding: 18px 20px;
-            margin-bottom: 25px;
-            font-size: 13px;
-            color: #92400E;
-            line-height: 1.8;
-        }
-
-        .avviso-ban strong { display: block; margin-bottom: 8px; font-size: 14px; color: #78350F; }
-
-        .avviso-verde {
-            background: #ECFDF5;
-            border: 1px solid #6EE7B7;
-            border-radius: 12px;
-            padding: 18px 20px;
-            margin-bottom: 25px;
-            font-size: 13px;
-            color: #065F46;
-            line-height: 1.8;
-        }
-
-        .avviso-verde strong { display: block; margin-bottom: 8px; font-size: 14px; }
-
-        .avviso-blu {
-            background: #EFF6FF;
-            border: 1px solid #BFDBFE;
-            border-radius: 12px;
-            padding: 18px 20px;
-            margin-bottom: 25px;
-            font-size: 13px;
-            color: var(--blu);
-            line-height: 1.8;
-        }
-
-        .avviso-blu strong { display: block; margin-bottom: 8px; font-size: 14px; }
-
-        .avviso-oro {
-            background: #FFFBEB;
-            border: 1px solid var(--oro);
-            border-radius: 12px;
-            padding: 18px 20px;
-            margin-bottom: 25px;
-            font-size: 13px;
-            color: #78350F;
-            line-height: 1.8;
-        }
-
-        .avviso-oro strong { display: block; margin-bottom: 8px; font-size: 14px; color: var(--oro); }
-
-        .categoria-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 8px;
-        }
-
-        .cat-btn {
-            padding: 8px 16px;
-            border: 1.5px solid #e5e7eb;
-            border-radius: 20px;
-            font-size: 13px;
-            cursor: pointer;
-            background: var(--grigio-chiaro);
-            color: var(--testo);
-            transition: 0.3s;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .cat-btn.selected {
-            background: var(--blu);
-            color: white;
-            border-color: var(--blu);
-        }
-
-        .btn-main {
-            width: 100%;
-            padding: 16px;
-            background: var(--blu);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 10px;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .btn-main:hover { background: var(--blu-chiaro); transform: translateY(-1px); }
-        .btn-main.oro { background: var(--oro); }
-        .btn-main.oro:hover { background: var(--oro-chiaro); }
-        .btn-main.grigio { background: var(--grigio-chiaro); color: var(--grigio); }
-
-        .pacchetti-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .pacchetto {
-            border: 2px solid #e5e7eb;
-            border-radius: 16px;
-            padding: 20px 25px;
-            cursor: pointer;
-            transition: 0.3s;
-            position: relative;
-        }
-
-        .pacchetto:hover { border-color: var(--blu); }
-        .pacchetto.selected { border-color: var(--oro); background: #FFFBEB; }
-
-        .pacchetto-badge {
-            position: absolute;
-            top: -12px;
-            right: 20px;
-            background: var(--oro);
-            color: white;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 20px;
-        }
-
-        .pacchetto-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .pacchetto-nome { font-size: 17px; font-weight: 700; color: var(--blu-scuro); }
-
-        .pacchetto-prezzo {
-            font-size: 22px;
-            font-weight: 900;
-            color: var(--oro);
-            font-family: 'Playfair Display', serif;
-        }
-
-        .pacchetto-prezzo span {
-            font-size: 13px;
-            color: var(--grigio);
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-        }
-
-        .pacchetto-features { font-size: 13px; color: var(--grigio); line-height: 1.8; list-style: none; }
-        .pacchetto-features li::before { content: "✓ "; color: var(--verde); font-weight: 700; }
-
-        .upload-area {
-            border: 2px dashed #e5e7eb;
-            border-radius: 12px;
-            padding: 25px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.3s;
-            color: var(--grigio);
-            font-size: 14px;
-        }
-
-        .upload-area:hover { border-color: var(--blu); color: var(--blu); }
-        .upload-area .upload-icon { font-size: 32px; margin-bottom: 8px; }
-
-        .raggio-display {
-            text-align: center;
-            font-size: 28px;
-            font-weight: 900;
-            color: var(--blu);
-            font-family: 'Playfair Display', serif;
-            margin: 10px 0;
-        }
-
-        input[type="range"] {
-            padding: 0;
-            border: none;
-            background: transparent;
-            accent-color: var(--blu);
-        }
-
-        .success-box { text-align: center; padding: 20px 0; }
-        .success-icon { font-size: 70px; margin-bottom: 20px; }
-
-        .success-box h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            color: var(--blu-scuro);
-            margin-bottom: 15px;
-        }
-
-        .success-box p { color: var(--grigio); font-size: 15px; line-height: 1.7; margin-bottom: 10px; }
-
-        .highlight {
-            background: var(--grigio-chiaro);
-            border-radius: 12px;
-            padding: 15px 20px;
-            margin: 15px 0;
-            font-size: 14px;
-            color: var(--blu-scuro);
-            font-weight: 600;
-            text-align: left;
-            line-height: 1.8;
-        }
-
-        .otp-timer { text-align: center; font-size: 13px; color: var(--grigio); margin-top: 10px; }
-        .otp-timer span { color: var(--blu); font-weight: 600; cursor: pointer; }
-
-        .link-back { display: block; text-align: center; margin-top: 20px; color: var(--grigio); font-size: 14px; text-decoration: none; }
-        .link-back:hover { color: var(--blu); }
-
-        .abbonamento-card {
-            border: 2px solid #e5e7eb;
-            border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 15px;
-            cursor: pointer;
-            transition: 0.3s;
-            position: relative;
-        }
-
-        .abbonamento-card:hover { border-color: var(--blu); }
-        .abbonamento-card.selected { border-color: var(--oro); background: #FFFBEB; }
-
-        .abbonamento-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .abbonamento-nome { font-size: 16px; font-weight: 700; color: var(--blu-scuro); }
-        .abbonamento-prezzo { font-size: 20px; font-weight: 900; color: var(--oro); font-family: 'Playfair Display', serif; }
-        .abbonamento-desc { font-size: 13px; color: var(--grigio); margin-top: 8px; line-height: 1.6; }
-
-        .risparmio-badge {
-            background: var(--verde);
-            color: white;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 3px 10px;
-            border-radius: 20px;
-            margin-left: 10px;
-        }
+        .otp-boxes { display: flex; gap: 10px; justify-content: center; margin: 15px 0; }
+        .otp-box { width: 50px; height: 58px; border: 2px solid #e5e7eb; border-radius: 12px; text-align: center; font-size: 22px; font-weight: 700; color: var(--blu); transition: 0.3s; -moz-appearance: textfield; }
+        .otp-box::-webkit-outer-spin-button, .otp-box::-webkit-inner-spin-button { -webkit-appearance: none; }
+        .otp-box:focus { border-color: var(--oro); outline: none; background: #FFFBEB; }
+        .otp-timer { text-align: center; font-size: 13px; color: var(--grigio); }
+        .otp-timer span { color: var(--blu); cursor: pointer; font-weight: 600; }
 
         /* PIVA RESULT */
-        .piva-result-box {
-            margin-top: 10px;
-            font-size: 13px;
-            border-radius: 10px;
-            padding: 12px 15px;
-            line-height: 1.7;
-        }
+        #piva-result { margin-top: 10px; }
 
-        .piva-ok { background: #ECFDF5; border: 1px solid #6EE7B7; color: #065F46; }
-        .piva-error { background: #FEF2F2; border: 1px solid #FCA5A5; color: #991B1B; }
-        .piva-warning { background: #FEF3C7; border: 1px solid #F59E0B; color: #92400E; }
+        /* CATEGORIE */
+        .categorie-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 15px 0 20px; }
+        .categoria-btn { padding: 14px 12px; border: 2px solid #e5e7eb; border-radius: 14px; background: white; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--grigio); transition: 0.3s; text-align: center; font-family: 'Inter', sans-serif; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+        .categoria-btn:hover { border-color: var(--blu); color: var(--blu); background: #EFF6FF; }
+        .categoria-btn.selected { border-color: var(--oro); background: #FFFBEB; color: var(--oro); }
+        .categoria-btn .emoji { font-size: 22px; }
+        .categoria-btn.escort-btn { border-color: #FDA4AF; color: #BE185D; }
+        .categoria-btn.escort-btn:hover { border-color: #F43F5E; background: #FFF1F2; color: #F43F5E; }
+        .categoria-btn.escort-btn.selected { border-color: #F43F5E; background: #FFF1F2; color: #F43F5E; }
+
+        /* PRICING */
+        .pricing-box { background: var(--grigio-chiaro); border-radius: 16px; padding: 22px; margin: 20px 0; border: 1px solid #e5e7eb; }
+        .pricing-box h3 { font-size: 15px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+        .pricing-options { display: flex; gap: 12px; flex-wrap: wrap; }
+        .pricing-card { flex: 1; min-width: 140px; background: white; border: 2px solid #e5e7eb; border-radius: 14px; padding: 18px 15px; text-align: center; cursor: pointer; transition: 0.3s; position: relative; }
+        .pricing-card:hover { border-color: var(--blu); box-shadow: 0 4px 15px rgba(27,58,107,0.1); }
+        .pricing-card.selected { border-color: var(--oro); background: #FFFBEB; }
+        .pricing-card .best { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--verde); color: white; font-size: 10px; font-weight: 700; padding: 3px 12px; border-radius: 10px; white-space: nowrap; }
+        .pricing-card .periodo { font-size: 12px; color: var(--grigio); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .pricing-card .prezzo { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; color: var(--blu-scuro); }
+        .pricing-card.selected .prezzo { color: var(--oro); }
+        .pricing-card .unita { font-size: 12px; color: var(--grigio); }
+        .pricing-card .risparmio { font-size: 11px; color: var(--verde); font-weight: 600; margin-top: 6px; }
+
+        /* CONTATTI SBLOCCO */
+        .sblocco-info { background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 14px; padding: 18px 20px; font-size: 14px; color: var(--blu-scuro); line-height: 1.8; margin: 15px 0; }
+        .sblocco-info strong { display: block; margin-bottom: 8px; font-size: 15px; }
+        .sblocco-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid rgba(27,58,107,0.08); font-size: 13px; }
+        .sblocco-row:last-child { border-bottom: none; }
+        .sblocco-prezzo { font-weight: 700; color: var(--oro); font-size: 15px; }
+
+        /* AVVISI */
+        .avviso-blu { background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 12px; padding: 15px 18px; font-size: 13px; color: #1E40AF; line-height: 1.7; margin-bottom: 20px; }
+        .avviso-blu strong { display: block; margin-bottom: 5px; }
+        .avviso-oro { background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 12px; padding: 15px 18px; font-size: 13px; color: #78350F; line-height: 1.7; margin-bottom: 20px; }
+        .avviso-oro strong { display: block; margin-bottom: 5px; color: var(--oro); }
+        .avviso-rosso { background: #FEF2F2; border: 1px solid #FECACA; border-radius: 12px; padding: 15px 18px; font-size: 13px; color: #991B1B; line-height: 1.7; margin-bottom: 20px; }
+        .avviso-rosso strong { display: block; margin-bottom: 5px; }
+        .avviso-verde { background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 12px; padding: 15px 18px; font-size: 13px; color: #065F46; line-height: 1.7; margin-bottom: 20px; }
+        .avviso-verde strong { display: block; margin-bottom: 5px; }
+
+        /* UPLOAD */
+        .upload-area { border: 2px dashed #e5e7eb; border-radius: 14px; padding: 30px 20px; text-align: center; cursor: pointer; transition: 0.3s; margin-bottom: 15px; }
+        .upload-area:hover { border-color: var(--blu); background: #EFF6FF; }
+        .upload-area .upload-icon { font-size: 36px; margin-bottom: 10px; }
+        .upload-area p { font-size: 14px; color: var(--grigio); }
+        .upload-area strong { color: var(--blu); }
+
+        /* BUTTON */
+        .btn-main { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--blu) 0%, var(--blu-chiaro) 100%); color: white; border: none; border-radius: 14px; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; margin-top: 10px; letter-spacing: 0.3px; box-shadow: 0 4px 15px rgba(27,58,107,0.3); }
+        .btn-main:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(27,58,107,0.35); }
+        .btn-main:active { transform: translateY(0); }
+        .btn-main.oro { background: linear-gradient(135deg, var(--oro) 0%, var(--oro-chiaro) 100%); box-shadow: 0 4px 15px rgba(184,151,42,0.3); }
+        .btn-main.oro:hover { box-shadow: 0 8px 25px rgba(184,151,42,0.4); }
+        .btn-back { background: transparent; color: var(--grigio); border: 1.5px solid #e5e7eb; padding: 12px; border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; width: 100%; margin-top: 10px; }
+        .btn-back:hover { border-color: var(--grigio); color: var(--testo); }
+
+        /* STEP TITLE */
+        .step-title { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--blu-scuro); margin-bottom: 6px; font-weight: 700; }
+        .step-subtitle { font-size: 14px; color: var(--grigio); margin-bottom: 25px; line-height: 1.6; }
+
+        /* FOTO GALLERY */
+        .foto-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 15px 0; }
+        .foto-slot { aspect-ratio: 1; border: 2px dashed #e5e7eb; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; transition: 0.3s; background: var(--grigio-chiaro); }
+        .foto-slot:hover { border-color: var(--oro); background: #FFFBEB; }
+        .foto-slot.loaded { border-color: var(--verde); background: #ECFDF5; }
+
+        /* RAGGIO */
+        .raggio-container { margin: 10px 0 20px; }
+        .raggio-value { text-align: center; font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; color: var(--blu); margin-bottom: 10px; }
+        .raggio-value span { font-size: 16px; color: var(--grigio); }
+        input[type="range"] { width: 100%; height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--blu) 0%, #e5e7eb 0%); outline: none; cursor: pointer; }
+        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--blu); cursor: pointer; box-shadow: 0 2px 8px rgba(27,58,107,0.3); }
+
+        /* SUCCESS */
+        .success-screen { text-align: center; padding: 20px 0; }
+        .success-icon { font-size: 72px; margin-bottom: 20px; animation: pulse 1s ease; }
+        @keyframes pulse { 0% { transform: scale(0); } 70% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        .success-title { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--blu-scuro); margin-bottom: 12px; }
+        .success-sub { font-size: 15px; color: var(--grigio); line-height: 1.7; margin-bottom: 30px; max-width: 400px; margin-left: auto; margin-right: auto; }
+        .success-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 30px; text-align: left; }
+        .highlight-item { background: var(--grigio-chiaro); border-radius: 12px; padding: 15px; font-size: 13px; color: var(--testo); line-height: 1.5; }
+        .highlight-item strong { display: block; color: var(--blu-scuro); margin-bottom: 4px; font-size: 14px; }
+
+        /* POPUP ADULT */
+        .adult-popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
+        .adult-popup.show { display: flex; }
+        .adult-box { background: white; border-radius: 25px; padding: 40px 30px; max-width: 400px; width: 100%; text-align: center; }
+        .adult-box h2 { font-family: 'Playfair Display', serif; color: var(--blu-scuro); font-size: 22px; margin-bottom: 12px; }
+        .adult-box p { color: var(--grigio); font-size: 14px; line-height: 1.6; margin-bottom: 25px; }
+        .adult-buttons { display: flex; gap: 12px; }
+        .btn-adult-si { flex: 1; background: var(--rosso); color: white; border: none; padding: 14px; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s; }
+        .btn-adult-no { flex: 1; background: var(--grigio-chiaro); color: var(--grigio); border: none; padding: 14px; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s; }
+        .btn-adult-si:hover { background: #DC2626; }
+        .btn-adult-no:hover { background: #e5e7eb; color: var(--testo); }
+
+        /* LINK BACK */
+        .link-back { display: block; text-align: center; color: var(--grigio); font-size: 14px; text-decoration: none; margin-top: 20px; padding: 10px; transition: 0.2s; }
+        .link-back:hover { color: var(--blu); }
+
+        /* DIVIDER */
+        .divider { height: 1px; background: #e5e7eb; margin: 25px 0; }
+
+        /* CHECKBOX */
+        .checkbox-group { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 15px; cursor: pointer; }
+        .checkbox-group input[type="checkbox"] { width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px; accent-color: var(--blu); cursor: pointer; }
+        .checkbox-group span { font-size: 13px; color: var(--grigio); line-height: 1.6; }
+        .checkbox-group span a { color: var(--blu); text-decoration: none; font-weight: 600; }
+
+        @media (max-width: 600px) {
+            .card { padding: 25px 20px; }
+            .categorie-grid { grid-template-columns: 1fr 1fr; }
+            .page-hero h1 { font-size: 30px; }
+            .hero-stats { gap: 20px; }
+            .foto-grid { grid-template-columns: repeat(3, 1fr); }
+            .success-highlights { grid-template-columns: 1fr; }
+            .pricing-options { flex-direction: column; }
+        }
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
-    </nav>
+<!-- NAVBAR -->
+<nav class="navbar">
+    <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
+    <div class="navbar-links">
+        <a href="cliente.html" class="btn-cliente">Sei un cliente?</a>
+        <a href="#tab-accedi" class="btn-login" onclick="switchTab('accedi'); return false;">Accedi</a>
+    </div>
+</nav>
 
-    <div class="page-hero">
-        <h1>Area <span>Professionista</span></h1>
-        <p>Verificato • Professionale • Sicuro</p>
+<!-- HERO -->
+<div class="page-hero">
+    <div class="hero-badge">💼 Area Professionisti</div>
+    <h1>Trova nuovi <span>clienti</span><br>ogni giorno</h1>
+    <p>Registrati, crea il tuo profilo e ricevi richieste qualificate nella tua zona. Paga solo per i contatti che ti interessano.</p>
+    <div class="hero-stats">
+        <div class="hero-stat"><div class="hero-stat-num">10.000+</div><div class="hero-stat-label">Professionisti attivi</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">50.000+</div><div class="hero-stat-label">Richieste gestite</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">Max 5</div><div class="hero-stat-label">Pro per richiesta</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">4.9★</div><div class="hero-stat-label">Valutazione media</div></div>
+    </div>
+</div>
+
+<!-- CONTENUTO -->
+<div class="container">
+    <!-- TABS -->
+    <div class="tabs">
+        <button class="tab active" id="tab-reg-btn" onclick="switchTab('registrati')">📝 Registrati</button>
+        <button class="tab" id="tab-acc-btn" onclick="switchTab('accedi')">🔑 Accedi</button>
     </div>
 
-    <div class="container">
-        <div class="card">
+    <div class="card">
 
-            <div class="tabs">
-                <button class="tab active" onclick="switchTab('registrati')">📝 Registrati</button>
-                <button class="tab" onclick="switchTab('accedi')">🔑 Accedi</button>
+        <!-- ==================== TAB REGISTRAZIONE ==================== -->
+        <div id="tab-registrati">
+
+            <!-- STEP INDICATOR -->
+            <div class="steps-indicator">
+                <div class="step-dot active" id="dot1">1</div>
+                <div class="step-line" id="line12"></div>
+                <div class="step-dot" id="dot2">2</div>
+                <div class="step-line" id="line23"></div>
+                <div class="step-dot" id="dot3">3</div>
+                <div class="step-line" id="line34"></div>
+                <div class="step-dot" id="dot4">4</div>
+                <div class="step-line" id="line45"></div>
+                <div class="step-dot" id="dot5">5</div>
             </div>
 
-            <div id="tab-registrati">
+            <!-- ===== STEP 1: DATI PERSONALI + OTP ===== -->
+            <div class="step-content active" id="step1">
+                <div class="step-title">Dati personali</div>
+                <div class="step-subtitle">Crea il tuo account professionale. Tutti i professionisti devono verificare il numero di telefono.</div>
 
-                <div class="steps-indicator">
-                    <div class="step-dot active" id="dot1">1</div>
-                    <div class="step-line" id="line1"></div>
-                    <div class="step-dot" id="dot2">2</div>
-                    <div class="step-line" id="line2"></div>
-                    <div class="step-dot" id="dot3">3</div>
-                    <div class="step-line" id="line3"></div>
-                    <div class="step-dot" id="dot4">4</div>
-                    <div class="step-line" id="line4"></div>
-                    <div class="step-dot" id="dot5">5</div>
+                <div class="avviso-blu">
+                    <strong>ℹ️ Come funziona la registrazione</strong>
+                    La registrazione è in 5 step. Creerai il profilo, sceglierai la categoria, caricherai i documenti (dove richiesto), sceglierai il piano e inizierai a ricevere richieste.
                 </div>
 
-                <!-- STEP 1 -->
-                <div class="step-content active" id="step1">
-
-                    <div class="avviso-blu">
-                        <strong>ℹ️ Come funziona la registrazione</strong>
-                        Per garantire la qualità della piattaforma, i professionisti devono registrarsi con visura camerale verificata automaticamente. Categorie Istruzione ed Escort +18 hanno registrazione semplificata.
+                <div class="form-group">
+                    <label>Nome e Cognome *</label>
+                    <input type="text" id="reg-nome" placeholder="Es. Marco Bianchi">
+                </div>
+                <div class="form-group">
+                    <label>Email *</label>
+                    <input type="email" id="reg-email" placeholder="Es. marco@email.com">
+                </div>
+                <div class="form-group">
+                    <label>Numero di Telefono * <span style="font-size:11px;color:var(--grigio);font-weight:400">(riceverai un codice OTP)</span></label>
+                    <div class="otp-group">
+                        <input type="tel" id="reg-telefono" placeholder="+39 333 1234567">
+                        <button class="btn-otp" id="btn-otp-tel" onclick="inviaOTP()">Invia OTP</button>
                     </div>
-
-                    <div class="avviso-ban">
-                        <strong>⚠️ Regole della piattaforma:</strong>
-                        🔴 <strong>Ban professionista:</strong> Se per 3 volte non ti presenti al sopralluogo concordato senza giustificazione, il tuo account verrà <strong>bannato definitivamente</strong> insieme alla visura camerale.<br><br>
-                        🟢 <strong>Sei tutelato:</strong> Se il cliente non permette il sopralluogo a nessuno dei 5 professionisti, viene <strong>bannato immediatamente</strong>. La piattaforma tutela entrambe le parti.<br><br>
-                        ⭐ <strong>Recensioni:</strong> Al termine del lavoro e dopo la <strong>conferma del pagamento</strong>, si aprirà automaticamente la schermata recensione reciproca. Entrambi dovrete recensirvi per mantenere l'account attivo.
+                </div>
+                <div class="otp-verify" id="otp-verify">
+                    <label style="font-size:13px;font-weight:600;display:block;margin-bottom:10px;text-align:center">Inserisci il codice a 6 cifre ricevuto via SMS</label>
+                    <div class="otp-boxes">
+                        <input class="otp-box" type="number" id="otp1" maxlength="1" oninput="moveOTP(this,null,'otp2')">
+                        <input class="otp-box" type="number" id="otp2" maxlength="1" oninput="moveOTP(this,'otp1','otp3')">
+                        <input class="otp-box" type="number" id="otp3" maxlength="1" oninput="moveOTP(this,'otp2','otp4')">
+                        <input class="otp-box" type="number" id="otp4" maxlength="1" oninput="moveOTP(this,'otp3','otp5')">
+                        <input class="otp-box" type="number" id="otp5" maxlength="1" oninput="moveOTP(this,'otp4','otp6')">
+                        <input class="otp-box" type="number" id="otp6" maxlength="1" oninput="moveOTP(this,'otp5',null)">
                     </div>
+                    <div class="otp-timer">Non hai ricevuto il codice? <span onclick="inviaOTP()">Reinvia</span></div>
+                </div>
+                <div class="form-group" style="margin-top:18px">
+                    <label>Password *</label>
+                    <input type="password" id="reg-password" placeholder="Minimo 8 caratteri">
+                </div>
+                <div class="form-group">
+                    <label>Conferma Password *</label>
+                    <input type="password" id="reg-password2" placeholder="Ripeti la password">
+                </div>
 
+                <div class="divider"></div>
+
+                <div class="avviso-rosso">
+                    <strong>⚠️ Regole anti-abbandono — LEGGI ATTENTAMENTE</strong>
+                    • Se accetti una richiesta, paghi e poi non ti presenti al sopralluogo senza preavviso: ricevi una segnalazione.<br>
+                    • Dopo <strong>3 segnalazioni</strong> il tuo account viene <strong>bannato definitivamente</strong> (P.IVA e telefono bloccati).<br>
+                    • La piattaforma tutela sempre i clienti e i professionisti: comportamenti scorretti non sono tollerati.
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="check-regole">
+                    <span>Ho letto e accetto le <a href="#">Regole della piattaforma</a>, i <a href="#">Termini di Servizio</a> e la <a href="#">Privacy Policy</a></span>
+                </div>
+
+                <button class="btn-main" onclick="goStep(1,2)">Continua — Scegli categoria →</button>
+            </div>
+
+            <!-- ===== STEP 2: CATEGORIA + VERIFICA ===== -->
+            <div class="step-content" id="step2">
+                <div class="step-title">Categoria e verifica</div>
+                <div class="step-subtitle">Scegli la tua categoria professionale. In base alla categoria cambierà il tipo di verifica richiesta.</div>
+
+                <div class="form-group">
+                    <label>Seleziona la tua categoria *</label>
+                    <div class="categorie-grid">
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="edilizia">
+                            <span class="emoji">🏗️</span>Edilizia & Costruzioni
+                        </button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="impianti">
+                            <span class="emoji">⚡🔧</span>Impianti
+                        </button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="automotive">
+                            <span class="emoji">🚗</span>Automotive
+                        </button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="legale">
+                            <span class="emoji">⚖️</span>Legale & Finanza
+                        </button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="salute">
+                            <span class="emoji">🩺</span>Salute & Benessere
+                        </button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="estetica">
+                            <span class="emoji">💅</span>Estetica & Persona
+                        </button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="giardinieri">
+                            <span class="emoji">🌿</span>Giardinieri
+                        </button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="traslochi">
+                            <span class="emoji">📦</span>Traslochi & Facchinaggio
+                        </button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="digitale">
+                            <span class="emoji">💻</span>Digitale & Tech
+                        </button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="eventi">
+                            <span class="emoji">🎉</span>Organizzatori eventi
+                        </button>
+                        <!-- SEMPLIFICATE (no P.IVA) -->
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'semplificata')" data-cat="pulizie">
+                            <span class="emoji">🧹</span>Pulizie domestiche
+                        </button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'semplificata')" data-cat="badanti">
+                            <span class="emoji">🤝</span>Badanti & Assistenti
+                        </button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'semplificata')" data-cat="babysitter">
+                            <span class="emoji">👶</span>Baby sitter
+                        </button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'semplificata')" data-cat="dogsitter">
+                            <span class="emoji">🐾</span>Dog sitter & Toelettatori
+                        </button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'semplificata')" data-cat="cuochi">
+                            <span class="emoji">👨‍🍳</span>Cuochi a domicilio
+                        </button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'semplificata')" data-cat="tuttofare">
+                            <span class="emoji">🔨</span>Tuttofare & Sbrigafaccende
+                        </button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'semplificata')" data-cat="istruzione">
+                            <span class="emoji">📚</span>Istruzione & Formazione
+                        </button>
+                        <button class="categoria-btn escort-btn" onclick="selezionaCategoria(this,'escort')" data-cat="escort">
+                            <span class="emoji">🔞</span>Escort & Accompagnatrici +18
+                        </button>
+                    </div>
+                </div>
+
+                <!-- BOX VERIFICA STANDARD (P.IVA) -->
+                <div id="box-standard" style="display:none">
+                    <div class="avviso-oro">
+                        <strong>📋 Verifica richiesta per questa categoria</strong>
+                        Per registrarti come professionista in questa categoria devi fornire:<br>
+                        ✅ Partita IVA valida (verifica automatica)<br>
+                        ✅ Visura camerale aggiornata (verifica entro 24h)<br>
+                        ✅ Documento d'identità valido
+                    </div>
                     <div class="form-group">
-                        <label>Nome e Cognome / Ragione Sociale</label>
-                        <input type="text" id="pro-nome" placeholder="Es. Mario Rossi / Rossi Edilizia Srl">
+                        <label>Ragione Sociale / Nome Impresa *</label>
+                        <input type="text" id="ragione-sociale" placeholder="Es. Bianchi Ristrutturazioni Srl">
                     </div>
-
                     <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" id="pro-email" placeholder="Es. mario@rossiedilizia.it">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Numero di Telefono</label>
+                        <label>Partita IVA *</label>
                         <div class="otp-group">
-                            <input type="tel" id="pro-telefono" placeholder="+39 333 1234567">
-                            <button class="btn-otp" id="btn-invia-otp" onclick="inviaOTP()">Invia OTP</button>
+                            <input type="text" id="piva" placeholder="11 cifre senza IT" maxlength="11" oninput="this.value=this.value.replace(/\D/g,'')">
+                            <button class="btn-otp" id="btn-verifica-piva" onclick="verificaPIVA()">Verifica</button>
                         </div>
+                        <div id="piva-result"></div>
                     </div>
-
-                    <div class="otp-verify" id="otp-verify">
-                        <label>Inserisci il codice OTP ricevuto via SMS</label>
-                        <div class="otp-boxes">
-                            <input class="otp-box" type="number" maxlength="1" id="otp1" oninput="moveOTP(this, null, 'otp2')">
-                            <input class="otp-box" type="number" maxlength="1" id="otp2" oninput="moveOTP(this, 'otp1', 'otp3')">
-                            <input class="otp-box" type="number" maxlength="1" id="otp3" oninput="moveOTP(this, 'otp2', 'otp4')">
-                            <input class="otp-box" type="number" maxlength="1" id="otp4" oninput="moveOTP(this, 'otp3', 'otp5')">
-                            <input class="otp-box" type="number" maxlength="1" id="otp5" oninput="moveOTP(this, 'otp4', 'otp6')">
-                            <input class="otp-box" type="number" maxlength="1" id="otp6" oninput="moveOTP(this, 'otp5', null)">
-                        </div>
-                        <div class="otp-timer">Non hai ricevuto il codice? <span onclick="inviaOTP()">Reinvia</span></div>
-                    </div>
-
-                    <div class="form-group" style="margin-top:20px">
-                        <label>Password</label>
-                        <input type="password" id="pro-password" placeholder="Minimo 8 caratteri">
-                    </div>
-
                     <div class="form-group">
-                        <label>Categoria professionale</label>
-                        <div class="categoria-grid">
-                            <button class="cat-btn" onclick="selezionaCategoria(this, false)">🏗️ Edilizia</button>
-                            <button class="cat-btn" onclick="selezionaCategoria(this, false)">⚡💧 Impianti</button>
-                            <button class="cat-btn" onclick="selezionaCategoria(this, false)">🚗 Automotive</button>
-                            <button class="cat-btn" onclick="selezionaCategoria(this, false)">⚖️ Legale</button>
-                            <button class="cat-btn" onclick="selezionaCategoria(this, false)">🏥 Salute</button>
-                            <button class="cat-btn" onclick="selezionaCategoria(this, false)">💇 Estetica</button>
-                            <button class="cat-btn" onclick="selezionaCategoria(this, false)">🏠 Casa</button>
-                            <button class="cat-btn" onclick="selezionaCategoria(this, false)">💻 Digitale</button>
-                            <button class="cat-btn" onclick="selezionaCategoria(this, true)">🎓 Istruzione</button>
-                            <button class="cat-btn" onclick="selezionaCategoria(this, true)">🔞 Escort +18</button>
+                        <label>Carica Visura Camerale *</label>
+                        <div class="upload-area" onclick="document.getElementById('upload-visura').click()">
+                            <div class="upload-icon">📄</div>
+                            <p><strong>Clicca per caricare</strong><br>PDF, JPG o PNG — max 10MB</p>
                         </div>
+                        <input type="file" id="upload-visura" style="display:none" accept=".pdf,.jpg,.jpeg,.png" onchange="fileCaricato(this,'visura-label')">
+                        <div id="visura-label" style="font-size:12px;color:var(--verde);margin-top:5px"></div>
                     </div>
-
-                    <button class="btn-main" onclick="goStep2()">Continua →</button>
+                    <div class="form-group">
+                        <label>Carica Documento d'Identità *</label>
+                        <div class="upload-area" onclick="document.getElementById('upload-doc').click()">
+                            <div class="upload-icon">🪪</div>
+                            <p><strong>Clicca per caricare</strong><br>Carta d'identità o passaporto</p>
+                        </div>
+                        <input type="file" id="upload-doc" style="display:none" accept=".pdf,.jpg,.jpeg,.png" onchange="fileCaricato(this,'doc-label')">
+                        <div id="doc-label" style="font-size:12px;color:var(--verde);margin-top:5px"></div>
+                    </div>
                 </div>
 
-                <!-- STEP 2 -->
-                <div class="step-content" id="step2">
-
-                    <div id="box-visura">
-                        <div class="avviso-oro">
-                            <strong>📋 Verifica Visura Camerale</strong>
-                            Inserisci la tua Partita IVA per la verifica automatica. Carica anche la visura camerale che verrà controllata dal nostro team entro 24 ore.
-                        </div>
-
-                        <div class="form-group">
-                            <label>Partita IVA</label>
-                            <div class="otp-group">
-                                <input type="text" id="piva" placeholder="Es. 12345678901" maxlength="11">
-                                <button class="btn-otp" id="btn-verifica-piva" onclick="verificaPIVA()">Verifica</button>
-                            </div>
-                            <div id="piva-result"></div>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Codice Fiscale Azienda / Titolare</label>
-                            <input type="text" id="cf" placeholder="Es. RSSMRA80A01H501Z">
-                        </div>
-
-                        <div class="form-group">
-                            <label>Upload Visura Camerale (PDF)</label>
-                            <div class="upload-area" onclick="document.getElementById('upload-visura').click()">
-                                <div class="upload-icon">📄</div>
-                                <div>Clicca per caricare la visura camerale</div>
-                                <div style="font-size:12px;margin-top:5px">PDF, max 5MB</div>
-                            </div>
-                            <input type="file" id="upload-visura" accept=".pdf" style="display:none" onchange="fileCaricato(this, 'nome-visura')">
-                            <div id="nome-visura" style="font-size:13px;color:var(--verde);margin-top:8px"></div>
-                        </div>
-                    </div>
-
-                    <div id="box-semplificato" style="display:none">
-                        <div class="avviso-verde">
-                            <strong>✅ Registrazione Semplificata</strong>
-                            Per la categoria selezionata non è richiesta la visura camerale. Ti chiediamo solo un documento di identità valido.
-                        </div>
-
-                        <div class="form-group">
-                            <label>Upload Documento di Identità</label>
-                            <div class="upload-area" onclick="document.getElementById('upload-doc').click()">
-                                <div class="upload-icon">🪪</div>
-                                <div>Clicca per caricare carta d'identità o passaporto</div>
-                                <div style="font-size:12px;margin-top:5px">JPG, PNG o PDF, max 5MB</div>
-                            </div>
-                            <input type="file" id="upload-doc" accept=".pdf,.jpg,.png" style="display:none" onchange="fileCaricato(this, 'nome-doc')">
-                            <div id="nome-doc" style="font-size:13px;color:var(--verde);margin-top:8px"></div>
-                        </div>
-                    </div>
-
-                    <button class="btn-main" onclick="goStep3()">Verifica e Continua →</button>
-                    <button class="btn-main grigio" onclick="goToStep(1)">← Indietro</button>
-                </div>
-
-                <!-- STEP 3 -->
-                <div class="step-content" id="step3">
-
+                <!-- BOX VERIFICA SEMPLIFICATA (no P.IVA) -->
+                <div id="box-semplificata" style="display:none">
                     <div class="avviso-verde">
-                        <strong>✅ Documenti verificati!</strong>
-                        Ora crea il tuo profilo professionale. Più è completo, più clienti attirerai!
+                        <strong>✅ Registrazione semplificata</strong>
+                        Per questa categoria non è richiesta Partita IVA o Visura camerale.<br>
+                        Devi caricare solo un documento d'identità valido per la verifica.
                     </div>
-
                     <div class="form-group">
-                        <label>Nome attività / Studio / Impresa</label>
-                        <input type="text" id="pro-attivita" placeholder="Es. Rossoni Edilizia, Studio Legale Bianchi...">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Descrizione professionale</label>
-                        <textarea id="pro-descrizione" placeholder="Descrivi la tua attività, anni di esperienza, specializzazioni, punti di forza..."></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Foto profilo / lavori (max 5 foto)</label>
-                        <div class="upload-area" onclick="document.getElementById('upload-foto').click()">
-                            <div class="upload-icon">📸</div>
-                            <div>Clicca per caricare le foto</div>
-                            <div style="font-size:12px;margin-top:5px">JPG o PNG, max 5 foto</div>
+                        <label>Carica Documento d'Identità *</label>
+                        <div class="upload-area" onclick="document.getElementById('upload-doc-s').click()">
+                            <div class="upload-icon">🪪</div>
+                            <p><strong>Clicca per caricare</strong><br>Carta d'identità o passaporto</p>
                         </div>
-                        <input type="file" id="upload-foto" accept=".jpg,.png" multiple style="display:none" onchange="fotoCaricate(this)">
-                        <div id="nome-foto" style="font-size:13px;color:var(--verde);margin-top:8px"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Video di presentazione (opzionale)</label>
-                        <div class="upload-area" onclick="document.getElementById('upload-video').click()">
-                            <div class="upload-icon">🎥</div>
-                            <div>Clicca per caricare un video di presentazione</div>
-                            <div style="font-size:12px;margin-top:5px">MP4, max 50MB</div>
-                        </div>
-                        <input type="file" id="upload-video" accept=".mp4" style="display:none" onchange="fileCaricato(this, 'nome-video')">
-                        <div id="nome-video" style="font-size:13px;color:var(--verde);margin-top:8px"></div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Zona operativa — Raggio di lavoro</label>
-                        <input type="text" id="pro-citta-base" placeholder="Città principale Es. Milano">
-                        <div style="margin-top:15px">
-                            <div class="raggio-display"><span id="raggio-val">30</span> km</div>
-                            <input type="range" min="5" max="200" value="30" style="width:100%" oninput="document.getElementById('raggio-val').textContent=this.value">
-                            <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--grigio);margin-top:5px">
-                                <span>5 km</span>
-                                <span>200 km</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button class="btn-main" onclick="goStep4()">Continua →</button>
-                    <button class="btn-main grigio" onclick="goToStep(2)">← Indietro</button>
-                </div>
-
-                <!-- STEP 4 -->
-                <div class="step-content" id="step4">
-
-                    <div class="avviso-blu">
-                        <strong>💬 Come funziona il sistema contatti</strong>
-                        Quando vedi una richiesta di un cliente nella tua zona che ti interessa, acquisti il contatto e sblocchi la chat privata. Il cliente non vede i tuoi dati finché non accetti.
-                    </div>
-
-                    <div style="margin-bottom:20px">
-                        <label style="margin-bottom:15px;display:block">Scegli il tuo piano contatti</label>
-
-                        <div class="pacchetti-grid">
-                            <div class="pacchetto" onclick="selezionaPacchetto(this, 'base')">
-                                <div class="pacchetto-header">
-                                    <div class="pacchetto-nome">🥉 Piano Base</div>
-                                    <div class="pacchetto-prezzo">€9,90 <span>/contatto</span></div>
-                                </div>
-                                <ul class="pacchetto-features">
-                                    <li>Acquisto singolo contatto</li>
-                                    <li>Chat privata sbloccata</li>
-                                    <li>Nessun abbonamento</li>
-                                </ul>
-                            </div>
-
-                            <div class="pacchetto" onclick="selezionaPacchetto(this, 'pro')">
-                                <div class="pacchetto-badge">PIÙ POPOLARE</div>
-                                <div class="pacchetto-header">
-                                    <div class="pacchetto-nome">🥈 Piano Pro</div>
-                                    <div class="pacchetto-prezzo">€6,90 <span>/contatto</span></div>
-                                </div>
-                                <ul class="pacchetto-features">
-                                    <li>10 contatti inclusi</li>
-                                    <li>Risparmio del 30%</li>
-                                    <li>Chat privata sbloccata</li>
-                                    <li>Notifiche prioritarie</li>
-                                </ul>
-                            </div>
-
-                            <div class="pacchetto" onclick="selezionaPacchetto(this, 'premium')">
-                                <div class="pacchetto-header">
-                                    <div class="pacchetto-nome">🥇 Piano Premium</div>
-                                    <div class="pacchetto-prezzo">€4,90 <span>/contatto</span></div>
-                                </div>
-                                <ul class="pacchetto-features">
-                                    <li>25 contatti inclusi</li>
-                                    <li>Risparmio del 50%</li>
-                                    <li>Chat privata sbloccata</li>
-                                    <li>Notifiche prioritarie</li>
-                                    <li>Badge verificato in evidenza</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style="margin-bottom:25px">
-                        <label style="margin-bottom:15px;display:block">Pagina profilo dedicata — Abbonamento</label>
-
-                        <div class="abbonamento-card" onclick="selezionaAbbonamento(this, 'mensile')">
-                            <div class="abbonamento-header">
-                                <div class="abbonamento-nome">📅 Mensile</div>
-                                <div class="abbonamento-prezzo">€29,90<span style="font-size:13px;color:var(--grigio);font-family:'Inter',sans-serif;font-weight:400">/mese</span></div>
-                            </div>
-                            <div class="abbonamento-desc">Pagina profilo con 5 foto + video • Visibile a tutti i clienti • Disdici quando vuoi</div>
-                        </div>
-
-                        <div class="abbonamento-card" onclick="selezionaAbbonamento(this, 'annuale')">
-                            <div class="abbonamento-header">
-                                <div class="abbonamento-nome">📆 Annuale <span class="risparmio-badge">RISPARMIA 30%</span></div>
-                                <div class="abbonamento-prezzo">€19,90<span style="font-size:13px;color:var(--grigio);font-family:'Inter',sans-serif;font-weight:400">/mese</span></div>
-                            </div>
-                            <div class="abbonamento-desc">€239/anno • Pagina profilo con 5 foto + video • Posizione prioritaria • Badge Premium</div>
-                        </div>
-
-                        <div class="abbonamento-card" onclick="selezionaAbbonamento(this, 'nessuno')">
-                            <div class="abbonamento-header">
-                                <div class="abbonamento-nome">⏭️ Salta per ora</div>
-                                <div class="abbonamento-prezzo" style="font-size:16px">Gratis</div>
-                            </div>
-                            <div class="abbonamento-desc">Potrai attivare la pagina profilo in qualsiasi momento dalla tua dashboard.</div>
-                        </div>
-                    </div>
-
-                    <button class="btn-main oro" onclick="goStep5()">Completa Registrazione →</button>
-                    <button class="btn-main grigio" onclick="goToStep(3)">← Indietro</button>
-                </div>
-
-                <!-- STEP 5 -->
-                <div class="step-content" id="step5">
-                    <div class="success-box">
-                        <div class="success-icon">🎉</div>
-                        <h2>Benvenuto su Professionisti!</h2>
-                        <p>La tua registrazione è completata. Il tuo profilo è in fase di verifica e sarà attivo entro 24 ore.</p>
-
-                        <div class="highlight">
-                            📍 Vedrai le richieste dei clienti nella tua zona di raggio.<br><br>
-                            👁️ Vedrai solo: descrizione del lavoro e città. Mai i dati personali del cliente.<br><br>
-                            💳 Acquisti il contatto → si sblocca la chat privata.<br><br>
-                            📅 In chat concordate data e ora del sopralluogo.<br><br>
-                            ✅ Al termine del lavoro e dopo la <strong>conferma del pagamento</strong>, si aprirà automaticamente la schermata recensione reciproca.
-                        </div>
-
-                        <div class="avviso-ban">
-                            <strong>⚠️ Ricorda le regole:</strong>
-                            🔴 3 sopralluoghi mancati per colpa tua → <strong>ban definitivo</strong><br><br>
-                            🟢 Se il cliente non si presenta → <strong>viene bannato lui</strong>. Sei sempre tutelato!
-                        </div>
-
-                        <button class="btn-main oro" onclick="window.location.href='dashboard-pro.html'">🏠 Vai alla Dashboard</button>
+                        <input type="file" id="upload-doc-s" style="display:none" accept=".pdf,.jpg,.jpeg,.png" onchange="fileCaricato(this,'doc-s-label')">
+                        <div id="doc-s-label" style="font-size:12px;color:var(--verde);margin-top:5px"></div>
                     </div>
                 </div>
 
+                <!-- BOX ESCORT -->
+                <div id="box-escort" style="display:none">
+                    <div class="avviso-rosso">
+                        <strong>🔞 Sezione riservata a maggiorenni</strong>
+                        Questa sezione è accessibile solo a persone maggiorenni (+18 anni).<br>
+                        Non è richiesta Partita IVA, ma è obbligatorio caricare un documento d'identità valido per confermare la maggiore età.<br>
+                        <strong>La piattaforma verifica manualmente ogni registrazione in questa categoria.</strong>
+                    </div>
+                    <div class="form-group">
+                        <label>Carica Documento d'Identità (+18) *</label>
+                        <div class="upload-area" onclick="document.getElementById('upload-doc-e').click()">
+                            <div class="upload-icon">🪪</div>
+                            <p><strong>Clicca per caricare</strong><br>Carta d'identità o passaporto — verifica età obbligatoria</p>
+                        </div>
+                        <input type="file" id="upload-doc-e" style="display:none" accept=".pdf,.jpg,.jpeg,.png" onchange="fileCaricato(this,'doc-e-label')">
+                        <div id="doc-e-label" style="font-size:12px;color:var(--verde);margin-top:5px"></div>
+                    </div>
+                </div>
+
+                <button class="btn-main" onclick="goStep(2,3)" id="btn-step2-avanti" style="margin-top:10px">Continua — Profilo →</button>
+                <button class="btn-back" onclick="goStep(2,1)">← Indietro</button>
             </div>
 
-            <!-- ACCEDI -->
-            <div id="tab-accedi" style="display:none">
+            <!-- ===== STEP 3: PROFILO ===== -->
+            <div class="step-content" id="step3">
+                <div class="step-title">Il tuo profilo</div>
+                <div class="step-subtitle">Crea un profilo completo per attirare più clienti. Foto e video aumentano le probabilità di essere scelto.</div>
+
                 <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" placeholder="La tua email professionale">
+                    <label>Descrizione professionale *</label>
+                    <textarea id="descrizione" placeholder="Descrivi la tua attività, la tua esperienza, le tue specializzazioni e perché i clienti dovrebbero sceglierti..."></textarea>
                 </div>
                 <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" placeholder="La tua password">
+                    <label>Anni di esperienza</label>
+                    <input type="number" id="anni-esperienza" placeholder="Es. 15" min="0" max="60">
                 </div>
-                <button class="btn-main" onclick="alert('Login in arrivo!')">🔑 Accedi</button>
-                <a href="#" class="link-back" style="margin-top:15px;color:var(--blu)">Hai dimenticato la password?</a>
+                <div class="form-group">
+                    <label>Città principale di operatività *</label>
+                    <input type="text" id="citta" placeholder="Es. Milano">
+                </div>
+                <div class="form-group">
+                    <label>Raggio di operatività — <span id="raggio-text">30 km</span></label>
+                    <div class="raggio-container">
+                        <div class="raggio-value" id="raggio-display">30 <span>km</span></div>
+                        <input type="range" id="raggio-slider" min="5" max="200" value="30" step="5" oninput="aggiornaRaggio(this.value)">
+                        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--grigio);margin-top:5px"><span>5 km</span><span>200 km</span></div>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="form-group">
+                    <label>Foto del lavoro — <span style="font-weight:400;color:var(--grigio)">carica fino a 5 foto (obbligatorie almeno 2)</span></label>
+                    <div class="foto-grid">
+                        <div class="foto-slot" onclick="uploadFoto(0)" id="foto0">📷</div>
+                        <div class="foto-slot" onclick="uploadFoto(1)" id="foto1">📷</div>
+                        <div class="foto-slot" onclick="uploadFoto(2)" id="foto2">📷</div>
+                        <div class="foto-slot" onclick="uploadFoto(3)" id="foto3">📷</div>
+                        <div class="foto-slot" onclick="uploadFoto(4)" id="foto4">📷</div>
+                    </div>
+                    <input type="file" id="upload-foto-input" style="display:none" accept="image/*" onchange="fotoCaricata(this)">
+                </div>
+
+                <div class="form-group">
+                    <label>Video di presentazione <span style="font-weight:400;color:var(--grigio)">(facoltativo — aumenta la visibilità del 60%)</span></label>
+                    <div class="upload-area" onclick="document.getElementById('upload-video').click()">
+                        <div class="upload-icon">🎥</div>
+                        <p><strong>Carica un video</strong> fino a 2 minuti<br>MP4 o MOV — max 100MB</p>
+                    </div>
+                    <input type="file" id="upload-video" style="display:none" accept="video/mp4,video/mov" onchange="fileCaricato(this,'video-label')">
+                    <div id="video-label" style="font-size:12px;color:var(--verde);margin-top:5px"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Sito web <span style="font-weight:400;color:var(--grigio)">(facoltativo)</span></label>
+                    <input type="url" id="sito-web" placeholder="https://www.tuosito.it">
+                </div>
+
+                <button class="btn-main" onclick="goStep(3,4)">Continua — Scegli piano →</button>
+                <button class="btn-back" onclick="goStep(3,2)">← Indietro</button>
             </div>
 
-            <a href="index.html" class="link-back">← Torna alla Home</a>
+            <!-- ===== STEP 4: PIANO E PREZZI ===== -->
+            <div class="step-content" id="step4">
+                <div class="step-title">Scegli il piano</div>
+                <div class="step-subtitle">Abbonati per attivare la tua pagina profilo e iniziare a ricevere richieste qualificate.</div>
+
+                <!-- Prezzo dinamico per categoria -->
+                <div id="pricing-container">
+                    <!-- Sarà popolato dal JS in base alla categoria -->
+                </div>
+
+                <div class="divider"></div>
+
+                <div id="sblocco-container">
+                    <!-- Sarà popolato dal JS in base alla categoria -->
+                </div>
+
+                <div class="avviso-blu" style="margin-top:15px">
+                    <strong>ℹ️ Come funziona lo sblocco contatti</strong>
+                    Quando un cliente pubblica una richiesta nella tua zona e categoria, la vedi anonimizzata (solo descrizione lavoro e città). Se ti interessa, paghi lo sblocco per accedere alla chat privata e concordare sopralluogo e preventivo.
+                </div>
+
+                <button class="btn-main oro" onclick="goStep(4,5)" id="btn-continua-piano">Attiva abbonamento e vai avanti →</button>
+                <button class="btn-back" onclick="goStep(4,3)">← Indietro</button>
+            </div>
+
+            <!-- ===== STEP 5: CONFERMA ===== -->
+            <div class="step-content" id="step5">
+                <div class="success-screen">
+                    <div class="success-icon">🎉</div>
+                    <div class="success-title">Registrazione inviata!</div>
+                    <div class="success-sub">Il tuo profilo è stato inviato per la verifica. Riceverai una conferma entro 24 ore via email e SMS.</div>
+                    <div class="success-highlights">
+                        <div class="highlight-item"><strong>📧 Email inviata</strong>Controlla la tua casella email per il riepilogo della registrazione</div>
+                        <div class="highlight-item"><strong>🔍 Verifica in corso</strong>Il nostro team verificherà i tuoi documenti entro 24h</div>
+                        <div class="highlight-item"><strong>✅ Attivazione profilo</strong>Una volta verificato, il tuo profilo sarà visibile ai clienti</div>
+                        <div class="highlight-item"><strong>📲 Notifiche attive</strong>Riceverai un SMS ogni volta che arriva una richiesta nella tua zona</div>
+                    </div>
+                    <button class="btn-main" onclick="window.location.href='dashboard-pro.html'">Vai alla Dashboard →</button>
+                    <a href="index.html" class="link-back">← Torna alla homepage</a>
+                </div>
+            </div>
+
+        </div>
+        <!-- Fine tab registrati -->
+
+        <!-- ==================== TAB ACCEDI ==================== -->
+        <div id="tab-accedi" style="display:none">
+            <div class="step-title" style="margin-bottom:6px">Bentornato 👋</div>
+            <div class="step-subtitle">Accedi alla tua area professionista.</div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="login-email" placeholder="La tua email">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="login-password" placeholder="La tua password">
+            </div>
+            <button class="btn-main" onclick="alert('✅ Login in arrivo con il backend!')">🔑 Accedi</button>
+            <a href="#" class="link-back" style="color:var(--blu);font-weight:600">Hai dimenticato la password?</a>
+            <div class="divider"></div>
+            <p style="text-align:center;font-size:14px;color:var(--grigio)">Non hai ancora un account? <a href="#" onclick="switchTab('registrati');return false" style="color:var(--blu);font-weight:600">Registrati gratis</a></p>
+        </div>
+
+        <a href="index.html" class="link-back">← Torna alla homepage</a>
+    </div>
+    <!-- Fine card -->
+</div>
+<!-- Fine container -->
+
+<!-- POPUP ADULTI (escort) -->
+<div class="adult-popup" id="adultPopup">
+    <div class="adult-box">
+        <div style="font-size:48px;margin-bottom:15px">🔞</div>
+        <h2>Sezione riservata +18</h2>
+        <p>Questa sezione è riservata esclusivamente a persone maggiorenni. Confermando dichiari di avere almeno 18 anni e di accettare i termini di utilizzo per questa categoria.</p>
+        <div class="adult-buttons">
+            <button class="btn-adult-no" onclick="denyAdult()">❌ Sono minorenne</button>
+            <button class="btn-adult-si" onclick="confirmAdult()">✅ Ho 18+ anni</button>
         </div>
     </div>
+</div>
 
-    <script>
-        let categoriaSelezionata = '';
-        let registrazioneSemplificata = false;
-        let otpInviato = false;
-        let pacchetto = '';
-        let abbonamento = '';
-        let pivaVerificata = false;
+<script>
+    // ========== STATO GLOBALE ==========
+    let currentStep = 1;
+    let tipoRegistrazione = 'standard'; // standard | semplificata | escort
+    let categoriaSelezionata = '';
+    let pianoSelezionato = 'mensile';
+    let pivaVerificata = false;
+    let otpInviato = false;
+    let fotoCaricate = 0;
+    let pendingEscort = false;
 
-        function switchTab(tab) {
-            document.getElementById('tab-registrati').style.display = tab === 'registrati' ? 'block' : 'none';
-            document.getElementById('tab-accedi').style.display = tab === 'accedi' ? 'block' : 'none';
-            document.querySelectorAll('.tab').forEach((t, i) => {
-                t.classList.toggle('active', (tab === 'registrati' && i === 0) || (tab === 'accedi' && i === 1));
-            });
+    // ========== PREZZI PER CATEGORIA ==========
+    const PREZZI = {
+        // Semplificate
+        babysitter:  { mensile: 10,  annuale: null,  contatto: 8,   tipo: 'semplificata' },
+        dogsitter:   { mensile: 10,  annuale: null,  contatto: 8,   tipo: 'semplificata' },
+        cuochi:      { mensile: 10,  annuale: null,  contatto: 8,   tipo: 'semplificata' },
+        tuttofare:   { mensile: 10,  annuale: null,  contatto: 8,   tipo: 'semplificata' },
+        istruzione:  { mensile: 10,  annuale: null,  contatto: 8,   tipo: 'semplificata' },
+        pulizie:     { mensile: 10,  annuale: null,  contatto: 8,   tipo: 'semplificata' },
+        badanti:     { mensile: 10,  annuale: null,  contatto: 8,   tipo: 'semplificata' },
+        // Escort
+        escort:      { mensile: 150, annuale: 999,   contatto: 9,   tipo: 'escort'       },
+        // Standard
+        edilizia:    { mensile: 99,  annuale: 888,   contatto: null, tipo: 'standard', sbloccoCat: 'edilizia' },
+        impianti:    { mensile: 99,  annuale: 888,   contatto: 9,   tipo: 'standard' },
+        automotive:  { mensile: 99,  annuale: 888,   contatto: 9,   tipo: 'standard' },
+        legale:      { mensile: 99,  annuale: 888,   contatto: 9,   tipo: 'standard' },
+        salute:      { mensile: 99,  annuale: 888,   contatto: 9,   tipo: 'standard' },
+        estetica:    { mensile: 99,  annuale: 888,   contatto: 9,   tipo: 'standard' },
+        giardinieri: { mensile: 99,  annuale: 888,   contatto: 9,   tipo: 'standard' },
+        traslochi:   { mensile: 99,  annuale: 888,   contatto: 9,   tipo: 'standard' },
+        digitale:    { mensile: 99,  annuale: 888,   contatto: 9,   tipo: 'standard' },
+        eventi:      { mensile: 99,  annuale: 888,   contatto: 9,   tipo: 'standard' },
+    };
+
+    // ========== TABS ==========
+    function switchTab(tab) {
+        document.getElementById('tab-registrati').style.display = tab === 'registrati' ? 'block' : 'none';
+        document.getElementById('tab-accedi').style.display = tab === 'accedi' ? 'block' : 'none';
+        document.getElementById('tab-reg-btn').classList.toggle('active', tab === 'registrati');
+        document.getElementById('tab-acc-btn').classList.toggle('active', tab === 'accedi');
+    }
+
+    // ========== OTP ==========
+    function inviaOTP() {
+        const tel = document.getElementById('reg-telefono').value.trim();
+        if (!tel || tel.length < 9) { alert('Inserisci un numero di telefono valido!'); return; }
+        const btn = document.getElementById('btn-otp-tel');
+        btn.disabled = true; btn.textContent = 'Inviato ✓';
+        document.getElementById('otp-verify').classList.add('show');
+        otpInviato = true;
+        setTimeout(() => { btn.disabled = false; btn.textContent = 'Reinvia'; }, 30000);
+        alert('📱 OTP inviato! (Demo: inserisci 123456)');
+    }
+
+    function moveOTP(current, prevId, nextId) {
+        if (current.value.length > 1) current.value = current.value.slice(-1);
+        if (current.value && nextId) document.getElementById(nextId).focus();
+        if (!current.value && prevId) document.getElementById(prevId).focus();
+        // check auto completamento
+        const codice = ['otp1','otp2','otp3','otp4','otp5','otp6'].map(id => document.getElementById(id).value).join('');
+        if (codice.length === 6) verificaOTP(codice);
+    }
+
+    function verificaOTP(codice) {
+        if (codice === '123456') {
+            document.querySelectorAll('.otp-box').forEach(b => { b.style.borderColor = 'var(--verde)'; b.style.background = '#ECFDF5'; });
         }
+    }
 
-        function inviaOTP() {
-            const tel = document.getElementById('pro-telefono').value;
-            if (!tel) { alert('Inserisci il numero di telefono!'); return; }
-            document.getElementById('otp-verify').classList.add('show');
-            document.getElementById('btn-invia-otp').disabled = true;
-            document.getElementById('btn-invia-otp').textContent = 'Inviato ✓';
-            otpInviato = true;
-            alert('Codice OTP inviato al numero ' + tel + '\n\n(Demo: usa 123456)');
-        }
-
-        function moveOTP(current, prevId, nextId) {
-            if (current.value.length >= 1 && nextId) document.getElementById(nextId).focus();
-            if (current.value.length === 0 && prevId) document.getElementById(prevId).focus();
-        }
-
-        function selezionaCategoria(btn, semplificata) {
-            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-            categoriaSelezionata = btn.textContent;
-            registrazioneSemplificata = semplificata;
-        }
-
-        async function verificaPIVA() {
-            const piva = document.getElementById('piva').value.trim();
-            const result = document.getElementById('piva-result');
-            const btn = document.getElementById('btn-verifica-piva');
-
-            if (!piva || piva.length !== 11) {
-                result.innerHTML = '<div class="piva-result-box piva-error">❌ Inserisci una P.IVA valida di 11 cifre</div>';
-                return;
+    // ========== STEP NAVIGATION ==========
+    function goStep(from, to) {
+        if (to > from) {
+            // Validazioni avanti
+            if (from === 1) {
+                const nome = document.getElementById('reg-nome').value.trim();
+                const email = document.getElementById('reg-email').value.trim();
+                const pass = document.getElementById('reg-password').value;
+                const pass2 = document.getElementById('reg-password2').value;
+                const check = document.getElementById('check-regole').checked;
+                if (!nome) { alert('Inserisci il tuo nome e cognome!'); return; }
+                if (!email || !email.includes('@')) { alert('Inserisci un\'email valida!'); return; }
+                if (!pass || pass.length < 8) { alert('La password deve essere di almeno 8 caratteri!'); return; }
+                if (pass !== pass2) { alert('Le password non coincidono!'); return; }
+                if (!check) { alert('Devi accettare i Termini di Servizio per continuare!'); return; }
             }
-
-            btn.disabled = true;
-            btn.textContent = '⏳';
-            result.innerHTML = '<div class="piva-result-box" style="background:#F5F7FA;border:1px solid #e5e7eb;color:#6B7280">⏳ Verifica in corso...</div>';
-
-            try {
-                const response = await fetch('https://api.vatcomply.com/vat?vat_number=IT' + piva);
-                const data = await response.json();
-
-                if (data.valid) {
-                    result.innerHTML = `<div class="piva-result-box piva-ok">
-                        ✅ <strong>P.IVA valida e attiva!</strong><br>
-                        🏢 <strong>Ragione sociale:</strong> ${data.name || 'Verificata'}<br>
-                        📍 <strong>Indirizzo:</strong> ${data.address || 'Italia'}
-                    </div>`;
-                    pivaVerificata = true;
-                } else {
-                    result.innerHTML = '<div class="piva-result-box piva-error">❌ <strong>P.IVA non valida o non attiva.</strong> Controlla il numero inserito.</div>';
-                    pivaVerificata = false;
+            if (from === 2) {
+                if (!categoriaSelezionata) { alert('Seleziona una categoria!'); return; }
+                if (tipoRegistrazione === 'standard') {
+                    if (!pivaVerificata) { alert('Verifica la Partita IVA prima di continuare!'); return; }
                 }
-            } catch (e) {
-                result.innerHTML = '<div class="piva-result-box piva-warning">⚠️ <strong>Verifica manuale in corso.</strong> Il nostro team controllerà la tua visura entro 24 ore dalla registrazione.</div>';
+            }
+            if (from === 3) {
+                const desc = document.getElementById('descrizione').value.trim();
+                const citta = document.getElementById('citta').value.trim();
+                if (!desc) { alert('Inserisci una descrizione professionale!'); return; }
+                if (!citta) { alert('Inserisci la tua città!'); return; }
+            }
+        }
+        // Aggiorna dots e lines
+        const stepCurrent = document.getElementById('step' + from);
+        const stepNext = document.getElementById('step' + to);
+        if (stepCurrent) { stepCurrent.classList.remove('active'); }
+        if (stepNext) { stepNext.classList.add('active'); }
+        // Aggiorna indicatori
+        for (let i = 1; i <= 5; i++) {
+            const dot = document.getElementById('dot' + i);
+            if (i < to) { dot.classList.remove('active'); dot.classList.add('done'); dot.textContent = '✓'; }
+            else if (i === to) { dot.classList.add('active'); dot.classList.remove('done'); dot.textContent = i; }
+            else { dot.classList.remove('active','done'); dot.textContent = i; }
+        }
+        for (let i = 1; i <= 4; i++) {
+            const line = document.getElementById('line' + i + (i+1));
+            if (line) line.classList.toggle('done', i < to);
+        }
+        currentStep = to;
+        // Se siamo allo step 4, popola i prezzi
+        if (to === 4) { popolaPrezzi(); }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ========== CATEGORIE ==========
+    function selezionaCategoria(btn, tipo) {
+        if (tipo === 'escort') {
+            pendingEscort = true;
+            document.getElementById('adultPopup').classList.add('show');
+            return;
+        }
+        _confermaCat(btn, tipo);
+    }
+
+    function _confermaCat(btn, tipo) {
+        document.querySelectorAll('.categoria-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        categoriaSelezionata = btn.getAttribute('data-cat');
+        tipoRegistrazione = tipo;
+        document.getElementById('box-standard').style.display = tipo === 'standard' ? 'block' : 'none';
+        document.getElementById('box-semplificata').style.display = tipo === 'semplificata' ? 'block' : 'none';
+        document.getElementById('box-escort').style.display = tipo === 'escort' ? 'block' : 'none';
+        // reset piva
+        if (tipo !== 'standard') pivaVerificata = true;
+    }
+
+    function confirmAdult() {
+        document.getElementById('adultPopup').classList.remove('show');
+        const escortBtn = document.querySelector('[data-cat="escort"]');
+        _confermaCat(escortBtn, 'escort');
+        pendingEscort = false;
+    }
+
+    function denyAdult() {
+        document.getElementById('adultPopup').classList.remove('show');
+        pendingEscort = false;
+    }
+
+    // ========== VERIFICA P.IVA ==========
+    async function verificaPIVA() {
+        const piva = document.getElementById('piva').value.trim();
+        const result = document.getElementById('piva-result');
+        const btn = document.getElementById('btn-verifica-piva');
+        if (!piva || piva.length !== 11) {
+            result.innerHTML = '<div style="background:#FEF2F2;border:1px solid #FECACA;border-radius:10px;padding:12px 15px;color:#991B1B;font-size:13px">❌ Inserisci una P.IVA valida di 11 cifre numeriche</div>';
+            return;
+        }
+        btn.disabled = true; btn.textContent = '...';
+        result.innerHTML = '<span style="color:var(--grigio);font-size:13px">⏳ Verifica in corso...</span>';
+        try {
+            const response = await fetch('https://api.vatcomply.com/vat?vat_number=IT' + piva);
+            const data = await response.json();
+            if (data.valid) {
+                result.innerHTML = `<div style="background:#ECFDF5;border:1px solid #6EE7B7;border-radius:12px;padding:14px 18px;color:#065F46;line-height:1.8;font-size:13px">
+                    ✅ <strong>P.IVA valida e attiva!</strong><br>
+                    🏢 <strong>Ragione sociale:</strong> ${data.name || 'Non disponibile'}<br>
+                    📍 <strong>Indirizzo:</strong> ${data.address || 'Non disponibile'}
+                </div>`;
                 pivaVerificata = true;
-            }
-
-            btn.disabled = false;
-            btn.textContent = 'Verifica';
-        }
-
-        function selezionaPacchetto(el, nome) {
-            document.querySelectorAll('.pacchetto').forEach(p => p.classList.remove('selected'));
-            el.classList.add('selected');
-            pacchetto = nome;
-        }
-
-        function selezionaAbbonamento(el, nome) {
-            document.querySelectorAll('.abbonamento-card').forEach(a => a.classList.remove('selected'));
-            el.classList.add('selected');
-            abbonamento = nome;
-        }
-
-        function fileCaricato(input, targetId) {
-            if (input.files.length > 0) {
-                document.getElementById(targetId).textContent = '✓ ' + input.files[0].name;
-            }
-        }
-
-        function fotoCaricate(input) {
-            if (input.files.length > 0) {
-                const nomi = Array.from(input.files).map(f => f.name).join(', ');
-                document.getElementById('nome-foto').textContent = '✓ ' + input.files.length + ' foto caricate: ' + nomi;
-            }
-        }
-
-        function goStep2() {
-            const nome = document.getElementById('pro-nome').value;
-            const email = document.getElementById('pro-email').value;
-            const tel = document.getElementById('pro-telefono').value;
-            const pass = document.getElementById('pro-password').value;
-            if (!nome || !email || !tel || !pass) { alert('Compila tutti i campi!'); return; }
-            if (!categoriaSelezionata) { alert('Seleziona una categoria professionale!'); return; }
-            if (!otpInviato) { alert('Verifica prima il numero di telefono con OTP!'); return; }
-
-            if (registrazioneSemplificata) {
-                document.getElementById('box-visura').style.display = 'none';
-                document.getElementById('box-semplificato').style.display = 'block';
+                if (document.getElementById('ragione-sociale').value === '') {
+                    document.getElementById('ragione-sociale').value = data.name || '';
+                }
             } else {
-                document.getElementById('box-visura').style.display = 'block';
-                document.getElementById('box-semplificato').style.display = 'none';
+                result.innerHTML = '<div style="background:#FEF2F2;border:1px solid #FECACA;border-radius:12px;padding:14px 18px;color:#991B1B;font-size:13px">❌ <strong>P.IVA non valida o non attiva.</strong> Controlla il numero inserito.</div>';
+                pivaVerificata = false;
             }
-            goToStep(2);
+        } catch (e) {
+            result.innerHTML = '<div style="background:#FFFBEB;border:1px solid #FDE68A;border-radius:12px;padding:14px 18px;color:#78350F;font-size:13px">⚠️ <strong>Verifica manuale in corso.</strong> Il nostro team controllerà la tua visura entro 24 ore.</div>';
+            pivaVerificata = true;
         }
+        btn.disabled = false; btn.textContent = 'Verifica';
+    }
 
-        function goStep3() {
-            if (!registrazioneSemplificata && !pivaVerificata) {
-                alert('Verifica prima la tua Partita IVA!');
-                return;
-            }
-            goToStep(3);
+    // ========== FILE UPLOAD ==========
+    function fileCaricato(input, labelId) {
+        if (input.files && input.files[0]) {
+            document.getElementById(labelId).innerHTML = '✅ File caricato: <strong>' + input.files[0].name + '</strong>';
         }
+    }
 
-        function goStep4() {
-            const attivita = document.getElementById('pro-attivita').value;
-            const desc = document.getElementById('pro-descrizione').value;
-            const citta = document.getElementById('pro-citta-base').value;
-            if (!attivita || !desc || !citta) { alert('Compila tutti i campi obbligatori!'); return; }
-            goToStep(4);
-        }
+    let fotoSlotCorrente = 0;
+    function uploadFoto(index) {
+        fotoSlotCorrente = index;
+        document.getElementById('upload-foto-input').click();
+    }
 
-        function goStep5() {
-            if (!pacchetto) { alert('Seleziona un piano contatti!'); return; }
-            if (!abbonamento) { alert('Seleziona un\'opzione per la pagina profilo!'); return; }
-            goToStep(5);
+    function fotoCaricata(input) {
+        if (input.files && input.files[0]) {
+            const slot = document.getElementById('foto' + fotoSlotCorrente);
+            slot.textContent = '✅';
+            slot.classList.add('loaded');
+            fotoCaricate++;
         }
+    }
 
-        function goToStep(n) {
-            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
-            document.getElementById('step' + n).classList.add('active');
-            document.querySelectorAll('.step-dot').forEach((d, i) => {
-                d.classList.remove('active', 'done');
-                if (i + 1 < n) d.classList.add('done');
-                if (i + 1 === n) d.classList.add('active');
-            });
-            document.querySelectorAll('.step-line').forEach((l, i) => {
-                l.classList.toggle('done', i + 1 < n);
-            });
-            window.scrollTo(0, 0);
+    // ========== RAGGIO ==========
+    function aggiornaRaggio(val) {
+        document.getElementById('raggio-display').innerHTML = val + ' <span>km</span>';
+        document.getElementById('raggio-text').textContent = val + ' km';
+        const slider = document.getElementById('raggio-slider');
+        const pct = ((val - 5) / (200 - 5)) * 100;
+        slider.style.background = `linear-gradient(90deg, var(--blu) ${pct}%, #e5e7eb ${pct}%)`;
+    }
+
+    // ========== PREZZI ==========
+    function popolaPrezzi() {
+        const p = PREZZI[categoriaSelezionata];
+        if (!p) return;
+        const container = document.getElementById('pricing-container');
+        const sbloccoContainer = document.getElementById('sblocco-container');
+
+        // Box abbonamento
+        let html = '<div class="pricing-box"><h3>📦 Abbonamento pagina profilo</h3><p style="font-size:13px;color:var(--grigio);margin-bottom:15px">Abbonati per attivare il tuo profilo pubblico e ricevere richieste.</p><div class="pricing-options">';
+        html += `<div class="pricing-card ${pianoSelezionato === 'mensile' ? 'selected' : ''}" onclick="selezionaPiano('mensile', this)">
+            <div class="periodo">Mensile</div>
+            <div class="prezzo">€${p.mensile}</div>
+            <div class="unita">al mese</div>
+        </div>`;
+        if (p.annuale) {
+            const risparmio = Math.round(((p.mensile * 12) - p.annuale) / (p.mensile * 12) * 100);
+            html += `<div class="pricing-card ${pianoSelezionato === 'annuale' ? 'selected' : ''}" onclick="selezionaPiano('annuale', this)">
+                <div class="best">RISPARMIA ${risparmio}%</div>
+                <div class="periodo">Annuale</div>
+                <div class="prezzo">€${p.annuale}</div>
+                <div class="unita">all'anno</div>
+                <div class="risparmio">Invece di €${p.mensile * 12}/anno</div>
+            </div>`;
+        } else {
+            html += `<div style="flex:1;background:var(--grigio-chiaro);border-radius:14px;padding:18px;text-align:center;font-size:13px;color:var(--grigio);display:flex;align-items:center;justify-content:center">Piano annuale<br>non disponibile per<br>questa categoria</div>`;
         }
-    </script>
+        html += '</div></div>';
+        container.innerHTML = html;
+
+        // Box sblocco contatti
+        let sbloccoHtml = '<div class="sblocco-info"><strong>🔓 Costo sblocco contatti</strong>';
+        if (p.sbloccoCat === 'edilizia') {
+            sbloccoHtml += `
+            <div class="sblocco-row"><span>🟢 Piccoli lavori (tinteggiatura, cartongesso, piastrelle...)</span><span class="sblocco-prezzo">€9,90</span></div>
+            <div class="sblocco-row"><span>🟡 Medi lavori (ristrutturazione bagno, posa pavimenti, impermeabilizzazioni...)</span><span class="sblocco-prezzo">€19,90</span></div>
+            <div class="sblocco-row"><span>🔴 Grandi lavori (ristrutturazione completa, cappotto, costruzioni...)</span><span class="sblocco-prezzo">€29,90</span></div>`;
+        } else if (p.contatto) {
+            sbloccoHtml += `<div class="sblocco-row"><span>Singolo contatto</span><span class="sblocco-prezzo">€${p.contatto},00</span></div>`;
+        }
+        sbloccoHtml += '</div>';
+        sbloccoContainer.innerHTML = sbloccoHtml;
+    }
+
+    function selezionaPiano(piano, el) {
+        pianoSelezionato = piano;
+        document.querySelectorAll('.pricing-card').forEach(c => c.classList.remove('selected'));
+        el.classList.add('selected');
+    }
+</script>
 
 </body>
 </html>
