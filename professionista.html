@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professionisti - Area Professionista</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --blu: #1B3A6B;
+            --blu-scuro: #0F2347;
+            --blu-chiaro: #2952A3;
+            --oro: #B8972A;
+            --oro-chiaro: #D4AF37;
+            --bianco: #FFFFFF;
+            --grigio-chiaro: #F5F7FA;
+            --grigio: #6B7280;
+            --testo: #1A1A2E;
+            --verde: #10B981;
+            --rosso: #EF4444;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--grigio-chiaro);
+            color: var(--testo);
+            min-height: 100vh;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 40px;
+            background: var(--bianco);
+            border-bottom: 1px solid #e5e7eb;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--blu);
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--oro); }
+
+        .page-hero {
+            background: linear-gradient(135deg, var(--blu-scuro) 0%, var(--blu) 100%);
+            padding: 50px 30px;
+            text-align: center;
+        }
+
+        .page-hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .page-hero h1 span { color: var(--oro); }
+        .page-hero p { color: #9CA3AF; font-size: 16px; }
+
+        .container {
+            max-width: 650px;
+            margin: -30px auto 60px;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 35px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            border: 1px solid #e5e7eb;
+            margin-bottom: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            margin-bottom: 35px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 14px;
+            text-align: center;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--grigio);
+            background: var(--grigio-chiaro);
+            transition: 0.3s;
+            border: none;
+        }
+
+        .tab.active {
+            background: var(--blu);
+            color: white;
+        }
+
+        .form-group { margin-bottom: 22px; }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--blu-scuro);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            color: var(--testo);
+            background: var(--grigio-chiaro);
+            transition: 0.3s;
+            outline: none;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--blu);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(27,58,107,0.08);
+        }
+
+        textarea { resize: vertical; min-height: 100px; }
+
+        .otp-group { display: flex; gap: 10px; }
+        .otp-group input { flex: 1; }
+
+        .btn-otp {
+            background: var(--blu);
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: 0.3s;
+        }
+
+        .btn-otp:hover { background: var(--blu-chiaro); }
+        .btn-otp:disabled { background: var(--grigio); cursor: not-allowed; }
+
+        .otp-verify { display: none; margin-top: 15px; }
+        .otp-verify.show { display: block; }
+
+        .otp-boxes {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .otp-box {
+            width: 50px;
+            height: 55px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: 700;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            background: var(--grigio-chiaro);
+            outline: none;
+        }
+
+        .otp-box:focus { border-color: var(--blu); background: white; }
+
+        .steps-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 35px;
+        }
+
+        .step-dot {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            color: var(--grigio);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .step-dot.active { background: var(--blu); color: white; }
+        .step-dot.done { background: var(--verde); color: white; }
+
+        .step-line {
+            flex: 1;
+            height: 2px;
+            background: #e5e7eb;
+            max-width: 50px;
+        }
+
+        .step-line.done { background: var(--verde); }
+
+        .step-content { display: none; }
+        .step-content.active { display: block; }
+
+        .avviso-ban {
+            background: #FEF3C7;
+            border: 1px solid #F59E0B;
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin-bottom: 25px;
+            font-size: 13px;
+            color: #92400E;
+            line-height: 1.8;
+        }
+
+        .avviso-ban strong { display: block; margin-bottom: 8px; font-size: 14px; color: #78350F; }
+
+        .avviso-verde {
+            background: #ECFDF5;
+            border: 1px solid #6EE7B7;
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin-bottom: 25px;
+            font-size: 13px;
+            color: #065F46;
+            line-height: 1.8;
+        }
+
+        .avviso-verde strong { display: block; margin-bottom: 8px; font-size: 14px; }
+
+        .avviso-blu {
+            background: #EFF6FF;
+            border: 1px solid #BFDBFE;
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin-bottom: 25px;
+            font-size: 13px;
+            color: var(--blu);
+            line-height: 1.8;
+        }
+
+        .avviso-blu strong { display: block; margin-bottom: 8px; font-size: 14px; }
+
+        .avviso-oro {
+            background: #FFFBEB;
+            border: 1px solid var(--oro);
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin-bottom: 25px;
+            font-size: 13px;
+            color: #78350F;
+            line-height: 1.8;
+        }
+
+        .avviso-oro strong { display: block; margin-bottom: 8px; font-size: 14px; color: var(--oro); }
+
+        .categoria-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .cat-btn {
+            padding: 8px 16px;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            background: var(--grigio-chiaro);
+            color: var(--testo);
+            transition: 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .cat-btn.selected {
+            background: var(--blu);
+            color: white;
+            border-color: var(--blu);
+        }
+
+        .btn-main {
+            width: 100%;
+            padding: 16px;
+            background: var(--blu);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-main:hover { background: var(--blu-chiaro); transform: translateY(-1px); }
+        .btn-main.oro { background: var(--oro); }
+        .btn-main.oro:hover { background: var(--oro-chiaro); }
+        .btn-main.grigio { background: var(--grigio-chiaro); color: var(--grigio); }
+
+        /* PACCHETTI */
+        .pacchetti-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .pacchetto {
+            border: 2px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 20px 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .pacchetto:hover { border-color: var(--blu); }
+        .pacchetto.selected { border-color: var(--oro); background: #FFFBEB; }
+
+        .pacchetto-badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: var(--oro);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .pacchetto-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .pacchetto-nome {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--blu-scuro);
+        }
+
+        .pacchetto-prezzo {
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--oro);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .pacchetto-prezzo span {
+            font-size: 13px;
+            color: var(--grigio);
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+        }
+
+        .pacchetto-features {
+            font-size: 13px;
+            color: var(--grigio);
+            line-height: 1.8;
+        }
+
+        .pacchetto-features li {
+            list-style: none;
+            padding: 2px 0;
+        }
+
+        .pacchetto-features li::before { content: "✓ "; color: var(--verde); font-weight: 700; }
+
+        /* UPLOAD */
+        .upload-area {
+            border: 2px dashed #e5e7eb;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            color: var(--grigio);
+            font-size: 14px;
+        }
+
+        .upload-area:hover { border-color: var(--blu); color: var(--blu); }
+        .upload-area .upload-icon { font-size: 32px; margin-bottom: 8px; }
+
+        /* RAGGIO */
+        .raggio-display {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--blu);
+            font-family: 'Playfair Display', serif;
+            margin: 10px 0;
+        }
+
+        input[type="range"] {
+            padding: 0;
+            border: none;
+            background: transparent;
+            accent-color: var(--blu);
+        }
+
+        /* SUCCESS */
+        .success-box { text-align: center; padding: 20px 0; }
+        .success-icon { font-size: 70px; margin-bottom: 20px; }
+
+        .success-box h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: var(--blu-scuro);
+            margin-bottom: 15px;
+        }
+
+        .success-box p { color: var(--grigio); font-size: 15px; line-height: 1.7; margin-bottom: 10px; }
+
+        .highlight {
+            background: var(--grigio-chiaro);
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin: 15px 0;
+            font-size: 14px;
+            color: var(--blu-scuro);
+            font-weight: 600;
+            text-align: left;
+            line-height: 1.8;
+        }
+
+        .otp-timer { text-align: center; font-size: 13px; color: var(--grigio); margin-top: 10px; }
+        .otp-timer span { color: var(--blu); font-weight: 600; cursor: pointer; }
+
+        .link-back { display: block; text-align: center; margin-top: 20px; color: var(--grigio); font-size: 14px; text-decoration: none; }
+        .link-back:hover { color: var(--blu); }
+
+        /* ABBONAMENTO PAGINA */
+        .abbonamento-card {
+            border: 2px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .abbonamento-card:hover { border-color: var(--blu); }
+        .abbonamento-card.selected { border-color: var(--oro); background: #FFFBEB; }
+
+        .abbonamento-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .abbonamento-nome { font-size: 16px; font-weight: 700; color: var(--blu-scuro); }
+        .abbonamento-prezzo { font-size: 20px; font-weight: 900; color: var(--oro); font-family: 'Playfair Display', serif; }
+        .abbonamento-desc { font-size: 13px; color: var(--grigio); margin-top: 8px; line-height: 1.6; }
+
+        .risparmio-badge {
+            background: var(--verde);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
+    </nav>
+
+    <!-- HERO -->
+    <div class="page-hero">
+        <h1>Area <span>Professionista</span></h1>
+        <p>Verificato • Professionale • Sicuro</p>
+    </div>
+
+    <!-- CONTAINER -->
+    <div class="container">
+        <div class="card">
+
+            <!-- TABS -->
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('registrati')">📝 Registrati</button>
+                <button class="tab" onclick="switchTab('accedi')">🔑 Accedi</button>
+            </div>
+
+            <!-- ===== REGISTRAZIONE ===== -->
+            <div id="tab-registrati">
+
+                <!-- STEP INDICATOR -->
+                <div class="steps-indicator">
+                    <div class="step-dot active" id="dot1">1</div>
+                    <div class="step-line" id="line1"></div>
+                    <div class="step-dot" id="dot2">2</div>
+                    <div class="step-line" id="line2"></div>
+                    <div class="step-dot" id="dot3">3</div>
+                    <div class="step-line" id="line3"></div>
+                    <div class="step-dot" id="dot4">4</div>
+                    <div class="step-line" id="line4"></div>
+                    <div class="step-dot" id="dot5">5</div>
+                </div>
+
+                <!-- STEP 1: DATI PERSONALI -->
+                <div class="step-content active" id="step1">
+
+                    <div class="avviso-blu">
+                        <strong>ℹ️ Come funziona la registrazione</strong>
+                        Per garantire la qualità della piattaforma, i professionisti devono registrarsi con visura camerale verificata automaticamente. Categorie Istruzione ed Escort +18 hanno registrazione semplificata.
+                    </div>
+
+                    <div class="avviso-ban">
+                        <strong>⚠️ Regole della piattaforma:</strong>
+                        🔴 <strong>Ban professionista:</strong> Se per 3 volte non ti presenti al sopralluogo concordato senza giustificazione, il tuo account verrà <strong>bannato definitivamente</strong> insieme alla visura camerale.<br><br>
+                        🟢 <strong>Sei tutelato:</strong> Se il cliente non permette il sopralluogo a nessuno dei 5 professionisti, viene <strong>bannato immediatamente</strong>. La piattaforma tutela entrambe le parti.<br><br>
+                        ⭐ <strong>Recensioni:</strong> Al termine del lavoro e dopo la <strong>conferma del pagamento</strong>, si aprirà automaticamente la schermata recensione reciproca. Entrambi dovrete recensirvi per mantenere l'account attivo.
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nome e Cognome / Ragione Sociale</label>
+                        <input type="text" id="pro-nome" placeholder="Es. Mario Rossi / Rossi Edilizia Srl">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="pro-email" placeholder="Es. mario@rossiedilizia.it">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Numero di Telefono</label>
+                        <div class="otp-group">
+                            <input type="tel" id="pro-telefono" placeholder="+39 333 1234567">
+                            <button class="btn-otp" id="btn-invia-otp" onclick="inviaOTP()">Invia OTP</button>
+                        </div>
+                    </div>
+
+                    <div class="otp-verify" id="otp-verify">
+                        <label>Inserisci il codice OTP ricevuto via SMS</label>
+                        <div class="otp-boxes">
+                            <input class="otp-box" type="number" maxlength="1" id="otp1" oninput="moveOTP(this, null, 'otp2')">
+                            <input class="otp-box" type="number" maxlength="1" id="otp2" oninput="moveOTP(this, 'otp1', 'otp3')">
+                            <input class="otp-box" type="number" maxlength="1" id="otp3" oninput="moveOTP(this, 'otp2', 'otp4')">
+                            <input class="otp-box" type="number" maxlength="1" id="otp4" oninput="moveOTP(this, 'otp3', 'otp5')">
+                            <input class="otp-box" type="number" maxlength="1" id="otp5" oninput="moveOTP(this, 'otp4', 'otp6')">
+                            <input class="otp-box" type="number" maxlength="1" id="otp6" oninput="moveOTP(this, 'otp5', null)">
+                        </div>
+                        <div class="otp-timer">Non hai ricevuto il codice? <span onclick="inviaOTP()">Reinvia</span></div>
+                    </div>
+
+                    <div class="form-group" style="margin-top:20px">
+                        <label>Password</label>
+                        <input type="password" id="pro-password" placeholder="Minimo 8 caratteri">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Categoria professionale</label>
+                        <div class="categoria-grid">
+                            <button class="cat-btn" onclick="selezionaCategoria(this, false)">🏗️ Edilizia</button>
+                            <button class="cat-btn" onclick="selezionaCategoria(this, false)">⚡💧 Impianti</button>
+                            <button class="cat-btn" onclick="selezionaCategoria(this, false)">🚗 Automotive</button>
+                            <button class="cat-btn" onclick="selezionaCategoria(this, false)">⚖️ Legale</button>
+                            <button class="cat-btn" onclick="selezionaCategoria(this, false)">🏥 Salute</button>
+                            <button class="cat-btn" onclick="selezionaCategoria(this, false)">💇 Estetica</button>
+                            <button class="cat-btn" onclick="selezionaCategoria(this, false)">🏠 Casa</button>
+                            <button class="cat-btn" onclick="selezionaCategoria(this, false)">💻 Digitale</button>
+                            <button class="cat-btn" onclick="selezionaCategoria(this, true)">🎓 Istruzione</button>
+                            <button class="cat-btn" onclick="selezionaCategoria(this, true)">🔞 Escort +18</button>
+                        </div>
+                    </div>
+
+                    <button class="btn-main" onclick="goStep2()">Continua →</button>
+                </div>
+
+                <!-- STEP 2: VISURA / DOCUMENTI -->
+                <div class="step-content" id="step2">
+
+                    <div id="box-visura">
+                        <div class="avviso-oro">
+                            <strong>📋 Verifica Visura Camerale</strong>
+                            Inserisci il numero di Partita IVA o Codice Fiscale aziendale. Il sistema verificherà automaticamente i tuoi dati tramite il registro delle Camere di Commercio italiane.
+                        </div>
+
+                        <div class="form-group">
+                            <label>Partita IVA</label>
+                            <input type="text" id="piva" placeholder="Es. 12345678901">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Codice Fiscale Azienda / Titolare</label>
+                            <input type="text" id="cf" placeholder="Es. RSSMRA80A01H501Z">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Upload Visura Camerale (PDF)</label>
+                            <div class="upload-area" onclick="document.getElementById('upload-visura').click()">
+                                <div class="upload-icon">📄</div>
+                                <div>Clicca per caricare la visura camerale</div>
+                                <div style="font-size:12px;margin-top:5px">PDF, max 5MB</div>
+                            </div>
+                            <input type="file" id="upload-visura" accept=".pdf" style="display:none" onchange="fileCaricato(this, 'nome-visura')">
+                            <div id="nome-visura" style="font-size:13px;color:var(--verde);margin-top:8px"></div>
+                        </div>
+                    </div>
+
+                    <div id="box-semplificato" style="display:none">
+                        <div class="avviso-verde">
+                            <strong>✅ Registrazione Semplificata</strong>
+                            Per la categoria selezionata non è richiesta la visura camerale. Ti chiediamo solo un documento di identità valido per verificare la tua identità.
+                        </div>
+
+                        <div class="form-group">
+                            <label>Upload Documento di Identità</label>
+                            <div class="upload-area" onclick="document.getElementById('upload-doc').click()">
+                                <div class="upload-icon">🪪</div>
+                                <div>Clicca per caricare carta d'identità o passaporto</div>
+                                <div style="font-size:12px;margin-top:5px">JPG, PNG o PDF, max 5MB</div>
+                            </div>
+                            <input type="file" id="upload-doc" accept=".pdf,.jpg,.png" style="display:none" onchange="fileCaricato(this, 'nome-doc')">
+                            <div id="nome-doc" style="font-size:13px;color:var(--verde);margin-top:8px"></div>
+                        </div>
+                    </div>
+
+                    <button class="btn-main" onclick="goStep3()">Verifica e Continua →</button>
+                    <button class="btn-main grigio" onclick="goToStep(1)">← Indietro</button>
+                </div>
+
+                <!-- STEP 3: PROFILO -->
+                <div class="step-content" id="step3">
+
+                    <div class="avviso-verde">
+                        <strong>✅ Documenti verificati!</strong>
+                        Ora crea il tuo profilo professionale. Più è completo, più clienti attirerai!
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nome attività / Studio / Impresa</label>
+                        <input type="text" id="pro-attivita" placeholder="Es. Rossoni Edilizia, Studio Legale Bianchi...">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Descrizione professionale</label>
+                        <textarea id="pro-descrizione" placeholder="Descrivi la tua attività, anni di esperienza, specializzazioni, punti di forza..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Foto profilo / lavori (max 5 foto)</label>
+                        <div class="upload-area" onclick="document.getElementById('upload-foto').click()">
+                            <div class="upload-icon">📸</div>
+                            <div>Clicca per caricare le foto</div>
+                            <div style="font-size:12px;margin-top:5px">JPG o PNG, max 5 foto</div>
+                        </div>
+                        <input type="file" id="upload-foto" accept=".jpg,.png" multiple style="display:none" onchange="fotoCaricate(this)">
+                        <div id="nome-foto" style="font-size:13px;color:var(--verde);margin-top:8px"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Video di presentazione (opzionale)</label>
+                        <div class="upload-area" onclick="document.getElementById('upload-video').click()">
+                            <div class="upload-icon">🎥</div>
+                            <div>Clicca per caricare un video di presentazione</div>
+                            <div style="font-size:12px;margin-top:5px">MP4, max 50MB</div>
+                        </div>
+                        <input type="file" id="upload-video" accept=".mp4" style="display:none" onchange="fileCaricato(this, 'nome-video')">
+                        <div id="nome-video" style="font-size:13px;color:var(--verde);margin-top:8px"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Zona operativa — Raggio di lavoro</label>
+                        <input type="text" id="pro-citta-base" placeholder="Città principale Es. Milano">
+                        <div style="margin-top:15px">
+                            <div class="raggio-display"><span id="raggio-val">30</span> km</div>
+                            <input type="range" min="5" max="200" value="30" style="width:100%" oninput="document.getElementById('raggio-val').textContent=this.value">
+                            <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--grigio);margin-top:5px">
+                                <span>5 km</span>
+                                <span>200 km</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn-main" onclick="goStep4()">Continua →</button>
+                    <button class="btn-main grigio" onclick="goToStep(2)">← Indietro</button>
+                </div>
+
+                <!-- STEP 4: PACCHETTI CONTATTI -->
+                <div class="step-content" id="step4">
+
+                    <div class="avviso-blu">
+                        <strong>💬 Come funziona il sistema contatti</strong>
+                        Quando vedi una richiesta di un cliente nella tua zona che ti interessa, acquisti il contatto e sblocchi la chat privata. Il cliente vede solo la tua richiesta di contatto, non i tuoi dati finché non accetti.
+                    </div>
+
+                    <div style="margin-bottom:20px">
+                        <label style="margin-bottom:15px;display:block">Scegli il tuo piano contatti</label>
+
+                        <div class="pacchetti-grid">
+                            <div class="pacchetto" onclick="selezionaPacchetto(this, 'base')">
+                                <div class="pacchetto-header">
+                                    <div class="pacchetto-nome">🥉 Piano Base</div>
+                                    <div class="pacchetto-prezzo">€9,90 <span>/contatto</span></div>
+                                </div>
+                                <ul class="pacchetto-features">
+                                    <li>Acquisto singolo contatto</li>
+                                    <li>Chat privata sbloccata</li>
+                                    <li>Nessun abbonamento</li>
+                                </ul>
+                            </div>
+
+                            <div class="pacchetto" onclick="selezionaPacchetto(this, 'pro')">
+                                <div class="pacchetto-badge">PIÙ POPOLARE</div>
+                                <div class="pacchetto-header">
+                                    <div class="pacchetto-nome">🥈 Piano Pro</div>
+                                    <div class="pacchetto-prezzo">€6,90 <span>/contatto</span></div>
+                                </div>
+                                <ul class="pacchetto-features">
+                                    <li>10 contatti inclusi</li>
+                                    <li>Risparmio del 30%</li>
+                                    <li>Chat privata sbloccata</li>
+                                    <li>Notifiche prioritarie</li>
+                                </ul>
+                            </div>
+
+                            <div class="pacchetto" onclick="selezionaPacchetto(this, 'premium')">
+                                <div class="pacchetto-header">
+                                    <div class="pacchetto-nome">🥇 Piano Premium</div>
+                                    <div class="pacchetto-prezzo">€4,90 <span>/contatto</span></div>
+                                </div>
+                                <ul class="pacchetto-features">
+                                    <li>25 contatti inclusi</li>
+                                    <li>Risparmio del 50%</li>
+                                    <li>Chat privata sbloccata</li>
+                                    <li>Notifiche prioritarie</li>
+                                    <li>Badge verificato in evidenza</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom:25px">
+                        <label style="margin-bottom:15px;display:block">Pagina profilo dedicata — Abbonamento</label>
+
+                        <div class="abbonamento-card" onclick="selezionaAbbonamento(this, 'mensile')">
+                            <div class="abbonamento-header">
+                                <div class="abbonamento-nome">📅 Mensile</div>
+                                <div class="abbonamento-prezzo">€29,90<span style="font-size:13px;color:var(--grigio);font-family:'Inter',sans-serif;font-weight:400">/mese</span></div>
+                            </div>
+                            <div class="abbonamento-desc">Pagina profilo con 5 foto + video • Visibile a tutti i clienti • Disdici quando vuoi</div>
+                        </div>
+
+                        <div class="abbonamento-card" onclick="selezionaAbbonamento(this, 'annuale')">
+                            <div class="abbonamento-header">
+                                <div class="abbonamento-nome">📆 Annuale <span class="risparmio-badge">RISPARMIA 30%</span></div>
+                                <div class="abbonamento-prezzo">€19,90<span style="font-size:13px;color:var(--grigio);font-family:'Inter',sans-serif;font-weight:400">/mese</span></div>
+                            </div>
+                            <div class="abbonamento-desc">€239/anno • Pagina profilo con 5 foto + video • Posizione prioritaria nei risultati • Badge Premium</div>
+                        </div>
+
+                        <div class="abbonamento-card" onclick="selezionaAbbonamento(this, 'nessuno')">
+                            <div class="abbonamento-header">
+                                <div class="abbonamento-nome">⏭️ Salta per ora</div>
+                                <div class="abbonamento-prezzo" style="font-size:16px">Gratis</div>
+                            </div>
+                            <div class="abbonamento-desc">Potrai attivare la pagina profilo in qualsiasi momento dalla tua dashboard.</div>
+                        </div>
+                    </div>
+
+                    <button class="btn-main oro" onclick="goStep5()">Completa Registrazione →</button>
+                    <button class="btn-main grigio" onclick="goToStep(3)">← Indietro</button>
+                </div>
+
+                <!-- STEP 5: SUCCESSO -->
+                <div class="step-content" id="step5">
+                    <div class="success-box">
+                        <div class="success-icon">🎉</div>
+                        <h2>Benvenuto su Professionisti!</h2>
+                        <p>La tua registrazione è completata. Il tuo profilo è in fase di verifica e sarà attivo entro 24 ore.</p>
+
+                        <div class="highlight">
+                            📍 Vedrai le richieste dei clienti nella tua zona di raggio.<br><br>
+                            👁️ Vedrai solo: descrizione del lavoro e città. Mai i dati personali del cliente.<br><br>
+                            💳 Acquisti il contatto → si sblocca la chat privata.<br><br>
+                            📅 In chat concordate data e ora del sopralluogo.<br><br>
+                            ✅ Al termine del lavoro e dopo la <strong>conferma del pagamento</strong>, si aprirà automaticamente la schermata recensione reciproca. Entrambi dovrete recensirvi per mantenere l'account attivo.
+                        </div>
+
+                        <div class="avviso-ban">
+                            <strong>⚠️ Ricorda le regole:</strong>
+                            🔴 3 sopralluoghi mancati per colpa tua → <strong>ban definitivo</strong><br><br>
+                            🟢 Se il cliente non si presenta o non permette il sopralluogo → <strong>viene bannato lui</strong>. Sei sempre tutelato!
+                        </div>
+
+                        <button class="btn-main oro" onclick="window.location.href='index.html'">🏠 Vai alla Dashboard</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ===== ACCEDI ===== -->
+            <div id="tab-accedi" style="display:none">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="La tua email professionale">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="La tua password">
+                </div>
+                <button class="btn-main" onclick="alert('Login in arrivo!')">🔑 Accedi</button>
+                <a href="#" class="link-back" style="margin-top:15px;color:var(--blu)">Hai dimenticato la password?</a>
+            </div>
+
+            <a href="index.html" class="link-back">← Torna alla Home</a>
+        </div>
+    </div>
+
+    <script>
+        let categoriaSelezionata = '';
+        let registrazioneSemplificata = false;
+        let otpInviato = false;
+        let pacchetto = '';
+        let abbonamento = '';
+
+        function switchTab(tab) {
+            document.getElementById('tab-registrati').style.display = tab === 'registrati' ? 'block' : 'none';
+            document.getElementById('tab-accedi').style.display = tab === 'accedi' ? 'block' : 'none';
+            document.querySelectorAll('.tab').forEach((t, i) => {
+                t.classList.toggle('active', (tab === 'registrati' && i === 0) || (tab === 'accedi' && i === 1));
+            });
+        }
+
+        function inviaOTP() {
+            const tel = document.getElementById('pro-telefono').value;
+            if (!tel) { alert('Inserisci il numero di telefono!'); return; }
+            document.getElementById('otp-verify').classList.add('show');
+            document.getElementById('btn-invia-otp').disabled = true;
+            document.getElementById('btn-invia-otp').textContent = 'Inviato ✓';
+            otpInviato = true;
+            alert('Codice OTP inviato al numero ' + tel + '\n\n(Demo: usa 123456)');
+        }
+
+        function moveOTP(current, prevId, nextId) {
+            if (current.value.length >= 1 && nextId) document.getElementById(nextId).focus();
+            if (current.value.length === 0 && prevId) document.getElementById(prevId).focus();
+        }
+
+        function selezionaCategoria(btn, semplificata) {
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            categoriaSelezionata = btn.textContent;
+            registrazioneSemplificata = semplificata;
+        }
+
+        function selezionaPacchetto(el, nome) {
+            document.querySelectorAll('.pacchetto').forEach(p => p.classList.remove('selected'));
+            el.classList.add('selected');
+            pacchetto = nome;
+        }
+
+        function selezionaAbbonamento(el, nome) {
+            document.querySelectorAll('.abbonamento-card').forEach(a => a.classList.remove('selected'));
+            el.classList.add('selected');
+            abbonamento = nome;
+        }
+
+        function fileCaricato(input, targetId) {
+            if (input.files.length > 0) {
+                document.getElementById(targetId).textContent = '✓ ' + input.files[0].name;
+            }
+        }
+
+        function fotoCaricate(input) {
+            if (input.files.length > 0) {
+                const nomi = Array.from(input.files).map(f => f.name).join(', ');
+                document.getElementById('nome-foto').textContent = '✓ ' + input.files.length + ' foto caricate: ' + nomi;
+            }
+        }
+
+        function goStep2() {
+            const nome = document.getElementById('pro-nome').value;
+            const email = document.getElementById('pro-email').value;
+            const tel = document.getElementById('pro-telefono').value;
+            const pass = document.getElementById('pro-password').value;
+            if (!nome || !email || !tel || !pass) { alert('Compila tutti i campi!'); return; }
+            if (!categoriaSelezionata) { alert('Seleziona una categoria professionale!'); return; }
+            if (!otpInviato) { alert('Verifica prima il numero di telefono con OTP!'); return; }
+
+            if (registrazioneSemplificata) {
+                document.getElementById('box-visura').style.display = 'none';
+                document.getElementById('box-semplificato').style.display = 'block';
+            } else {
+                document.getElementById('box-visura').style.display = 'block';
+                document.getElementById('box-semplificato').style.display = 'none';
+            }
+            goToStep(2);
+        }
+
+        function goStep3() {
+            goToStep(3);
+        }
+
+        function goStep4() {
+            const attivita = document.getElementById('pro-attivita').value;
+            const desc = document.getElementById('pro-descrizione').value;
+            const citta = document.getElementById('pro-citta-base').value;
+            if (!attivita || !desc || !citta) { alert('Compila tutti i campi obbligatori!'); return; }
+            goToStep(4);
+        }
+
+        function goStep5() {
+            if (!pacchetto) { alert('Seleziona un piano contatti!'); return; }
+            if (!abbonamento) { alert('Seleziona un\'opzione per la pagina profilo!'); return; }
+            goToStep(5);
+        }
+
+        function goToStep(n) {
+            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + n).classList.add('active');
+            document.querySelectorAll('.step-dot').forEach((d, i) => {
+                d.classList.remove('active', 'done');
+                if (i + 1 < n) d.classList.add('done');
+                if (i + 1 === n) d.classList.add('active');
+            });
+            document.querySelectorAll('.step-line').forEach((l, i) => {
+                l.classList.toggle('done', i + 1 < n);
+            });
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+</body>
+</html>
