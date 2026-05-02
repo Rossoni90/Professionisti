@@ -29,7 +29,6 @@
             min-height: 100vh;
         }
 
-        /* NAVBAR */
         nav {
             display: flex;
             justify-content: space-between;
@@ -50,7 +49,6 @@
 
         .logo span { color: var(--oro); }
 
-        /* HERO PICCOLO */
         .page-hero {
             background: linear-gradient(135deg, var(--blu-scuro) 0%, var(--blu) 100%);
             padding: 50px 30px;
@@ -71,14 +69,12 @@
             font-size: 16px;
         }
 
-        /* CONTAINER PRINCIPALE */
         .container {
-            max-width: 600px;
+            max-width: 620px;
             margin: -30px auto 60px;
             padding: 0 20px;
         }
 
-        /* CARD */
         .card {
             background: white;
             border-radius: 20px;
@@ -87,10 +83,8 @@
             border: 1px solid #e5e7eb;
         }
 
-        /* TABS */
         .tabs {
             display: flex;
-            gap: 0;
             margin-bottom: 35px;
             border-radius: 12px;
             overflow: hidden;
@@ -115,10 +109,7 @@
             color: white;
         }
 
-        /* FORM */
-        .form-group {
-            margin-bottom: 22px;
-        }
+        .form-group { margin-bottom: 22px; }
 
         label {
             display: block;
@@ -154,15 +145,12 @@
             min-height: 120px;
         }
 
-        /* OTP */
         .otp-group {
             display: flex;
             gap: 10px;
         }
 
-        .otp-group input {
-            flex: 1;
-        }
+        .otp-group input { flex: 1; }
 
         .btn-otp {
             background: var(--blu);
@@ -177,24 +165,15 @@
             transition: 0.3s;
         }
 
-        .btn-otp:hover {
-            background: var(--blu-chiaro);
-        }
+        .btn-otp:hover { background: var(--blu-chiaro); }
+        .btn-otp:disabled { background: var(--grigio); cursor: not-allowed; }
 
-        .btn-otp:disabled {
-            background: var(--grigio);
-            cursor: not-allowed;
-        }
-
-        /* OTP VERIFY */
         .otp-verify {
             display: none;
             margin-top: 15px;
         }
 
-        .otp-verify.show {
-            display: block;
-        }
+        .otp-verify.show { display: block; }
 
         .otp-boxes {
             display: flex;
@@ -212,6 +191,7 @@
             border: 2px solid #e5e7eb;
             border-radius: 12px;
             background: var(--grigio-chiaro);
+            outline: none;
         }
 
         .otp-box:focus {
@@ -219,13 +199,11 @@
             background: white;
         }
 
-        /* STEP INDICATOR */
         .steps-indicator {
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 35px;
-            gap: 0;
         }
 
         .step-dot {
@@ -242,15 +220,8 @@
             transition: 0.3s;
         }
 
-        .step-dot.active {
-            background: var(--blu);
-            color: white;
-        }
-
-        .step-dot.done {
-            background: var(--verde);
-            color: white;
-        }
+        .step-dot.active { background: var(--blu); color: white; }
+        .step-dot.done { background: var(--verde); color: white; }
 
         .step-line {
             flex: 1;
@@ -259,38 +230,64 @@
             max-width: 60px;
         }
 
-        .step-line.done {
-            background: var(--verde);
-        }
+        .step-line.done { background: var(--verde); }
 
-        /* STEP CONTENT */
-        .step-content {
-            display: none;
-        }
+        .step-content { display: none; }
+        .step-content.active { display: block; }
 
-        .step-content.active {
-            display: block;
-        }
-
-        /* AVVISO BAN */
+        /* AVVISI */
         .avviso-ban {
             background: #FEF3C7;
             border: 1px solid #F59E0B;
             border-radius: 12px;
-            padding: 15px 18px;
+            padding: 18px 20px;
             margin-bottom: 25px;
             font-size: 13px;
             color: #92400E;
-            line-height: 1.6;
+            line-height: 1.8;
         }
 
         .avviso-ban strong {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #78350F;
+        }
+
+        .avviso-verde {
+            background: #ECFDF5;
+            border: 1px solid #6EE7B7;
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin-bottom: 25px;
+            font-size: 13px;
+            color: #065F46;
+            line-height: 1.8;
+        }
+
+        .avviso-verde strong {
+            display: block;
+            margin-bottom: 8px;
             font-size: 14px;
         }
 
-        /* CATEGORIA SELECT */
+        .avviso-blu {
+            background: #EFF6FF;
+            border: 1px solid #BFDBFE;
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin-bottom: 25px;
+            font-size: 13px;
+            color: var(--blu);
+            line-height: 1.8;
+        }
+
+        .avviso-blu strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
         .categoria-grid {
             display: flex;
             flex-wrap: wrap;
@@ -316,7 +313,6 @@
             border-color: var(--blu);
         }
 
-        /* BTN PRINCIPALE */
         .btn-main {
             width: 100%;
             padding: 16px;
@@ -337,24 +333,20 @@
             transform: translateY(-1px);
         }
 
-        .btn-main.oro {
-            background: var(--oro);
+        .btn-main.oro { background: var(--oro); }
+        .btn-main.oro:hover { background: var(--oro-chiaro); }
+
+        .btn-main.grigio {
+            background: var(--grigio-chiaro);
+            color: var(--grigio);
         }
 
-        .btn-main.oro:hover {
-            background: var(--oro-chiaro);
-        }
-
-        /* SUCCESS */
         .success-box {
             text-align: center;
             padding: 20px 0;
         }
 
-        .success-icon {
-            font-size: 70px;
-            margin-bottom: 20px;
-        }
+        .success-icon { font-size: 70px; margin-bottom: 20px; }
 
         .success-box h2 {
             font-family: 'Playfair Display', serif;
@@ -370,29 +362,31 @@
             margin-bottom: 10px;
         }
 
-        .success-box .highlight {
+        .highlight {
             background: var(--grigio-chiaro);
             border-radius: 12px;
             padding: 15px 20px;
-            margin: 20px 0;
+            margin: 15px 0;
             font-size: 14px;
             color: var(--blu-scuro);
             font-weight: 600;
+            text-align: left;
+            line-height: 1.7;
         }
 
-        /* INFO BOX */
-        .info-box {
-            background: #EFF6FF;
-            border: 1px solid #BFDBFE;
-            border-radius: 12px;
-            padding: 15px 18px;
-            margin-bottom: 25px;
+        .otp-timer {
+            text-align: center;
             font-size: 13px;
-            color: var(--blu);
-            line-height: 1.6;
+            color: var(--grigio);
+            margin-top: 10px;
         }
 
-        /* LINK */
+        .otp-timer span {
+            color: var(--blu);
+            font-weight: 600;
+            cursor: pointer;
+        }
+
         .link-back {
             display: block;
             text-align: center;
@@ -404,17 +398,64 @@
 
         .link-back:hover { color: var(--blu); }
 
-        /* TIMER OTP */
-        .otp-timer {
-            text-align: center;
-            font-size: 13px;
-            color: var(--grigio);
-            margin-top: 10px;
+        /* RECENSIONE POPUP */
+        .recensione-popup {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
 
-        .otp-timer span {
-            color: var(--blu);
-            font-weight: 600;
+        .recensione-popup.show { display: flex; }
+
+        .recensione-box {
+            background: white;
+            border-radius: 25px;
+            padding: 40px 30px;
+            max-width: 440px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+        }
+
+        .recensione-box h2 {
+            font-family: 'Playfair Display', serif;
+            color: var(--blu-scuro);
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .recensione-box p {
+            color: var(--grigio);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .stelle {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stella {
+            font-size: 36px;
+            cursor: pointer;
+            opacity: 0.3;
+            transition: 0.2s;
+        }
+
+        .stella.attiva { opacity: 1; }
+
+        .recensione-box textarea {
+            margin-bottom: 15px;
+            min-height: 90px;
         }
     </style>
 </head>
@@ -435,7 +476,7 @@
     <div class="container">
         <div class="card">
 
-            <!-- TABS LOGIN / REGISTRATI -->
+            <!-- TABS -->
             <div class="tabs">
                 <button class="tab active" onclick="switchTab('registrati')">📝 Registrati</button>
                 <button class="tab" onclick="switchTab('accedi')">🔑 Accedi</button>
@@ -453,15 +494,19 @@
                     <div class="step-dot" id="dot3">3</div>
                 </div>
 
-                <!-- STEP 1: DATI PERSONALI -->
+                <!-- STEP 1: DATI -->
                 <div class="step-content active" id="step1">
-                    <div class="info-box">
-                        ℹ️ La registrazione è <strong>completamente gratuita</strong>. Ti chiediamo solo email e telefono per verificare che tu sia una persona reale.
+
+                    <div class="avviso-blu">
+                        <strong>ℹ️ Registrazione gratuita</strong>
+                        Ti chiediamo solo email e telefono per verificare che tu sia una persona reale. I tuoi dati personali non saranno mai visibili ai professionisti.
                     </div>
 
                     <div class="avviso-ban">
-                        <strong>⚠️ Importante — Leggi prima di procedere:</strong>
-                        Se accetti richieste di sopralluogo e non ti presenti, o se non permetti a nessuno dei 5 professionisti di effettuare il sopralluogo, il tuo account verrà <strong>bannato immediatamente</strong> insieme a numero di telefono ed email.
+                        <strong>⚠️ Regole della piattaforma — Leggi prima di procedere:</strong>
+                        🔴 <strong>Come cliente:</strong> Se non permetti a nessuno dei 5 professionisti di effettuare il sopralluogo, il tuo account verrà <strong>bannato immediatamente</strong> insieme a numero di telefono ed email.<br><br>
+                        🟢 <strong>Sei tutelato:</strong> Se un professionista paga per sbloccare la tua richiesta e poi non si presenta al sopralluogo senza giustificazione, verrà <strong>bannato dopo 3 mancanze</strong>. La piattaforma tutela entrambe le parti in modo equo.<br><br>
+                        ⭐ <strong>Recensioni:</strong> Al termine del lavoro e dopo la conferma del pagamento, si aprirà automaticamente la schermata di recensione reciproca. Sia tu che il professionista dovrete recensirvi a vicenda per mantenere l'account attivo.
                     </div>
 
                     <div class="form-group">
@@ -482,7 +527,6 @@
                         </div>
                     </div>
 
-                    <!-- VERIFICA OTP -->
                     <div class="otp-verify" id="otp-verify">
                         <label>Inserisci il codice OTP ricevuto via SMS</label>
                         <div class="otp-boxes">
@@ -493,10 +537,10 @@
                             <input class="otp-box" type="number" maxlength="1" id="otp5" oninput="moveOTP(this, 'otp4', 'otp6')">
                             <input class="otp-box" type="number" maxlength="1" id="otp6" oninput="moveOTP(this, 'otp5', null)">
                         </div>
-                        <div class="otp-timer">Non hai ricevuto il codice? <span onclick="inviaOTP()" style="cursor:pointer">Reinvia</span></div>
+                        <div class="otp-timer">Non hai ricevuto il codice? <span onclick="inviaOTP()">Reinvia</span></div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" style="margin-top:20px">
                         <label>Password</label>
                         <input type="password" id="reg-password" placeholder="Minimo 8 caratteri">
                     </div>
@@ -506,6 +550,11 @@
 
                 <!-- STEP 2: RICHIESTA -->
                 <div class="step-content" id="step2">
+
+                    <div class="avviso-verde">
+                        <strong>✅ Telefono verificato!</strong>
+                        Ora descrivi il lavoro o servizio che stai cercando. I professionisti vedranno solo la descrizione e la città, mai i tuoi dati personali.
+                    </div>
 
                     <div class="form-group">
                         <label>Categoria</label>
@@ -530,7 +579,7 @@
 
                     <div class="form-group">
                         <label>Descrizione del lavoro / servizio</label>
-                        <textarea id="req-descrizione" placeholder="Descrivi quello di cui hai bisogno nel dettaglio. Più sei preciso, più ricevi offerte pertinenti..."></textarea>
+                        <textarea id="req-descrizione" placeholder="Descrivi quello di cui hai bisogno nel dettaglio. Più sei preciso, migliori saranno le offerte che ricevi..."></textarea>
                     </div>
 
                     <div class="form-group">
@@ -545,7 +594,7 @@
                     </div>
 
                     <button class="btn-main" onclick="goStep3()">Invia Richiesta →</button>
-                    <button class="btn-main" style="background:var(--grigio-chiaro);color:var(--grigio);margin-top:10px" onclick="goToStep(1)">← Indietro</button>
+                    <button class="btn-main grigio" onclick="goToStep(1)">← Indietro</button>
                 </div>
 
                 <!-- STEP 3: SUCCESSO -->
@@ -553,15 +602,20 @@
                     <div class="success-box">
                         <div class="success-icon">🎉</div>
                         <h2>Richiesta Inviata!</h2>
-                        <p>La tua richiesta è stata pubblicata con successo. Entro poche ore riceverai le offerte dei professionisti.</p>
+                        <p>La tua richiesta è stata pubblicata. Entro poche ore riceverai le offerte dei professionisti verificati nella tua zona.</p>
 
                         <div class="highlight">
-                            📱 Riceverai una notifica SMS quando un professionista è interessato al tuo lavoro.
+                            📱 Riceverai un SMS quando un professionista è interessato.<br><br>
+                            👤 Massimo <strong>5 professionisti</strong> possono rispondere alla tua richiesta.<br><br>
+                            💬 La chat si sblocca solo dopo che il professionista acquista il tuo contatto.<br><br>
+                            📅 In chat concorderete data e ora del sopralluogo.<br><br>
+                            ✅ Al termine del lavoro e dopo la <strong>conferma del pagamento</strong>, si aprirà automaticamente la schermata per le <strong>recensioni reciproche</strong>. Entrambi dovrete recensirvi per mantenere l'account attivo.
                         </div>
 
                         <div class="avviso-ban">
                             <strong>⚠️ Ricorda:</strong>
-                            Massimo <strong>5 professionisti</strong> possono rispondere alla tua richiesta. Se non permetti a nessuno di effettuare il sopralluogo, il tuo account verrà bannato immediatamente.
+                            🔴 Se non permetti a nessuno dei 5 professionisti di fare il sopralluogo → <strong>ban immediato</strong><br><br>
+                            🟢 Se un professionista non si presenta → <strong>viene bannato lui</strong> dopo 3 mancanze. Sei sempre tutelato!
                         </div>
 
                         <button class="btn-main oro" onclick="window.location.href='index.html'">🏠 Torna alla Home</button>
@@ -592,7 +646,7 @@
     <div id="adultPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;justify-content:center;align-items:center;padding:20px;">
         <div style="background:white;border-radius:25px;padding:45px 30px;max-width:400px;text-align:center;box-shadow:0 25px 60px rgba(0,0,0,0.3);">
             <h2 style="font-family:'Playfair Display',serif;color:#0F2347;font-size:26px;margin-bottom:15px;">🔞 Contenuto +18</h2>
-            <p style="color:#6B7280;margin-bottom:30px;line-height:1.6;">Questa sezione è riservata esclusivamente ai maggiorenni. Confermi di avere più di 18 anni?</p>
+            <p style="color:#6B7280;margin-bottom:30px;line-height:1.6;">Questa sezione è riservata esclusivamente ai maggiorenni. Confermi di avere più di 18 anni e di accettare i termini di accesso?</p>
             <div style="display:flex;gap:15px;justify-content:center;flex-wrap:wrap;">
                 <button onclick="confirmAdult()" style="background:#1B3A6B;color:white;border:none;padding:14px 25px;border-radius:25px;font-size:15px;font-weight:600;cursor:pointer;">✅ Sì, ho +18 anni</button>
                 <button onclick="denyAdult()" style="background:transparent;color:#B8972A;border:2px solid #B8972A;padding:14px 25px;border-radius:25px;font-size:15px;font-weight:600;cursor:pointer;">❌ No, sono minorenne</button>
@@ -600,12 +654,28 @@
         </div>
     </div>
 
+    <!-- RECENSIONE POPUP -->
+    <div class="recensione-popup" id="recensionePopup">
+        <div class="recensione-box">
+            <h2>⭐ Lascia una Recensione</h2>
+            <p>Il lavoro è stato completato e il pagamento confermato. Ora valuta la tua esperienza con il professionista. La recensione è <strong>obbligatoria</strong> per mantenere il tuo account attivo.</p>
+            <div class="stelle">
+                <span class="stella" onclick="setStella(1)">★</span>
+                <span class="stella" onclick="setStella(2)">★</span>
+                <span class="stella" onclick="setStella(3)">★</span>
+                <span class="stella" onclick="setStella(4)">★</span>
+                <span class="stella" onclick="setStella(5)">★</span>
+            </div>
+            <textarea placeholder="Descrivi la tua esperienza con il professionista..."></textarea>
+            <button class="btn-main" onclick="inviaRecensione()">Invia Recensione ✅</button>
+        </div>
+    </div>
+
     <script>
         let categoriaSelezionata = '';
         let otpInviato = false;
-        let escortSelezionata = false;
+        let stelleSelezionate = 0;
 
-        // TABS
         function switchTab(tab) {
             document.getElementById('tab-registrati').style.display = tab === 'registrati' ? 'block' : 'none';
             document.getElementById('tab-accedi').style.display = tab === 'accedi' ? 'block' : 'none';
@@ -614,7 +684,6 @@
             });
         }
 
-        // OTP
         function inviaOTP() {
             const tel = document.getElementById('reg-telefono').value;
             if (!tel) { alert('Inserisci il numero di telefono!'); return; }
@@ -626,18 +695,12 @@
         }
 
         function moveOTP(current, prevId, nextId) {
-            if (current.value.length >= 1 && nextId) {
-                document.getElementById(nextId).focus();
-            }
-            if (current.value.length === 0 && prevId) {
-                document.getElementById(prevId).focus();
-            }
+            if (current.value.length >= 1 && nextId) document.getElementById(nextId).focus();
+            if (current.value.length === 0 && prevId) document.getElementById(prevId).focus();
         }
 
-        // CATEGORIE
         function selezionaCategoria(btn, isEscort = false) {
             if (isEscort) {
-                escortSelezionata = true;
                 document.getElementById('adultPopup').style.display = 'flex';
                 return;
             }
@@ -657,24 +720,15 @@
 
         function denyAdult() {
             document.getElementById('adultPopup').style.display = 'none';
-            escortSelezionata = false;
         }
 
-        // STEPS
         function goStep2() {
             const nome = document.getElementById('reg-nome').value;
             const email = document.getElementById('reg-email').value;
             const tel = document.getElementById('reg-telefono').value;
             const pass = document.getElementById('reg-password').value;
-
-            if (!nome || !email || !tel || !pass) {
-                alert('Compila tutti i campi!');
-                return;
-            }
-            if (!otpInviato) {
-                alert('Verifica prima il tuo numero di telefono con OTP!');
-                return;
-            }
+            if (!nome || !email || !tel || !pass) { alert('Compila tutti i campi!'); return; }
+            if (!otpInviato) { alert('Verifica prima il numero di telefono con OTP!'); return; }
             goToStep(2);
         }
 
@@ -682,31 +736,35 @@
             const citta = document.getElementById('req-citta').value;
             const desc = document.getElementById('req-descrizione').value;
             const quando = document.getElementById('req-quando').value;
-
-            if (!categoriaSelezionata) {
-                alert('Seleziona una categoria!');
-                return;
-            }
-            if (!citta || !desc || !quando) {
-                alert('Compila tutti i campi!');
-                return;
-            }
+            if (!categoriaSelezionata) { alert('Seleziona una categoria!'); return; }
+            if (!citta || !desc || !quando) { alert('Compila tutti i campi!'); return; }
             goToStep(3);
         }
 
         function goToStep(n) {
             document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
             document.getElementById('step' + n).classList.add('active');
-
             document.querySelectorAll('.step-dot').forEach((d, i) => {
                 d.classList.remove('active', 'done');
                 if (i + 1 < n) d.classList.add('done');
                 if (i + 1 === n) d.classList.add('active');
             });
-
             document.querySelectorAll('.step-line').forEach((l, i) => {
                 l.classList.toggle('done', i + 1 < n);
             });
+        }
+
+        function setStella(n) {
+            stelleSelezionate = n;
+            document.querySelectorAll('.stella').forEach((s, i) => {
+                s.classList.toggle('attiva', i < n);
+            });
+        }
+
+        function inviaRecensione() {
+            if (stelleSelezionate === 0) { alert('Seleziona almeno una stella!'); return; }
+            document.getElementById('recensionePopup').classList.remove('show');
+            alert('Recensione inviata! Grazie per il tuo feedback.');
         }
     </script>
 
