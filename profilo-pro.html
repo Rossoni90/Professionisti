@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professionisti - Profilo Professionista</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --blu: #1B3A6B;
+            --blu-scuro: #0F2347;
+            --blu-chiaro: #2952A3;
+            --oro: #B8972A;
+            --oro-chiaro: #D4AF37;
+            --bianco: #FFFFFF;
+            --grigio-chiaro: #F5F7FA;
+            --grigio: #6B7280;
+            --testo: #1A1A2E;
+            --verde: #10B981;
+            --rosso: #EF4444;
+            --arancio: #F59E0B;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--grigio-chiaro);
+            color: var(--testo);
+            min-height: 100vh;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 40px;
+            background: var(--bianco);
+            border-bottom: 1px solid #e5e7eb;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--blu);
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--oro); }
+
+        .btn-back {
+            background: var(--grigio-chiaro);
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--blu);
+            font-family: 'Inter', sans-serif;
+            transition: 0.3s;
+        }
+
+        .btn-back:hover { background: #e5e7eb; }
+
+        /* HERO PROFILO */
+        .profilo-hero {
+            background: linear-gradient(135deg, var(--blu-scuro) 0%, var(--blu) 100%);
+            padding: 50px 30px 80px;
+            text-align: center;
+            position: relative;
+        }
+
+        .verificato-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--oro);
+            color: white;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .profilo-avatar {
+            width: 100px;
+            height: 100px;
+            background: var(--oro);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+            font-weight: 900;
+            color: white;
+            margin: 0 auto 20px;
+            border: 4px solid rgba(255,255,255,0.3);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .profilo-nome {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: white;
+            font-weight: 900;
+            margin-bottom: 8px;
+        }
+
+        .profilo-categoria {
+            font-size: 16px;
+            color: #9CA3AF;
+            margin-bottom: 15px;
+        }
+
+        .profilo-stelle {
+            font-size: 24px;
+            color: var(--arancio);
+            margin-bottom: 5px;
+        }
+
+        .profilo-stelle-label {
+            font-size: 14px;
+            color: #9CA3AF;
+            margin-bottom: 25px;
+        }
+
+        .profilo-stats {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .profilo-stat {
+            text-align: center;
+        }
+
+        .profilo-stat-numero {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--oro);
+        }
+
+        .profilo-stat-label {
+            font-size: 12px;
+            color: #9CA3AF;
+            margin-top: 3px;
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 900px;
+            margin: -40px auto 60px;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 25px;
+            align-items: start;
+        }
+
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; }
+        }
+
+        /* CARD */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: var(--blu-scuro);
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--grigio-chiaro);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* DESCRIZIONE */
+        .descrizione-text {
+            font-size: 15px;
+            color: var(--grigio);
+            line-height: 1.8;
+        }
+
+        /* SPECIALIZZAZIONI */
+        .spec-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .spec-chip {
+            background: #EFF6FF;
+            color: var(--blu);
+            font-size: 13px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid #BFDBFE;
+        }
+
+        /* FOTO GALLERY */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .gallery-item:hover { transform: scale(1.02); }
+
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            background: var(--grigio-chiaro);
+            border: 1px solid #e5e7eb;
+        }
+
+        .gallery-item:first-child .gallery-placeholder { background: #EFF6FF; }
+        .gallery-item:nth-child(2) .gallery-placeholder { background: #ECFDF5; }
+        .gallery-item:nth-child(3) .gallery-placeholder { background: #FEF3C7; }
+        .gallery-item:nth-child(4) .gallery-placeholder { background: #FDF2F8; }
+        .gallery-item:nth-child(5) .gallery-placeholder { background: #F0FDF4; }
+
+        /* VIDEO */
+        .video-placeholder {
+            background: var(--blu-scuro);
+            border-radius: 16px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .video-placeholder:hover { background: var(--blu); }
+
+        .video-icon { font-size: 50px; margin-bottom: 10px; }
+
+        .video-label {
+            font-size: 15px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .video-sub {
+            font-size: 13px;
+            color: #9CA3AF;
+            margin-top: 5px;
+        }
+
+        /* RECENSIONI */
+        .recensione-item {
+            padding: 18px 0;
+            border-bottom: 1px solid var(--grigio-chiaro);
+        }
+
+        .recensione-item:last-child { border-bottom: none; }
+
+        .recensione-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .recensione-autore {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--blu-scuro);
+        }
+
+        .recensione-stelle { font-size: 14px; color: var(--arancio); }
+
+        .recensione-data { font-size: 12px; color: var(--grigio); }
+
+        .recensione-text {
+            font-size: 14px;
+            color: var(--grigio);
+            line-height: 1.6;
+        }
+
+        .recensione-lavoro {
+            font-size: 12px;
+            color: var(--blu);
+            font-weight: 600;
+            margin-top: 6px;
+        }
+
+        /* SIDEBAR STICKY */
+        .sidebar-sticky {
+            position: sticky;
+            top: 80px;
+        }
+
+        /* CONTATTO CARD */
+        .contatto-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .contatto-prezzo {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            color: var(--grigio);
+            margin-bottom: 5px;
+        }
+
+        .btn-contatta {
+            width: 100%;
+            padding: 16px;
+            background: var(--oro);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Inter', sans-serif;
+            margin-bottom: 12px;
+        }
+
+        .btn-contatta:hover { background: var(--oro-chiaro); transform: translateY(-2px); }
+
+        .btn-contatta.blu { background: var(--blu); }
+        .btn-contatta.blu:hover { background: var(--blu-chiaro); }
+
+        .garanzia-list {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .garanzia-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--grigio);
+            padding: 6px 0;
+        }
+
+        .garanzia-item span { color: var(--verde); font-size: 16px; }
+
+        /* INFO CARD */
+        .info-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 20px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--grigio-chiaro);
+            font-size: 14px;
+        }
+
+        .info-row:last-child { border-bottom: none; }
+        .info-row-label { color: var(--grigio); font-weight: 500; }
+        .info-row-value { color: var(--blu-scuro); font-weight: 700; }
+
+        /* ZONA OPERATIVA */
+        .zona-map {
+            background: var(--grigio-chiaro);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 15px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .zona-map-icon { font-size: 40px; margin-bottom: 10px; }
+        .zona-map-text { font-size: 14px; color: var(--grigio); }
+        .zona-map-raggio { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--blu); font-weight: 900; }
+
+        /* POPUP */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .popup-overlay.show { display: flex; }
+
+        .popup-box {
+            background: white;
+            border-radius: 25px;
+            padding: 40px 35px;
+            max-width: 460px;
+            width: 100%;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .popup-box h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: var(--blu-scuro);
+            margin-bottom: 15px;
+        }
+
+        .popup-box p {
+            color: var(--grigio);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .avviso-oro {
+            background: #FFFBEB;
+            border: 1px solid var(--oro);
+            border-radius: 12px;
+            padding: 15px 18px;
+            font-size: 13px;
+            color: #78350F;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .avviso-oro strong { display: block; margin-bottom: 5px; color: var(--oro); }
+
+        .popup-buttons { display: flex; gap: 12px; }
+
+        .popup-buttons button {
+            flex: 1;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            transition: 0.3s;
+        }
+
+        .btn-oro-popup { background: var(--oro); color: white; }
+        .btn-oro-popup:hover { background: var(--oro-chiaro); }
+        .btn-gray-popup { background: var(--grigio-chiaro); color: var(--grigio); }
+
+        /* RATING BAR */
+        .rating-bars { margin-bottom: 20px; }
+
+        .rating-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .rating-label { font-size: 13px; color: var(--grigio); width: 15px; }
+
+        .rating-bar-bg {
+            flex: 1;
+            height: 8px;
+            background: var(--grigio-chiaro);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .rating-bar-fill {
+            height: 100%;
+            background: var(--arancio);
+            border-radius: 10px;
+        }
+
+        .rating-count { font-size: 12px; color: var(--grigio); width: 25px; text-align: right; }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
+        <button class="btn-back" onclick="window.history.back()">← Torna indietro</button>
+    </nav>
+
+    <!-- HERO -->
+    <div class="profilo-hero">
+        <div class="verificato-badge">✅ Professionista Verificato</div>
+        <div class="profilo-avatar">R</div>
+        <div class="profilo-nome">Rossoni Edilizia</div>
+        <div class="profilo-categoria">🏗️ Edilizia — Tinteggiatura • Ristrutturazioni • Resine</div>
+        <div class="profilo-stelle">★★★★★</div>
+        <div class="profilo-stelle-label">4.9 su 5 — 47 recensioni verificate</div>
+        <div class="profilo-stats">
+            <div class="profilo-stat">
+                <div class="profilo-stat-numero">15+</div>
+                <div class="profilo-stat-label">Anni esperienza</div>
+            </div>
+            <div class="profilo-stat">
+                <div class="profilo-stat-numero">280+</div>
+                <div class="profilo-stat-label">Lavori completati</div>
+            </div>
+            <div class="profilo-stat">
+                <div class="profilo-stat-numero">98%</div>
+                <div class="profilo-stat-label">Clienti soddisfatti</div>
+            </div>
+            <div class="profilo-stat">
+                <div class="profilo-stat-numero">30km</div>
+                <div class="profilo-stat-label">Raggio operativo</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTAINER -->
+    <div class="container">
+
+        <!-- COLONNA SINISTRA -->
+        <div>
+
+            <!-- DESCRIZIONE -->
+            <div class="card">
+                <div class="card-title">👤 Chi siamo</div>
+                <p class="descrizione-text">
+                    Rossoni Edilizia è un'impresa specializzata nelle lavorazioni di finitura e ristrutturazione con oltre 15 anni di esperienza nel settore. Operiamo principalmente in Lombardia e province limitrofe, offrendo servizi di altissima qualità per privati, condomini e aziende.<br><br>
+                    Siamo specializzati in tinteggiatura con pitture ecologiche, applicazione di resine e microcemento, posa di pavimenti SPC e laminato, impermeabilizzazioni e cappotti termici. Ogni lavoro viene eseguito con materiali di prima scelta e garantiamo la massima cura nei dettagli.<br><br>
+                    La nostra filosofia: <strong>qualità, puntualità e trasparenza</strong>. Offriamo sopralluogo gratuito e preventivo dettagliato senza impegno.
+                </p>
+            </div>
+
+            <!-- SPECIALIZZAZIONI -->
+            <div class="card">
+                <div class="card-title">🎯 Specializzazioni</div>
+                <div class="spec-grid">
+                    <span class="spec-chip">🎨 Tinteggiatura</span>
+                    <span class="spec-chip">✨ Decorazioni</span>
+                    <span class="spec-chip">🏗️ Ristrutturazioni</span>
+                    <span class="spec-chip">🚿 Ristrutturazione bagno</span>
+                    <span class="spec-chip">🧱 Resine epossidiche</span>
+                    <span class="spec-chip">🪨 Microcemento</span>
+                    <span class="spec-chip">🏠 Posa SPC e laminato</span>
+                    <span class="spec-chip">💧 Impermeabilizzazioni</span>
+                    <span class="spec-chip">🏡 Cappotti termici</span>
+                    <span class="spec-chip">📦 Cartongesso</span>
+                    <span class="spec-chip">🌡️ Isolamenti</span>
+                    <span class="spec-chip">🖌️ Rasature e stuccature</span>
+                </div>
+            </div>
+
+            <!-- VIDEO -->
+            <div class="card">
+                <div class="card-title">🎥 Video di presentazione</div>
+                <div class="video-placeholder" onclick="alert('Video di presentazione — Rossoni Edilizia')">
+                    <div class="video-icon">▶️</div>
+                    <div class="video-label">Guarda la nostra presentazione</div>
+                    <div class="video-sub">2 minuti • Rossoni Edilizia</div>
+                </div>
+            </div>
+
+            <!-- FOTO -->
+            <div class="card">
+                <div class="card-title">📸 Portfolio lavori</div>
+                <div class="gallery">
+                    <div class="gallery-item" onclick="alert('Foto 1 — Tinteggiatura appartamento Milano')">
+                        <div class="gallery-placeholder">🎨</div>
+                    </div>
+                    <div class="gallery-item" onclick="alert('Foto 2 — Resina epossidica garage')">
+                        <div class="gallery-placeholder">🧱</div>
+                    </div>
+                    <div class="gallery-item" onclick="alert('Foto 3 — Ristrutturazione bagno')">
+                        <div class="gallery-placeholder">🚿</div>
+                    </div>
+                    <div class="gallery-item" onclick="alert('Foto 4 — Posa laminato SPC')">
+                        <div class="gallery-placeholder">🏠</div>
+                    </div>
+                    <div class="gallery-item" onclick="alert('Foto 5 — Cappotto termico')">
+                        <div class="gallery-placeholder">🏡</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RECENSIONI -->
+            <div class="card">
+                <div class="card-title">⭐ Recensioni verificate</div>
+
+                <!-- RATING BARS -->
+                <div class="rating-bars">
+                    <div class="rating-row">
+                        <div class="rating-label">5★</div>
+                        <div class="rating-bar-bg"><div class="rating-bar-fill" style="width:85%"></div></div>
+                        <div class="rating-count">40</div>
+                    </div>
+                    <div class="rating-row">
+                        <div class="rating-label">4★</div>
+                        <div class="rating-bar-bg"><div class="rating-bar-fill" style="width:10%"></div></div>
+                        <div class="rating-count">5</div>
+                    </div>
+                    <div class="rating-row">
+                        <div class="rating-label">3★</div>
+                        <div class="rating-bar-bg"><div class="rating-bar-fill" style="width:4%"></div></div>
+                        <div class="rating-count">2</div>
+                    </div>
+                    <div class="rating-row">
+                        <div class="rating-label">2★</div>
+                        <div class="rating-bar-bg"><div class="rating-bar-fill" style="width:0%"></div></div>
+                        <div class="rating-count">0</div>
+                    </div>
+                    <div class="rating-row">
+                        <div class="rating-label">1★</div>
+                        <div class="rating-bar-bg"><div class="rating-bar-fill" style="width:0%"></div></div>
+                        <div class="rating-count">0</div>
+                    </div>
+                </div>
+
+                <!-- RECENSIONI -->
+                <div class="recensione-item">
+                    <div class="recensione-header">
+                        <div>
+                            <div class="recensione-autore">Mario R.</div>
+                            <div class="recensione-stelle">★★★★★</div>
+                        </div>
+                        <div class="recensione-data">Aprile 2026</div>
+                    </div>
+                    <div class="recensione-text">Lavoro eccellente! Hanno tinteggiato tutto l'appartamento in 2 giorni, puliti e precisi. Consigliatissimi!</div>
+                    <div class="recensione-lavoro">🏗️ Tinteggiatura appartamento 80mq — Milano</div>
+                </div>
+
+                <div class="recensione-item">
+                    <div class="recensione-header">
+                        <div>
+                            <div class="recensione-autore">Giulia T.</div>
+                            <div class="recensione-stelle">★★★★★</div>
+                        </div>
+                        <div class="recensione-data">Marzo 2026</div>
+                    </div>
+                    <div class="recensione-text">Ristrutturazione bagno perfetta! Hanno rispettato i tempi e il budget concordato. Microcemento bellissimo. Tornerò sicuramente.</div>
+                    <div class="recensione-lavoro">🚿 Ristrutturazione bagno — Monza</div>
+                </div>
+
+                <div class="recensione-item">
+                    <div class="recensione-header">
+                        <div>
+                            <div class="recensione-autore">Luca B.</div>
+                            <div class="recensione-stelle">★★★★★</div>
+                        </div>
+                        <div class="recensione-data">Febbraio 2026</div>
+                    </div>
+                    <div class="recensione-text">Resina epossidica nel garage e nel living. Risultato fantastico, sembrava impossibile ma sono stati bravissimi. Professionali al 100%.</div>
+                    <div class="recensione-lavoro">🧱 Posa resina epossidica — Bergamo</div>
+                </div>
+
+                <div class="recensione-item">
+                    <div class="recensione-header">
+                        <div>
+                            <div class="recensione-autore">Anna M.</div>
+                            <div class="recensione-stelle">★★★★☆</div>
+                        </div>
+                        <div class="recensione-data">Gennaio 2026</div>
+                    </div>
+                    <div class="recensione-text">Ottimo lavoro di tinteggiatura e posa laminato. Piccolo ritardo di un giorno ma ci hanno avvisato in anticipo. Risultato finale ottimo.</div>
+                    <div class="recensione-lavoro">🏠 Tinteggiatura + Laminato SPC — Milano</div>
+                </div>
+
+                <div class="recensione-item">
+                    <div class="recensione-header">
+                        <div>
+                            <div class="recensione-autore">Roberto C.</div>
+                            <div class="recensione-stelle">★★★★★</div>
+                        </div>
+                        <div class="recensione-data">Dicembre 2025</div>
+                    </div>
+                    <div class="recensione-text">Impermeabilizzazione terrazzo fatta a regola d'arte. Nessuna infiltrazione dopo 4 mesi. Garanzia rispettata, azienda seria.</div>
+                    <div class="recensione-lavoro">💧 Impermeabilizzazione terrazzo — Sesto San Giovanni</div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- COLONNA DESTRA - SIDEBAR -->
+        <div class="sidebar-sticky">
+
+            <!-- CONTATTO -->
+            <div class="contatto-card">
+                <div style="font-size:13px;color:var(--grigio);margin-bottom:20px;line-height:1.6">
+                    Interessato a questo professionista? Invia una richiesta e riceverai una risposta direttamente in chat.
+                </div>
+
+                <button class="btn-contatta" onclick="apriPopupContatto()">
+                    💬 Richiedi contatto
+                </button>
+
+                <button class="btn-contatta blu" onclick="window.location.href='cliente.html'">
+                    📋 Pubblica una richiesta
+                </button>
+
+                <div class="garanzia-list">
+                    <div class="garanzia-item"><span>✅</span> Professionista verificato</div>
+                    <div class="garanzia-item"><span>✅</span> Visura camerale controllata</div>
+                    <div class="garanzia-item"><span>✅</span> 47 recensioni reali</div>
+                    <div class="garanzia-item"><span>✅</span> Sopralluogo gratuito</div>
+                    <div class="garanzia-item"><span>✅</span> Preventivo senza impegno</div>
+                    <div class="garanzia-item"><span>✅</span> Sistema anti-truffe attivo</div>
+                </div>
+            </div>
+
+            <!-- INFO -->
+            <div class="info-card">
+                <div class="info-row">
+                    <span class="info-row-label">📍 Sede</span>
+                    <span class="info-row-value">Milano</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-row-label">🗓️ Attivo dal</span>
+                    <span class="info-row-value">2010</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-row-label">⚡ Risponde in</span>
+                    <span class="info-row-value">< 2 ore</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-row-label">✅ Tasso risposta</span>
+                    <span class="info-row-value">98%</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-row-label">📅 Sopralluogo</span>
+                    <span class="info-row-value">Gratuito</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-row-label">🏆 Livello</span>
+                    <span class="info-row-value" style="color:var(--oro)">⭐ Premium</span>
+                </div>
+            </div>
+
+            <!-- ZONA OPERATIVA -->
+            <div class="info-card">
+                <div style="font-size:15px;font-weight:700;color:var(--blu-scuro);margin-bottom:15px">📍 Zona operativa</div>
+                <div class="zona-map">
+                    <div class="zona-map-icon">🗺️</div>
+                    <div class="zona-map-raggio">30 km</div>
+                    <div class="zona-map-text">da Milano<br><small>Copre: Milano, Monza, Bergamo, Varese, Como e province</small></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- POPUP CONTATTO -->
+    <div class="popup-overlay" id="popupContatto">
+        <div class="popup-box">
+            <div style="font-size:50px;margin-bottom:15px">💬</div>
+            <h2>Richiedi contatto</h2>
+            <p>Per contattare <strong>Rossoni Edilizia</strong> devi prima registrarti come cliente e pubblicare una richiesta. Il professionista potrà poi acquistare il tuo contatto e aprire la chat.</p>
+
+            <div class="avviso-oro">
+                <strong>ℹ️ Come funziona:</strong>
+                1. Registrati gratis come cliente<br>
+                2. Pubblica la tua richiesta<br>
+                3. Rossoni Edilizia acquista il contatto<br>
+                4. Si apre la chat privata<br>
+                5. Concordate il sopralluogo gratuito
+            </div>
+
+            <div class="popup-buttons">
+                <button class="btn-gray-popup" onclick="chiudiPopup()">Chiudi</button>
+                <button class="btn-oro-popup" onclick="window.location.href='cliente.html'">📋 Registrati gratis</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function apriPopupContatto() {
+            document.getElementById('popupContatto').classList.add('show');
+        }
+
+        function chiudiPopup() {
+            document.getElementById('popupContatto').classList.remove('show');
+        }
+    </script>
+
+</body>
+</html>
