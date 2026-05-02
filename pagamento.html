@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professionisti — Pagamento</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --blu: #1B3A6B; --blu-scuro: #0F2347; --blu-chiaro: #2952A3;
+            --oro: #B8972A; --oro-chiaro: #D4AF37; --bianco: #FFFFFF;
+            --grigio-chiaro: #F5F7FA; --grigio: #6B7280; --testo: #1A1A2E;
+            --verde: #10B981; --rosso: #EF4444; --arancio: #F59E0B;
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color: var(--testo); min-height: 100vh; }
+
+        /* NAVBAR */
+        .navbar { background: var(--blu-scuro); padding: 14px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 15px rgba(0,0,0,0.25); }
+        .logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: white; text-decoration: none; }
+        .logo span { color: var(--oro); }
+        .btn-back { background: transparent; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.25); padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; text-decoration: none; }
+        .btn-back:hover { color: var(--oro); border-color: var(--oro); }
+
+        /* HERO */
+        .page-hero { background: linear-gradient(135deg, var(--blu-scuro) 0%, var(--blu) 100%); padding: 45px 30px 40px; text-align: center; }
+        .page-hero h1 { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: white; margin-bottom: 10px; }
+        .page-hero h1 span { color: var(--oro); }
+        .page-hero p { color: rgba(255,255,255,0.75); font-size: 15px; max-width: 500px; margin: 0 auto; line-height: 1.7; }
+
+        /* CONTAINER */
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px 60px; }
+
+        /* TABS TIPO PAGAMENTO */
+        .tipo-tabs { display: flex; gap: 12px; margin-bottom: 30px; flex-wrap: wrap; }
+        .tipo-tab { flex: 1; min-width: 200px; background: white; border: 2px solid #e5e7eb; border-radius: 16px; padding: 18px 20px; cursor: pointer; transition: 0.3s; text-align: center; }
+        .tipo-tab:hover { border-color: var(--blu); }
+        .tipo-tab.active { border-color: var(--oro); background: #FFFBEB; }
+        .tipo-tab-icon { font-size: 30px; margin-bottom: 8px; }
+        .tipo-tab-nome { font-size: 15px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 4px; }
+        .tipo-tab-desc { font-size: 12px; color: var(--grigio); }
+
+        /* SEZIONE ABBONAMENTO */
+        .sezione { display: none; }
+        .sezione.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* CARD ABBONAMENTO */
+        .abbonamento-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-bottom: 30px; }
+        .abbonamento-card { background: white; border: 2px solid #e5e7eb; border-radius: 20px; padding: 28px 22px; text-align: center; cursor: pointer; transition: 0.3s; position: relative; }
+        .abbonamento-card:hover { border-color: var(--blu); box-shadow: 0 8px 25px rgba(0,0,0,0.08); transform: translateY(-2px); }
+        .abbonamento-card.selected { border-color: var(--oro); background: #FFFBEB; }
+        .abbonamento-card .best-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--verde); color: white; font-size: 10px; font-weight: 700; padding: 4px 14px; border-radius: 12px; white-space: nowrap; }
+        .abbonamento-cat { font-size: 30px; margin-bottom: 10px; }
+        .abbonamento-nome { font-size: 14px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 6px; }
+        .abbonamento-desc { font-size: 11px; color: var(--grigio); margin-bottom: 16px; line-height: 1.5; }
+        .abbonamento-prezzo { font-family: 'Playfair Display', serif; font-size: 34px; font-weight: 900; color: var(--blu-scuro); margin-bottom: 4px; }
+        .abbonamento-card.selected .abbonamento-prezzo { color: var(--oro); }
+        .abbonamento-unita { font-size: 12px; color: var(--grigio); margin-bottom: 6px; }
+        .abbonamento-risparmio { font-size: 11px; color: var(--verde); font-weight: 600; height: 16px; }
+
+        /* SWITCH MENSILE/ANNUALE */
+        .switch-row { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 25px; }
+        .switch-label { font-size: 14px; font-weight: 600; color: var(--grigio); }
+        .switch-label.active { color: var(--blu-scuro); }
+        .switch { width: 52px; height: 28px; background: #e5e7eb; border-radius: 14px; cursor: pointer; position: relative; transition: 0.3s; flex-shrink: 0; }
+        .switch.on { background: var(--oro); }
+        .switch-knob { width: 22px; height: 22px; background: white; border-radius: 50%; position: absolute; top: 3px; left: 3px; transition: 0.3s; box-shadow: 0 2px 6px rgba(0,0,0,0.2); }
+        .switch.on .switch-knob { left: 27px; }
+        .risparmio-tag { background: var(--verde); color: white; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 10px; }
+
+        /* CREDITI SBLOCCO */
+        .crediti-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 30px; }
+        .credito-card { background: white; border: 2px solid #e5e7eb; border-radius: 18px; padding: 24px 18px; text-align: center; cursor: pointer; transition: 0.3s; position: relative; }
+        .credito-card:hover { border-color: var(--blu); box-shadow: 0 6px 20px rgba(0,0,0,0.07); transform: translateY(-2px); }
+        .credito-card.selected { border-color: var(--oro); background: #FFFBEB; }
+        .credito-card .best-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--verde); color: white; font-size: 10px; font-weight: 700; padding: 4px 14px; border-radius: 12px; white-space: nowrap; }
+        .credito-icon { font-size: 32px; margin-bottom: 10px; }
+        .credito-num { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; color: var(--blu-scuro); margin-bottom: 4px; }
+        .credito-card.selected .credito-num { color: var(--oro); }
+        .credito-label { font-size: 13px; color: var(--grigio); margin-bottom: 10px; }
+        .credito-prezzo { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 900; color: var(--blu-scuro); margin-bottom: 4px; }
+        .credito-card.selected .credito-prezzo { color: var(--oro); }
+        .credito-unitario { font-size: 11px; color: var(--grigio); }
+        .credito-risparmio { font-size: 11px; color: var(--verde); font-weight: 600; margin-top: 4px; height: 16px; }
+
+        /* RIEPILOGO ORDINE */
+        .riepilogo { background: white; border-radius: 20px; padding: 28px 30px; border: 1px solid #e5e7eb; margin-bottom: 24px; }
+        .riepilogo h3 { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--blu-scuro); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .riepilogo-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f3f4f6; font-size: 14px; }
+        .riepilogo-row:last-child { border-bottom: none; }
+        .riepilogo-row.totale { font-size: 18px; font-weight: 700; color: var(--blu-scuro); padding-top: 15px; border-top: 2px solid #e5e7eb; border-bottom: none; margin-top: 5px; }
+        .riepilogo-row.totale .prezzo-totale { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--oro); }
+        .riepilogo-label { color: var(--grigio); }
+        .riepilogo-valore { font-weight: 600; color: var(--testo); }
+
+        /* FORM PAGAMENTO */
+        .form-pagamento { background: white; border-radius: 20px; padding: 28px 30px; border: 1px solid #e5e7eb; margin-bottom: 24px; }
+        .form-pagamento h3 { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--blu-scuro); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--testo); margin-bottom: 7px; }
+        .form-group input, .form-group select { width: 100%; padding: 13px 16px; border: 1.5px solid #e5e7eb; border-radius: 12px; font-size: 15px; font-family: 'Inter', sans-serif; outline: none; transition: 0.3s; }
+        .form-group input:focus, .form-group select:focus { border-color: var(--blu); box-shadow: 0 0 0 3px rgba(27,58,107,0.07); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .card-icons { display: flex; gap: 8px; margin-bottom: 16px; }
+        .card-icon { background: var(--grigio-chiaro); border: 1px solid #e5e7eb; border-radius: 8px; padding: 6px 12px; font-size: 20px; }
+        .secure-badge { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--grigio); margin-bottom: 18px; background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 10px; padding: 10px 14px; }
+        .metodo-tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+        .metodo-tab { flex: 1; padding: 12px; border: 2px solid #e5e7eb; border-radius: 12px; text-align: center; cursor: pointer; transition: 0.3s; font-size: 13px; font-weight: 600; color: var(--grigio); background: white; }
+        .metodo-tab:hover { border-color: var(--blu); color: var(--blu); }
+        .metodo-tab.active { border-color: var(--oro); background: #FFFBEB; color: var(--blu-scuro); }
+
+        /* BOTTONE PAGA */
+        .btn-paga { width: 100%; padding: 18px; background: linear-gradient(135deg, var(--oro) 0%, var(--oro-chiaro) 100%); color: white; border: none; border-radius: 16px; font-size: 18px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; box-shadow: 0 6px 20px rgba(184,151,42,0.35); display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .btn-paga:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(184,151,42,0.45); }
+        .btn-paga:active { transform: translateY(0); }
+        .note-pagamento { text-align: center; font-size: 12px; color: var(--grigio); margin-top: 14px; line-height: 1.6; }
+
+        /* AVVISI */
+        .avviso-blu { background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 12px; padding: 14px 18px; font-size: 13px; color: #1E40AF; line-height: 1.7; margin-bottom: 20px; }
+        .avviso-blu strong { display: block; margin-bottom: 4px; }
+
+        /* SUCCESS SCREEN */
+        .success-screen { display: none; text-align: center; padding: 50px 20px; }
+        .success-screen.show { display: block; animation: fadeIn 0.5s ease; }
+        .success-icon-big { font-size: 80px; margin-bottom: 20px; }
+        .success-title { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--blu-scuro); margin-bottom: 12px; }
+        .success-sub { font-size: 16px; color: var(--grigio); line-height: 1.7; margin-bottom: 35px; max-width: 450px; margin-left: auto; margin-right: auto; }
+        .success-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 450px; margin: 0 auto 35px; }
+        .success-item { background: var(--grigio-chiaro); border-radius: 14px; padding: 16px; font-size: 13px; color: var(--testo); line-height: 1.5; text-align: left; }
+        .success-item strong { display: block; color: var(--blu-scuro); font-size: 14px; margin-bottom: 4px; }
+        .btn-vai-dashboard { background: var(--blu); color: white; border: none; padding: 15px 35px; border-radius: 25px; font-size: 15px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; box-shadow: 0 4px 15px rgba(27,58,107,0.3); }
+        .btn-vai-dashboard:hover { background: var(--blu-chiaro); transform: translateY(-2px); }
+
+        @media (max-width: 700px) {
+            .abbonamento-grid { grid-template-columns: 1fr; }
+            .crediti-grid { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .tipo-tabs { flex-direction: column; }
+            .success-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
+    <a href="dashboard-pro.html" class="btn-back">← Torna alla dashboard</a>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+    <h1>💳 <span>Pagamento</span> sicuro</h1>
+    <p>Abbonati per attivare il profilo o acquista crediti per sbloccare i contatti dei clienti.</p>
+</div>
+
+<!-- CONTAINER -->
+<div class="container">
+
+    <!-- TIPO PAGAMENTO -->
+    <div class="tipo-tabs">
+        <div class="tipo-tab active" id="tab-abbonamento" onclick="selezionaTipo('abbonamento')">
+            <div class="tipo-tab-icon">📦</div>
+            <div class="tipo-tab-nome">Abbonamento profilo</div>
+            <div class="tipo-tab-desc">Attiva la tua pagina profilo e ricevi richieste</div>
+        </div>
+        <div class="tipo-tab" id="tab-crediti" onclick="selezionaTipo('crediti')">
+            <div class="tipo-tab-icon">🔓</div>
+            <div class="tipo-tab-nome">Crediti sblocco</div>
+            <div class="tipo-tab-desc">Sblocca i contatti delle richieste che ti interessano</div>
+        </div>
+        <div class="tipo-tab" id="tab-singolo" onclick="selezionaTipo('singolo')">
+            <div class="tipo-tab-icon">⚡</div>
+            <div class="tipo-tab-nome">Sblocco singolo</div>
+            <div class="tipo-tab-desc">Paga solo per questa richiesta specifica</div>
+        </div>
+    </div>
+
+    <!-- SEZIONE ABBONAMENTO -->
+    <div class="sezione active" id="sez-abbonamento">
+
+        <div class="switch-row">
+            <span class="switch-label active" id="label-mensile">Mensile</span>
+            <div class="switch" id="switchAnnuale" onclick="toggleAnnuale()">
+                <div class="switch-knob"></div>
+            </div>
+            <span class="switch-label" id="label-annuale">Annuale</span>
+            <span class="risparmio-tag">Risparmia fino al 40%</span>
+        </div>
+
+        <div class="abbonamento-grid">
+            <div class="abbonamento-card" id="card-base" onclick="selezionaAbbonamento('base', this)">
+                <div class="abbonamento-cat">🏠</div>
+                <div class="abbonamento-nome">Casa, Cura & Istruzione</div>
+                <div class="abbonamento-desc">Baby sitter, Dog sitter, Cuochi, Tuttofare, Pulizie, Badanti, Istruzione</div>
+                <div class="abbonamento-prezzo" id="prezzo-base">€10</div>
+                <div class="abbonamento-unita" id="unita-base">/mese</div>
+                <div class="abbonamento-risparmio" id="risparmio-base"></div>
+            </div>
+            <div class="abbonamento-card selected" id="card-standard" onclick="selezionaAbbonamento('standard', this)">
+                <div class="best-badge">⭐ PIÙ SCELTO</div>
+                <div class="abbonamento-cat">🏗️</div>
+                <div class="abbonamento-nome">Edilizia & Tutti gli altri</div>
+                <div class="abbonamento-desc">Edilizia, Impianti, Automotive, Legale, Salute, Estetica, Digitale...</div>
+                <div class="abbonamento-prezzo" id="prezzo-standard">€99</div>
+                <div class="abbonamento-unita" id="unita-standard">/mese</div>
+                <div class="abbonamento-risparmio" id="risparmio-standard"></div>
+            </div>
+            <div class="abbonamento-card" id="card-escort" onclick="selezionaAbbonamento('escort', this)">
+                <div class="abbonamento-cat">🔞</div>
+                <div class="abbonamento-nome">Escort & Accompagnatrici</div>
+                <div class="abbonamento-desc">Solo +18 — verifica identità obbligatoria</div>
+                <div class="abbonamento-prezzo" id="prezzo-escort">€150</div>
+                <div class="abbonamento-unita" id="unita-escort">/mese</div>
+                <div class="abbonamento-risparmio" id="risparmio-escort"></div>
+            </div>
+        </div>
+
+        <div class="avviso-blu">
+            <strong>ℹ️ Cosa include l'abbonamento</strong>
+            Pagina profilo pubblica attiva · Ricezione richieste nella tua zona · Sistema recensioni · Chat privata · Notifiche SMS e email · Supporto clienti
+        </div>
+
+    </div>
+
+    <!-- SEZIONE CREDITI -->
+    <div class="sezione" id="sez-crediti">
+
+        <div class="avviso-blu" style="margin-bottom:20px">
+            <strong>ℹ️ Come funzionano i crediti</strong>
+            Ogni credito vale per sbloccare un contatto. Il costo effettivo dipende dal tipo di lavoro (€8 per categorie base, €9 per standard, €9,90–€29,90 per edilizia).
+        </div>
+
+        <div class="crediti-grid">
+            <div class="credito-card" onclick="selezionaCrediti('5', this)">
+                <div class="credito-icon">🔓</div>
+                <div class="credito-num">5</div>
+                <div class="credito-label">crediti</div>
+                <div class="credito-prezzo">€45</div>
+                <div class="credito-unitario">€9,00 a credito</div>
+                <div class="credito-risparmio"></div>
+            </div>
+            <div class="credito-card selected" onclick="selezionaCrediti('10', this)">
+                <div class="best-badge">MIGLIOR VALORE</div>
+                <div class="credito-icon">🔓🔓</div>
+                <div class="credito-num">10</div>
+                <div class="credito-label">crediti</div>
+                <div class="credito-prezzo">€80</div>
+                <div class="credito-unitario">€8,00 a credito</div>
+                <div class="credito-risparmio">Risparmi €10 rispetto a 10 singoli</div>
+            </div>
+            <div class="credito-card" onclick="selezionaCrediti('25', this)">
+                <div class="credito-icon">🔓🔓🔓</div>
+                <div class="credito-num">25</div>
+                <div class="credito-label">crediti</div>
+                <div class="credito-prezzo">€175</div>
+                <div class="credito-unitario">€7,00 a credito</div>
+                <div class="credito-risparmio">Risparmi €50 rispetto a 25 singoli</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SEZIONE SBLOCCO SINGOLO -->
+    <div class="sezione" id="sez-singolo">
+
+        <div class="avviso-blu" style="margin-bottom:20px">
+            <strong>⚡ Sblocco singolo richiesta</strong>
+            Stai pagando per sbloccare il contatto di una specifica richiesta cliente. Una volta sbloccato avrai accesso alla chat privata.
+        </div>
+
+        <div class="crediti-grid" style="grid-template-columns: repeat(3,1fr)">
+            <div class="credito-card selected" id="singolo-piccolo" onclick="selezionaSingolo('piccolo', this)">
+                <div class="credito-icon">🟢</div>
+                <div class="credito-num" style="font-size:22px">Piccolo lavoro</div>
+                <div class="credito-label">Tinteggiatura, cartongesso, piastrelle...</div>
+                <div class="credito-prezzo">€9,90</div>
+                <div class="credito-unitario">pagamento unico</div>
+                <div class="credito-risparmio"></div>
+            </div>
+            <div class="credito-card" id="singolo-medio" onclick="selezionaSingolo('medio', this)">
+                <div class="credito-icon">🟡</div>
+                <div class="credito-num" style="font-size:22px">Medio lavoro</div>
+                <div class="credito-label">Ristrutturazione bagno, pavimenti...</div>
+                <div class="credito-prezzo">€19,90</div>
+                <div class="credito-unitario">pagamento unico</div>
+                <div class="credito-risparmio"></div>
+            </div>
+            <div class="credito-card" id="singolo-grande" onclick="selezionaSingolo('grande', this)">
+                <div class="credito-icon">🔴</div>
+                <div class="credito-num" style="font-size:22px">Grande lavoro</div>
+                <div class="credito-label">Ristrutturazione completa, cappotto...</div>
+                <div class="credito-prezzo">€29,90</div>
+                <div class="credito-unitario">pagamento unico</div>
+                <div class="credito-risparmio"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- RIEPILOGO ORDINE -->
+    <div class="riepilogo" id="riepilogoBox">
+        <h3>🧾 Riepilogo ordine</h3>
+        <div class="riepilogo-row">
+            <span class="riepilogo-label">Tipo</span>
+            <span class="riepilogo-valore" id="riepilogo-tipo">Abbonamento mensile</span>
+        </div>
+        <div class="riepilogo-row">
+            <span class="riepilogo-label">Piano</span>
+            <span class="riepilogo-valore" id="riepilogo-piano">Edilizia & Tutti gli altri</span>
+        </div>
+        <div class="riepilogo-row">
+            <span class="riepilogo-label">IVA (22%)</span>
+            <span class="riepilogo-valore" id="riepilogo-iva">€17,82</span>
+        </div>
+        <div class="riepilogo-row totale">
+            <span>Totale da pagare</span>
+            <span class="prezzo-totale" id="riepilogo-totale">€99,00</span>
+        </div>
+    </div>
+
+    <!-- FORM PAGAMENTO -->
+    <div class="form-pagamento" id="formPagamento">
+        <h3>💳 Dati di pagamento</h3>
+
+        <div class="secure-badge">
+            🔒 Pagamento sicuro con crittografia SSL 256-bit — I tuoi dati sono al sicuro
+        </div>
+
+        <div class="metodo-tabs">
+            <div class="metodo-tab active" onclick="selezionaMetodo('carta', this)">💳 Carta di credito</div>
+            <div class="metodo-tab" onclick="selezionaMetodo('paypal', this)">🅿️ PayPal</div>
+            <div class="metodo-tab" onclick="selezionaMetodo('bonifico', this)">🏦 Bonifico</div>
+        </div>
+
+        <div id="form-carta">
+            <div class="card-icons">
+                <div class="card-icon">💳</div>
+                <div class="card-icon">🔵</div>
+                <div class="card-icon">🔴</div>
+            </div>
+            <div class="form-group">
+                <label>Numero carta *</label>
+                <input type="text" id="carta-numero" placeholder="1234 5678 9012 3456" maxlength="19" oninput="formatCarta(this)">
+            </div>
+            <div class="form-group">
+                <label>Intestatario carta *</label>
+                <input type="text" id="carta-nome" placeholder="Nome Cognome come sulla carta">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Scadenza *</label>
+                    <input type="text" id="carta-scadenza" placeholder="MM/AA" maxlength="5" oninput="formatScadenza(this)">
+                </div>
+                <div class="form-group">
+                    <label>CVV *</label>
+                    <input type="text" id="carta-cvv" placeholder="123" maxlength="4" oninput="this.value=this.value.replace(/\D/g,'')">
+                </div>
+            </div>
+        </div>
+
+        <div id="form-paypal" style="display:none">
+            <div style="text-align:center;padding:30px;background:var(--grigio-chiaro);border-radius:14px;margin-bottom:18px">
+                <div style="font-size:48px;margin-bottom:12px">🅿️</div>
+                <p style="font-size:14px;color:var(--grigio)">Verrai reindirizzato a PayPal per completare il pagamento in modo sicuro.</p>
+            </div>
+        </div>
+
+        <div id="form-bonifico" style="display:none">
+            <div style="background:var(--grigio-chiaro);border-radius:14px;padding:20px;margin-bottom:18px;font-size:13px;line-height:1.9;color:var(--testo)">
+                <strong style="display:block;font-size:15px;color:var(--blu-scuro);margin-bottom:10px">🏦 Dati bonifico</strong>
+                <strong>Intestatario:</strong> Professionisti Srl<br>
+                <strong>IBAN:</strong> IT60 X054 2811 1010 0000 0123 456<br>
+                <strong>Causale:</strong> Abbonamento Professionisti + tua email<br>
+                <strong>Importo:</strong> <span id="bonifico-importo">€99,00</span><br>
+                <br>
+                ⚠️ L'account verrà attivato entro 24h dalla ricezione del bonifico.
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Email per fattura *</label>
+            <input type="email" id="email-fattura" placeholder="La tua email per ricevere la fattura">
+        </div>
+        <div class="form-group">
+            <label>Codice fiscale / P.IVA (per fattura)</label>
+            <input type="text" id="cf-piva" placeholder="Per fattura intestata alla tua impresa">
+        </div>
+
+        <button class="btn-paga" onclick="elaboraPagamento()">
+            🔒 Paga ora — <span id="btn-importo">€99,00</span>
+        </button>
+        <div class="note-pagamento">
+            🔒 Pagamento sicuro · Fattura automatica via email · Attivazione immediata<br>
+            Per assistenza: supporto@professionisti.it
+        </div>
+    </div>
+
+</div>
+
+<!-- SUCCESS SCREEN -->
+<div class="success-screen" id="successScreen">
+    <div class="container" style="max-width:600px">
+        <div class="success-icon-big">🎉</div>
+        <div class="success-title">Pagamento completato!</div>
+        <div class="success-sub" id="success-msg">Il tuo abbonamento è attivo. Puoi iniziare subito a ricevere richieste nella tua zona!</div>
+        <div class="success-grid">
+            <div class="success-item"><strong>📧 Fattura inviata</strong>Controlla la tua email per la fattura in PDF</div>
+            <div class="success-item"><strong>✅ Account attivo</strong>Il tuo profilo è ora visibile ai clienti</div>
+            <div class="success-item"><strong>📲 Notifiche attive</strong>Riceverai SMS per ogni nuova richiesta</div>
+            <div class="success-item"><strong>🔓 Pronto a sbloccare</strong>Vai alla dashboard per vedere le richieste</div>
+        </div>
+        <button class="btn-vai-dashboard" onclick="window.location.href='dashboard-pro.html'">Vai alla Dashboard →</button>
+    </div>
+</div>
+
+<script>
+    let tipoSelezionato = 'abbonamento';
+    let pianoSelezionato = 'standard';
+    let creditiSelezionati = '10';
+    let singoloSelezionato = 'piccolo';
+    let annuale = false;
+    let metodoSelezionato = 'carta';
+
+    const PREZZI_ABBONAMENTO = {
+        base:     { mensile: 10,  annuale: null },
+        standard: { mensile: 99,  annuale: 888  },
+        escort:   { mensile: 150, annuale: 999  }
+    };
+    const NOMI_PIANO = {
+        base: 'Casa, Cura & Istruzione',
+        standard: 'Edilizia & Tutti gli altri',
+        escort: 'Escort & Accompagnatrici'
+    };
+    const PREZZI_CREDITI = { '5': 45, '10': 80, '25': 175 };
+    const PREZZI_SINGOLO = { piccolo: 9.90, medio: 19.90, grande: 29.90 };
+
+    function selezionaTipo(tipo) {
+        tipoSelezionato = tipo;
+        ['abbonamento','crediti','singolo'].forEach(t => {
+            document.getElementById('tab-' + t).classList.toggle('active', t === tipo);
+            document.getElementById('sez-' + t).classList.toggle('active', t === tipo);
+        });
+        aggiornaRiepilogo();
+    }
+
+    function toggleAnnuale() {
+        annuale = !annuale;
+        const sw = document.getElementById('switchAnnuale');
+        sw.classList.toggle('on', annuale);
+        document.getElementById('label-mensile').classList.toggle('active', !annuale);
+        document.getElementById('label-annuale').classList.toggle('active', annuale);
+
+        // Aggiorna prezzi cards
+        Object.keys(PREZZI_ABBONAMENTO).forEach(p => {
+            const prezzi = PREZZI_ABBONAMENTO[p];
+            if (annuale && prezzi.annuale) {
+                document.getElementById('prezzo-' + p).textContent = '€' + prezzi.annuale;
+                document.getElementById('unita-' + p).textContent = '/anno';
+                const risparmio = Math.round(((prezzi.mensile * 12) - prezzi.annuale) / (prezzi.mensile * 12) * 100);
+                document.getElementById('risparmio-' + p).textContent = '💚 Risparmi il ' + risparmio + '%';
+            } else {
+                document.getElementById('prezzo-' + p).textContent = prezzi.annuale ? '€' + prezzi.mensile : '€' + prezzi.mensile;
+                document.getElementById('unita-' + p).textContent = prezzi.annuale ? '/mese' : '/mese (no annuale)';
+                document.getElementById('risparmio-' + p).textContent = '';
+            }
+        });
+        aggiornaRiepilogo();
+    }
+
+    function selezionaAbbonamento(piano, el) {
+        pianoSelezionato = piano;
+        document.querySelectorAll('.abbonamento-card').forEach(c => c.classList.remove('selected'));
+        el.classList.add('selected');
+        aggiornaRiepilogo();
+    }
+
+    function selezionaCrediti(num, el) {
+        creditiSelezionati = num;
+        document.querySelectorAll('.credito-card').forEach(c => c.classList.remove('selected'));
+        el.classList.add('selected');
+        aggiornaRiepilogo();
+    }
+
+    function selezionaSingolo(tipo, el) {
+        singoloSelezionato = tipo;
+        document.querySelectorAll('#sez-singolo .credito-card').forEach(c => c.classList.remove('selected'));
+        el.classList.add('selected');
+        aggiornaRiepilogo();
+    }
+
+    function selezionaMetodo(metodo, el) {
+        metodoSelezionato = metodo;
+        document.querySelectorAll('.metodo-tab').forEach(t => t.classList.remove('active'));
+        el.classList.add('active');
+        document.getElementById('form-carta').style.display = metodo === 'carta' ? 'block' : 'none';
+        document.getElementById('form-paypal').style.display = metodo === 'paypal' ? 'block' : 'none';
+        document.getElementById('form-bonifico').style.display = metodo === 'bonifico' ? 'block' : 'none';
+    }
+
+    function aggiornaRiepilogo() {
+        let tipo, piano, importo;
+        if (tipoSelezionato === 'abbonamento') {
+            const p = PREZZI_ABBONAMENTO[pianoSelezionato];
+            importo = annuale && p.annuale ? p.annuale : p.mensile;
+            tipo = annuale && p.annuale ? 'Abbonamento annuale' : 'Abbonamento mensile';
+            piano = NOMI_PIANO[pianoSelezionato];
+        } else if (tipoSelezionato === 'crediti') {
+            importo = PREZZI_CREDITI[creditiSelezionati];
+            tipo = 'Pacchetto crediti sblocco';
+            piano = creditiSelezionati + ' crediti';
+        } else {
+            importo = PREZZI_SINGOLO[singoloSelezionato];
+            tipo = 'Sblocco singolo';
+            piano = singoloSelezionato.charAt(0).toUpperCase() + singoloSelezionato.slice(1) + ' lavoro';
+        }
+        const iva = (importo * 0.22).toFixed(2);
+        document.getElementById('riepilogo-tipo').textContent = tipo;
+        document.getElementById('riepilogo-piano').textContent = piano;
+        document.getElementById('riepilogo-iva').textContent = '€' + iva;
+        document.getElementById('riepilogo-totale').textContent = '€' + importo.toFixed(2).replace('.', ',');
+        document.getElementById('btn-importo').textContent = '€' + importo.toFixed(2).replace('.', ',');
+        document.getElementById('bonifico-importo').textContent = '€' + importo.toFixed(2).replace('.', ',');
+    }
+
+    function formatCarta(input) {
+        let val = input.value.replace(/\D/g, '').slice(0, 16);
+        input.value = val.replace(/(.{4})/g, '$1 ').trim();
+    }
+
+    function formatScadenza(input) {
+        let val = input.value.replace(/\D/g, '').slice(0, 4);
+        if (val.length >= 2) val = val.slice(0, 2) + '/' + val.slice(2);
+        input.value = val;
+    }
+
+    function elaboraPagamento() {
+        const email = document.getElementById('email-fattura').value.trim();
+        if (!email || !email.includes('@')) { alert('Inserisci un\'email valida per la fattura!'); return; }
+
+        if (metodoSelezionato === 'carta') {
+            const numero = document.getElementById('carta-numero').value.replace(/\s/g, '');
+            const nome = document.getElementById('carta-nome').value.trim();
+            const scad = document.getElementById('carta-scadenza').value;
+            const cvv = document.getElementById('carta-cvv').value;
+            if (numero.length < 16) { alert('Inserisci un numero di carta valido!'); return; }
+            if (!nome) { alert('Inserisci il nome intestatario!'); return; }
+            if (scad.length < 5) { alert('Inserisci la scadenza (MM/AA)!'); return; }
+            if (cvv.length < 3) { alert('Inserisci il CVV!'); return; }
+        }
+
+        // Simula elaborazione
+        const btn = document.querySelector('.btn-paga');
+        btn.textContent = '⏳ Elaborazione in corso...';
+        btn.disabled = true;
+
+        setTimeout(() => {
+            document.querySelector('.container').style.display = 'none';
+            document.querySelector('.page-hero').style.display = 'none';
+            const successMsg = tipoSelezionato === 'abbonamento'
+                ? 'Il tuo abbonamento è attivo. Puoi iniziare subito a ricevere richieste nella tua zona!'
+                : tipoSelezionato === 'crediti'
+                ? 'I tuoi crediti sono stati aggiunti. Vai alla dashboard per sbloccare i contatti!'
+                : 'Il contatto è sbloccato. Vai alla chat per comunicare con il cliente!';
+            document.getElementById('success-msg').textContent = successMsg;
+            document.getElementById('successScreen').classList.add('show');
+        }, 2000);
+    }
+
+    // Init
+    aggiornaRiepilogo();
+</script>
+</body>
+</html>
