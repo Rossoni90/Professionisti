@@ -4,13 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Professionisti</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
+
+        :root {
+            --blu: #1B3A6B;
+            --blu-scuro: #0F2347;
+            --blu-chiaro: #2952A3;
+            --oro: #B8972A;
+            --oro-chiaro: #D4AF37;
+            --bianco: #FFFFFF;
+            --grigio-chiaro: #F5F7FA;
+            --grigio: #6B7280;
+            --testo: #1A1A2E;
+        }
+
         body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #0a0a2e;
-            color: white;
+            font-family: 'Inter', sans-serif;
+            background: var(--bianco);
+            color: var(--testo);
             min-height: 100vh;
         }
 
@@ -19,59 +32,128 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 30px;
-            background: #0a0a2e;
-            border-bottom: 2px solid #c9a84c;
+            padding: 18px 40px;
+            background: var(--bianco);
+            border-bottom: 1px solid #e5e7eb;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .logo {
-            font-size: 28px;
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
             font-weight: 900;
-            color: #c9a84c;
-            letter-spacing: 2px;
+            color: var(--blu);
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--oro);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+            align-items: center;
         }
 
         .lang-switch {
             display: flex;
-            gap: 10px;
+            gap: 8px;
+            margin-right: 10px;
         }
 
         .lang-btn {
             background: transparent;
-            border: 1px solid #c9a84c;
-            color: #c9a84c;
-            padding: 5px 12px;
+            border: 1px solid var(--blu);
+            color: var(--blu);
+            padding: 4px 12px;
             border-radius: 20px;
             cursor: pointer;
-            font-size: 13px;
+            font-size: 12px;
+            font-weight: 600;
         }
 
         .lang-btn.active {
-            background: #c9a84c;
-            color: #0a0a2e;
-            font-weight: bold;
+            background: var(--blu);
+            color: white;
+        }
+
+        .nav-btn-login {
+            background: transparent;
+            border: 2px solid var(--blu);
+            color: var(--blu);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-btn-login:hover {
+            background: var(--blu);
+            color: white;
+        }
+
+        .nav-btn-register {
+            background: var(--oro);
+            border: 2px solid var(--oro);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .nav-btn-register:hover {
+            background: var(--oro-chiaro);
+            border-color: var(--oro-chiaro);
         }
 
         /* HERO */
         .hero {
             text-align: center;
-            padding: 80px 30px 60px;
-            background: linear-gradient(180deg, #0a0a2e 0%, #0d1554 100%);
+            padding: 100px 30px 80px;
+            background: linear-gradient(135deg, #F5F7FA 0%, #EEF2FF 100%);
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--blu);
+            color: var(--oro);
+            padding: 6px 20px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 25px;
         }
 
         .hero h1 {
-            font-size: 42px;
-            color: #c9a84c;
+            font-family: 'Playfair Display', serif;
+            font-size: 52px;
+            color: var(--blu-scuro);
             margin-bottom: 20px;
             line-height: 1.2;
         }
 
+        .hero h1 span {
+            color: var(--oro);
+        }
+
         .hero p {
             font-size: 18px;
-            color: #ccc;
-            max-width: 600px;
-            margin: 0 auto 40px;
-            line-height: 1.6;
+            color: var(--grigio);
+            max-width: 580px;
+            margin: 0 auto 50px;
+            line-height: 1.7;
+            font-weight: 400;
         }
 
         .hero-buttons {
@@ -82,107 +164,159 @@
         }
 
         .btn-primary {
-            background: #c9a84c;
-            color: #0a0a2e;
-            padding: 15px 35px;
+            background: var(--blu);
+            color: white;
+            padding: 16px 40px;
             border-radius: 30px;
             font-size: 16px;
-            font-weight: bold;
+            font-weight: 600;
             border: none;
             cursor: pointer;
             text-decoration: none;
             transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(27,58,107,0.3);
         }
 
         .btn-primary:hover {
-            background: #e0c06a;
+            background: var(--blu-chiaro);
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(27,58,107,0.4);
         }
 
         .btn-secondary {
-            background: transparent;
-            color: #c9a84c;
-            padding: 15px 35px;
+            background: white;
+            color: var(--oro);
+            padding: 16px 40px;
             border-radius: 30px;
             font-size: 16px;
-            font-weight: bold;
-            border: 2px solid #c9a84c;
+            font-weight: 600;
+            border: 2px solid var(--oro);
             cursor: pointer;
             text-decoration: none;
             transition: 0.3s;
         }
 
         .btn-secondary:hover {
-            background: #c9a84c;
-            color: #0a0a2e;
+            background: var(--oro);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* STATS */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            padding: 40px 30px;
+            background: var(--blu-scuro);
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: var(--oro);
+            font-weight: 900;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #9CA3AF;
+            margin-top: 5px;
         }
 
         /* COME FUNZIONA */
         .how-it-works {
-            padding: 60px 30px;
+            padding: 80px 30px;
             text-align: center;
-            background: #0d1554;
+            background: var(--bianco);
+        }
+
+        .section-label {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--oro);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
         }
 
         .how-it-works h2 {
-            font-size: 32px;
-            color: #c9a84c;
-            margin-bottom: 40px;
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: var(--blu-scuro);
+            margin-bottom: 50px;
         }
 
         .steps {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             justify-content: center;
             flex-wrap: wrap;
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
         .step {
-            background: #0a0a2e;
-            border: 1px solid #c9a84c;
-            border-radius: 15px;
-            padding: 30px 20px;
-            width: 200px;
+            background: var(--grigio-chiaro);
+            border-radius: 20px;
+            padding: 35px 25px;
+            width: 210px;
+            position: relative;
             transition: 0.3s;
+            border: 1px solid #e5e7eb;
         }
 
         .step:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(201,168,76,0.3);
+            box-shadow: 0 15px 40px rgba(27,58,107,0.12);
+            border-color: var(--oro);
         }
 
         .step-number {
-            font-size: 36px;
-            color: #c9a84c;
+            width: 50px;
+            height: 50px;
+            background: var(--blu);
+            color: var(--oro);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
             font-weight: 900;
-            margin-bottom: 15px;
+            margin: 0 auto 20px;
+            font-family: 'Playfair Display', serif;
         }
 
         .step h3 {
-            font-size: 16px;
-            color: white;
+            font-size: 17px;
+            color: var(--blu-scuro);
             margin-bottom: 10px;
+            font-weight: 600;
         }
 
         .step p {
             font-size: 13px;
-            color: #aaa;
-            line-height: 1.5;
+            color: var(--grigio);
+            line-height: 1.6;
         }
 
         /* CATEGORIE */
         .categories {
-            padding: 60px 30px;
-            background: #0a0a2e;
+            padding: 80px 30px;
+            background: var(--grigio-chiaro);
             text-align: center;
         }
 
         .categories h2 {
-            font-size: 32px;
-            color: #c9a84c;
-            margin-bottom: 40px;
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: var(--blu-scuro);
+            margin-bottom: 50px;
         }
 
         .category-grid {
@@ -190,111 +324,202 @@
             flex-wrap: wrap;
             gap: 15px;
             justify-content: center;
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
         .category-card {
-            background: #0d1554;
-            border: 1px solid #c9a84c33;
-            border-radius: 12px;
-            padding: 20px 15px;
-            width: 150px;
+            background: var(--bianco);
+            border: 1px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 25px 15px;
+            width: 155px;
             cursor: pointer;
             transition: 0.3s;
             text-align: center;
         }
 
         .category-card:hover {
-            border-color: #c9a84c;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(201,168,76,0.2);
+            border-color: var(--oro);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(184,151,42,0.15);
         }
 
         .category-icon {
-            font-size: 36px;
-            margin-bottom: 10px;
+            font-size: 38px;
+            margin-bottom: 12px;
         }
 
         .category-card p {
             font-size: 13px;
-            color: #ccc;
+            color: var(--blu-scuro);
+            font-weight: 600;
         }
 
         /* VANTAGGI */
         .vantaggi {
-            padding: 60px 30px;
-            background: #0d1554;
+            padding: 80px 30px;
+            background: var(--bianco);
             text-align: center;
         }
 
         .vantaggi h2 {
-            font-size: 32px;
-            color: #c9a84c;
-            margin-bottom: 40px;
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: var(--blu-scuro);
+            margin-bottom: 50px;
         }
 
         .vantaggi-grid {
             display: flex;
-            gap: 20px;
+            gap: 25px;
             justify-content: center;
             flex-wrap: wrap;
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
         .vantaggio {
-            background: #0a0a2e;
-            border-left: 4px solid #c9a84c;
-            border-radius: 10px;
-            padding: 25px 20px;
-            width: 250px;
+            background: var(--grigio-chiaro);
+            border-radius: 15px;
+            padding: 30px 25px;
+            width: 220px;
             text-align: left;
+            border: 1px solid #e5e7eb;
+            transition: 0.3s;
+        }
+
+        .vantaggio:hover {
+            border-color: var(--blu);
+            box-shadow: 0 10px 30px rgba(27,58,107,0.1);
+        }
+
+        .vantaggio-icon {
+            font-size: 32px;
+            margin-bottom: 15px;
         }
 
         .vantaggio h3 {
-            color: #c9a84c;
+            color: var(--blu-scuro);
             margin-bottom: 10px;
             font-size: 16px;
+            font-weight: 700;
         }
 
         .vantaggio p {
-            color: #aaa;
+            color: var(--grigio);
             font-size: 13px;
             line-height: 1.6;
         }
 
         /* CTA */
         .cta {
-            padding: 80px 30px;
+            padding: 100px 30px;
             text-align: center;
-            background: linear-gradient(180deg, #0a0a2e 0%, #0d1554 100%);
+            background: linear-gradient(135deg, var(--blu-scuro) 0%, var(--blu) 100%);
         }
 
         .cta h2 {
-            font-size: 36px;
-            color: #c9a84c;
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            color: white;
             margin-bottom: 20px;
+        }
+
+        .cta h2 span {
+            color: var(--oro);
         }
 
         .cta p {
             font-size: 18px;
-            color: #ccc;
-            margin-bottom: 40px;
+            color: #9CA3AF;
+            margin-bottom: 50px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-oro {
+            background: var(--oro);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(184,151,42,0.4);
+            display: inline-block;
+            margin: 8px;
+        }
+
+        .btn-oro:hover {
+            background: var(--oro-chiaro);
+            transform: translateY(-2px);
+        }
+
+        .btn-bianco {
+            background: transparent;
+            color: white;
+            padding: 16px 40px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border: 2px solid white;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.3s;
+            display: inline-block;
+            margin: 8px;
+        }
+
+        .btn-bianco:hover {
+            background: white;
+            color: var(--blu);
         }
 
         /* FOOTER */
         footer {
-            background: #050518;
-            border-top: 2px solid #c9a84c;
-            padding: 30px;
+            background: #0A0F1E;
+            padding: 40px 30px;
             text-align: center;
-            color: #666;
-            font-size: 13px;
         }
 
-        footer span {
-            color: #c9a84c;
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo span {
+            color: var(--oro);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: #6B7280;
+            text-decoration: none;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--oro);
+        }
+
+        footer p {
+            color: #4B5563;
+            font-size: 12px;
         }
 
         /* ADULT POPUP */
@@ -303,10 +528,11 @@
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.85);
             z-index: 9999;
             justify-content: center;
             align-items: center;
+            padding: 20px;
         }
 
         .adult-popup.show {
@@ -314,30 +540,33 @@
         }
 
         .adult-box {
-            background: #0a0a2e;
-            border: 2px solid #c9a84c;
-            border-radius: 20px;
-            padding: 40px 30px;
-            max-width: 400px;
+            background: white;
+            border-radius: 25px;
+            padding: 50px 35px;
+            max-width: 420px;
             text-align: center;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
         }
 
         .adult-box h2 {
-            color: #c9a84c;
+            color: var(--blu-scuro);
+            font-family: 'Playfair Display', serif;
             font-size: 28px;
             margin-bottom: 15px;
         }
 
         .adult-box p {
-            color: #ccc;
+            color: var(--grigio);
             margin-bottom: 30px;
             line-height: 1.6;
+            font-size: 15px;
         }
 
         .adult-buttons {
             display: flex;
             gap: 15px;
             justify-content: center;
+            flex-wrap: wrap;
         }
     </style>
 </head>
@@ -345,65 +574,92 @@
 
     <!-- NAVBAR -->
     <nav>
-        <div class="logo">⭐ PROFESSIONISTI</div>
-        <div class="lang-switch">
-            <button class="lang-btn active" onclick="setLang('it')">IT</button>
-            <button class="lang-btn" onclick="setLang('en')">EN</button>
+        <div class="logo">PROFES<span>SIONISTI</span></div>
+        <div class="nav-buttons">
+            <div class="lang-switch">
+                <button class="lang-btn active" onclick="setLang('it', event)">IT</button>
+                <button class="lang-btn" onclick="setLang('en', event)">EN</button>
+            </div>
+            <button class="nav-btn-login" data-it="Accedi" data-en="Login">Accedi</button>
+            <button class="nav-btn-register" data-it="Registrati" data-en="Register">Registrati</button>
         </div>
     </nav>
 
     <!-- HERO -->
     <section class="hero">
-        <h1 data-it="Trova il Professionista<br>Giusto per Te" data-en="Find the Right<br>Professional for You">
-            Trova il Professionista<br>Giusto per Te
+        <div class="hero-badge" data-it="🇮🇹 La piattaforma N°1 in Italia" data-en="🇮🇹 The N°1 platform in Italy">🇮🇹 La piattaforma N°1 in Italia</div>
+        <h1 data-it="Trova il <span>Professionista</span><br>Giusto per Te" data-en="Find the Right<br><span>Professional</span> for You">
+            Trova il <span>Professionista</span><br>Giusto per Te
         </h1>
-        <p data-it="Connetti clienti e professionisti in tutta Italia. Gratis per i clienti, qualità garantita per tutti." 
-           data-en="Connect clients and professionals across Italy. Free for clients, quality guaranteed for all.">
-            Connetti clienti e professionisti in tutta Italia. Gratis per i clienti, qualità garantita per tutti.
+        <p data-it="Connetti clienti e professionisti in tutta Italia. Completamente gratuito per i clienti." 
+           data-en="Connect clients and professionals across Italy. Completely free for clients.">
+            Connetti clienti e professionisti in tutta Italia. Completamente gratuito per i clienti.
         </p>
         <div class="hero-buttons">
-            <a href="cliente.html" class="btn-primary" data-it="Sono un Cliente" data-en="I'm a Client">Sono un Cliente</a>
-            <a href="professionista.html" class="btn-secondary" data-it="Sono un Professionista" data-en="I'm a Professional">Sono un Professionista</a>
+            <a href="cliente.html" class="btn-primary" data-it="🔍 Cerca un Professionista" data-en="🔍 Find a Professional">🔍 Cerca un Professionista</a>
+            <a href="professionista.html" class="btn-secondary" data-it="💼 Sono un Professionista" data-en="💼 I'm a Professional">💼 Sono un Professionista</a>
         </div>
     </section>
 
+    <!-- STATS -->
+    <div class="stats">
+        <div class="stat">
+            <div class="stat-number">10.000+</div>
+            <div class="stat-label" data-it="Professionisti verificati" data-en="Verified professionals">Professionisti verificati</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">50.000+</div>
+            <div class="stat-label" data-it="Richieste completate" data-en="Completed requests">Richieste completate</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">Max 5</div>
+            <div class="stat-label" data-it="Offerte per richiesta" data-en="Offers per request">Offerte per richiesta</div>
+        </div>
+        <div class="stat">
+            <div class="stat-number">4.9★</div>
+            <div class="stat-label" data-it="Valutazione media" data-en="Average rating">Valutazione media</div>
+        </div>
+    </div>
+
     <!-- COME FUNZIONA -->
     <section class="how-it-works">
+        <div class="section-label" data-it="SEMPLICE E VELOCE" data-en="SIMPLE AND FAST">SEMPLICE E VELOCE</div>
         <h2 data-it="Come Funziona" data-en="How It Works">Come Funziona</h2>
         <div class="steps">
             <div class="step">
                 <div class="step-number">1</div>
-                <h3 data-it="Descrivi" data-en="Describe">Descrivi</h3>
-                <p data-it="Inserisci quello di cui hai bisogno e la tua città" data-en="Enter what you need and your city">Inserisci quello di cui hai bisogno e la tua città</p>
+                <h3 data-it="Descrivi il Lavoro" data-en="Describe the Job">Descrivi il Lavoro</h3>
+                <p data-it="Inserisci una descrizione e la tua città. Nessun dato personale richiesto." data-en="Enter a description and your city. No personal data required.">Inserisci una descrizione e la tua città. Nessun dato personale richiesto.</p>
             </div>
             <div class="step">
                 <div class="step-number">2</div>
                 <h3 data-it="Ricevi Offerte" data-en="Receive Offers">Ricevi Offerte</h3>
-                <p data-it="Massimo 5 professionisti ti contattano" data-en="Maximum 5 professionals contact you">Massimo 5 professionisti ti contattano</p>
+                <p data-it="Massimo 5 professionisti verificati ti contattano tramite chat privata." data-en="Maximum 5 verified professionals contact you via private chat.">Massimo 5 professionisti verificati ti contattano tramite chat privata.</p>
             </div>
             <div class="step">
                 <div class="step-number">3</div>
-                <h3 data-it="Scegli" data-en="Choose">Scegli</h3>
-                <p data-it="Confronta e scegli il migliore per te" data-en="Compare and choose the best for you">Confronta e scegli il migliore per te</p>
+                <h3 data-it="Scegli il Migliore" data-en="Choose the Best">Scegli il Migliore</h3>
+                <p data-it="Confronta profili, recensioni e prezzi. Scegli in totale libertà." data-en="Compare profiles, reviews and prices. Choose freely.">Confronta profili, recensioni e prezzi. Scegli in totale libertà.</p>
             </div>
             <div class="step">
                 <div class="step-number">4</div>
                 <h3 data-it="Sopralluogo" data-en="Site Visit">Sopralluogo</h3>
-                <p data-it="Concordate data e ora direttamente in chat" data-en="Agree on date and time directly in chat">Concordate data e ora direttamente in chat</p>
+                <p data-it="Concordate data e ora in chat. Il sistema monitora e conferma l'appuntamento." data-en="Agree on date and time in chat. The system monitors and confirms the appointment.">Concordate data e ora in chat. Il sistema monitora e conferma l'appuntamento.</p>
             </div>
         </div>
     </section>
 
     <!-- CATEGORIE -->
     <section class="categories">
-        <h2 data-it="Tutte le Categorie" data-en="All Categories">Tutte le Categorie</h2>
+        <div class="section-label" data-it="TUTTI I SETTORI" data-en="ALL SECTORS">TUTTI I SETTORI</div>
+        <h2 data-it="Trova il Professionista<br>in Ogni Categoria" data-en="Find Professionals<br>in Every Category">Trova il Professionista<br>in Ogni Categoria</h2>
         <div class="category-grid">
             <div class="category-card">
                 <div class="category-icon">🏗️</div>
                 <p data-it="Edilizia" data-en="Construction">Edilizia</p>
             </div>
             <div class="category-card">
-                <div class="category-icon">⚡</div>
+                <div class="category-icon">⚡💧</div>
                 <p data-it="Impianti" data-en="Systems">Impianti</p>
             </div>
             <div class="category-card">
@@ -412,7 +668,7 @@
             </div>
             <div class="category-card">
                 <div class="category-icon">⚖️</div>
-                <p data-it="Legale" data-en="Legal">Legale</p>
+                <p data-it="Legale & Finanza" data-en="Legal & Finance">Legale & Finanza</p>
             </div>
             <div class="category-card">
                 <div class="category-icon">🏥</div>
@@ -424,11 +680,11 @@
             </div>
             <div class="category-card">
                 <div class="category-icon">🏠</div>
-                <p data-it="Casa" data-en="Home">Casa</p>
+                <p data-it="Casa & Servizi" data-en="Home & Services">Casa & Servizi</p>
             </div>
             <div class="category-card">
                 <div class="category-icon">💻</div>
-                <p data-it="Digitale" data-en="Digital">Digitale</p>
+                <p data-it="Digitale & Tech" data-en="Digital & Tech">Digitale & Tech</p>
             </div>
             <div class="category-card">
                 <div class="category-icon">🎓</div>
@@ -443,63 +699,77 @@
 
     <!-- VANTAGGI -->
     <section class="vantaggi">
-        <h2 data-it="Perché Sceglierci" data-en="Why Choose Us">Perché Sceglierci</h2>
+        <div class="section-label" data-it="I NOSTRI PUNTI DI FORZA" data-en="OUR STRENGTHS">I NOSTRI PUNTI DI FORZA</div>
+        <h2 data-it="Perché Scegliere Professionisti" data-en="Why Choose Professionisti">Perché Scegliere Professionisti</h2>
         <div class="vantaggi-grid">
             <div class="vantaggio">
-                <h3 data-it="🛡️ Zero Truffe" data-en="🛡️ Zero Scams">🛡️ Zero Truffe</h3>
-                <p data-it="Ogni cliente è verificato con OTP. Niente profili falsi." data-en="Every client is verified with OTP. No fake profiles.">Ogni cliente è verificato con OTP. Niente profili falsi.</p>
+                <div class="vantaggio-icon">🛡️</div>
+                <h3 data-it="Zero Truffe" data-en="Zero Scams">Zero Truffe</h3>
+                <p data-it="Ogni utente è verificato con codice OTP. Niente profili falsi o clienti fantasma." data-en="Every user is verified with OTP code. No fake profiles or ghost clients.">Ogni utente è verificato con codice OTP. Niente profili falsi o clienti fantasma.</p>
             </div>
             <div class="vantaggio">
-                <h3 data-it="⭐ Max 5 Offerte" data-en="⭐ Max 5 Offers">⭐ Max 5 Offerte</h3>
-                <p data-it="Solo 5 professionisti per richiesta. Qualità, non quantità." data-en="Only 5 professionals per request. Quality, not quantity.">Solo 5 professionisti per richiesta. Qualità, non quantità.</p>
+                <div class="vantaggio-icon">⭐</div>
+                <h3 data-it="Max 5 Offerte" data-en="Max 5 Offers">Max 5 Offerte</h3>
+                <p data-it="Solo 5 professionisti per richiesta. Qualità garantita, non quantità." data-en="Only 5 professionals per request. Quality guaranteed, not quantity.">Solo 5 professionisti per richiesta. Qualità garantita, non quantità.</p>
             </div>
             <div class="vantaggio">
-                <h3 data-it="💬 Chat Privata" data-en="💬 Private Chat">💬 Chat Privata</h3>
-                <p data-it="Comunicazione sicura e protetta all'interno della piattaforma." data-en="Safe and protected communication within the platform.">Comunicazione sicura e protetta all'interno della piattaforma.</p>
+                <div class="vantaggio-icon">💬</div>
+                <h3 data-it="Chat Privata" data-en="Private Chat">Chat Privata</h3>
+                <p data-it="Comunicazione sicura all'interno della piattaforma. I tuoi dati sempre protetti." data-en="Secure communication within the platform. Your data always protected.">Comunicazione sicura all'interno della piattaforma. I tuoi dati sempre protetti.</p>
             </div>
             <div class="vantaggio">
-                <h3 data-it="✅ Recensioni Reali" data-en="✅ Real Reviews">✅ Recensioni Reali</h3>
-                <p data-it="Cliente recensisce pro, pro recensisce cliente. Trasparenza totale." data-en="Client reviews pro, pro reviews client. Total transparency.">Cliente recensisce pro, pro recensisce cliente. Trasparenza totale.</p>
+                <div class="vantaggio-icon">✅</div>
+                <h3 data-it="Recensioni Reali" data-en="Real Reviews">Recensioni Reali</h3>
+                <p data-it="Cliente recensisce il pro, il pro recensisce il cliente. Trasparenza totale." data-en="Client reviews pro, pro reviews client. Total transparency.">Cliente recensisce il pro, il pro recensisce il cliente. Trasparenza totale.</p>
             </div>
         </div>
     </section>
 
     <!-- CTA -->
     <section class="cta">
-        <h2 data-it="Inizia Subito, è Gratis!" data-en="Start Now, It's Free!">Inizia Subito, è Gratis!</h2>
-        <p data-it="Registrati come cliente e ricevi fino a 5 offerte in poche ore." data-en="Register as a client and receive up to 5 offers within hours.">Registrati come cliente e ricevi fino a 5 offerte in poche ore.</p>
-        <div class="hero-buttons">
-            <a href="cliente.html" class="btn-primary" data-it="Registrati Gratis" data-en="Register Free">Registrati Gratis</a>
-            <a href="professionista.html" class="btn-secondary" data-it="Sei un Pro? Entra" data-en="Are you a Pro? Join">Sei un Pro? Entra</a>
+        <h2 data-it="Inizia Subito,<br>è <span>Completamente Gratis!</span>" data-en="Start Now,<br>it's <span>Completely Free!</span>">Inizia Subito,<br>è <span>Completamente Gratis!</span></h2>
+        <p data-it="Registrati come cliente e ricevi fino a 5 offerte di professionisti verificati in poche ore." 
+           data-en="Register as a client and receive up to 5 offers from verified professionals within hours.">
+           Registrati come cliente e ricevi fino a 5 offerte di professionisti verificati in poche ore.
+        </p>
+        <div>
+            <a href="cliente.html" class="btn-oro" data-it="🔍 Cerca Gratis" data-en="🔍 Search Free">🔍 Cerca Gratis</a>
+            <a href="professionista.html" class="btn-bianco" data-it="💼 Sei un Professionista?" data-en="💼 Are you a Professional?">💼 Sei un Professionista?</a>
         </div>
     </section>
 
     <!-- FOOTER -->
     <footer>
-        <p>© 2026 <span>Professionisti</span> — Tutti i diritti riservati | 
-        <span data-it="Piattaforma verificata" data-en="Verified platform">Piattaforma verificata</span></p>
+        <div class="footer-logo">PROFES<span>SIONISTI</span></div>
+        <div class="footer-links">
+            <a href="#" data-it="Chi Siamo" data-en="About Us">Chi Siamo</a>
+            <a href="#" data-it="Come Funziona" data-en="How It Works">Come Funziona</a>
+            <a href="#" data-it="Privacy Policy" data-en="Privacy Policy">Privacy Policy</a>
+            <a href="#" data-it="Termini di Servizio" data-en="Terms of Service">Termini di Servizio</a>
+            <a href="#" data-it="Contatti" data-en="Contact">Contatti</a>
+        </div>
+        <p>© 2026 Professionisti — <span style="color:#B8972A" data-it="Tutti i diritti riservati" data-en="All rights reserved">Tutti i diritti riservati</span></p>
     </footer>
 
     <!-- ADULT POPUP -->
     <div class="adult-popup" id="adultPopup">
         <div class="adult-box">
-            <h2>🔞 +18</h2>
-            <p data-it="Questa sezione è riservata ai maggiorenni. Confermi di avere più di 18 anni?" 
-               data-en="This section is for adults only. Do you confirm you are over 18?">
-               Questa sezione è riservata ai maggiorenni. Confermi di avere più di 18 anni?
+            <h2>🔞 Contenuto +18</h2>
+            <p data-it="Questa sezione è riservata esclusivamente ai maggiorenni. Confermi di avere più di 18 anni e di accettare i termini di accesso?" 
+               data-en="This section is exclusively for adults. Do you confirm you are over 18 and accept the access terms?">
+               Questa sezione è riservata esclusivamente ai maggiorenni. Confermi di avere più di 18 anni e di accettare i termini di accesso?
             </p>
             <div class="adult-buttons">
-                <button class="btn-primary" onclick="confirmAdult()" data-it="Sì, ho +18 anni" data-en="Yes, I'm 18+">Sì, ho +18 anni</button>
-                <button class="btn-secondary" onclick="denyAdult()" data-it="No, sono minorenne" data-en="No, I'm underage">No, sono minorenne</button>
+                <button class="btn-primary" onclick="confirmAdult()" data-it="✅ Sì, ho più di 18 anni" data-en="✅ Yes, I'm over 18">✅ Sì, ho più di 18 anni</button>
+                <button class="btn-secondary" onclick="denyAdult()" data-it="❌ No, sono minorenne" data-en="❌ No, I'm underage">❌ No, sono minorenne</button>
             </div>
         </div>
     </div>
 
     <script>
-        // LINGUA
         let currentLang = 'it';
 
-        function setLang(lang) {
+        function setLang(lang, event) {
             currentLang = lang;
             document.querySelectorAll('[data-it]').forEach(el => {
                 el.innerHTML = el.getAttribute('data-' + lang);
@@ -510,19 +780,17 @@
             event.target.classList.add('active');
         }
 
-        // POPUP ADULTI
         function checkAdult() {
             document.getElementById('adultPopup').classList.add('show');
         }
 
         function confirmAdult() {
             document.getElementById('adultPopup').classList.remove('show');
-            alert(currentLang === 'it' ? 'Accesso alla sezione Escort consentito.' : 'Access to Escort section granted.');
         }
 
         function denyAdult() {
             document.getElementById('adultPopup').classList.remove('show');
-            window.location.href = '/';
+            window.scrollTo(0, 0);
         }
     </script>
 
