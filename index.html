@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professionisti</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #0a0a2e;
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background: #0a0a2e;
+            border-bottom: 2px solid #c9a84c;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 900;
+            color: #c9a84c;
+            letter-spacing: 2px;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: 1px solid #c9a84c;
+            color: #c9a84c;
+            padding: 5px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .lang-btn.active {
+            background: #c9a84c;
+            color: #0a0a2e;
+            font-weight: bold;
+        }
+
+        /* HERO */
+        .hero {
+            text-align: center;
+            padding: 80px 30px 60px;
+            background: linear-gradient(180deg, #0a0a2e 0%, #0d1554 100%);
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            color: #c9a84c;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: #c9a84c;
+            color: #0a0a2e;
+            padding: 15px 35px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #e0c06a;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #c9a84c;
+            padding: 15px 35px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border: 2px solid #c9a84c;
+            cursor: pointer;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: #c9a84c;
+            color: #0a0a2e;
+        }
+
+        /* COME FUNZIONA */
+        .how-it-works {
+            padding: 60px 30px;
+            text-align: center;
+            background: #0d1554;
+        }
+
+        .how-it-works h2 {
+            font-size: 32px;
+            color: #c9a84c;
+            margin-bottom: 40px;
+        }
+
+        .steps {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .step {
+            background: #0a0a2e;
+            border: 1px solid #c9a84c;
+            border-radius: 15px;
+            padding: 30px 20px;
+            width: 200px;
+            transition: 0.3s;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(201,168,76,0.3);
+        }
+
+        .step-number {
+            font-size: 36px;
+            color: #c9a84c;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
+        .step h3 {
+            font-size: 16px;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            font-size: 13px;
+            color: #aaa;
+            line-height: 1.5;
+        }
+
+        /* CATEGORIE */
+        .categories {
+            padding: 60px 30px;
+            background: #0a0a2e;
+            text-align: center;
+        }
+
+        .categories h2 {
+            font-size: 32px;
+            color: #c9a84c;
+            margin-bottom: 40px;
+        }
+
+        .category-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .category-card {
+            background: #0d1554;
+            border: 1px solid #c9a84c33;
+            border-radius: 12px;
+            padding: 20px 15px;
+            width: 150px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+        }
+
+        .category-card:hover {
+            border-color: #c9a84c;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(201,168,76,0.2);
+        }
+
+        .category-icon {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .category-card p {
+            font-size: 13px;
+            color: #ccc;
+        }
+
+        /* VANTAGGI */
+        .vantaggi {
+            padding: 60px 30px;
+            background: #0d1554;
+            text-align: center;
+        }
+
+        .vantaggi h2 {
+            font-size: 32px;
+            color: #c9a84c;
+            margin-bottom: 40px;
+        }
+
+        .vantaggi-grid {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .vantaggio {
+            background: #0a0a2e;
+            border-left: 4px solid #c9a84c;
+            border-radius: 10px;
+            padding: 25px 20px;
+            width: 250px;
+            text-align: left;
+        }
+
+        .vantaggio h3 {
+            color: #c9a84c;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .vantaggio p {
+            color: #aaa;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        /* CTA */
+        .cta {
+            padding: 80px 30px;
+            text-align: center;
+            background: linear-gradient(180deg, #0a0a2e 0%, #0d1554 100%);
+        }
+
+        .cta h2 {
+            font-size: 36px;
+            color: #c9a84c;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 18px;
+            color: #ccc;
+            margin-bottom: 40px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #050518;
+            border-top: 2px solid #c9a84c;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+        }
+
+        footer span {
+            color: #c9a84c;
+        }
+
+        /* ADULT POPUP */
+        .adult-popup {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .adult-popup.show {
+            display: flex;
+        }
+
+        .adult-box {
+            background: #0a0a2e;
+            border: 2px solid #c9a84c;
+            border-radius: 20px;
+            padding: 40px 30px;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .adult-box h2 {
+            color: #c9a84c;
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .adult-box p {
+            color: #ccc;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .adult-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">⭐ PROFESSIONISTI</div>
+        <div class="lang-switch">
+            <button class="lang-btn active" onclick="setLang('it')">IT</button>
+            <button class="lang-btn" onclick="setLang('en')">EN</button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <h1 data-it="Trova il Professionista<br>Giusto per Te" data-en="Find the Right<br>Professional for You">
+            Trova il Professionista<br>Giusto per Te
+        </h1>
+        <p data-it="Connetti clienti e professionisti in tutta Italia. Gratis per i clienti, qualità garantita per tutti." 
+           data-en="Connect clients and professionals across Italy. Free for clients, quality guaranteed for all.">
+            Connetti clienti e professionisti in tutta Italia. Gratis per i clienti, qualità garantita per tutti.
+        </p>
+        <div class="hero-buttons">
+            <a href="cliente.html" class="btn-primary" data-it="Sono un Cliente" data-en="I'm a Client">Sono un Cliente</a>
+            <a href="professionista.html" class="btn-secondary" data-it="Sono un Professionista" data-en="I'm a Professional">Sono un Professionista</a>
+        </div>
+    </section>
+
+    <!-- COME FUNZIONA -->
+    <section class="how-it-works">
+        <h2 data-it="Come Funziona" data-en="How It Works">Come Funziona</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3 data-it="Descrivi" data-en="Describe">Descrivi</h3>
+                <p data-it="Inserisci quello di cui hai bisogno e la tua città" data-en="Enter what you need and your city">Inserisci quello di cui hai bisogno e la tua città</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3 data-it="Ricevi Offerte" data-en="Receive Offers">Ricevi Offerte</h3>
+                <p data-it="Massimo 5 professionisti ti contattano" data-en="Maximum 5 professionals contact you">Massimo 5 professionisti ti contattano</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3 data-it="Scegli" data-en="Choose">Scegli</h3>
+                <p data-it="Confronta e scegli il migliore per te" data-en="Compare and choose the best for you">Confronta e scegli il migliore per te</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3 data-it="Sopralluogo" data-en="Site Visit">Sopralluogo</h3>
+                <p data-it="Concordate data e ora direttamente in chat" data-en="Agree on date and time directly in chat">Concordate data e ora direttamente in chat</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CATEGORIE -->
+    <section class="categories">
+        <h2 data-it="Tutte le Categorie" data-en="All Categories">Tutte le Categorie</h2>
+        <div class="category-grid">
+            <div class="category-card">
+                <div class="category-icon">🏗️</div>
+                <p data-it="Edilizia" data-en="Construction">Edilizia</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">⚡</div>
+                <p data-it="Impianti" data-en="Systems">Impianti</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">🚗</div>
+                <p data-it="Automotive" data-en="Automotive">Automotive</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">⚖️</div>
+                <p data-it="Legale" data-en="Legal">Legale</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">🏥</div>
+                <p data-it="Salute" data-en="Health">Salute</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">💇</div>
+                <p data-it="Estetica" data-en="Beauty">Estetica</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">🏠</div>
+                <p data-it="Casa" data-en="Home">Casa</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">💻</div>
+                <p data-it="Digitale" data-en="Digital">Digitale</p>
+            </div>
+            <div class="category-card">
+                <div class="category-icon">🎓</div>
+                <p data-it="Istruzione" data-en="Education">Istruzione</p>
+            </div>
+            <div class="category-card" onclick="checkAdult()">
+                <div class="category-icon">🔞</div>
+                <p data-it="Escort +18" data-en="Escort +18">Escort +18</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- VANTAGGI -->
+    <section class="vantaggi">
+        <h2 data-it="Perché Sceglierci" data-en="Why Choose Us">Perché Sceglierci</h2>
+        <div class="vantaggi-grid">
+            <div class="vantaggio">
+                <h3 data-it="🛡️ Zero Truffe" data-en="🛡️ Zero Scams">🛡️ Zero Truffe</h3>
+                <p data-it="Ogni cliente è verificato con OTP. Niente profili falsi." data-en="Every client is verified with OTP. No fake profiles.">Ogni cliente è verificato con OTP. Niente profili falsi.</p>
+            </div>
+            <div class="vantaggio">
+                <h3 data-it="⭐ Max 5 Offerte" data-en="⭐ Max 5 Offers">⭐ Max 5 Offerte</h3>
+                <p data-it="Solo 5 professionisti per richiesta. Qualità, non quantità." data-en="Only 5 professionals per request. Quality, not quantity.">Solo 5 professionisti per richiesta. Qualità, non quantità.</p>
+            </div>
+            <div class="vantaggio">
+                <h3 data-it="💬 Chat Privata" data-en="💬 Private Chat">💬 Chat Privata</h3>
+                <p data-it="Comunicazione sicura e protetta all'interno della piattaforma." data-en="Safe and protected communication within the platform.">Comunicazione sicura e protetta all'interno della piattaforma.</p>
+            </div>
+            <div class="vantaggio">
+                <h3 data-it="✅ Recensioni Reali" data-en="✅ Real Reviews">✅ Recensioni Reali</h3>
+                <p data-it="Cliente recensisce pro, pro recensisce cliente. Trasparenza totale." data-en="Client reviews pro, pro reviews client. Total transparency.">Cliente recensisce pro, pro recensisce cliente. Trasparenza totale.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <h2 data-it="Inizia Subito, è Gratis!" data-en="Start Now, It's Free!">Inizia Subito, è Gratis!</h2>
+        <p data-it="Registrati come cliente e ricevi fino a 5 offerte in poche ore." data-en="Register as a client and receive up to 5 offers within hours.">Registrati come cliente e ricevi fino a 5 offerte in poche ore.</p>
+        <div class="hero-buttons">
+            <a href="cliente.html" class="btn-primary" data-it="Registrati Gratis" data-en="Register Free">Registrati Gratis</a>
+            <a href="professionista.html" class="btn-secondary" data-it="Sei un Pro? Entra" data-en="Are you a Pro? Join">Sei un Pro? Entra</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 <span>Professionisti</span> — Tutti i diritti riservati | 
+        <span data-it="Piattaforma verificata" data-en="Verified platform">Piattaforma verificata</span></p>
+    </footer>
+
+    <!-- ADULT POPUP -->
+    <div class="adult-popup" id="adultPopup">
+        <div class="adult-box">
+            <h2>🔞 +18</h2>
+            <p data-it="Questa sezione è riservata ai maggiorenni. Confermi di avere più di 18 anni?" 
+               data-en="This section is for adults only. Do you confirm you are over 18?">
+               Questa sezione è riservata ai maggiorenni. Confermi di avere più di 18 anni?
+            </p>
+            <div class="adult-buttons">
+                <button class="btn-primary" onclick="confirmAdult()" data-it="Sì, ho +18 anni" data-en="Yes, I'm 18+">Sì, ho +18 anni</button>
+                <button class="btn-secondary" onclick="denyAdult()" data-it="No, sono minorenne" data-en="No, I'm underage">No, sono minorenne</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // LINGUA
+        let currentLang = 'it';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-it]').forEach(el => {
+                el.innerHTML = el.getAttribute('data-' + lang);
+            });
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // POPUP ADULTI
+        function checkAdult() {
+            document.getElementById('adultPopup').classList.add('show');
+        }
+
+        function confirmAdult() {
+            document.getElementById('adultPopup').classList.remove('show');
+            alert(currentLang === 'it' ? 'Accesso alla sezione Escort consentito.' : 'Access to Escort section granted.');
+        }
+
+        function denyAdult() {
+            document.getElementById('adultPopup').classList.remove('show');
+            window.location.href = '/';
+        }
+    </script>
+
+</body>
+</html>
