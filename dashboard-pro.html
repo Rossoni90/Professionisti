@@ -3,929 +3,489 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professionisti - Dashboard Pro</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Professionisti — Dashboard Professionista</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         :root {
-            --blu: #1B3A6B;
-            --blu-scuro: #0F2347;
-            --blu-chiaro: #2952A3;
-            --oro: #B8972A;
-            --oro-chiaro: #D4AF37;
-            --bianco: #FFFFFF;
-            --grigio-chiaro: #F5F7FA;
-            --grigio: #6B7280;
-            --testo: #1A1A2E;
-            --verde: #10B981;
-            --rosso: #EF4444;
-            --arancio: #F59E0B;
+            --blu: #1B3A6B; --blu-scuro: #0F2347; --blu-chiaro: #2952A3;
+            --oro: #B8972A; --oro-chiaro: #D4AF37; --bianco: #FFFFFF;
+            --grigio-chiaro: #F5F7FA; --grigio: #6B7280; --testo: #1A1A2E;
+            --verde: #10B981; --rosso: #EF4444; --arancio: #F59E0B;
         }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--grigio-chiaro);
-            color: var(--testo);
-            min-height: 100vh;
-        }
+        body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color: var(--testo); min-height: 100vh; }
 
         /* NAVBAR */
-        .navbar {
-            background: var(--blu-scuro);
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.2);
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 22px;
-            font-weight: 900;
-            color: white;
-            text-decoration: none;
-        }
-
+        .navbar { background: var(--blu-scuro); padding: 14px 25px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 15px rgba(0,0,0,0.25); }
+        .logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: white; text-decoration: none; }
         .logo span { color: var(--oro); }
-
-        .navbar-right {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .notifica-badge {
-            position: relative;
-            cursor: pointer;
-        }
-
-        .notifica-badge .badge {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: var(--rosso);
-            color: white;
-            font-size: 10px;
-            font-weight: 700;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .avatar {
-            width: 38px;
-            height: 38px;
-            background: var(--oro);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .navbar-nome {
-            color: white;
-            font-size: 14px;
-            font-weight: 600;
-        }
+        .navbar-right { display: flex; align-items: center; gap: 15px; }
+        .notifica-badge { position: relative; cursor: pointer; font-size: 20px; }
+        .notifica-badge .badge { position: absolute; top: -8px; right: -8px; background: var(--rosso); color: white; font-size: 10px; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .avatar { width: 38px; height: 38px; background: var(--oro); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; font-size: 16px; cursor: pointer; }
+        .navbar-nome { color: white; font-size: 14px; font-weight: 600; }
+        .abbonamento-badge { background: var(--verde); color: white; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
+        .abbonamento-badge.scaduto { background: var(--rosso); }
 
         /* LAYOUT */
-        .dashboard-layout {
-            display: flex;
-            min-height: calc(100vh - 65px);
-        }
+        .layout { display: flex; min-height: calc(100vh - 66px); }
 
         /* SIDEBAR */
-        .sidebar {
-            width: 240px;
-            background: white;
-            border-right: 1px solid #e5e7eb;
-            padding: 25px 0;
-            flex-shrink: 0;
-        }
-
-        .sidebar-menu {
-            list-style: none;
-        }
-
-        .sidebar-item {
-            padding: 12px 25px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--grigio);
-            border-left: 3px solid transparent;
-        }
-
-        .sidebar-item:hover {
-            background: var(--grigio-chiaro);
-            color: var(--blu);
-        }
-
-        .sidebar-item.active {
-            background: #EFF6FF;
-            color: var(--blu);
-            border-left-color: var(--blu);
-            font-weight: 600;
-        }
-
+        .sidebar { width: 240px; background: white; border-right: 1px solid #e5e7eb; padding: 20px 0; flex-shrink: 0; }
+        .sidebar-menu { list-style: none; }
+        .sidebar-item { padding: 12px 22px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: 0.2s; font-size: 14px; font-weight: 500; color: var(--grigio); border-left: 3px solid transparent; }
+        .sidebar-item:hover { background: var(--grigio-chiaro); color: var(--blu); }
+        .sidebar-item.active { background: #EFF6FF; color: var(--blu); border-left-color: var(--oro); font-weight: 600; }
         .sidebar-item .icon { font-size: 18px; }
+        .sidebar-divider { height: 1px; background: #e5e7eb; margin: 12px 22px; }
+        .sidebar-label { font-size: 11px; font-weight: 700; color: #9CA3AF; text-transform: uppercase; letter-spacing: 1px; padding: 5px 22px; margin-top: 8px; }
+        .sidebar-notifica { background: var(--rosso); color: white; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; margin-left: auto; }
 
-        .sidebar-divider {
-            height: 1px;
-            background: #e5e7eb;
-            margin: 15px 25px;
-        }
+        /* MAIN */
+        .main { flex: 1; padding: 28px; overflow-y: auto; }
+        .page-header { margin-bottom: 22px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 15px; }
+        .page-header-left h1 { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--blu-scuro); margin-bottom: 4px; }
+        .page-header-left p { color: var(--grigio); font-size: 14px; }
 
-        .sidebar-label {
-            font-size: 11px;
-            font-weight: 700;
-            color: #9CA3AF;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 5px 25px;
-            margin-top: 10px;
-        }
+        /* ABBONAMENTO ALERT */
+        .abbonamento-bar { background: linear-gradient(135deg, var(--blu) 0%, var(--blu-chiaro) 100%); border-radius: 16px; padding: 18px 22px; margin-bottom: 22px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .abbonamento-bar.scaduto { background: linear-gradient(135deg, var(--rosso) 0%, #DC2626 100%); }
+        .abbonamento-bar-info { color: white; }
+        .abbonamento-bar-info strong { display: block; font-size: 15px; margin-bottom: 3px; }
+        .abbonamento-bar-info span { font-size: 13px; opacity: 0.85; }
+        .btn-rinnova { background: var(--oro); color: white; border: none; padding: 10px 22px; border-radius: 25px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; flex-shrink: 0; }
+        .btn-rinnova:hover { background: var(--oro-chiaro); transform: translateY(-1px); }
 
-        /* MAIN CONTENT */
-        .main-content {
-            flex: 1;
-            padding: 30px;
-            overflow-y: auto;
-        }
+        /* STATS */
+        .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+        .stat-card { background: white; border-radius: 16px; padding: 20px; border: 1px solid #e5e7eb; transition: 0.3s; }
+        .stat-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.07); transform: translateY(-2px); }
+        .stat-icon { font-size: 26px; margin-bottom: 10px; }
+        .stat-num { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; color: var(--blu-scuro); margin-bottom: 4px; }
+        .stat-label { font-size: 12px; color: var(--grigio); }
+        .stat-card.oro .stat-num { color: var(--oro); }
+        .stat-card.verde .stat-num { color: var(--verde); }
+        .stat-card.rosso .stat-num { color: var(--rosso); }
 
-        /* HEADER */
-        .page-header {
-            margin-bottom: 25px;
-        }
+        /* SEZIONE TITLE */
+        .sez-title { font-size: 16px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+        .count-badge { background: var(--blu); color: white; font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 10px; }
+        .count-badge.oro { background: var(--oro); }
+        .count-badge.rosso { background: var(--rosso); }
 
-        .page-header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            color: var(--blu-scuro);
-            margin-bottom: 5px;
-        }
+        /* RICHIESTA CARD */
+        .richiesta-card { background: white; border-radius: 16px; padding: 20px 22px; margin-bottom: 14px; border: 1px solid #e5e7eb; transition: 0.3s; position: relative; }
+        .richiesta-card:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.08); border-color: var(--oro); }
+        .richiesta-card.nuova { border-left: 4px solid var(--oro); }
+        .nuovo-tag { position: absolute; top: -8px; left: 18px; background: var(--oro); color: white; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 10px; }
+        .richiesta-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+        .richiesta-cat { display: inline-flex; align-items: center; gap: 6px; background: #EFF6FF; color: var(--blu); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
+        .richiesta-tempo { font-size: 12px; color: var(--grigio); }
+        .richiesta-desc { font-size: 14px; color: var(--testo); line-height: 1.6; margin-bottom: 14px; background: var(--grigio-chiaro); border-radius: 10px; padding: 12px 15px; }
+        .richiesta-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+        .chip { background: var(--grigio-chiaro); color: var(--testo); font-size: 12px; font-weight: 500; padding: 5px 12px; border-radius: 20px; }
+        .chip.verde { background: #ECFDF5; color: var(--verde); font-weight: 600; }
+        .chip.oro { background: #FFFBEB; color: var(--oro); font-weight: 600; }
+        .chip.rosso { background: #FEF2F2; color: var(--rosso); font-weight: 600; }
+        .richiesta-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .costo-sblocco { font-size: 13px; color: var(--grigio); }
+        .costo-sblocco strong { color: var(--blu-scuro); font-size: 16px; }
+        .btn-sblocca { background: linear-gradient(135deg, var(--oro) 0%, var(--oro-chiaro) 100%); color: white; border: none; padding: 11px 24px; border-radius: 25px; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; box-shadow: 0 4px 12px rgba(184,151,42,0.3); }
+        .btn-sblocca:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(184,151,42,0.4); }
+        .btn-sblocca:disabled { background: #e5e7eb; color: var(--grigio); box-shadow: none; cursor: not-allowed; transform: none; }
 
-        .page-header p {
-            color: var(--grigio);
-            font-size: 14px;
-        }
-
-        /* STATS ROW */
-        .stats-row {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .stat-card {
-            background: white;
-            border-radius: 16px;
-            padding: 20px 25px;
-            flex: 1;
-            min-width: 150px;
-            border: 1px solid #e5e7eb;
-            transition: 0.3s;
-        }
-
-        .stat-card:hover {
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-            transform: translateY(-2px);
-        }
-
-        .stat-card-icon { font-size: 28px; margin-bottom: 10px; }
-
-        .stat-card-numero {
-            font-family: 'Playfair Display', serif;
-            font-size: 30px;
-            font-weight: 900;
-            color: var(--blu-scuro);
-            margin-bottom: 5px;
-        }
-
-        .stat-card-label {
-            font-size: 13px;
-            color: var(--grigio);
-        }
-
-        .stat-card.oro .stat-card-numero { color: var(--oro); }
-        .stat-card.verde .stat-card-numero { color: var(--verde); }
-        .stat-card.rosso .stat-card-numero { color: var(--rosso); }
-
-        /* FILTRI */
-        .filtri-bar {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .filtro-btn {
-            padding: 8px 18px;
-            border: 1.5px solid #e5e7eb;
-            border-radius: 20px;
-            font-size: 13px;
-            cursor: pointer;
-            background: white;
-            color: var(--grigio);
-            transition: 0.3s;
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-        }
-
-        .filtro-btn.active {
-            background: var(--blu);
-            color: white;
-            border-color: var(--blu);
-        }
-
-        .filtro-btn:hover { border-color: var(--blu); color: var(--blu); }
-
-        .ricerca-input {
-            flex: 1;
-            min-width: 200px;
-            padding: 8px 16px;
-            border: 1.5px solid #e5e7eb;
-            border-radius: 20px;
-            font-size: 13px;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .ricerca-input:focus { border-color: var(--blu); }
-
-        /* RICHIESTE */
-        .sezione-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--blu-scuro);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .count-badge {
-            background: var(--blu);
-            color: white;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 2px 8px;
-            border-radius: 10px;
-        }
-
-        .richiesta-card {
-            background: white;
-            border-radius: 16px;
-            padding: 22px 25px;
-            margin-bottom: 15px;
-            border: 1px solid #e5e7eb;
-            transition: 0.3s;
-            position: relative;
-        }
-
-        .richiesta-card:hover {
-            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-            border-color: var(--blu);
-        }
-
-        .richiesta-card.nuova {
-            border-left: 4px solid var(--oro);
-        }
-
-        .richiesta-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .richiesta-categoria {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: #EFF6FF;
-            color: var(--blu);
-            font-size: 12px;
-            font-weight: 600;
-            padding: 4px 12px;
-            border-radius: 20px;
-        }
-
-        .richiesta-tempo {
-            font-size: 12px;
-            color: var(--grigio);
-        }
-
-        .richiesta-luogo {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--blu-scuro);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .richiesta-descrizione {
-            font-size: 14px;
-            color: var(--grigio);
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-
-        .richiesta-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .richiesta-info {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .info-chip {
-            font-size: 12px;
-            color: var(--grigio);
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .info-chip.urgente { color: var(--rosso); font-weight: 600; }
-
-        .btn-acquista {
-            background: var(--oro);
-            color: white;
-            border: none;
-            padding: 10px 22px;
-            border-radius: 25px;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .btn-acquista:hover {
-            background: var(--oro-chiaro);
-            transform: translateY(-1px);
-        }
-
-        .btn-ignora {
-            background: transparent;
-            color: var(--grigio);
-            border: 1.5px solid #e5e7eb;
-            padding: 10px 18px;
-            border-radius: 25px;
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: 0.3s;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .btn-ignora:hover { border-color: var(--rosso); color: var(--rosso); }
-
-        .posti-rimasti {
-            font-size: 12px;
-            color: var(--arancio);
-            font-weight: 600;
-        }
-
-        .posti-rimasti.ultimo { color: var(--rosso); }
-
-        /* NUOVO BADGE */
-        .nuovo-badge {
-            position: absolute;
-            top: -8px;
-            left: 20px;
-            background: var(--oro);
-            color: white;
-            font-size: 10px;
-            font-weight: 700;
-            padding: 3px 10px;
-            border-radius: 10px;
-        }
+        /* SOPRALLUOGO */
+        .sopralluogo-card { background: white; border-radius: 16px; padding: 20px 22px; margin-bottom: 14px; border: 1px solid #e5e7eb; border-left: 4px solid var(--verde); transition: 0.3s; }
+        .sopralluogo-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.07); }
+        .sopralluogo-stato { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 10px; }
+        .sopralluogo-stato.confermato { background: #ECFDF5; color: var(--verde); }
+        .sopralluogo-stato.attesa { background: #FEF3C7; color: var(--arancio); }
+        .sopralluogo-data { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 900; color: var(--blu-scuro); margin-bottom: 8px; }
+        .sopralluogo-info { font-size: 13px; color: var(--grigio); line-height: 1.8; }
+        .sopralluogo-info strong { color: var(--blu-scuro); }
 
         /* CREDITI */
-        .crediti-bar {
-            background: white;
-            border-radius: 16px;
-            padding: 20px 25px;
-            margin-bottom: 25px;
-            border: 1px solid #e5e7eb;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
+        .crediti-box { background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%); border: 1.5px solid var(--oro); border-radius: 16px; padding: 20px 22px; margin-bottom: 22px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+        .crediti-info strong { display: block; font-size: 15px; color: var(--blu-scuro); margin-bottom: 4px; }
+        .crediti-info span { font-size: 13px; color: var(--grigio); }
+        .crediti-num { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 900; color: var(--oro); text-align: center; }
+        .crediti-num span { font-size: 14px; color: var(--grigio); font-family: 'Inter', sans-serif; font-weight: 400; display: block; }
+        .btn-ricarica { background: var(--oro); color: white; border: none; padding: 10px 22px; border-radius: 25px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; }
+        .btn-ricarica:hover { background: var(--oro-chiaro); transform: translateY(-1px); }
 
-        .crediti-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+        /* RECENSIONI */
+        .recensione-card { background: white; border-radius: 16px; padding: 18px 22px; margin-bottom: 12px; border: 1px solid #e5e7eb; border-left: 4px solid var(--arancio); }
+        .rec-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .rec-nome { font-weight: 700; color: var(--blu-scuro); font-size: 14px; }
+        .rec-stelle { color: var(--arancio); font-size: 16px; }
+        .rec-testo { font-size: 13px; color: var(--grigio); line-height: 1.6; }
+        .rec-data { font-size: 11px; color: #9CA3AF; margin-top: 6px; }
 
-        .crediti-numero {
-            font-family: 'Playfair Display', serif;
-            font-size: 36px;
-            font-weight: 900;
-            color: var(--oro);
-        }
-
-        .crediti-label {
-            font-size: 13px;
-            color: var(--grigio);
-        }
-
-        .crediti-label strong {
-            display: block;
-            font-size: 15px;
-            color: var(--blu-scuro);
-        }
-
-        .btn-ricarica {
-            background: var(--blu);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .btn-ricarica:hover { background: var(--blu-chiaro); }
-
-        /* POPUP ACQUISTO */
-        .popup-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
+        /* POPUP SBLOCCO */
+        .popup-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
         .popup-overlay.show { display: flex; }
+        .popup-box { background: white; border-radius: 24px; padding: 38px 32px; max-width: 430px; width: 100%; text-align: center; }
+        .popup-icon { font-size: 56px; margin-bottom: 16px; }
+        .popup-box h2 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--blu-scuro); margin-bottom: 10px; }
+        .popup-box p { font-size: 14px; color: var(--grigio); line-height: 1.7; margin-bottom: 22px; }
+        .popup-prezzo { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 900; color: var(--oro); margin-bottom: 6px; }
+        .popup-prezzo-sub { font-size: 13px; color: var(--grigio); margin-bottom: 25px; }
+        .popup-info { background: var(--grigio-chiaro); border-radius: 12px; padding: 14px 18px; font-size: 13px; color: var(--testo); line-height: 1.7; margin-bottom: 22px; text-align: left; }
+        .btn-popup-main { width: 100%; padding: 15px; background: linear-gradient(135deg, var(--oro), var(--oro-chiaro)); color: white; border: none; border-radius: 14px; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; margin-bottom: 10px; }
+        .btn-popup-main:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(184,151,42,0.35); }
+        .btn-popup-cancel { width: 100%; padding: 13px; background: var(--grigio-chiaro); color: var(--grigio); border: none; border-radius: 14px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s; }
+        .btn-popup-cancel:hover { background: #e5e7eb; }
 
-        .popup-box {
-            background: white;
-            border-radius: 25px;
-            padding: 40px 35px;
-            max-width: 480px;
-            width: 100%;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
-        }
+        /* POPUP RECENSIONE */
+        .recensione-popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
+        .recensione-popup.show { display: flex; }
+        .recensione-box { background: white; border-radius: 24px; padding: 38px 30px; max-width: 420px; width: 100%; text-align: center; }
+        .recensione-box h2 { font-family: 'Playfair Display', serif; color: var(--blu-scuro); font-size: 22px; margin-bottom: 10px; }
+        .recensione-box p { color: var(--grigio); font-size: 14px; line-height: 1.6; margin-bottom: 20px; }
+        .stelle { display: flex; justify-content: center; gap: 10px; margin-bottom: 18px; }
+        .stella { font-size: 36px; cursor: pointer; opacity: 0.3; transition: 0.2s; }
+        .stella.attiva { opacity: 1; }
+        .recensione-box textarea { width: 100%; padding: 13px 16px; border: 1.5px solid #e5e7eb; border-radius: 12px; font-size: 14px; font-family: 'Inter', sans-serif; margin-bottom: 14px; min-height: 85px; resize: vertical; outline: none; }
+        .recensione-box textarea:focus { border-color: var(--blu); }
+        .btn-rec { width: 100%; padding: 14px; background: var(--blu); color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s; margin-bottom: 8px; }
+        .btn-rec:hover { background: var(--blu-chiaro); }
+        .btn-rec.oro { background: var(--oro); }
+        .btn-rec.grigio { background: var(--grigio-chiaro); color: var(--grigio); }
 
-        .popup-box h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            color: var(--blu-scuro);
-            margin-bottom: 10px;
-        }
+        /* TWO COLS */
+        .two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 22px; }
 
-        .popup-box p {
-            color: var(--grigio);
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .popup-dettaglio {
-            background: var(--grigio-chiaro);
-            border-radius: 12px;
-            padding: 15px 20px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            line-height: 1.8;
-            color: var(--blu-scuro);
-        }
-
-        .popup-prezzo {
-            font-family: 'Playfair Display', serif;
-            font-size: 32px;
-            color: var(--oro);
-            font-weight: 900;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .popup-prezzo span {
-            font-size: 14px;
-            color: var(--grigio);
-            font-family: 'Inter', sans-serif;
-            font-weight: 400;
-        }
-
-        .popup-buttons {
-            display: flex;
-            gap: 12px;
-        }
-
-        .popup-buttons button {
-            flex: 1;
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-            font-family: 'Inter', sans-serif;
-            border: none;
-        }
-
-        .btn-conferma {
-            background: var(--oro);
-            color: white;
-        }
-
-        .btn-conferma:hover { background: var(--oro-chiaro); }
-
-        .btn-annulla {
-            background: var(--grigio-chiaro);
-            color: var(--grigio);
-        }
-
-        .btn-annulla:hover { background: #e5e7eb; }
-
-        .avviso-ban {
-            background: #FEF3C7;
-            border: 1px solid #F59E0B;
-            border-radius: 12px;
-            padding: 15px 18px;
-            font-size: 13px;
-            color: #92400E;
-            line-height: 1.7;
-            margin-bottom: 20px;
-        }
-
-        .avviso-ban strong { display: block; margin-bottom: 5px; }
-
-        /* EMPTY STATE */
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--grigio);
-        }
-
-        .empty-state .empty-icon { font-size: 60px; margin-bottom: 15px; }
-        .empty-state h3 { font-size: 18px; color: var(--blu-scuro); margin-bottom: 10px; }
-        .empty-state p { font-size: 14px; line-height: 1.6; }
-
-        /* MOBILE */
-        @media (max-width: 768px) {
-            .sidebar { display: none; }
-            .main-content { padding: 20px 15px; }
-            .stats-row { gap: 12px; }
-            .stat-card { min-width: 130px; }
-        }
+        @media (max-width: 900px) { .stats-row { grid-template-columns: repeat(2, 1fr); } .two-cols { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .sidebar { display: none; } .main { padding: 18px 14px; } .stats-row { grid-template-columns: repeat(2, 1fr); } }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
-        <div class="navbar-right">
-            <div class="notifica-badge" onclick="alert('3 nuove richieste nella tua zona!')">
-                🔔
-                <div class="badge">3</div>
-            </div>
-            <div class="navbar-nome">Rossoni Edilizia</div>
-            <div class="avatar">R</div>
-        </div>
-    </nav>
-
-    <!-- LAYOUT -->
-    <div class="dashboard-layout">
-
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
-            <ul class="sidebar-menu">
-                <li class="sidebar-item active" onclick="mostraSezione('richieste')">
-                    <span class="icon">📋</span> Richieste
-                </li>
-                <li class="sidebar-item" onclick="mostraSezione('chat')">
-                    <span class="icon">💬</span> Chat
-                </li>
-                <li class="sidebar-item" onclick="mostraSezione('sopralluoghi')">
-                    <span class="icon">📅</span> Sopralluoghi
-                </li>
-                <li class="sidebar-item" onclick="mostraSezione('recensioni')">
-                    <span class="icon">⭐</span> Recensioni
-                </li>
-                <div class="sidebar-divider"></div>
-                <div class="sidebar-label">Account</div>
-                <li class="sidebar-item" onclick="mostraSezione('profilo')">
-                    <span class="icon">👤</span> Il mio profilo
-                </li>
-                <li class="sidebar-item" onclick="mostraSezione('pacchetti')">
-                    <span class="icon">💳</span> Pacchetti
-                </li>
-                <li class="sidebar-item" onclick="mostraSezione('statistiche')">
-                    <span class="icon">📊</span> Statistiche
-                </li>
-                <div class="sidebar-divider"></div>
-                <li class="sidebar-item" onclick="window.location.href='index.html'">
-                    <span class="icon">🚪</span> Esci
-                </li>
-            </ul>
-        </aside>
-
-        <!-- MAIN -->
-        <main class="main-content">
-
-            <!-- HEADER -->
-            <div class="page-header">
-                <h1>Buongiorno, <span style="color:var(--oro)">Rossoni</span> 👋</h1>
-                <p>Hai 3 nuove richieste nella tua zona oggi</p>
-            </div>
-
-            <!-- CREDITI -->
-            <div class="crediti-bar">
-                <div class="crediti-info">
-                    <div class="crediti-numero">7</div>
-                    <div class="crediti-label">
-                        <strong>Contatti disponibili</strong>
-                        Piano Pro — si ricaricano il 1° del mese
-                    </div>
-                </div>
-                <button class="btn-ricarica" onclick="alert('Pagina pacchetti in arrivo!')">+ Ricarica contatti</button>
-            </div>
-
-            <!-- STATS -->
-            <div class="stats-row">
-                <div class="stat-card">
-                    <div class="stat-card-icon">📋</div>
-                    <div class="stat-card-numero">12</div>
-                    <div class="stat-card-label">Richieste totali ricevute</div>
-                </div>
-                <div class="stat-card verde">
-                    <div class="stat-card-icon">✅</div>
-                    <div class="stat-card-numero">8</div>
-                    <div class="stat-card-label">Lavori completati</div>
-                </div>
-                <div class="stat-card oro">
-                    <div class="stat-card-icon">⭐</div>
-                    <div class="stat-card-numero">4.9</div>
-                    <div class="stat-card-label">Valutazione media</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-card-icon">💬</div>
-                    <div class="stat-card-numero">3</div>
-                    <div class="stat-card-label">Chat attive</div>
-                </div>
-            </div>
-
-            <!-- FILTRI -->
-            <div class="filtri-bar">
-                <button class="filtro-btn active" onclick="filtra(this, 'tutte')">Tutte</button>
-                <button class="filtro-btn" onclick="filtra(this, 'edilizia')">🏗️ Edilizia</button>
-                <button class="filtro-btn" onclick="filtra(this, 'impianti')">⚡💧 Impianti</button>
-                <button class="filtro-btn" onclick="filtra(this, 'urgenti')">🔴 Urgenti</button>
-                <input class="ricerca-input" type="text" placeholder="🔍 Cerca per città o descrizione...">
-            </div>
-
-            <!-- RICHIESTE -->
-            <div class="sezione-title">
-                Richieste nella tua zona
-                <span class="count-badge">3 nuove</span>
-            </div>
-
-            <!-- RICHIESTA 1 - NUOVA URGENTE -->
-            <div class="richiesta-card nuova">
-                <div class="nuovo-badge">🆕 NUOVA</div>
-                <div class="richiesta-header">
-                    <span class="richiesta-categoria">🏗️ Edilizia — Tinteggiatura</span>
-                    <span class="richiesta-tempo">⏰ 20 minuti fa</span>
-                </div>
-                <div class="richiesta-luogo">📍 Milano, zona Navigli</div>
-                <div class="richiesta-descrizione">
-                    Cerco imbianchino per tinteggiatura completa appartamento 80mq. Pareti e soffitti, due colori diversi per soggiorno e camere. Preferibilmente con esperienza in pitture eco-compatibili.
-                </div>
-                <div class="richiesta-footer">
-                    <div class="richiesta-info">
-                        <span class="info-chip urgente">🔴 Il prima possibile</span>
-                        <span class="info-chip">👥 4/5 posti rimasti</span>
-                        <span class="info-chip">📏 8 km da te</span>
-                    </div>
-                    <div style="display:flex;gap:10px;align-items:center">
-                        <button class="btn-ignora" onclick="ignoraRichiesta(this)">Ignora</button>
-                        <button class="btn-acquista" onclick="apriPopupAcquisto('Tinteggiatura appartamento 80mq — Navigli, Milano', '€9,90')">💳 Acquista contatto</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- RICHIESTA 2 - NUOVA -->
-            <div class="richiesta-card nuova">
-                <div class="nuovo-badge">🆕 NUOVA</div>
-                <div class="richiesta-header">
-                    <span class="richiesta-categoria">🏗️ Edilizia — Ristrutturazione bagno</span>
-                    <span class="richiesta-tempo">⏰ 1 ora fa</span>
-                </div>
-                <div class="richiesta-luogo">📍 Sesto San Giovanni</div>
-                <div class="richiesta-descrizione">
-                    Ristrutturazione completa bagno 6mq. Sostituzione sanitari, nuova doccia walk-in, posa piastrelle, impianto idraulico ed elettrico. Budget disponibile da concordare.
-                </div>
-                <div class="richiesta-footer">
-                    <div class="richiesta-info">
-                        <span class="info-chip urgente">🟡 Entro questo mese</span>
-                        <span class="info-chip posti-rimasti ultimo">🔥 Ultimo posto disponibile!</span>
-                        <span class="info-chip">📏 12 km da te</span>
-                    </div>
-                    <div style="display:flex;gap:10px;align-items:center">
-                        <button class="btn-ignora" onclick="ignoraRichiesta(this)">Ignora</button>
-                        <button class="btn-acquista" onclick="apriPopupAcquisto('Ristrutturazione bagno 6mq — Sesto San Giovanni', '€9,90')">💳 Acquista contatto</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- RICHIESTA 3 -->
-            <div class="richiesta-card nuova">
-                <div class="nuovo-badge">🆕 NUOVA</div>
-                <div class="richiesta-header">
-                    <span class="richiesta-categoria">🏗️ Edilizia — Impermeabilizzazione</span>
-                    <span class="richiesta-tempo">⏰ 3 ore fa</span>
-                </div>
-                <div class="richiesta-luogo">📍 Monza</div>
-                <div class="richiesta-descrizione">
-                    Impermeabilizzazione terrazzo 25mq con infiltrazioni evidenti. Cerco professionista esperto con garanzia sul lavoro. Disponibile per sopralluogo questa settimana.
-                </div>
-                <div class="richiesta-footer">
-                    <div class="richiesta-info">
-                        <span class="info-chip urgente">🔴 Urgente</span>
-                        <span class="info-chip">👥 3/5 posti rimasti</span>
-                        <span class="info-chip">📏 18 km da te</span>
-                    </div>
-                    <div style="display:flex;gap:10px;align-items:center">
-                        <button class="btn-ignora" onclick="ignoraRichiesta(this)">Ignora</button>
-                        <button class="btn-acquista" onclick="apriPopupAcquisto('Impermeabilizzazione terrazzo 25mq — Monza', '€9,90')">💳 Acquista contatto</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- RICHIESTE PRECEDENTI -->
-            <div class="sezione-title" style="margin-top:30px">
-                Richieste precedenti
-                <span class="count-badge" style="background:var(--grigio)">2</span>
-            </div>
-
-            <div class="richiesta-card" style="opacity:0.6">
-                <div class="richiesta-header">
-                    <span class="richiesta-categoria">🏗️ Edilizia — Posa laminato</span>
-                    <span class="richiesta-tempo">📅 2 giorni fa</span>
-                </div>
-                <div class="richiesta-luogo">📍 Cinisello Balsamo</div>
-                <div class="richiesta-descrizione">
-                    Posa laminato SPC 60mq con rimozione vecchio parquet. Richiesta scaduta — 5 professionisti hanno già risposto.
-                </div>
-                <div class="richiesta-footer">
-                    <div class="richiesta-info">
-                        <span class="info-chip">🔒 Richiesta chiusa — 5/5 professionisti</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="richiesta-card" style="opacity:0.6">
-                <div class="richiesta-header">
-                    <span class="richiesta-categoria">🏗️ Edilizia — Cartongesso</span>
-                    <span class="richiesta-tempo">📅 5 giorni fa</span>
-                </div>
-                <div class="richiesta-luogo">📍 Cologno Monzese</div>
-                <div class="richiesta-descrizione">
-                    Controsoffitto in cartongesso 40mq con faretti incassati. Richiesta scaduta.
-                </div>
-                <div class="richiesta-footer">
-                    <div class="richiesta-info">
-                        <span class="info-chip">🔒 Richiesta chiusa — 5/5 professionisti</span>
-                    </div>
-                </div>
-            </div>
-
-        </main>
+<!-- NAVBAR -->
+<nav class="navbar">
+    <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
+    <div class="navbar-right">
+        <div class="abbonamento-badge">✅ Abbonamento attivo</div>
+        <div class="notifica-badge" onclick="alert('3 nuove richieste nella tua zona!')">🔔<div class="badge">3</div></div>
+        <div class="navbar-nome">Rossoni Edilizia</div>
+        <div class="avatar">R</div>
     </div>
+</nav>
 
-    <!-- POPUP ACQUISTO -->
-    <div class="popup-overlay" id="popupAcquisto">
-        <div class="popup-box">
-            <h2>💳 Acquista Contatto</h2>
-            <p>Stai per acquistare il contatto per questa richiesta. Una volta acquistato, si sblocca la chat privata con il cliente.</p>
+<!-- LAYOUT -->
+<div class="layout">
 
-            <div class="popup-dettaglio" id="popup-dettaglio-text">
-                📋 <strong>Lavoro:</strong> ...<br>
-                📍 <strong>Zona:</strong> ...<br>
-                💳 <strong>Costo:</strong> ...
-            </div>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <ul class="sidebar-menu">
+            <li class="sidebar-item active"><span class="icon">🏠</span> Dashboard</li>
+            <li class="sidebar-item" onclick="alert('In arrivo!')"><span class="icon">📋</span> Richieste zona <span class="sidebar-notifica">3</span></li>
+            <li class="sidebar-item" onclick="alert('In arrivo!')"><span class="icon">💬</span> Chat</li>
+            <li class="sidebar-item" onclick="alert('In arrivo!')"><span class="icon">📅</span> Sopralluoghi</li>
+            <li class="sidebar-item" onclick="alert('In arrivo!')"><span class="icon">⭐</span> Recensioni</li>
+            <li class="sidebar-item" onclick="alert('In arrivo!')"><span class="icon">📊</span> Statistiche</li>
+            <div class="sidebar-divider"></div>
+            <div class="sidebar-label">Account</div>
+            <li class="sidebar-item" onclick="window.location.href='profilo-pro.html'"><span class="icon">👤</span> Il mio profilo</li>
+            <li class="sidebar-item" onclick="alert('In arrivo!')"><span class="icon">💳</span> Abbonamento</li>
+            <li class="sidebar-item" onclick="alert('In arrivo!')"><span class="icon">🔓</span> Crediti sblocco</li>
+            <div class="sidebar-divider"></div>
+            <li class="sidebar-item" onclick="window.location.href='index.html'"><span class="icon">🚪</span> Esci</li>
+        </ul>
+    </aside>
 
-            <div class="avviso-ban">
-                <strong>⚠️ Importante prima di procedere:</strong>
-                Una volta acquistato il contatto e concordato il sopralluogo in chat, sei tenuto a presentarti. <strong>3 mancanze</strong> causano il ban definitivo del tuo account.<br><br>
-                🟢 Se il cliente non si presenta o non collabora, <strong>viene bannato lui</strong>. Sei tutelato!<br><br>
-                ⭐ Al termine del lavoro e dopo la <strong>conferma del pagamento</strong>, si aprirà automaticamente la schermata recensione reciproca.
-            </div>
+    <!-- MAIN CONTENT -->
+    <main class="main">
 
-            <div class="popup-prezzo" id="popup-prezzo-text">€9,90 <span>per questo contatto</span></div>
-
-            <div class="popup-buttons">
-                <button class="btn-annulla" onclick="chiudiPopup()">Annulla</button>
-                <button class="btn-conferma" onclick="confermaAcquisto()">✅ Conferma acquisto</button>
+        <!-- HEADER -->
+        <div class="page-header">
+            <div class="page-header-left">
+                <h1>Ciao, <span style="color:var(--oro)">Rossoni</span> 👋</h1>
+                <p>Hai 3 nuove richieste nella tua zona — Milano e dintorni</p>
             </div>
         </div>
-    </div>
 
-    <!-- POPUP SUCCESSO ACQUISTO -->
-    <div class="popup-overlay" id="popupSuccesso">
-        <div class="popup-box" style="text-align:center">
-            <div style="font-size:60px;margin-bottom:20px">🎉</div>
-            <h2>Contatto Acquistato!</h2>
-            <p style="margin-bottom:25px">La chat privata con il cliente è stata sbloccata. Scrivici subito per concordare il sopralluogo!</p>
-            <div class="popup-dettaglio" style="text-align:left">
-                📅 <strong>Prossimo passo:</strong> Apri la chat e concorda data e ora del sopralluogo con il cliente.<br><br>
-                ⚠️ <strong>Ricorda:</strong> Data e ora del sopralluogo vengono salvate dal sistema. Il giorno dopo riceverai una conferma automatica.
+        <!-- ABBONAMENTO BAR -->
+        <div class="abbonamento-bar">
+            <div class="abbonamento-bar-info">
+                <strong>✅ Abbonamento Annuale — Edilizia — Attivo</strong>
+                <span>Scade il 15 Aprile 2027 · €888/anno · Prossimo rinnovo automatico</span>
             </div>
-            <button style="width:100%;padding:15px;background:var(--blu);color:white;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif;margin-top:15px" onclick="chiudiPopupSuccesso()">💬 Vai alla Chat</button>
+            <button class="btn-rinnova" onclick="alert('Gestione abbonamento in arrivo!')">Gestisci abbonamento</button>
         </div>
+
+        <!-- CREDITI SBLOCCO -->
+        <div class="crediti-box">
+            <div class="crediti-info">
+                <strong>🔓 I tuoi crediti sblocco</strong>
+                <span>Usa i crediti per sbloccare i contatti dei clienti interessati.<br>Ogni sblocco dipende dal tipo di lavoro richiesto.</span>
+            </div>
+            <div style="text-align:center">
+                <div class="crediti-num">5<span>crediti disponibili</span></div>
+            </div>
+            <button class="btn-ricarica" onclick="apriRicarica()">+ Ricarica crediti</button>
+        </div>
+
+        <!-- STATS -->
+        <div class="stats-row">
+            <div class="stat-card"><div class="stat-icon">📋</div><div class="stat-num">3</div><div class="stat-label">Richieste nuove</div></div>
+            <div class="stat-card oro"><div class="stat-icon">🔓</div><div class="stat-num">8</div><div class="stat-label">Contatti sbloccati</div></div>
+            <div class="stat-card verde"><div class="stat-icon">✅</div><div class="stat-num">12</div><div class="stat-label">Lavori completati</div></div>
+            <div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-num">4.9</div><div class="stat-label">Valutazione media</div></div>
+        </div>
+
+        <!-- TWO COLS: SOPRALLUOGO + PROSSIMO LAVORO -->
+        <div class="two-cols">
+            <div>
+                <div class="sez-title">📅 Prossimo sopralluogo</div>
+                <div class="sopralluogo-card">
+                    <div class="sopralluogo-stato confermato">✅ Confermato</div>
+                    <div class="sopralluogo-data">Lunedì 6 Maggio 2026 — 09:30</div>
+                    <div class="sopralluogo-info">
+                        <strong>Cliente:</strong> Mario R. (Milano)<br>
+                        <strong>Lavoro:</strong> Tinteggiatura appartamento 80mq<br>
+                        <strong>Indirizzo:</strong> Via Roma 15, Milano<br>
+                        <br>
+                        ⚠️ Se non ti presenti senza preavviso ricevi una segnalazione.
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="sez-title">⭐ Recensione da lasciare</div>
+                <div class="sopralluogo-card" style="border-left-color:var(--arancio)">
+                    <div class="sopralluogo-stato" style="background:#FEF3C7;color:var(--arancio)">⭐ In attesa tua recensione</div>
+                    <div class="sopralluogo-data" style="font-size:16px">Lavoro completato il 28/04/2026</div>
+                    <div class="sopralluogo-info">
+                        <strong>Cliente:</strong> Luca B.<br>
+                        <strong>Lavoro:</strong> Posa piastrelle bagno 6mq<br>
+                        <strong>Pagamento:</strong> Confermato ✅
+                    </div>
+                    <button style="margin-top:12px;width:100%;padding:10px;background:var(--arancio);color:white;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif" onclick="apriRecensione()">⭐ Lascia recensione al cliente</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- NUOVE RICHIESTE -->
+        <div class="sez-title" style="margin-top:10px">
+            📋 Nuove richieste nella tua zona
+            <span class="count-badge oro">3 nuove</span>
+        </div>
+
+        <!-- RICHIESTA 1 — Piccolo lavoro -->
+        <div class="richiesta-card nuova">
+            <div class="nuovo-tag">🆕 NUOVA</div>
+            <div class="richiesta-header">
+                <span class="richiesta-cat">🏗️ Edilizia — Tinteggiatura</span>
+                <span class="richiesta-tempo">30 minuti fa</span>
+            </div>
+            <div class="richiesta-desc">
+                "Cerco imbianchino per tinteggiatura di appartamento al secondo piano. Muri e soffitti in 3 stanze più corridoio. Appartamento libero e non arredato. Zona Navigli."
+            </div>
+            <div class="richiesta-chips">
+                <span class="chip">📍 Milano — Navigli</span>
+                <span class="chip">📐 Circa 65mq</span>
+                <span class="chip">🏠 Non arredato</span>
+                <span class="chip verde">🟢 Piccolo lavoro</span>
+                <span class="chip">⏰ Entro 2 settimane</span>
+            </div>
+            <div class="richiesta-footer">
+                <div class="costo-sblocco">Costo sblocco: <strong>€9,90</strong></div>
+                <button class="btn-sblocca" onclick="apriSblocco('€9,90', 'Tinteggiatura Navigli', 'piccolo')">🔓 Sblocca contatto</button>
+            </div>
+        </div>
+
+        <!-- RICHIESTA 2 — Medio lavoro -->
+        <div class="richiesta-card nuova">
+            <div class="nuovo-tag">🆕 NUOVA</div>
+            <div class="richiesta-header">
+                <span class="richiesta-cat">🏗️ Edilizia — Ristrutturazione bagno</span>
+                <span class="richiesta-tempo">2 ore fa</span>
+            </div>
+            <div class="richiesta-desc">
+                "Devo ristrutturare completamente il bagno di casa mia: sostituzione sanitari, nuove piastrelle, rifacimento impianto idraulico e nuova doccia al posto della vasca. Bagno di circa 7mq."
+            </div>
+            <div class="richiesta-chips">
+                <span class="chip">📍 Milano — Porta Romana</span>
+                <span class="chip">📐 7mq bagno</span>
+                <span class="chip">🏠 Arredato</span>
+                <span class="chip oro">🟡 Medio lavoro</span>
+                <span class="chip">⏰ Entro 1 mese</span>
+                <span class="chip rosso">🔴 Urgente</span>
+            </div>
+            <div class="richiesta-footer">
+                <div class="costo-sblocco">Costo sblocco: <strong>€19,90</strong></div>
+                <button class="btn-sblocca" onclick="apriSblocco('€19,90', 'Ristrutturazione bagno Porta Romana', 'medio')">🔓 Sblocca contatto</button>
+            </div>
+        </div>
+
+        <!-- RICHIESTA 3 — Grande lavoro -->
+        <div class="richiesta-card nuova">
+            <div class="nuovo-tag">🆕 NUOVA</div>
+            <div class="richiesta-header">
+                <span class="richiesta-cat">🏗️ Edilizia — Ristrutturazione completa</span>
+                <span class="richiesta-tempo">5 ore fa</span>
+            </div>
+            <div class="richiesta-desc">
+                "Appartamento da ristrutturare completamente. 3 camere + soggiorno + 2 bagni. Pavimenti da rifare, pareti da intonacare e tinteggiare, cucina e bagni da rifare, impianti elettrico e idraulico da aggiornare. Zona Brera."
+            </div>
+            <div class="richiesta-chips">
+                <span class="chip">📍 Milano — Brera</span>
+                <span class="chip">📐 Circa 130mq</span>
+                <span class="chip">🏠 Da svuotare</span>
+                <span class="chip rosso">🔴 Grande lavoro</span>
+                <span class="chip">⏰ Flessibile</span>
+                <span class="chip verde">💰 Budget alto</span>
+            </div>
+            <div class="richiesta-footer">
+                <div class="costo-sblocco">Costo sblocco: <strong>€29,90</strong></div>
+                <button class="btn-sblocca" onclick="apriSblocco('€29,90', 'Ristrutturazione completa Brera', 'grande')">🔓 Sblocca contatto</button>
+            </div>
+        </div>
+
+        <!-- RECENSIONI RICEVUTE -->
+        <div class="sez-title" style="margin-top:10px">⭐ Ultime recensioni ricevute</div>
+        <div class="recensione-card">
+            <div class="rec-header"><div class="rec-nome">Mario R.</div><div class="rec-stelle">★★★★★</div></div>
+            <div class="rec-testo">"Lavoro eccellente! Puntuale, preciso e molto professionale. Consigliatissimo per tinteggiature di qualità."</div>
+            <div class="rec-data">28 Aprile 2026</div>
+        </div>
+        <div class="recensione-card">
+            <div class="rec-header"><div class="rec-nome">Giulia M.</div><div class="rec-stelle">★★★★☆</div></div>
+            <div class="rec-testo">"Ottimo lavoro sul bagno, qualche piccolo ritardo ma risultato finale molto soddisfacente."</div>
+            <div class="rec-data">15 Aprile 2026</div>
+        </div>
+
+    </main>
+</div>
+
+<!-- POPUP SBLOCCO CONTATTO -->
+<div class="popup-overlay" id="popupSblocco">
+    <div class="popup-box">
+        <div class="popup-icon">🔓</div>
+        <h2>Sblocca il contatto</h2>
+        <p id="popup-desc">Pagando sblocchi la chat privata con il cliente. Potrai concordare sopralluogo, data e preventivo.</p>
+        <div class="popup-prezzo" id="popup-prezzo">€9,90</div>
+        <div class="popup-prezzo-sub">pagamento una tantum per questa richiesta</div>
+        <div class="popup-info">
+            ✅ Sblocchi la <strong>chat privata</strong> con il cliente<br>
+            ✅ Puoi concordare <strong>sopralluogo e preventivo</strong><br>
+            ✅ Se il lavoro non parte, <strong>nessun rimborso</strong><br>
+            ⚠️ Mancata presentazione al sopralluogo = <strong>segnalazione</strong>
+        </div>
+        <button class="btn-popup-main" onclick="confermaSblocco()">💳 Paga e sblocca chat</button>
+        <button class="btn-popup-cancel" onclick="chiudiPopup('popupSblocco')">Annulla</button>
     </div>
+</div>
 
-    <script>
-        let richiestaCorrente = '';
+<!-- POPUP RICARICA CREDITI -->
+<div class="popup-overlay" id="popupRicarica">
+    <div class="popup-box">
+        <div class="popup-icon">💰</div>
+        <h2>Ricarica crediti sblocco</h2>
+        <p>Acquista crediti da usare per sbloccare i contatti dei clienti nelle richieste che ti interessano.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px">
+            <div style="border:2px solid #e5e7eb;border-radius:14px;padding:16px;text-align:center;cursor:pointer;transition:0.3s" onclick="selezionaPacchetto(this,'5 crediti','€45')" onmouseover="this.style.borderColor='var(--oro)'" onmouseout="if(!this.classList.contains('sel'))this.style.borderColor='#e5e7eb'">
+                <div style="font-size:24px;margin-bottom:6px">🔓</div>
+                <div style="font-weight:700;color:var(--blu-scuro);font-size:14px">5 crediti</div>
+                <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:var(--oro);margin:5px 0">€45</div>
+                <div style="font-size:11px;color:var(--grigio)">€9/credito</div>
+            </div>
+            <div style="border:2px solid var(--oro);border-radius:14px;padding:16px;text-align:center;cursor:pointer;transition:0.3s;background:#FFFBEB;position:relative" onclick="selezionaPacchetto(this,'10 crediti','€80')">
+                <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--verde);color:white;font-size:10px;font-weight:700;padding:3px 10px;border-radius:10px">MIGLIOR VALORE</div>
+                <div style="font-size:24px;margin-bottom:6px">🔓🔓</div>
+                <div style="font-weight:700;color:var(--blu-scuro);font-size:14px">10 crediti</div>
+                <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:var(--oro);margin:5px 0">€80</div>
+                <div style="font-size:11px;color:var(--verde);font-weight:600">€8/credito</div>
+            </div>
+            <div style="border:2px solid #e5e7eb;border-radius:14px;padding:16px;text-align:center;cursor:pointer;transition:0.3s" onclick="selezionaPacchetto(this,'25 crediti','€175')" onmouseover="this.style.borderColor='var(--oro)'" onmouseout="if(!this.classList.contains('sel'))this.style.borderColor='#e5e7eb'">
+                <div style="font-size:24px;margin-bottom:6px">🔓🔓🔓</div>
+                <div style="font-weight:700;color:var(--blu-scuro);font-size:14px">25 crediti</div>
+                <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:var(--oro);margin:5px 0">€175</div>
+                <div style="font-size:11px;color:var(--grigio)">€7/credito</div>
+            </div>
+        </div>
+        <button class="btn-popup-main" onclick="confermaRicarica()">💳 Acquista crediti</button>
+        <button class="btn-popup-cancel" onclick="chiudiPopup('popupRicarica')">Annulla</button>
+    </div>
+</div>
 
-        function mostraSezione(sezione) {
-            document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
-            event.currentTarget.classList.add('active');
-            alert('Sezione "' + sezione + '" in arrivo nella prossima versione!');
-        }
+<!-- POPUP RECENSIONE -->
+<div class="recensione-popup" id="recensionePopup">
+    <div class="recensione-box">
+        <h2>⭐ Valuta il cliente</h2>
+        <p>Il pagamento è confermato. Valuta la tua esperienza con <strong>Luca B.</strong> La recensione è <strong>obbligatoria</strong> per mantenere l'account attivo.</p>
+        <div class="stelle">
+            <span class="stella" onclick="setStella(1)">★</span>
+            <span class="stella" onclick="setStella(2)">★</span>
+            <span class="stella" onclick="setStella(3)">★</span>
+            <span class="stella" onclick="setStella(4)">★</span>
+            <span class="stella" onclick="setStella(5)">★</span>
+        </div>
+        <textarea placeholder="Descrivi la tua esperienza con questo cliente: puntualità, disponibilità, correttezza nei pagamenti..."></textarea>
+        <button class="btn-rec oro" onclick="inviaRecensione()">✅ Invia recensione</button>
+        <button class="btn-rec grigio" style="margin-top:8px" onclick="chiudiPopup('recensionePopup')">Dopo</button>
+    </div>
+</div>
 
-        function filtra(btn, tipo) {
-            document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-        }
+<script>
+    let stelleSelezionate = 0;
+    let pacchettoPagamento = '';
 
-        function ignoraRichiesta(btn) {
-            const card = btn.closest('.richiesta-card');
-            card.style.opacity = '0';
-            card.style.transform = 'translateX(20px)';
-            card.style.transition = '0.3s';
-            setTimeout(() => card.remove(), 300);
-        }
+    function apriSblocco(prezzo, titolo, tipo) {
+        document.getElementById('popup-prezzo').textContent = prezzo;
+        document.getElementById('popup-desc').textContent =
+            'Richiesta: ' + titolo + '. Pagando sblocchi la chat privata con il cliente e puoi concordare sopralluogo e preventivo.';
+        document.getElementById('popupSblocco').classList.add('show');
+    }
 
-        function apriPopupAcquisto(lavoro, prezzo) {
-            richiestaCorrente = lavoro;
-            const parts = lavoro.split('—');
-            document.getElementById('popup-dettaglio-text').innerHTML =
-                '📋 <strong>Lavoro:</strong> ' + (parts[0] || lavoro) + '<br>' +
-                '📍 <strong>Zona:</strong> ' + (parts[1] || '') + '<br>' +
-                '💳 <strong>Costo:</strong> ' + prezzo + ' (1 credito)';
-            document.getElementById('popup-prezzo-text').innerHTML = prezzo + ' <span>per questo contatto</span>';
-            document.getElementById('popupAcquisto').classList.add('show');
-        }
+    function confermaSblocco() {
+        chiudiPopup('popupSblocco');
+        setTimeout(() => {
+            alert('✅ Contatto sbloccato!\n\nLa chat privata è ora disponibile.\nVai nella sezione "Chat" per comunicare con il cliente.');
+            window.location.href = 'chat.html';
+        }, 300);
+    }
 
-        function chiudiPopup() {
-            document.getElementById('popupAcquisto').classList.remove('show');
-        }
+    function apriRicarica() {
+        document.getElementById('popupRicarica').classList.add('show');
+    }
 
-        function confermaAcquisto() {
-            document.getElementById('popupAcquisto').classList.remove('show');
-            document.getElementById('popupSuccesso').classList.add('show');
-        }
+    function selezionaPacchetto(el, nome, prezzo) {
+        document.querySelectorAll('#popupRicarica [style*="border"]').forEach(e => {
+            e.style.borderColor = '#e5e7eb';
+            e.style.background = '';
+            e.classList.remove('sel');
+        });
+        el.style.borderColor = 'var(--oro)';
+        el.style.background = '#FFFBEB';
+        el.classList.add('sel');
+        pacchettoPagamento = nome + ' — ' + prezzo;
+    }
 
-        function chiudiPopupSuccesso() {
-            document.getElementById('popupSuccesso').classList.remove('show');
-            alert('Chat in arrivo nella prossima versione!');
-        }
-    </script>
+    function confermaRicarica() {
+        if (!pacchettoPagamento) { alert('Seleziona un pacchetto!'); return; }
+        chiudiPopup('popupRicarica');
+        setTimeout(() => { alert('✅ Crediti acquistati!\n\n' + pacchettoPagamento + '\n\nI crediti sono stati aggiunti al tuo account.'); }, 300);
+    }
 
+    function apriRecensione() {
+        document.getElementById('recensionePopup').classList.add('show');
+    }
+
+    function setStella(n) {
+        stelleSelezionate = n;
+        document.querySelectorAll('.stella').forEach((s, i) => s.classList.toggle('attiva', i < n));
+    }
+
+    function inviaRecensione() {
+        if (stelleSelezionate === 0) { alert('Seleziona almeno una stella!'); return; }
+        chiudiPopup('recensionePopup');
+        setTimeout(() => { alert('✅ Recensione inviata!\n\nAnche il cliente ti recensirà a breve.'); }, 300);
+    }
+
+    function chiudiPopup(id) {
+        document.getElementById(id).classList.remove('show');
+    }
+</script>
 </body>
 </html>
