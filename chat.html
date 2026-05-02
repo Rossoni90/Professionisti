@@ -3,1017 +3,578 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professionisti - Chat</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Professionisti — Chat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         :root {
-            --blu: #1B3A6B;
-            --blu-scuro: #0F2347;
-            --blu-chiaro: #2952A3;
-            --oro: #B8972A;
-            --oro-chiaro: #D4AF37;
-            --bianco: #FFFFFF;
-            --grigio-chiaro: #F5F7FA;
-            --grigio: #6B7280;
-            --testo: #1A1A2E;
-            --verde: #10B981;
-            --rosso: #EF4444;
-            --arancio: #F59E0B;
+            --blu: #1B3A6B; --blu-scuro: #0F2347; --blu-chiaro: #2952A3;
+            --oro: #B8972A; --oro-chiaro: #D4AF37; --bianco: #FFFFFF;
+            --grigio-chiaro: #F5F7FA; --grigio: #6B7280; --testo: #1A1A2E;
+            --verde: #10B981; --rosso: #EF4444; --arancio: #F59E0B;
         }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--grigio-chiaro);
-            color: var(--testo);
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+        body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color: var(--testo); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
 
         /* NAVBAR */
-        .navbar {
-            background: var(--blu-scuro);
-            padding: 15px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.2);
-            flex-shrink: 0;
-        }
-
-        .navbar-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .btn-back {
-            color: white;
-            background: transparent;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-            padding: 5px;
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 20px;
-            font-weight: 900;
-            color: white;
-            text-decoration: none;
-        }
-
+        .navbar { background: var(--blu-scuro); padding: 14px 25px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; box-shadow: 0 2px 15px rgba(0,0,0,0.25); }
+        .logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: white; text-decoration: none; }
         .logo span { color: var(--oro); }
-
-        .navbar-right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .navbar-nome { color: white; font-size: 14px; font-weight: 600; }
-
-        .avatar {
-            width: 35px;
-            height: 35px;
-            background: var(--oro);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: white;
-            font-size: 14px;
-        }
+        .navbar-right { display: flex; align-items: center; gap: 12px; }
+        .btn-back-nav { background: transparent; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.25); padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; text-decoration: none; }
+        .btn-back-nav:hover { color: var(--oro); border-color: var(--oro); }
 
         /* CHAT LAYOUT */
-        .chat-layout {
-            display: flex;
-            flex: 1;
-            overflow: hidden;
-        }
+        .chat-layout { display: flex; flex: 1; overflow: hidden; }
 
-        /* LISTA CHAT */
-        .chat-lista {
-            width: 300px;
-            background: white;
-            border-right: 1px solid #e5e7eb;
-            display: flex;
-            flex-direction: column;
-            flex-shrink: 0;
-        }
-
-        .chat-lista-header {
-            padding: 20px;
-            border-bottom: 1px solid #e5e7eb;
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--blu-scuro);
-        }
-
-        .chat-item {
-            padding: 15px 20px;
-            border-bottom: 1px solid #f3f4f6;
-            cursor: pointer;
-            transition: 0.2s;
-            display: flex;
-            gap: 12px;
-            align-items: center;
-        }
-
+        /* LISTA CHAT (sidebar sinistra) */
+        .chat-list { width: 300px; background: white; border-right: 1px solid #e5e7eb; display: flex; flex-direction: column; flex-shrink: 0; }
+        .chat-list-header { padding: 18px 20px; border-bottom: 1px solid #e5e7eb; }
+        .chat-list-header h3 { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--blu-scuro); margin-bottom: 10px; }
+        .chat-search { width: 100%; padding: 9px 14px; border: 1.5px solid #e5e7eb; border-radius: 10px; font-size: 13px; font-family: 'Inter', sans-serif; outline: none; }
+        .chat-search:focus { border-color: var(--blu); }
+        .chat-list-items { flex: 1; overflow-y: auto; }
+        .chat-item { padding: 15px 18px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: 0.2s; border-bottom: 1px solid #f3f4f6; border-left: 3px solid transparent; }
         .chat-item:hover { background: var(--grigio-chiaro); }
-        .chat-item.active { background: #EFF6FF; border-left: 3px solid var(--blu); }
+        .chat-item.active { background: #EFF6FF; border-left-color: var(--oro); }
+        .chat-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; font-size: 16px; flex-shrink: 0; }
+        .chat-item-info { flex: 1; min-width: 0; }
+        .chat-item-nome { font-size: 14px; font-weight: 700; color: var(--testo); margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .chat-item-preview { font-size: 12px; color: var(--grigio); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .chat-item-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; flex-shrink: 0; }
+        .chat-item-time { font-size: 11px; color: var(--grigio); }
+        .chat-item-badge { background: var(--rosso); color: white; font-size: 10px; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .chat-item-stato { font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 8px; }
+        .chat-item-stato.attivo { background: #ECFDF5; color: var(--verde); }
+        .chat-item-stato.attesa { background: #FEF3C7; color: var(--arancio); }
 
-        .chat-item-avatar {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: var(--blu);
-            color: var(--oro);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 18px;
-            flex-shrink: 0;
-        }
+        /* AREA CHAT PRINCIPALE */
+        .chat-main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 
-        .chat-item-info { flex: 1; overflow: hidden; }
+        /* HEADER CHAT */
+        .chat-header { background: white; padding: 15px 22px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; box-shadow: 0 1px 8px rgba(0,0,0,0.05); }
+        .chat-header-info { display: flex; align-items: center; gap: 14px; }
+        .chat-header-avatar { width: 46px; height: 46px; background: var(--blu); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--oro); font-size: 18px; }
+        .chat-header-nome { font-size: 16px; font-weight: 700; color: var(--blu-scuro); }
+        .chat-header-stato { font-size: 12px; color: var(--verde); display: flex; align-items: center; gap: 5px; margin-top: 2px; }
+        .chat-header-stato::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--verde); display: inline-block; }
+        .chat-header-actions { display: flex; gap: 10px; }
+        .btn-header-action { background: var(--grigio-chiaro); border: none; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; color: var(--testo); display: flex; align-items: center; gap: 6px; }
+        .btn-header-action:hover { background: #e5e7eb; }
+        .btn-header-action.blu { background: var(--blu); color: white; }
+        .btn-header-action.blu:hover { background: var(--blu-chiaro); }
+        .btn-header-action.oro { background: var(--oro); color: white; }
+        .btn-header-action.oro:hover { background: var(--oro-chiaro); }
 
-        .chat-item-nome {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--blu-scuro);
-            margin-bottom: 3px;
-        }
-
-        .chat-item-preview {
-            font-size: 12px;
-            color: var(--grigio);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .chat-item-meta {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 5px;
-        }
-
-        .chat-item-tempo { font-size: 11px; color: var(--grigio); }
-
-        .unread-badge {
-            background: var(--blu);
-            color: white;
-            font-size: 10px;
-            font-weight: 700;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* CHAT PRINCIPALE */
-        .chat-main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        /* CHAT HEADER */
-        .chat-header {
-            background: white;
-            padding: 15px 25px;
-            border-bottom: 1px solid #e5e7eb;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-shrink: 0;
-        }
-
-        .chat-header-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .chat-header-avatar {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background: var(--blu);
-            color: var(--oro);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 18px;
-        }
-
-        .chat-header-nome {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--blu-scuro);
-        }
-
-        .chat-header-stato {
-            font-size: 12px;
-            color: var(--verde);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .chat-header-stato::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: var(--verde);
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        .chat-header-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn-action {
-            background: var(--grigio-chiaro);
-            border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            color: var(--blu);
-            font-family: 'Inter', sans-serif;
-        }
-
-        .btn-action:hover { background: #e5e7eb; }
-        .btn-action.oro { background: var(--oro); color: white; }
-        .btn-action.oro:hover { background: var(--oro-chiaro); }
+        /* BANNER RICHIESTA */
+        .richiesta-banner { background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); border-bottom: 1px solid #BFDBFE; padding: 12px 22px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; flex-wrap: wrap; gap: 8px; }
+        .richiesta-banner-info { font-size: 13px; color: var(--blu-scuro); line-height: 1.6; }
+        .richiesta-banner-info strong { display: block; font-size: 14px; margin-bottom: 2px; }
+        .richiesta-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+        .chip-small { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 15px; }
+        .chip-small.blu { background: #DBEAFE; color: var(--blu); }
+        .chip-small.verde { background: #ECFDF5; color: var(--verde); }
+        .chip-small.oro { background: #FEF3C7; color: var(--arancio); }
 
         /* SOPRALLUOGO BANNER */
-        .sopralluogo-banner {
-            background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
-            border-bottom: 1px solid #6EE7B7;
-            padding: 12px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-shrink: 0;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .sopralluogo-banner-info {
-            font-size: 13px;
-            color: #065F46;
-            font-weight: 600;
-        }
-
-        .sopralluogo-banner-info span {
-            font-size: 15px;
-            font-weight: 800;
-        }
-
-        .btn-conferma-sopr {
-            background: var(--verde);
-            color: white;
-            border: none;
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-        }
+        .sopralluogo-banner { background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border-bottom: 1px solid #A7F3D0; padding: 14px 22px; flex-shrink: 0; }
+        .sopralluogo-banner-title { font-size: 13px; font-weight: 700; color: #065F46; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+        .sopralluogo-banner-data { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 900; color: #065F46; margin-bottom: 4px; }
+        .sopralluogo-banner-sub { font-size: 12px; color: #047857; }
+        .sopralluogo-banner-actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+        .btn-sopralluogo { border: none; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; }
+        .btn-sopralluogo.verde { background: var(--verde); color: white; }
+        .btn-sopralluogo.rosso { background: var(--rosso); color: white; }
+        .btn-sopralluogo.grigio { background: #e5e7eb; color: var(--grigio); }
 
         /* MESSAGGI */
-        .chat-messaggi {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px 25px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .messaggio-gruppo {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .messaggio-gruppo.mio { align-items: flex-end; }
-        .messaggio-gruppo.altro { align-items: flex-start; }
-
-        .messaggio-nome {
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--grigio);
-            padding: 0 12px;
-        }
-
-        .messaggio {
-            max-width: 70%;
-            padding: 12px 16px;
-            border-radius: 18px;
-            font-size: 14px;
-            line-height: 1.6;
-            position: relative;
-        }
-
-        .messaggio.mio {
-            background: var(--blu);
-            color: white;
-            border-bottom-right-radius: 4px;
-        }
-
-        .messaggio.altro {
-            background: white;
-            color: var(--testo);
-            border: 1px solid #e5e7eb;
-            border-bottom-left-radius: 4px;
-        }
-
-        .messaggio-tempo {
-            font-size: 10px;
-            color: var(--grigio);
-            padding: 0 12px;
-        }
+        .chat-messages { flex: 1; overflow-y: auto; padding: 20px 22px; display: flex; flex-direction: column; gap: 14px; }
+        .msg { display: flex; gap: 10px; max-width: 75%; }
+        .msg.inviato { align-self: flex-end; flex-direction: row-reverse; }
+        .msg-avatar { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; font-size: 13px; flex-shrink: 0; margin-top: 2px; }
+        .msg-content { display: flex; flex-direction: column; gap: 3px; }
+        .msg.inviato .msg-content { align-items: flex-end; }
+        .msg-bubble { padding: 11px 15px; border-radius: 18px; font-size: 14px; line-height: 1.6; max-width: 100%; }
+        .msg.ricevuto .msg-bubble { background: white; color: var(--testo); border: 1px solid #e5e7eb; border-radius: 4px 18px 18px 18px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+        .msg.inviato .msg-bubble { background: linear-gradient(135deg, var(--blu), var(--blu-chiaro)); color: white; border-radius: 18px 4px 18px 18px; }
+        .msg-time { font-size: 11px; color: var(--grigio); padding: 0 4px; }
 
         /* MESSAGGIO SISTEMA */
-        .messaggio-sistema {
-            text-align: center;
-            padding: 10px 20px;
-            background: #FEF3C7;
-            border: 1px solid #F59E0B;
-            border-radius: 12px;
-            font-size: 13px;
-            color: #92400E;
-            line-height: 1.6;
-            margin: 5px 0;
-        }
+        .msg-sistema { align-self: center; background: #FEF3C7; border: 1px solid #FDE68A; border-radius: 12px; padding: 10px 16px; font-size: 12px; color: #78350F; text-align: center; max-width: 85%; line-height: 1.6; }
+        .msg-sistema.verde { background: #ECFDF5; border-color: #A7F3D0; color: #065F46; }
+        .msg-sistema.blu { background: #EFF6FF; border-color: #BFDBFE; color: #1E40AF; }
+        .msg-sistema.rosso { background: #FEF2F2; border-color: #FECACA; color: #991B1B; }
 
-        .messaggio-sistema.verde {
-            background: #ECFDF5;
-            border-color: #6EE7B7;
-            color: #065F46;
-        }
-
-        .messaggio-sistema.blu {
-            background: #EFF6FF;
-            border-color: #BFDBFE;
-            color: var(--blu);
-        }
-
-        /* SOPRALLUOGO CARD IN CHAT */
-        .sopralluogo-chat-card {
-            background: white;
-            border: 2px solid var(--verde);
-            border-radius: 16px;
-            padding: 18px 20px;
-            margin: 5px 0;
-        }
-
-        .sopralluogo-chat-card h4 {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--blu-scuro);
-            margin-bottom: 8px;
-        }
-
-        .sopralluogo-chat-card p {
-            font-size: 13px;
-            color: var(--grigio);
-            line-height: 1.7;
-        }
-
-        .sopralluogo-chat-card .data-grande {
-            font-family: 'Playfair Display', serif;
-            font-size: 20px;
-            font-weight: 900;
-            color: var(--verde);
-            margin: 8px 0;
-        }
-
-        .sopralluogo-chat-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 12px;
-        }
-
-        .sopralluogo-chat-buttons button {
-            flex: 1;
-            padding: 10px;
-            border-radius: 10px;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-            border: none;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .btn-accetta { background: var(--verde); color: white; }
-        .btn-rifiuta { background: var(--grigio-chiaro); color: var(--grigio); }
+        /* CARD SOPRALLUOGO IN CHAT */
+        .sopralluogo-msg { background: white; border: 2px solid var(--verde); border-radius: 16px; padding: 16px 18px; align-self: center; width: 90%; max-width: 420px; }
+        .sopralluogo-msg-title { font-size: 13px; font-weight: 700; color: var(--verde); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+        .sopralluogo-msg-data { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 900; color: var(--blu-scuro); margin-bottom: 6px; }
+        .sopralluogo-msg-info { font-size: 13px; color: var(--grigio); line-height: 1.7; margin-bottom: 12px; }
+        .sopralluogo-msg-info strong { color: var(--blu-scuro); }
+        .sopralluogo-msg-actions { display: flex; gap: 8px; }
+        .btn-sm { flex: 1; padding: 9px; border: none; border-radius: 10px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s; }
+        .btn-sm.verde { background: var(--verde); color: white; }
+        .btn-sm.rosso { background: var(--rosso); color: white; }
+        .btn-sm.verde:hover { background: #059669; }
+        .btn-sm.rosso:hover { background: #DC2626; }
 
         /* INPUT CHAT */
-        .chat-input-area {
-            background: white;
-            border-top: 1px solid #e5e7eb;
-            padding: 15px 25px;
-            flex-shrink: 0;
-        }
-
-        .chat-input-row {
-            display: flex;
-            gap: 12px;
-            align-items: flex-end;
-        }
-
-        .chat-input {
-            flex: 1;
-            padding: 12px 18px;
-            border: 1.5px solid #e5e7eb;
-            border-radius: 25px;
-            font-size: 14px;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-            resize: none;
-            max-height: 120px;
-            transition: 0.3s;
-        }
-
-        .chat-input:focus { border-color: var(--blu); }
-
-        .btn-send {
-            width: 45px;
-            height: 45px;
-            background: var(--blu);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 18px;
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .btn-send:hover { background: var(--blu-chiaro); transform: scale(1.05); }
-
-        .btn-sopr-input {
-            background: var(--oro);
-            color: white;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 25px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            white-space: nowrap;
-            font-family: 'Inter', sans-serif;
-            transition: 0.3s;
-            flex-shrink: 0;
-        }
-
-        .btn-sopr-input:hover { background: var(--oro-chiaro); }
+        .chat-input-area { background: white; border-top: 1px solid #e5e7eb; padding: 14px 20px; flex-shrink: 0; }
+        .chat-input-row { display: flex; gap: 10px; align-items: flex-end; }
+        .chat-input-box { flex: 1; padding: 12px 18px; border: 1.5px solid #e5e7eb; border-radius: 25px; font-size: 14px; font-family: 'Inter', sans-serif; outline: none; resize: none; max-height: 100px; transition: 0.3s; line-height: 1.5; }
+        .chat-input-box:focus { border-color: var(--blu); }
+        .btn-allega { background: var(--grigio-chiaro); border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; font-size: 18px; transition: 0.3s; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+        .btn-allega:hover { background: #e5e7eb; }
+        .btn-invia { background: linear-gradient(135deg, var(--blu), var(--blu-chiaro)); border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; font-size: 18px; transition: 0.3s; flex-shrink: 0; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(27,58,107,0.3); }
+        .btn-invia:hover { transform: scale(1.05); box-shadow: 0 6px 18px rgba(27,58,107,0.4); }
+        .chat-input-actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+        .btn-quick { background: var(--grigio-chiaro); border: 1px solid #e5e7eb; padding: 7px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; color: var(--testo); }
+        .btn-quick:hover { background: var(--blu); color: white; border-color: var(--blu); }
+        .btn-quick.oro { background: #FFFBEB; border-color: var(--oro); color: var(--oro); }
+        .btn-quick.oro:hover { background: var(--oro); color: white; }
 
         /* POPUP SOPRALLUOGO */
-        .popup-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
+        .popup-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
         .popup-overlay.show { display: flex; }
+        .popup-box { background: white; border-radius: 24px; padding: 35px 30px; max-width: 440px; width: 100%; }
+        .popup-box h2 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--blu-scuro); margin-bottom: 8px; text-align: center; }
+        .popup-box p { color: var(--grigio); font-size: 14px; line-height: 1.6; margin-bottom: 20px; text-align: center; }
+        .form-group { margin-bottom: 16px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--testo); margin-bottom: 6px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 16px; border: 1.5px solid #e5e7eb; border-radius: 12px; font-size: 14px; font-family: 'Inter', sans-serif; outline: none; transition: 0.3s; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--blu); }
+        .form-group textarea { min-height: 80px; resize: vertical; }
+        .popup-avviso { background: #FEF3C7; border: 1px solid #FDE68A; border-radius: 12px; padding: 12px 15px; font-size: 13px; color: #78350F; line-height: 1.6; margin-bottom: 18px; }
+        .btn-popup { width: 100%; padding: 14px; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s; margin-bottom: 8px; }
+        .btn-popup.blu { background: var(--blu); color: white; }
+        .btn-popup.blu:hover { background: var(--blu-chiaro); }
+        .btn-popup.grigio { background: var(--grigio-chiaro); color: var(--grigio); }
+        .btn-popup.grigio:hover { background: #e5e7eb; }
 
-        .popup-box {
-            background: white;
-            border-radius: 25px;
-            padding: 40px 35px;
-            max-width: 460px;
-            width: 100%;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
-        }
-
-        .popup-box h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            color: var(--blu-scuro);
-            margin-bottom: 10px;
-        }
-
-        .popup-box p {
-            color: var(--grigio);
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .form-group { margin-bottom: 18px; }
-
-        label {
-            display: block;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--blu-scuro);
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        input[type="date"], input[type="time"] {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1.5px solid #e5e7eb;
-            border-radius: 12px;
-            font-size: 15px;
-            font-family: 'Inter', sans-serif;
-            outline: none;
-            transition: 0.3s;
-            background: var(--grigio-chiaro);
-        }
-
-        input[type="date"]:focus, input[type="time"]:focus {
-            border-color: var(--blu);
-            background: white;
-        }
-
-        .avviso-ban {
-            background: #FEF3C7;
-            border: 1px solid #F59E0B;
-            border-radius: 12px;
-            padding: 15px 18px;
-            font-size: 13px;
-            color: #92400E;
-            line-height: 1.7;
-            margin-bottom: 20px;
-        }
-
-        .avviso-ban strong { display: block; margin-bottom: 5px; }
-
-        .popup-buttons {
-            display: flex;
-            gap: 12px;
-        }
-
-        .popup-buttons button {
-            flex: 1;
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            border: none;
-            font-family: 'Inter', sans-serif;
-            transition: 0.3s;
-        }
-
-        .btn-conferma { background: var(--oro); color: white; }
-        .btn-conferma:hover { background: var(--oro-chiaro); }
-        .btn-annulla { background: var(--grigio-chiaro); color: var(--grigio); }
-        .btn-annulla:hover { background: #e5e7eb; }
-
-        /* POPUP RECENSIONE */
-        .stelle {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .stella {
-            font-size: 38px;
-            cursor: pointer;
-            opacity: 0.3;
-            transition: 0.2s;
-        }
-
-        .stella.attiva { opacity: 1; }
-
-        textarea {
-            width: 100%;
-            padding: 14px 18px;
-            border: 1.5px solid #e5e7eb;
-            border-radius: 12px;
-            font-size: 14px;
-            font-family: 'Inter', sans-serif;
-            margin-bottom: 15px;
-            min-height: 90px;
-            resize: vertical;
-            outline: none;
-        }
-
-        textarea:focus { border-color: var(--blu); }
-
-        .btn-full {
-            width: 100%;
-            padding: 15px;
-            background: var(--blu);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            margin-bottom: 10px;
-            transition: 0.3s;
-        }
-
-        .btn-full:hover { background: var(--blu-chiaro); }
-        .btn-full.oro { background: var(--oro); }
-        .btn-full.oro:hover { background: var(--oro-chiaro); }
+        /* POPUP CONFERMA LAVORO */
+        .popup-box.conferma { text-align: center; }
+        .popup-icon { font-size: 56px; margin-bottom: 15px; }
+        .conferma-dettagli { background: var(--grigio-chiaro); border-radius: 14px; padding: 16px 18px; font-size: 13px; color: var(--testo); line-height: 1.9; margin-bottom: 20px; text-align: left; }
+        .conferma-dettagli strong { color: var(--blu-scuro); }
 
         @media (max-width: 768px) {
-            .chat-lista { display: none; }
+            .chat-list { display: none; }
+            .richiesta-banner { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <div class="navbar-left">
-            <button class="btn-back" onclick="window.history.back()">←</button>
-            <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
-        </div>
-        <div class="navbar-right">
-            <div class="navbar-nome">Rossoni Edilizia</div>
-            <div class="avatar">R</div>
-        </div>
-    </nav>
+<!-- NAVBAR -->
+<nav class="navbar">
+    <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
+    <div class="navbar-right">
+        <a href="dashboard-cliente.html" class="btn-back-nav">← Dashboard Cliente</a>
+        <a href="dashboard-pro.html" class="btn-back-nav">← Dashboard Pro</a>
+    </div>
+</nav>
 
-    <!-- CHAT LAYOUT -->
-    <div class="chat-layout">
+<!-- CHAT LAYOUT -->
+<div class="chat-layout">
 
-        <!-- LISTA CHAT -->
-        <div class="chat-lista">
-            <div class="chat-lista-header">💬 Le mie chat</div>
+    <!-- LISTA CHAT -->
+    <div class="chat-list">
+        <div class="chat-list-header">
+            <h3>💬 Le tue chat</h3>
+            <input type="text" class="chat-search" placeholder="🔍 Cerca conversazione...">
+        </div>
+        <div class="chat-list-items">
 
             <div class="chat-item active" onclick="selezionaChat(this)">
-                <div class="chat-item-avatar">M</div>
+                <div class="chat-avatar" style="background:var(--blu)">R</div>
                 <div class="chat-item-info">
-                    <div class="chat-item-nome">Mario Rossi</div>
-                    <div class="chat-item-preview">Perfetto, ci vediamo sabato alle 10!</div>
+                    <div class="chat-item-nome">Rossoni Edilizia</div>
+                    <div class="chat-item-preview">Perfetto, ci vediamo lunedì...</div>
                 </div>
                 <div class="chat-item-meta">
-                    <span class="chat-item-tempo">10:32</span>
-                    <span class="unread-badge">2</span>
+                    <span class="chat-item-time">09:30</span>
+                    <span class="chat-item-stato attivo">Sopralluogo ✅</span>
                 </div>
             </div>
 
             <div class="chat-item" onclick="selezionaChat(this)">
-                <div class="chat-item-avatar" style="background:var(--oro);color:white">G</div>
+                <div class="chat-avatar" style="background:var(--oro)">B</div>
                 <div class="chat-item-info">
-                    <div class="chat-item-nome">Giuseppe Verdi</div>
-                    <div class="chat-item-preview">Quando è disponibile per il sopralluogo?</div>
+                    <div class="chat-item-nome">Bianchi Imbianchini</div>
+                    <div class="chat-item-preview">Quando possiamo fissare il sopralluogo?</div>
                 </div>
                 <div class="chat-item-meta">
-                    <span class="chat-item-tempo">Ieri</span>
+                    <span class="chat-item-time">Ieri</span>
+                    <div class="chat-item-badge">1</div>
+                    <span class="chat-item-stato attesa">In attesa</span>
                 </div>
             </div>
 
             <div class="chat-item" onclick="selezionaChat(this)">
-                <div class="chat-item-avatar" style="background:var(--verde);color:white">L</div>
+                <div class="chat-avatar" style="background:var(--verde)">V</div>
                 <div class="chat-item-info">
-                    <div class="chat-item-nome">Laura Bianchi</div>
-                    <div class="chat-item-preview">Grazie mille per il lavoro!</div>
+                    <div class="chat-item-nome">Verdi Piastrelle</div>
+                    <div class="chat-item-preview">Grazie per la recensione! 🙏</div>
                 </div>
                 <div class="chat-item-meta">
-                    <span class="chat-item-tempo">2 giorni fa</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- CHAT PRINCIPALE -->
-        <div class="chat-main">
-
-            <!-- CHAT HEADER -->
-            <div class="chat-header">
-                <div class="chat-header-info">
-                    <div class="chat-header-avatar">M</div>
-                    <div>
-                        <div class="chat-header-nome">Mario Rossi</div>
-                        <div class="chat-header-stato">Online ora</div>
-                    </div>
-                </div>
-                <div class="chat-header-actions">
-                    <button class="btn-action" onclick="alert('Dettagli richiesta in arrivo!')">📋 Richiesta</button>
-                    <button class="btn-action oro" onclick="apriPopupSopralluogo()">📅 Sopralluogo</button>
+                    <span class="chat-item-time">28/04</span>
+                    <span class="chat-item-stato attivo">Completato ✅</span>
                 </div>
             </div>
 
-            <!-- SOPRALLUOGO BANNER -->
-            <div class="sopralluogo-banner">
-                <div class="sopralluogo-banner-info">
-                    📅 Sopralluogo fissato: <span>Sabato 10 Maggio 2026 — ore 10:00</span>
-                </div>
-                <button class="btn-conferma-sopr" onclick="apriPopupConferma()">✅ Conferma avvenuto</button>
-            </div>
-
-            <!-- MESSAGGI -->
-            <div class="chat-messaggi" id="chat-messaggi">
-
-                <!-- MESSAGGIO SISTEMA - CHAT SBLOCCATA -->
-                <div class="messaggio-sistema blu">
-                    🔓 <strong>Chat sbloccata!</strong><br>
-                    Rossoni Edilizia ha acquistato il tuo contatto. Puoi ora comunicare direttamente per concordare il sopralluogo.<br>
-                    <small>Oggi alle 09:15</small>
-                </div>
-
-                <!-- MESSAGGIO SISTEMA - AVVISO RECENSIONE -->
-                <div class="messaggio-sistema">
-                    ⭐ <strong>Ricorda:</strong> Al termine del lavoro e dopo la conferma del pagamento, entrambi dovrete lasciare una recensione reciproca per mantenere l'account attivo.
-                </div>
-
-                <!-- MESSAGGIO PROFESSIONISTA -->
-                <div class="messaggio-gruppo altro">
-                    <div class="messaggio-nome">Rossoni Edilizia</div>
-                    <div class="messaggio altro">
-                        Buongiorno Mario! Ho visto la sua richiesta per la tinteggiatura. Siamo specializzati in questo tipo di lavoro da 15 anni. Quando sarebbe disponibile per un sopralluogo gratuito?
-                    </div>
-                    <div class="messaggio-tempo">09:18</div>
-                </div>
-
-                <!-- MESSAGGIO CLIENTE -->
-                <div class="messaggio-gruppo mio">
-                    <div class="messaggio-nome">Mario Rossi</div>
-                    <div class="messaggio mio">
-                        Buongiorno! Ottimo, sono disponibile questo weekend. Sabato mattina andrebbe bene?
-                    </div>
-                    <div class="messaggio-tempo">09:45</div>
-                </div>
-
-                <!-- MESSAGGIO PROFESSIONISTA -->
-                <div class="messaggio-gruppo altro">
-                    <div class="messaggio-nome">Rossoni Edilizia</div>
-                    <div class="messaggio altro">
-                        Sabato mattina va benissimo! Propongo sabato 10 maggio alle ore 10:00. Le va bene?
-                    </div>
-                    <div class="messaggio-tempo">09:52</div>
-                </div>
-
-                <!-- SOPRALLUOGO PROPOSTO -->
-                <div class="sopralluogo-chat-card">
-                    <h4>📅 Proposta Sopralluogo</h4>
-                    <div class="data-grande">Sabato 10 Maggio 2026 — ore 10:00</div>
-                    <p>📍 Indirizzo da concordare<br>
-                    👤 Rossoni Edilizia<br>
-                    ⚠️ Una volta accettato, la data viene salvata dal sistema. Il giorno dopo riceverete entrambi una conferma automatica.</p>
-                    <div class="sopralluogo-chat-buttons">
-                        <button class="btn-accetta" onclick="accettaSopralluogo()">✅ Accetta</button>
-                        <button class="btn-rifiuta" onclick="rifiutaSopralluogo()">❌ Proponi altra data</button>
-                    </div>
-                </div>
-
-                <!-- MESSAGGIO CLIENTE -->
-                <div class="messaggio-gruppo mio">
-                    <div class="messaggio mio">
-                        Perfetto, ci vediamo sabato alle 10! ✅
-                    </div>
-                    <div class="messaggio-tempo">10:32</div>
-                </div>
-
-                <!-- MESSAGGIO SISTEMA - SOPRALLUOGO CONFERMATO -->
-                <div class="messaggio-sistema verde">
-                    ✅ <strong>Sopralluogo confermato!</strong><br>
-                    <strong>Sabato 10 Maggio 2026 — ore 10:00</strong><br>
-                    La data è stata salvata. Il giorno dopo riceverete entrambi un messaggio di conferma automatica.<br>
-                    <small>10:32</small>
-                </div>
-
-            </div>
-
-            <!-- INPUT AREA -->
-            <div class="chat-input-area">
-                <div class="chat-input-row">
-                    <button class="btn-sopr-input" onclick="apriPopupSopralluogo()">📅 Sopralluogo</button>
-                    <textarea class="chat-input" id="msg-input" placeholder="Scrivi un messaggio..." rows="1" onkeydown="inviaConEnter(event)"></textarea>
-                    <button class="btn-send" onclick="inviaMEssaggio()">➤</button>
-                </div>
-            </div>
         </div>
     </div>
 
-    <!-- POPUP SOPRALLUOGO -->
-    <div class="popup-overlay" id="popupSopralluogo">
-        <div class="popup-box">
-            <h2>📅 Proponi Sopralluogo</h2>
-            <p>Scegli data e ora per il sopralluogo. Una volta accettato dal cliente, la data viene salvata dal sistema e riceverete entrambi una conferma automatica il giorno dopo.</p>
+    <!-- CHAT PRINCIPALE -->
+    <div class="chat-main">
 
-            <div class="form-group">
-                <label>Data sopralluogo</label>
-                <input type="date" id="sopr-data" min="">
-            </div>
-
-            <div class="form-group">
-                <label>Ora sopralluogo</label>
-                <input type="time" id="sopr-ora" value="10:00">
-            </div>
-
-            <div class="avviso-ban">
-                <strong>⚠️ Importante:</strong>
-                Una volta concordato il sopralluogo, sei tenuto a presentarti. <strong>3 mancanze</strong> causano il ban definitivo.<br><br>
-                🟢 Se il cliente non si presenta o non collabora, <strong>viene bannato lui</strong>. Sei sempre tutelato!<br><br>
-                ⭐ Al termine del lavoro e dopo la conferma del pagamento, si aprirà automaticamente la schermata recensione reciproca.
-            </div>
-
-            <div class="popup-buttons">
-                <button class="btn-annulla" onclick="chiudiPopup('popupSopralluogo')">Annulla</button>
-                <button class="btn-conferma" onclick="inviaSopralluogo()">📅 Invia proposta</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- POPUP CONFERMA SOPRALLUOGO AVVENUTO -->
-    <div class="popup-overlay" id="popupConferma">
-        <div class="popup-box" style="text-align:center">
-            <h2>✅ Conferma Sopralluogo</h2>
-            <p>Il sopralluogo del <strong>Sabato 10 Maggio 2026 alle ore 10:00</strong> è avvenuto?</p>
-
-            <div class="avviso-ban" style="text-align:left">
-                <strong>⚠️ Attenzione:</strong>
-                Se confermi che il sopralluogo è avvenuto e il lavoro è stato completato con pagamento ricevuto, si aprirà automaticamente la schermata di <strong>recensione reciproca</strong>.<br><br>
-                Se invece non è avvenuto, indica il motivo per tutelare la tua posizione.
-            </div>
-
-            <div style="display:flex;flex-direction:column;gap:10px">
-                <button class="btn-full oro" onclick="confermaAvvenuto()">✅ Sì, è avvenuto — Procedi con recensione</button>
-                <button class="btn-full" style="background:#FEF3C7;color:#92400E" onclick="segnalaProblema('cliente')">❌ No — Problema con il cliente</button>
-                <button class="btn-full" style="background:var(--grigio-chiaro);color:var(--grigio)" onclick="chiudiPopup('popupConferma')">Annulla</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- POPUP RECENSIONE -->
-    <div class="popup-overlay" id="popupRecensione">
-        <div class="popup-box" style="text-align:center">
-            <h2>⭐ Recensisci il Cliente</h2>
-            <p>Il pagamento è stato confermato. Valuta la tua esperienza con <strong>Mario Rossi</strong>. La recensione è <strong>obbligatoria</strong> per mantenere l'account attivo. Anche lui ti recensirà!</p>
-
-            <div class="stelle">
-                <span class="stella" onclick="setStella(1)">★</span>
-                <span class="stella" onclick="setStella(2)">★</span>
-                <span class="stella" onclick="setStella(3)">★</span>
-                <span class="stella" onclick="setStella(4)">★</span>
-                <span class="stella" onclick="setStella(5)">★</span>
-            </div>
-
-            <textarea placeholder="Descrivi la tua esperienza: puntualità, collaborazione, pagamento..."></textarea>
-
-            <button class="btn-full oro" onclick="inviaRecensione()">Invia Recensione ✅</button>
-        </div>
-    </div>
-
-    <script>
-        let stelleSelezionate = 0;
-
-        // Imposta data minima nel datepicker
-        const oggi = new Date().toISOString().split('T')[0];
-        document.getElementById('sopr-data').min = oggi;
-
-        function selezionaChat(el) {
-            document.querySelectorAll('.chat-item').forEach(i => i.classList.remove('active'));
-            el.classList.add('active');
-        }
-
-        function inviaConEnter(e) {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                inviaMEssaggio();
-            }
-        }
-
-        function inviaMEssaggio() {
-            const input = document.getElementById('msg-input');
-            const testo = input.value.trim();
-            if (!testo) return;
-
-            const messaggi = document.getElementById('chat-messaggi');
-            const gruppo = document.createElement('div');
-            gruppo.className = 'messaggio-gruppo mio';
-            gruppo.innerHTML = `
-                <div class="messaggio mio">${testo}</div>
-                <div class="messaggio-tempo">${ora()}</div>
-            `;
-            messaggi.appendChild(gruppo);
-            input.value = '';
-            messaggi.scrollTop = messaggi.scrollHeight;
-        }
-
-        function apriPopupSopralluogo() {
-            document.getElementById('popupSopralluogo').classList.add('show');
-        }
-
-        function apriPopupConferma() {
-            document.getElementById('popupConferma').classList.add('show');
-        }
-
-        function chiudiPopup(id) {
-            document.getElementById(id).classList.remove('show');
-        }
-
-        function inviaSopralluogo() {
-            const data = document.getElementById('sopr-data').value;
-            const orario = document.getElementById('sopr-ora').value;
-            if (!data || !orario) { alert('Inserisci data e ora!'); return; }
-
-            const dataFormattata = new Date(data).toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-
-            chiudiPopup('popupSopralluogo');
-
-            const messaggi = document.getElementById('chat-messaggi');
-            const card = document.createElement('div');
-            card.className = 'sopralluogo-chat-card';
-            card.innerHTML = `
-                <h4>📅 Nuova Proposta Sopralluogo</h4>
-                <div class="data-grande">${dataFormattata} — ore ${orario}</div>
-                <p>⚠️ Una volta accettato, la data viene salvata dal sistema.</p>
-                <div class="sopralluogo-chat-buttons">
-                    <button class="btn-accetta" onclick="accettaSopralluogo()">✅ Accetta</button>
-                    <button class="btn-rifiuta">❌ Proponi altra data</button>
+        <!-- HEADER CHAT -->
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <div class="chat-header-avatar">R</div>
+                <div>
+                    <div class="chat-header-nome">Rossoni Edilizia</div>
+                    <div class="chat-header-stato">Online ora</div>
                 </div>
-            `;
-            messaggi.appendChild(card);
-            messaggi.scrollTop = messaggi.scrollHeight;
+            </div>
+            <div class="chat-header-actions">
+                <button class="btn-header-action" onclick="window.location.href='profilo-pro.html'">👤 Profilo</button>
+                <button class="btn-header-action blu" onclick="apriPopupSopralluogo()">📅 Fissa sopralluogo</button>
+            </div>
+        </div>
+
+        <!-- BANNER RICHIESTA -->
+        <div class="richiesta-banner">
+            <div class="richiesta-banner-info">
+                <strong>📋 Richiesta: Tinteggiatura appartamento 80mq — Milano</strong>
+                Chat sbloccata da Rossoni Edilizia il 02/05/2026
+            </div>
+            <div class="richiesta-chips">
+                <span class="chip-small blu">🏗️ Edilizia</span>
+                <span class="chip-small verde">✅ Contatto verificato</span>
+                <span class="chip-small oro">📅 Sopralluogo fissato</span>
+            </div>
+        </div>
+
+        <!-- BANNER SOPRALLUOGO FISSATO -->
+        <div class="sopralluogo-banner" id="sopralluogoBanner">
+            <div class="sopralluogo-banner-title">📅 Sopralluogo confermato</div>
+            <div class="sopralluogo-banner-data">Lunedì 6 Maggio 2026 — ore 09:30</div>
+            <div class="sopralluogo-banner-sub">📍 Via Roma 15, Milano · Con Rossoni Edilizia</div>
+            <div class="sopralluogo-banner-actions">
+                <button class="btn-sopralluogo verde" onclick="apriConfermaLavoro()">✅ Conferma lavoro</button>
+                <button class="btn-sopralluogo rosso" onclick="apriRifiuto()">❌ Rifiuta lavoro</button>
+                <button class="btn-sopralluogo grigio" onclick="apriModificaSopralluogo()">✏️ Modifica data</button>
+            </div>
+        </div>
+
+        <!-- MESSAGGI -->
+        <div class="chat-messages" id="chatMessages">
+
+            <div class="msg-sistema blu">
+                🔓 Chat sbloccata — Rossoni Edilizia ha pagato per contattarti.<br>
+                Ricorda: i tuoi dati personali sono protetti fino al termine del lavoro.
+            </div>
+
+            <div class="msg ricevuto">
+                <div class="msg-avatar" style="background:var(--blu)">R</div>
+                <div class="msg-content">
+                    <div class="msg-bubble">Buongiorno! Sono Rossoni Edilizia. Ho letto la sua richiesta per la tinteggiatura. Quando sarebbe disponibile per un sopralluogo gratuito? 😊</div>
+                    <span class="msg-time">Ieri, 10:15</span>
+                </div>
+            </div>
+
+            <div class="msg inviato">
+                <div class="msg-avatar" style="background:var(--blu-chiaro)">M</div>
+                <div class="msg-content">
+                    <div class="msg-bubble">Buongiorno! Sono disponibile lunedì mattina o martedì pomeriggio. Quando va bene a voi?</div>
+                    <span class="msg-time">Ieri, 10:32</span>
+                </div>
+            </div>
+
+            <div class="msg ricevuto">
+                <div class="msg-avatar" style="background:var(--blu)">R</div>
+                <div class="msg-content">
+                    <div class="msg-bubble">Perfetto, lunedì mattina ci sta benissimo! Potremmo fissare per le 9:30? Sarà un sopralluogo di circa 30 minuti per prendere le misure e capire il tipo di pittura più adatta.</div>
+                    <span class="msg-time">Ieri, 10:45</span>
+                </div>
+            </div>
+
+            <div class="msg inviato">
+                <div class="msg-avatar" style="background:var(--blu-chiaro)">M</div>
+                <div class="msg-content">
+                    <div class="msg-bubble">Perfetto per lunedì alle 9:30! L'indirizzo è Via Roma 15, Milano, terzo piano interno 8.</div>
+                    <span class="msg-time">Ieri, 11:02</span>
+                </div>
+            </div>
+
+            <!-- CARD SOPRALLUOGO IN CHAT -->
+            <div class="sopralluogo-msg">
+                <div class="sopralluogo-msg-title">📅 Sopralluogo concordato</div>
+                <div class="sopralluogo-msg-data">Lunedì 6 Maggio 2026 — ore 09:30</div>
+                <div class="sopralluogo-msg-info">
+                    <strong>Professionista:</strong> Rossoni Edilizia<br>
+                    <strong>Indirizzo:</strong> Via Roma 15, Milano (3° piano int. 8)<br>
+                    <strong>Lavoro:</strong> Tinteggiatura appartamento 80mq
+                </div>
+                <div class="msg-sistema verde" style="margin-bottom:10px;font-size:11px">
+                    ✅ Sopralluogo salvato nel sistema. Entrambi riceverete una conferma domani mattina.
+                </div>
+                <div class="sopralluogo-msg-actions">
+                    <button class="btn-sm verde" onclick="alert('✅ Sopralluogo già confermato!')">✅ Confermato</button>
+                    <button class="btn-sm rosso" onclick="apriRifiuto()">❌ Disdici</button>
+                </div>
+            </div>
+
+            <div class="msg ricevuto">
+                <div class="msg-avatar" style="background:var(--blu)">R</div>
+                <div class="msg-content">
+                    <div class="msg-bubble">Perfetto, ci vediamo lunedì alle 9:30! Porterò i campioni di colore così può scegliere sul posto. A presto! 😊</div>
+                    <span class="msg-time">Oggi, 09:30</span>
+                </div>
+            </div>
+
+            <div class="msg-sistema">
+                ⚠️ Ricorda: se non ti presenti al sopralluogo senza preavviso riceverai una segnalazione.<br>
+                Dopo 3 segnalazioni l'account viene bannato automaticamente.
+            </div>
+
+        </div>
+
+        <!-- INPUT AREA -->
+        <div class="chat-input-area">
+            <div class="chat-input-row">
+                <button class="btn-allega" onclick="alert('Allega foto in arrivo!')">📎</button>
+                <textarea class="chat-input-box" id="msgInput" placeholder="Scrivi un messaggio..." rows="1" onkeydown="handleEnter(event)"></textarea>
+                <button class="btn-invia" onclick="inviaMsgaggio()">➤</button>
+            </div>
+            <div class="chat-input-actions">
+                <button class="btn-quick" onclick="inserisciTesto('Quando è disponibile per il sopralluogo?')">📅 Chiedi disponibilità</button>
+                <button class="btn-quick" onclick="inserisciTesto('Ho visto il suo profilo, mi interesserebbe un preventivo.')">💬 Chiedi preventivo</button>
+                <button class="btn-quick oro" onclick="apriPopupSopralluogo()">📅 Fissa sopralluogo</button>
+                <button class="btn-quick" onclick="inserisciTesto('Grazie mille per la disponibilità! A presto.')">👋 Saluta</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- POPUP FISSA SOPRALLUOGO -->
+<div class="popup-overlay" id="popupSopralluogo">
+    <div class="popup-box">
+        <h2>📅 Fissa il Sopralluogo</h2>
+        <p>Concorda con il professionista la data e l'ora. Il sopralluogo verrà salvato e confermato automaticamente il giorno dopo.</p>
+        <div class="form-group">
+            <label>Data sopralluogo *</label>
+            <input type="date" id="sop-data" min="">
+        </div>
+        <div class="form-group">
+            <label>Ora *</label>
+            <select id="sop-ora">
+                <option value="">Seleziona orario</option>
+                <option>08:00</option><option>08:30</option><option>09:00</option>
+                <option selected>09:30</option><option>10:00</option><option>10:30</option>
+                <option>11:00</option><option>11:30</option><option>12:00</option>
+                <option>14:00</option><option>14:30</option><option>15:00</option>
+                <option>15:30</option><option>16:00</option><option>16:30</option>
+                <option>17:00</option><option>17:30</option><option>18:00</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Indirizzo completo *</label>
+            <input type="text" id="sop-indirizzo" placeholder="Es. Via Roma 15, Milano, 3° piano int. 8">
+        </div>
+        <div class="form-group">
+            <label>Note aggiuntive</label>
+            <textarea id="sop-note" placeholder="Es. Suonare il campanello, portare campioni colore, ecc."></textarea>
+        </div>
+        <div class="popup-avviso">
+            ⚠️ <strong>Importante:</strong> Fissando il sopralluogo ti impegni a essere presente. In caso di assenza senza preavviso riceverai una segnalazione. Dopo 3 segnalazioni l'account viene bannato.
+        </div>
+        <button class="btn-popup blu" onclick="confermaSopralluogo()">✅ Conferma sopralluogo</button>
+        <button class="btn-popup grigio" onclick="chiudiPopup('popupSopralluogo')">Annulla</button>
+    </div>
+</div>
+
+<!-- POPUP CONFERMA LAVORO -->
+<div class="popup-overlay" id="popupConfermaLavoro">
+    <div class="popup-box conferma">
+        <div class="popup-icon">✅</div>
+        <h2>Conferma il lavoro</h2>
+        <p>Stai confermando che il sopralluogo è avvenuto e che vuoi procedere con il lavoro.</p>
+        <div class="conferma-dettagli">
+            <strong>Professionista:</strong> Rossoni Edilizia<br>
+            <strong>Lavoro:</strong> Tinteggiatura appartamento 80mq<br>
+            <strong>Sopralluogo:</strong> 6 Maggio 2026 — ore 09:30<br>
+            <strong>Pagamento professionista:</strong> Già effettuato ✅<br>
+            <strong>Rimborso:</strong> ❌ Non previsto dopo conferma
+        </div>
+        <div class="popup-avviso">
+            ⚠️ Confermando il lavoro il pagamento è <strong>definitivo</strong>. Non sarà possibile richiedere rimborsi. Dopo il completamento entrambi lascerete una recensione obbligatoria.
+        </div>
+        <button class="btn-popup blu" onclick="confermaLavoroFinale()">✅ Confermo il lavoro</button>
+        <button class="btn-popup grigio" onclick="chiudiPopup('popupConfermaLavoro')">Annulla</button>
+    </div>
+</div>
+
+<!-- POPUP RIFIUTO LAVORO -->
+<div class="popup-overlay" id="popupRifiuto">
+    <div class="popup-box conferma">
+        <div class="popup-icon">❌</div>
+        <h2>Rifiuta il lavoro</h2>
+        <p>Stai rifiutando il lavoro dopo il sopralluogo. Questo verrà registrato nel sistema.</p>
+        <div class="form-group">
+            <label>Motivo del rifiuto *</label>
+            <select id="motivo-rifiuto">
+                <option value="">Seleziona motivo</option>
+                <option>Preventivo troppo alto</option>
+                <option>Ho trovato un altro professionista</option>
+                <option>Il professionista non si è presentato</option>
+                <option>Ho cambiato idea sul lavoro</option>
+                <option>Problemi di disponibilità</option>
+                <option>Altro</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Descrizione (facoltativa)</label>
+            <textarea id="desc-rifiuto" placeholder="Spiega brevemente il motivo..."></textarea>
+        </div>
+        <div class="popup-avviso">
+            ⚠️ Il rifiuto verrà registrato. Se il cliente rifiuta 3 volte senza motivo valido, l'account viene bannato.
+        </div>
+        <button class="btn-popup" style="background:var(--rosso);color:white;margin-bottom:8px" onclick="confermaRifiuto()">❌ Conferma rifiuto</button>
+        <button class="btn-popup grigio" onclick="chiudiPopup('popupRifiuto')">Annulla</button>
+    </div>
+</div>
+
+<script>
+    // Imposta data minima
+    const oggi = new Date();
+    const domani = new Date(oggi);
+    domani.setDate(domani.getDate() + 1);
+    document.getElementById('sop-data').min = domani.toISOString().split('T')[0];
+    document.getElementById('sop-data').value = '2026-05-06';
+
+    function selezionaChat(el) {
+        document.querySelectorAll('.chat-item').forEach(i => i.classList.remove('active'));
+        el.classList.add('active');
+    }
+
+    function handleEnter(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            inviaMsgaggio();
         }
+    }
 
-        function accettaSopralluogo() {
-            const messaggi = document.getElementById('chat-messaggi');
-            const msg = document.createElement('div');
-            msg.className = 'messaggio-sistema verde';
-            msg.innerHTML = '✅ <strong>Sopralluogo confermato!</strong><br>La data è stata salvata. Il giorno dopo riceverete entrambi un messaggio di conferma automatica.';
-            messaggi.appendChild(msg);
-            messaggi.scrollTop = messaggi.scrollHeight;
-        }
+    function inserisciTesto(testo) {
+        const input = document.getElementById('msgInput');
+        input.value = testo;
+        input.focus();
+    }
 
-        function rifiutaSopralluogo() {
-            apriPopupSopralluogo();
-        }
+    function inviaMsgaggio() {
+        const input = document.getElementById('msgInput');
+        const testo = input.value.trim();
+        if (!testo) return;
 
-        function confermaAvvenuto() {
-            chiudiPopup('popupConferma');
-            setTimeout(() => {
-                document.getElementById('popupRecensione').classList.add('show');
-            }, 500);
-        }
+        const messages = document.getElementById('chatMessages');
+        const msgDiv = document.createElement('div');
+        msgDiv.className = 'msg inviato';
+        const ora = new Date().toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
+        msgDiv.innerHTML = `
+            <div class="msg-avatar" style="background:var(--blu-chiaro)">M</div>
+            <div class="msg-content">
+                <div class="msg-bubble">${testo}</div>
+                <span class="msg-time">Ora, ${ora}</span>
+            </div>
+        `;
+        messages.appendChild(msgDiv);
+        input.value = '';
+        messages.scrollTop = messages.scrollHeight;
+    }
 
-        function segnalaProblema(chi) {
-            chiudiPopup('popupConferma');
-            alert('⚠️ Segnalazione inviata alla piattaforma.\n\nSe confermato, il ' + (chi === 'cliente' ? 'cliente' : 'professionista') + ' riceverà una segnalazione. Alla terza segnalazione verrà bannato.');
-        }
+    function apriPopupSopralluogo() {
+        document.getElementById('popupSopralluogo').classList.add('show');
+    }
 
-        function setStella(n) {
-            stelleSelezionate = n;
-            document.querySelectorAll('.stella').forEach((s, i) => {
-                s.classList.toggle('attiva', i < n);
-            });
-        }
+    function confermaSopralluogo() {
+        const data = document.getElementById('sop-data').value;
+        const ora = document.getElementById('sop-ora').value;
+        const indirizzo = document.getElementById('sop-indirizzo').value.trim();
+        if (!data) { alert('Inserisci la data del sopralluogo!'); return; }
+        if (!ora) { alert('Seleziona l\'orario!'); return; }
+        if (!indirizzo) { alert('Inserisci l\'indirizzo!'); return; }
 
-        function inviaRecensione() {
-            if (stelleSelezionate === 0) { alert('Seleziona almeno una stella!'); return; }
-            chiudiPopup('popupRecensione');
+        chiudiPopup('popupSopralluogo');
 
-            const messaggi = document.getElementById('chat-messaggi');
-            const msg = document.createElement('div');
-            msg.className = 'messaggio-sistema verde';
-            msg.innerHTML = '⭐ <strong>Recensione inviata!</strong><br>Grazie per il feedback. Anche il cliente ti recensirà a breve.';
-            messaggi.appendChild(msg);
-            messaggi.scrollTop = messaggi.scrollHeight;
-        }
+        // Aggiunge messaggio in chat
+        const messages = document.getElementById('chatMessages');
+        const card = document.createElement('div');
+        card.className = 'sopralluogo-msg';
+        const dataFormattata = new Date(data).toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+        card.innerHTML = `
+            <div class="sopralluogo-msg-title">📅 Sopralluogo concordato</div>
+            <div class="sopralluogo-msg-data">${dataFormattata.charAt(0).toUpperCase() + dataFormattata.slice(1)} — ore ${ora}</div>
+            <div class="sopralluogo-msg-info">
+                <strong>Professionista:</strong> Rossoni Edilizia<br>
+                <strong>Indirizzo:</strong> ${indirizzo}<br>
+                <strong>Lavoro:</strong> Tinteggiatura appartamento 80mq
+            </div>
+            <div class="msg-sistema verde" style="margin-bottom:10px;font-size:11px">
+                ✅ Sopralluogo salvato. Entrambi riceverete una conferma domani mattina.
+            </div>
+            <div class="sopralluogo-msg-actions">
+                <button class="btn-sm verde" onclick="alert('✅ Confermato!')">✅ Conferma</button>
+                <button class="btn-sm rosso" onclick="apriRifiuto()">❌ Disdici</button>
+            </div>
+        `;
+        messages.appendChild(card);
+        messages.scrollTop = messages.scrollHeight;
 
-        function ora() {
-            const now = new Date();
-            return now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
-        }
+        setTimeout(() => {
+            alert('✅ Sopralluogo fissato!\n\n📅 ' + dataFormattata + ' — ore ' + ora + '\n📍 ' + indirizzo + '\n\nEntrambi riceverete una notifica di conferma domani mattina.');
+        }, 300);
+    }
 
-        // Scroll in fondo ai messaggi all'avvio
-        window.onload = () => {
-            const messaggi = document.getElementById('chat-messaggi');
-            messaggi.scrollTop = messaggi.scrollHeight;
-        };
-    </script>
+    function apriConfermaLavoro() {
+        document.getElementById('popupConfermaLavoro').classList.add('show');
+    }
 
+    function confermaLavoroFinale() {
+        chiudiPopup('popupConfermaLavoro');
+        setTimeout(() => {
+            alert('✅ Lavoro confermato!\n\nIl pagamento è definitivo.\nDopo il completamento del lavoro entrambi dovrete lasciare una recensione obbligatoria.');
+        }, 300);
+    }
+
+    function apriRifiuto() {
+        document.getElementById('popupRifiuto').classList.add('show');
+    }
+
+    function apriModificaSopralluogo() {
+        chiudiPopup('popupSopralluogo');
+        document.getElementById('popupSopralluogo').classList.add('show');
+    }
+
+    function confermaRifiuto() {
+        const motivo = document.getElementById('motivo-rifiuto').value;
+        if (!motivo) { alert('Seleziona un motivo!'); return; }
+        chiudiPopup('popupRifiuto');
+        setTimeout(() => {
+            alert('❌ Rifiuto registrato.\n\nMotivo: ' + motivo + '\n\nIl rifiuto è stato salvato nel sistema.');
+        }, 300);
+    }
+
+    function chiudiPopup(id) {
+        document.getElementById(id).classList.remove('show');
+    }
+
+    // Chiudi popup cliccando fuori
+    document.querySelectorAll('.popup-overlay').forEach(overlay => {
+        overlay.addEventListener('click', function(e) {
+            if (e.target === this) chiudiPopup(this.id);
+        });
+    });
+</script>
 </body>
 </html>
