@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
@@ -68,7 +68,6 @@
 
         .btn-back:hover { background: #e5e7eb; }
 
-        /* HERO PROFILO */
         .profilo-hero {
             background: linear-gradient(135deg, var(--blu-scuro) 0%, var(--blu) 100%);
             padding: 50px 30px 80px;
@@ -139,9 +138,7 @@
             flex-wrap: wrap;
         }
 
-        .profilo-stat {
-            text-align: center;
-        }
+        .profilo-stat { text-align: center; }
 
         .profilo-stat-numero {
             font-family: 'Playfair Display', serif;
@@ -156,7 +153,6 @@
             margin-top: 3px;
         }
 
-        /* CONTAINER */
         .container {
             max-width: 900px;
             margin: -40px auto 60px;
@@ -169,9 +165,9 @@
 
         @media (max-width: 768px) {
             .container { grid-template-columns: 1fr; }
+            nav { padding: 15px 20px; }
         }
 
-        /* CARD */
         .card {
             background: white;
             border-radius: 20px;
@@ -193,14 +189,12 @@
             gap: 10px;
         }
 
-        /* DESCRIZIONE */
         .descrizione-text {
             font-size: 15px;
             color: var(--grigio);
             line-height: 1.8;
         }
 
-        /* SPECIALIZZAZIONI */
         .spec-grid {
             display: flex;
             flex-wrap: wrap;
@@ -217,7 +211,6 @@
             border: 1px solid #BFDBFE;
         }
 
-        /* FOTO GALLERY */
         .gallery {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -230,7 +223,6 @@
             overflow: hidden;
             cursor: pointer;
             transition: 0.3s;
-            position: relative;
         }
 
         .gallery-item:hover { transform: scale(1.02); }
@@ -252,7 +244,6 @@
         .gallery-item:nth-child(4) .gallery-placeholder { background: #FDF2F8; }
         .gallery-item:nth-child(5) .gallery-placeholder { background: #F0FDF4; }
 
-        /* VIDEO */
         .video-placeholder {
             background: var(--blu-scuro);
             border-radius: 16px;
@@ -264,22 +255,10 @@
         }
 
         .video-placeholder:hover { background: var(--blu); }
-
         .video-icon { font-size: 50px; margin-bottom: 10px; }
+        .video-label { font-size: 15px; color: white; font-weight: 600; }
+        .video-sub { font-size: 13px; color: #9CA3AF; margin-top: 5px; }
 
-        .video-label {
-            font-size: 15px;
-            color: white;
-            font-weight: 600;
-        }
-
-        .video-sub {
-            font-size: 13px;
-            color: #9CA3AF;
-            margin-top: 5px;
-        }
-
-        /* RECENSIONI */
         .recensione-item {
             padding: 18px 0;
             border-bottom: 1px solid var(--grigio-chiaro);
@@ -301,7 +280,6 @@
         }
 
         .recensione-stelle { font-size: 14px; color: var(--arancio); }
-
         .recensione-data { font-size: 12px; color: var(--grigio); }
 
         .recensione-text {
@@ -317,13 +295,11 @@
             margin-top: 6px;
         }
 
-        /* SIDEBAR STICKY */
         .sidebar-sticky {
             position: sticky;
             top: 80px;
         }
 
-        /* CONTATTO CARD */
         .contatto-card {
             background: white;
             border-radius: 20px;
@@ -334,11 +310,44 @@
             text-align: center;
         }
 
-        .contatto-prezzo {
-            font-family: 'Playfair Display', serif;
+        .come-funziona-box {
+            background: #EFF6FF;
+            border: 1px solid #BFDBFE;
+            border-radius: 14px;
+            padding: 18px 20px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .come-funziona-box h4 {
             font-size: 14px;
+            font-weight: 700;
+            color: var(--blu-scuro);
+            margin-bottom: 12px;
+        }
+
+        .come-funziona-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 13px;
             color: var(--grigio);
-            margin-bottom: 5px;
+            padding: 5px 0;
+            line-height: 1.5;
+        }
+
+        .step-num {
+            width: 22px;
+            height: 22px;
+            background: var(--blu);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            flex-shrink: 0;
         }
 
         .btn-contatta {
@@ -358,13 +367,7 @@
 
         .btn-contatta:hover { background: var(--oro-chiaro); transform: translateY(-2px); }
 
-        .btn-contatta.blu { background: var(--blu); }
-        .btn-contatta.blu:hover { background: var(--blu-chiaro); }
-
-        .garanzia-list {
-            text-align: left;
-            margin-top: 20px;
-        }
+        .garanzia-list { text-align: left; margin-top: 20px; }
 
         .garanzia-item {
             display: flex;
@@ -377,7 +380,6 @@
 
         .garanzia-item span { color: var(--verde); font-size: 16px; }
 
-        /* INFO CARD */
         .info-card {
             background: white;
             border-radius: 20px;
@@ -399,7 +401,6 @@
         .info-row-label { color: var(--grigio); font-weight: 500; }
         .info-row-value { color: var(--blu-scuro); font-weight: 700; }
 
-        /* ZONA OPERATIVA */
         .zona-map {
             background: var(--grigio-chiaro);
             border-radius: 12px;
@@ -410,81 +411,9 @@
         }
 
         .zona-map-icon { font-size: 40px; margin-bottom: 10px; }
-        .zona-map-text { font-size: 14px; color: var(--grigio); }
         .zona-map-raggio { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--blu); font-weight: 900; }
+        .zona-map-text { font-size: 14px; color: var(--grigio); margin-top: 5px; }
 
-        /* POPUP */
-        .popup-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .popup-overlay.show { display: flex; }
-
-        .popup-box {
-            background: white;
-            border-radius: 25px;
-            padding: 40px 35px;
-            max-width: 460px;
-            width: 100%;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
-            text-align: center;
-        }
-
-        .popup-box h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            color: var(--blu-scuro);
-            margin-bottom: 15px;
-        }
-
-        .popup-box p {
-            color: var(--grigio);
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-
-        .avviso-oro {
-            background: #FFFBEB;
-            border: 1px solid var(--oro);
-            border-radius: 12px;
-            padding: 15px 18px;
-            font-size: 13px;
-            color: #78350F;
-            line-height: 1.7;
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .avviso-oro strong { display: block; margin-bottom: 5px; color: var(--oro); }
-
-        .popup-buttons { display: flex; gap: 12px; }
-
-        .popup-buttons button {
-            flex: 1;
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            border: none;
-            font-family: 'Inter', sans-serif;
-            transition: 0.3s;
-        }
-
-        .btn-oro-popup { background: var(--oro); color: white; }
-        .btn-oro-popup:hover { background: var(--oro-chiaro); }
-        .btn-gray-popup { background: var(--grigio-chiaro); color: var(--grigio); }
-
-        /* RATING BAR */
         .rating-bars { margin-bottom: 20px; }
 
         .rating-row {
@@ -620,7 +549,6 @@
             <div class="card">
                 <div class="card-title">⭐ Recensioni verificate</div>
 
-                <!-- RATING BARS -->
                 <div class="rating-bars">
                     <div class="rating-row">
                         <div class="rating-label">5★</div>
@@ -649,7 +577,6 @@
                     </div>
                 </div>
 
-                <!-- RECENSIONI -->
                 <div class="recensione-item">
                     <div class="recensione-header">
                         <div>
@@ -713,21 +640,34 @@
             </div>
         </div>
 
-        <!-- COLONNA DESTRA - SIDEBAR -->
+        <!-- COLONNA DESTRA -->
         <div class="sidebar-sticky">
 
             <!-- CONTATTO -->
             <div class="contatto-card">
-                <div style="font-size:13px;color:var(--grigio);margin-bottom:20px;line-height:1.6">
-                    Interessato a questo professionista? Invia una richiesta e riceverai una risposta direttamente in chat.
+
+                <div class="come-funziona-box">
+                    <h4>ℹ️ Come contattare questo professionista:</h4>
+                    <div class="come-funziona-step">
+                        <div class="step-num">1</div>
+                        <div>Pubblica la tua richiesta gratuita</div>
+                    </div>
+                    <div class="come-funziona-step">
+                        <div class="step-num">2</div>
+                        <div>Il professionista vede la tua richiesta e acquista il contatto</div>
+                    </div>
+                    <div class="come-funziona-step">
+                        <div class="step-num">3</div>
+                        <div>Si apre la chat privata tra voi</div>
+                    </div>
+                    <div class="come-funziona-step">
+                        <div class="step-num">4</div>
+                        <div>Concordate il sopralluogo gratuito</div>
+                    </div>
                 </div>
 
-                <button class="btn-contatta" onclick="apriPopupContatto()">
-                    💬 Richiedi contatto
-                </button>
-
-                <button class="btn-contatta blu" onclick="window.location.href='cliente.html'">
-                    📋 Pubblica una richiesta
+                <button class="btn-contatta" onclick="window.location.href='cliente.html'">
+                    📋 Pubblica una richiesta gratuita
                 </button>
 
                 <div class="garanzia-list">
@@ -780,39 +720,6 @@
 
         </div>
     </div>
-
-    <!-- POPUP CONTATTO -->
-    <div class="popup-overlay" id="popupContatto">
-        <div class="popup-box">
-            <div style="font-size:50px;margin-bottom:15px">💬</div>
-            <h2>Richiedi contatto</h2>
-            <p>Per contattare <strong>Rossoni Edilizia</strong> devi prima registrarti come cliente e pubblicare una richiesta. Il professionista potrà poi acquistare il tuo contatto e aprire la chat.</p>
-
-            <div class="avviso-oro">
-                <strong>ℹ️ Come funziona:</strong>
-                1. Registrati gratis come cliente<br>
-                2. Pubblica la tua richiesta<br>
-                3. Rossoni Edilizia acquista il contatto<br>
-                4. Si apre la chat privata<br>
-                5. Concordate il sopralluogo gratuito
-            </div>
-
-            <div class="popup-buttons">
-                <button class="btn-gray-popup" onclick="chiudiPopup()">Chiudi</button>
-                <button class="btn-oro-popup" onclick="window.location.href='cliente.html'">📋 Registrati gratis</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function apriPopupContatto() {
-            document.getElementById('popupContatto').classList.add('show');
-        }
-
-        function chiudiPopup() {
-            document.getElementById('popupContatto').classList.remove('show');
-        }
-    </script>
 
 </body>
 </html>
