@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         :root {
             --blu: #1B3A6B;
             --blu-scuro: #0F2347;
@@ -21,441 +20,100 @@
             --verde: #10B981;
             --rosso: #EF4444;
         }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--grigio-chiaro);
-            color: var(--testo);
-            min-height: 100vh;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 18px 40px;
-            background: var(--bianco);
-            border-bottom: 1px solid #e5e7eb;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            font-weight: 900;
-            color: var(--blu);
-            text-decoration: none;
-        }
-
+        body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color: var(--testo); min-height: 100vh; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 18px 40px; background: var(--bianco); border-bottom: 1px solid #e5e7eb; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+        .logo { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 900; color: var(--blu); text-decoration: none; }
         .logo span { color: var(--oro); }
-
-        .page-hero {
-            background: linear-gradient(135deg, var(--blu-scuro) 0%, var(--blu) 100%);
-            padding: 50px 30px;
-            text-align: center;
-        }
-
-        .page-hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 36px;
-            color: white;
-            margin-bottom: 10px;
-        }
-
+        .nav-links { display: flex; gap: 15px; align-items: center; }
+        .nav-links a { color: var(--blu); text-decoration: none; font-size: 14px; font-weight: 600; padding: 8px 16px; border-radius: 8px; transition: 0.3s; }
+        .nav-links a:hover { background: var(--grigio-chiaro); }
+        .nav-links .btn-accedi { background: var(--blu); color: white; border-radius: 20px; }
+        .nav-links .btn-accedi:hover { background: var(--blu-chiaro); }
+        .page-hero { background: linear-gradient(135deg, var(--blu-scuro) 0%, var(--blu) 100%); padding: 50px 30px; text-align: center; }
+        .page-hero h1 { font-family: 'Playfair Display', serif; font-size: 36px; color: white; margin-bottom: 10px; }
         .page-hero h1 span { color: var(--oro); }
-
-        .page-hero p {
-            color: #9CA3AF;
-            font-size: 16px;
-        }
-
-        .container {
-            max-width: 620px;
-            margin: -30px auto 60px;
-            padding: 0 20px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px 35px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            border: 1px solid #e5e7eb;
-        }
-
-        .tabs {
-            display: flex;
-            margin-bottom: 35px;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid #e5e7eb;
-        }
-
-        .tab {
-            flex: 1;
-            padding: 14px;
-            text-align: center;
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--grigio);
-            background: var(--grigio-chiaro);
-            transition: 0.3s;
-            border: none;
-        }
-
-        .tab.active {
-            background: var(--blu);
-            color: white;
-        }
-
+        .page-hero p { color: #9CA3AF; font-size: 16px; }
+        .container { max-width: 620px; margin: -30px auto 60px; padding: 0 20px; }
+        .card { background: white; border-radius: 20px; padding: 40px 35px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); border: 1px solid #e5e7eb; }
+        .tabs { display: flex; margin-bottom: 35px; border-radius: 12px; overflow: hidden; border: 1px solid #e5e7eb; }
+        .tab { flex: 1; padding: 14px; text-align: center; cursor: pointer; font-size: 15px; font-weight: 600; color: var(--grigio); background: var(--grigio-chiaro); transition: 0.3s; border: none; }
+        .tab.active { background: var(--blu); color: white; }
         .form-group { margin-bottom: 22px; }
-
-        label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--blu-scuro);
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 14px 18px;
-            border: 1.5px solid #e5e7eb;
-            border-radius: 12px;
-            font-size: 15px;
-            font-family: 'Inter', sans-serif;
-            color: var(--testo);
-            background: var(--grigio-chiaro);
-            transition: 0.3s;
-            outline: none;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            border-color: var(--blu);
-            background: white;
-            box-shadow: 0 0 0 3px rgba(27,58,107,0.08);
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .otp-group {
-            display: flex;
-            gap: 10px;
-        }
-
+        label { display: block; font-size: 13px; font-weight: 600; color: var(--blu-scuro); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+        input, select, textarea { width: 100%; padding: 14px 18px; border: 1.5px solid #e5e7eb; border-radius: 12px; font-size: 15px; font-family: 'Inter', sans-serif; color: var(--testo); background: var(--grigio-chiaro); transition: 0.3s; outline: none; }
+        input:focus, select:focus, textarea:focus { border-color: var(--blu); background: white; box-shadow: 0 0 0 3px rgba(27,58,107,0.08); }
+        textarea { resize: vertical; min-height: 120px; }
+        .otp-group { display: flex; gap: 10px; }
         .otp-group input { flex: 1; }
-
-        .btn-otp {
-            background: var(--blu);
-            color: white;
-            border: none;
-            padding: 14px 20px;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: 0.3s;
-        }
-
+        .btn-otp { background: var(--blu); color: white; border: none; padding: 14px 20px; border-radius: 12px; font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: 0.3s; }
         .btn-otp:hover { background: var(--blu-chiaro); }
         .btn-otp:disabled { background: var(--grigio); cursor: not-allowed; }
-
-        .otp-verify {
-            display: none;
-            margin-top: 15px;
-        }
-
+        .otp-verify { display: none; margin-top: 15px; }
         .otp-verify.show { display: block; }
-
-        .otp-boxes {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-bottom: 15px;
-        }
-
-        .otp-box {
-            width: 50px;
-            height: 55px;
-            text-align: center;
-            font-size: 22px;
-            font-weight: 700;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            background: var(--grigio-chiaro);
-            outline: none;
-        }
-
-        .otp-box:focus {
-            border-color: var(--blu);
-            background: white;
-        }
-
-        .steps-indicator {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 35px;
-        }
-
-        .step-dot {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            background: #e5e7eb;
-            color: var(--grigio);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            font-weight: 700;
-            transition: 0.3s;
-        }
-
+        .otp-boxes { display: flex; gap: 10px; justify-content: center; margin-bottom: 15px; }
+        .otp-box { width: 50px; height: 55px; text-align: center; font-size: 22px; font-weight: 700; border: 2px solid #e5e7eb; border-radius: 12px; background: var(--grigio-chiaro); outline: none; }
+        .otp-box:focus { border-color: var(--blu); background: white; }
+        .steps-indicator { display: flex; align-items: center; justify-content: center; margin-bottom: 35px; }
+        .step-dot { width: 35px; height: 35px; border-radius: 50%; background: #e5e7eb; color: var(--grigio); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; transition: 0.3s; }
         .step-dot.active { background: var(--blu); color: white; }
         .step-dot.done { background: var(--verde); color: white; }
-
-        .step-line {
-            flex: 1;
-            height: 2px;
-            background: #e5e7eb;
-            max-width: 60px;
-        }
-
+        .step-line { flex: 1; height: 2px; background: #e5e7eb; max-width: 60px; }
         .step-line.done { background: var(--verde); }
-
         .step-content { display: none; }
         .step-content.active { display: block; }
-
-        /* AVVISI */
-        .avviso-ban {
-            background: #FEF3C7;
-            border: 1px solid #F59E0B;
-            border-radius: 12px;
-            padding: 18px 20px;
-            margin-bottom: 25px;
-            font-size: 13px;
-            color: #92400E;
-            line-height: 1.8;
-        }
-
-        .avviso-ban strong {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-            color: #78350F;
-        }
-
-        .avviso-verde {
-            background: #ECFDF5;
-            border: 1px solid #6EE7B7;
-            border-radius: 12px;
-            padding: 18px 20px;
-            margin-bottom: 25px;
-            font-size: 13px;
-            color: #065F46;
-            line-height: 1.8;
-        }
-
-        .avviso-verde strong {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-
-        .avviso-blu {
-            background: #EFF6FF;
-            border: 1px solid #BFDBFE;
-            border-radius: 12px;
-            padding: 18px 20px;
-            margin-bottom: 25px;
-            font-size: 13px;
-            color: var(--blu);
-            line-height: 1.8;
-        }
-
-        .avviso-blu strong {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-
-        .categoria-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 8px;
-        }
-
-        .cat-btn {
-            padding: 8px 16px;
-            border: 1.5px solid #e5e7eb;
-            border-radius: 20px;
-            font-size: 13px;
-            cursor: pointer;
-            background: var(--grigio-chiaro);
-            color: var(--testo);
-            transition: 0.3s;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .cat-btn.selected {
-            background: var(--blu);
-            color: white;
-            border-color: var(--blu);
-        }
-
-        .btn-main {
-            width: 100%;
-            padding: 16px;
-            background: var(--blu);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 10px;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .btn-main:hover {
-            background: var(--blu-chiaro);
-            transform: translateY(-1px);
-        }
-
+        .avviso-ban { background: #FEF3C7; border: 1px solid #F59E0B; border-radius: 12px; padding: 18px 20px; margin-bottom: 25px; font-size: 13px; color: #92400E; line-height: 1.8; }
+        .avviso-ban strong { display: block; margin-bottom: 8px; font-size: 14px; color: #78350F; }
+        .avviso-verde { background: #ECFDF5; border: 1px solid #6EE7B7; border-radius: 12px; padding: 18px 20px; margin-bottom: 25px; font-size: 13px; color: #065F46; line-height: 1.8; }
+        .avviso-verde strong { display: block; margin-bottom: 8px; font-size: 14px; }
+        .avviso-blu { background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 12px; padding: 18px 20px; margin-bottom: 25px; font-size: 13px; color: var(--blu); line-height: 1.8; }
+        .avviso-blu strong { display: block; margin-bottom: 8px; font-size: 14px; }
+        .categoria-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+        .cat-btn { padding: 8px 16px; border: 1.5px solid #e5e7eb; border-radius: 20px; font-size: 13px; cursor: pointer; background: var(--grigio-chiaro); color: var(--testo); transition: 0.3s; font-family: 'Inter', sans-serif; }
+        .cat-btn.selected { background: var(--blu); color: white; border-color: var(--blu); }
+        .btn-main { width: 100%; padding: 16px; background: var(--blu); color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.3s; margin-top: 10px; font-family: 'Inter', sans-serif; }
+        .btn-main:hover { background: var(--blu-chiaro); transform: translateY(-1px); }
         .btn-main.oro { background: var(--oro); }
         .btn-main.oro:hover { background: var(--oro-chiaro); }
-
-        .btn-main.grigio {
-            background: var(--grigio-chiaro);
-            color: var(--grigio);
-        }
-
-        .success-box {
-            text-align: center;
-            padding: 20px 0;
-        }
-
+        .btn-main.grigio { background: var(--grigio-chiaro); color: var(--grigio); }
+        .success-box { text-align: center; padding: 20px 0; }
         .success-icon { font-size: 70px; margin-bottom: 20px; }
-
-        .success-box h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            color: var(--blu-scuro);
-            margin-bottom: 15px;
-        }
-
-        .success-box p {
-            color: var(--grigio);
-            font-size: 15px;
-            line-height: 1.7;
-            margin-bottom: 10px;
-        }
-
-        .highlight {
-            background: var(--grigio-chiaro);
-            border-radius: 12px;
-            padding: 15px 20px;
-            margin: 15px 0;
-            font-size: 14px;
-            color: var(--blu-scuro);
-            font-weight: 600;
-            text-align: left;
-            line-height: 1.7;
-        }
-
-        .otp-timer {
-            text-align: center;
-            font-size: 13px;
-            color: var(--grigio);
-            margin-top: 10px;
-        }
-
-        .otp-timer span {
-            color: var(--blu);
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .link-back {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: var(--grigio);
-            font-size: 14px;
-            text-decoration: none;
-        }
-
+        .success-box h2 { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--blu-scuro); margin-bottom: 15px; }
+        .success-box p { color: var(--grigio); font-size: 15px; line-height: 1.7; margin-bottom: 10px; }
+        .highlight { background: var(--grigio-chiaro); border-radius: 12px; padding: 15px 20px; margin: 15px 0; font-size: 14px; color: var(--blu-scuro); font-weight: 600; text-align: left; line-height: 1.7; }
+        .otp-timer { text-align: center; font-size: 13px; color: var(--grigio); margin-top: 10px; }
+        .otp-timer span { color: var(--blu); font-weight: 600; cursor: pointer; }
+        .link-back { display: block; text-align: center; margin-top: 20px; color: var(--grigio); font-size: 14px; text-decoration: none; }
         .link-back:hover { color: var(--blu); }
 
-        /* RECENSIONE POPUP */
-        .recensione-popup {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .recensione-popup.show { display: flex; }
-
-        .recensione-box {
-            background: white;
-            border-radius: 25px;
-            padding: 40px 30px;
-            max-width: 440px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
-        }
-
-        .recensione-box h2 {
-            font-family: 'Playfair Display', serif;
-            color: var(--blu-scuro);
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        .recensione-box p {
-            color: var(--grigio);
+        /* CATEGORIA SELEZIONATA BANNER */
+        .cat-preselezionata {
+            background: linear-gradient(135deg, var(--blu-scuro), var(--blu));
+            color: white;
+            border-radius: 12px;
+            padding: 14px 20px;
+            margin-bottom: 20px;
             font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 20px;
+            font-weight: 600;
+            display: none;
         }
+        .cat-preselezionata.show { display: block; }
 
-        .stelle {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .stella {
-            font-size: 36px;
-            cursor: pointer;
-            opacity: 0.3;
-            transition: 0.2s;
-        }
-
+        /* RECENSIONE POPUP */
+        .recensione-popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
+        .recensione-popup.show { display: flex; }
+        .recensione-box { background: white; border-radius: 25px; padding: 40px 30px; max-width: 440px; width: 100%; text-align: center; box-shadow: 0 25px 60px rgba(0,0,0,0.3); }
+        .recensione-box h2 { font-family: 'Playfair Display', serif; color: var(--blu-scuro); font-size: 24px; margin-bottom: 10px; }
+        .recensione-box p { color: var(--grigio); font-size: 14px; line-height: 1.6; margin-bottom: 20px; }
+        .stelle { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+        .stella { font-size: 36px; cursor: pointer; opacity: 0.3; transition: 0.2s; }
         .stella.attiva { opacity: 1; }
+        .recensione-box textarea { margin-bottom: 15px; min-height: 90px; }
 
-        .recensione-box textarea {
-            margin-bottom: 15px;
-            min-height: 90px;
+        @media (max-width: 480px) {
+            nav { padding: 15px 20px; }
+            .nav-links a { font-size: 12px; padding: 6px 10px; }
+            .card { padding: 25px 20px; }
+            .otp-box { width: 40px; height: 48px; font-size: 18px; }
         }
     </style>
 </head>
@@ -464,6 +122,10 @@
     <!-- NAVBAR -->
     <nav>
         <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
+        <div class="nav-links">
+            <a href="professionista.html">Sei un professionista?</a>
+            <a href="cliente.html?tab=accedi" class="btn-accedi">🔑 Accedi</a>
+        </div>
     </nav>
 
     <!-- HERO -->
@@ -478,14 +140,13 @@
 
             <!-- TABS -->
             <div class="tabs">
-                <button class="tab active" onclick="switchTab('registrati')">📝 Registrati</button>
-                <button class="tab" onclick="switchTab('accedi')">🔑 Accedi</button>
+                <button class="tab active" id="tab-btn-registrati" onclick="switchTab('registrati')">📝 Registrati</button>
+                <button class="tab" id="tab-btn-accedi" onclick="switchTab('accedi')">🔑 Accedi</button>
             </div>
 
             <!-- ===== REGISTRAZIONE ===== -->
             <div id="tab-registrati">
 
-                <!-- STEP INDICATOR -->
                 <div class="steps-indicator">
                     <div class="step-dot active" id="dot1">1</div>
                     <div class="step-line" id="line1"></div>
@@ -494,31 +155,26 @@
                     <div class="step-dot" id="dot3">3</div>
                 </div>
 
-                <!-- STEP 1: DATI -->
+                <!-- STEP 1 -->
                 <div class="step-content active" id="step1">
-
                     <div class="avviso-blu">
                         <strong>ℹ️ Registrazione gratuita</strong>
                         Ti chiediamo solo email e telefono per verificare che tu sia una persona reale. I tuoi dati personali non saranno mai visibili ai professionisti.
                     </div>
-
                     <div class="avviso-ban">
                         <strong>⚠️ Regole della piattaforma — Leggi prima di procedere:</strong>
                         🔴 <strong>Come cliente:</strong> Se non permetti a nessuno dei 5 professionisti di effettuare il sopralluogo, il tuo account verrà <strong>bannato immediatamente</strong> insieme a numero di telefono ed email.<br><br>
                         🟢 <strong>Sei tutelato:</strong> Se un professionista paga per sbloccare la tua richiesta e poi non si presenta al sopralluogo senza giustificazione, verrà <strong>bannato dopo 3 mancanze</strong>. La piattaforma tutela entrambe le parti in modo equo.<br><br>
                         ⭐ <strong>Recensioni:</strong> Al termine del lavoro e dopo la conferma del pagamento, si aprirà automaticamente la schermata di recensione reciproca. Sia tu che il professionista dovrete recensirvi a vicenda per mantenere l'account attivo.
                     </div>
-
                     <div class="form-group">
                         <label>Nome e Cognome</label>
                         <input type="text" id="reg-nome" placeholder="Es. Mario Rossi">
                     </div>
-
                     <div class="form-group">
                         <label>Email</label>
                         <input type="email" id="reg-email" placeholder="Es. mario@email.com">
                     </div>
-
                     <div class="form-group">
                         <label>Numero di Telefono</label>
                         <div class="otp-group">
@@ -526,7 +182,6 @@
                             <button class="btn-otp" id="btn-invia-otp" onclick="inviaOTP()">Invia OTP</button>
                         </div>
                     </div>
-
                     <div class="otp-verify" id="otp-verify">
                         <label>Inserisci il codice OTP ricevuto via SMS</label>
                         <div class="otp-boxes">
@@ -539,36 +194,38 @@
                         </div>
                         <div class="otp-timer">Non hai ricevuto il codice? <span onclick="inviaOTP()">Reinvia</span></div>
                     </div>
-
                     <div class="form-group" style="margin-top:20px">
                         <label>Password</label>
                         <input type="password" id="reg-password" placeholder="Minimo 8 caratteri">
                     </div>
-
                     <button class="btn-main" onclick="goStep2()">Continua →</button>
                 </div>
 
-                <!-- STEP 2: RICHIESTA -->
+                <!-- STEP 2 -->
                 <div class="step-content" id="step2">
-
                     <div class="avviso-verde">
                         <strong>✅ Telefono verificato!</strong>
                         Ora descrivi il lavoro o servizio che stai cercando. I professionisti vedranno solo la descrizione e la città, mai i tuoi dati personali.
                     </div>
 
+                    <!-- BANNER CATEGORIA PRE-SELEZIONATA -->
+                    <div class="cat-preselezionata" id="cat-banner">
+                        ✅ Categoria pre-selezionata: <span id="cat-banner-nome"></span>
+                    </div>
+
                     <div class="form-group">
                         <label>Categoria</label>
                         <div class="categoria-grid" id="categoria-grid">
-                            <button class="cat-btn" onclick="selezionaCategoria(this)">🏗️ Edilizia</button>
-                            <button class="cat-btn" onclick="selezionaCategoria(this)">⚡💧 Impianti</button>
-                            <button class="cat-btn" onclick="selezionaCategoria(this)">🚗 Automotive</button>
-                            <button class="cat-btn" onclick="selezionaCategoria(this)">⚖️ Legale</button>
-                            <button class="cat-btn" onclick="selezionaCategoria(this)">🏥 Salute</button>
-                            <button class="cat-btn" onclick="selezionaCategoria(this)">💇 Estetica</button>
-                            <button class="cat-btn" onclick="selezionaCategoria(this)">🏠 Casa</button>
-                            <button class="cat-btn" onclick="selezionaCategoria(this)">💻 Digitale</button>
-                            <button class="cat-btn" onclick="selezionaCategoria(this)">🎓 Istruzione</button>
-                            <button class="cat-btn" onclick="selezionaCategoria(this, true)">🔞 Escort +18</button>
+                            <button class="cat-btn" data-cat="edilizia" onclick="selezionaCategoria(this)">🏗️ Edilizia</button>
+                            <button class="cat-btn" data-cat="impianti" onclick="selezionaCategoria(this)">⚡💧 Impianti</button>
+                            <button class="cat-btn" data-cat="automotive" onclick="selezionaCategoria(this)">🚗 Automotive</button>
+                            <button class="cat-btn" data-cat="legale" onclick="selezionaCategoria(this)">⚖️ Legale</button>
+                            <button class="cat-btn" data-cat="salute" onclick="selezionaCategoria(this)">🏥 Salute</button>
+                            <button class="cat-btn" data-cat="estetica" onclick="selezionaCategoria(this)">💇 Estetica</button>
+                            <button class="cat-btn" data-cat="casa" onclick="selezionaCategoria(this)">🏠 Casa</button>
+                            <button class="cat-btn" data-cat="digitale" onclick="selezionaCategoria(this)">💻 Digitale</button>
+                            <button class="cat-btn" data-cat="istruzione" onclick="selezionaCategoria(this)">🎓 Istruzione</button>
+                            <button class="cat-btn" data-cat="escort" onclick="selezionaCategoria(this, true)">🔞 Escort +18</button>
                         </div>
                     </div>
 
@@ -576,12 +233,10 @@
                         <label>Città / Paese</label>
                         <input type="text" id="req-citta" placeholder="Es. Milano, Roma, Bergamo...">
                     </div>
-
                     <div class="form-group">
                         <label>Descrizione del lavoro / servizio</label>
                         <textarea id="req-descrizione" placeholder="Descrivi quello di cui hai bisogno nel dettaglio. Più sei preciso, migliori saranno le offerte che ricevi..."></textarea>
                     </div>
-
                     <div class="form-group">
                         <label>Quando hai bisogno?</label>
                         <select id="req-quando">
@@ -592,18 +247,16 @@
                             <option>Nessuna fretta, sto valutando</option>
                         </select>
                     </div>
-
                     <button class="btn-main" onclick="goStep3()">Invia Richiesta →</button>
-                    <button class="btn-main grigio" onclick="goToStep(1)">← Indietro</button>
+                    <button class="btn-main grigio" onclick="goToStep(1)" style="margin-top:10px">← Indietro</button>
                 </div>
 
-                <!-- STEP 3: SUCCESSO -->
+                <!-- STEP 3 -->
                 <div class="step-content" id="step3">
                     <div class="success-box">
                         <div class="success-icon">🎉</div>
                         <h2>Richiesta Inviata!</h2>
                         <p>La tua richiesta è stata pubblicata. Entro poche ore riceverai le offerte dei professionisti verificati nella tua zona.</p>
-
                         <div class="highlight">
                             📱 Riceverai un SMS quando un professionista è interessato.<br><br>
                             👤 Massimo <strong>5 professionisti</strong> possono rispondere alla tua richiesta.<br><br>
@@ -611,13 +264,11 @@
                             📅 In chat concorderete data e ora del sopralluogo.<br><br>
                             ✅ Al termine del lavoro e dopo la <strong>conferma del pagamento</strong>, si aprirà automaticamente la schermata per le <strong>recensioni reciproche</strong>. Entrambi dovrete recensirvi per mantenere l'account attivo.
                         </div>
-
                         <div class="avviso-ban">
                             <strong>⚠️ Ricorda:</strong>
                             🔴 Se non permetti a nessuno dei 5 professionisti di fare il sopralluogo → <strong>ban immediato</strong><br><br>
                             🟢 Se un professionista non si presenta → <strong>viene bannato lui</strong> dopo 3 mancanze. Sei sempre tutelato!
                         </div>
-
                         <button class="btn-main oro" onclick="window.location.href='index.html'">🏠 Torna alla Home</button>
                     </div>
                 </div>
@@ -628,14 +279,15 @@
             <div id="tab-accedi" style="display:none">
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" placeholder="La tua email">
+                    <input type="email" id="login-email" placeholder="La tua email">
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" placeholder="La tua password">
+                    <input type="password" id="login-password" placeholder="La tua password">
                 </div>
-                <button class="btn-main" onclick="alert('Login in arrivo!')">🔑 Accedi</button>
+                <button class="btn-main" onclick="eseguiLogin()">🔑 Accedi</button>
                 <a href="#" class="link-back" style="margin-top:15px;color:var(--blu)">Hai dimenticato la password?</a>
+                <p style="text-align:center;margin-top:20px;font-size:14px;color:var(--grigio)">Non hai un account? <a href="cliente.html" style="color:var(--blu);font-weight:600">Registrati gratis</a></p>
             </div>
 
             <a href="index.html" class="link-back">← Torna alla Home</a>
@@ -676,12 +328,52 @@
         let otpInviato = false;
         let stelleSelezionate = 0;
 
+        // =============================================
+        // LEGGI PARAMETRI URL ALL'AVVIO
+        // =============================================
+        window.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+
+            // Se ?tab=accedi apri il tab login
+            const tab = params.get('tab');
+            if (tab === 'accedi') {
+                switchTab('accedi');
+            }
+
+            // Se ?cat=edilizia pre-seleziona la categoria
+            const cat = params.get('cat');
+            if (cat) {
+                // Salva la categoria per quando si arriva allo step 2
+                window._catDaURL = cat.toLowerCase();
+            }
+        });
+
+        // Pre-seleziona categoria quando si entra nello step 2
+        function applicaCategoriaURL() {
+            const cat = window._catDaURL;
+            if (!cat) return;
+
+            const btns = document.querySelectorAll('.cat-btn');
+            btns.forEach(btn => {
+                if (btn.getAttribute('data-cat') === cat) {
+                    if (cat === 'escort') {
+                        // Non auto-selezionare escort, mostra popup
+                        return;
+                    }
+                    btn.classList.add('selected');
+                    categoriaSelezionata = btn.textContent;
+                    // Mostra banner
+                    document.getElementById('cat-banner-nome').textContent = btn.textContent;
+                    document.getElementById('cat-banner').classList.add('show');
+                }
+            });
+        }
+
         function switchTab(tab) {
             document.getElementById('tab-registrati').style.display = tab === 'registrati' ? 'block' : 'none';
             document.getElementById('tab-accedi').style.display = tab === 'accedi' ? 'block' : 'none';
-            document.querySelectorAll('.tab').forEach((t, i) => {
-                t.classList.toggle('active', (tab === 'registrati' && i === 0) || (tab === 'accedi' && i === 1));
-            });
+            document.getElementById('tab-btn-registrati').classList.toggle('active', tab === 'registrati');
+            document.getElementById('tab-btn-accedi').classList.toggle('active', tab === 'accedi');
         }
 
         function inviaOTP() {
@@ -707,13 +399,14 @@
             document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
             btn.classList.add('selected');
             categoriaSelezionata = btn.textContent;
+            document.getElementById('cat-banner').classList.remove('show');
         }
 
         function confirmAdult() {
             document.getElementById('adultPopup').style.display = 'none';
             document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
             document.querySelectorAll('.cat-btn').forEach(b => {
-                if (b.textContent.includes('Escort')) b.classList.add('selected');
+                if (b.getAttribute('data-cat') === 'escort') b.classList.add('selected');
             });
             categoriaSelezionata = '🔞 Escort +18';
         }
@@ -730,6 +423,8 @@
             if (!nome || !email || !tel || !pass) { alert('Compila tutti i campi!'); return; }
             if (!otpInviato) { alert('Verifica prima il numero di telefono con OTP!'); return; }
             goToStep(2);
+            // Applica categoria da URL dopo aver caricato step 2
+            setTimeout(applicaCategoriaURL, 100);
         }
 
         function goStep3() {
@@ -752,6 +447,13 @@
             document.querySelectorAll('.step-line').forEach((l, i) => {
                 l.classList.toggle('done', i + 1 < n);
             });
+        }
+
+        function eseguiLogin() {
+            const email = document.getElementById('login-email').value;
+            const pass = document.getElementById('login-password').value;
+            if (!email || !pass) { alert('Inserisci email e password!'); return; }
+            alert('Login in arrivo! Il sistema di autenticazione sarà attivo presto.');
         }
 
         function setStella(n) {
