@@ -26,6 +26,7 @@
 
         .chat-layout { display: flex; flex: 1; overflow: hidden; }
 
+        /* LISTA CHAT */
         .chat-list { width: 300px; background: white; border-right: 1px solid #e5e7eb; display: flex; flex-direction: column; flex-shrink: 0; }
         .chat-list-header { padding: 18px 20px; border-bottom: 1px solid #e5e7eb; }
         .chat-list-header h3 { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--blu-scuro); margin-bottom: 10px; }
@@ -46,22 +47,23 @@
         .chat-item-stato.attivo { background: #ECFDF5; color: var(--verde); }
         .chat-item-stato.attesa { background: #FEF3C7; color: var(--arancio); }
 
+        /* CHAT MAIN */
         .chat-main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
-
         .chat-header { background: white; padding: 15px 22px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; box-shadow: 0 1px 8px rgba(0,0,0,0.05); }
         .chat-header-info { display: flex; align-items: center; gap: 14px; }
         .chat-header-avatar { width: 46px; height: 46px; background: var(--blu); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--oro); font-size: 18px; }
         .chat-header-nome { font-size: 16px; font-weight: 700; color: var(--blu-scuro); }
         .chat-header-stato { font-size: 12px; color: var(--verde); display: flex; align-items: center; gap: 5px; margin-top: 2px; }
         .chat-header-stato::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--verde); display: inline-block; }
-        .chat-header-actions { display: flex; gap: 10px; }
+        .chat-header-actions { display: flex; gap: 10px; flex-wrap: wrap; }
         .btn-header-action { background: var(--grigio-chiaro); border: none; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; color: var(--testo); display: flex; align-items: center; gap: 6px; }
         .btn-header-action:hover { background: #e5e7eb; }
         .btn-header-action.blu { background: var(--blu); color: white; }
         .btn-header-action.blu:hover { background: var(--blu-chiaro); }
-        .btn-header-action.oro { background: var(--oro); color: white; }
-        .btn-header-action.oro:hover { background: var(--oro-chiaro); }
+        .btn-header-action.verde { background: var(--verde); color: white; }
+        .btn-header-action.verde:hover { background: #059669; }
 
+        /* BANNER RICHIESTA */
         .richiesta-banner { background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); border-bottom: 1px solid #BFDBFE; padding: 12px 22px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; flex-wrap: wrap; gap: 8px; }
         .richiesta-banner-info { font-size: 13px; color: var(--blu-scuro); line-height: 1.6; }
         .richiesta-banner-info strong { display: block; font-size: 14px; margin-bottom: 2px; }
@@ -71,6 +73,7 @@
         .chip-small.verde { background: #ECFDF5; color: var(--verde); }
         .chip-small.oro { background: #FEF3C7; color: var(--arancio); }
 
+        /* BANNER SOPRALLUOGO */
         .sopralluogo-banner { background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border-bottom: 1px solid #A7F3D0; padding: 14px 22px; flex-shrink: 0; }
         .sopralluogo-banner-title { font-size: 13px; font-weight: 700; color: #065F46; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
         .sopralluogo-banner-data { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 900; color: #065F46; margin-bottom: 4px; }
@@ -80,14 +83,16 @@
         .btn-sopralluogo.verde { background: var(--verde); color: white; }
         .btn-sopralluogo.rosso { background: var(--rosso); color: white; }
         .btn-sopralluogo.grigio { background: #e5e7eb; color: var(--grigio); }
+        .btn-sopralluogo.oro { background: var(--oro); color: white; }
 
+        /* MESSAGGI */
         .chat-messages { flex: 1; overflow-y: auto; padding: 20px 22px; display: flex; flex-direction: column; gap: 14px; }
         .msg { display: flex; gap: 10px; max-width: 75%; }
         .msg.inviato { align-self: flex-end; flex-direction: row-reverse; }
         .msg-avatar { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; font-size: 13px; flex-shrink: 0; margin-top: 2px; }
         .msg-content { display: flex; flex-direction: column; gap: 3px; }
         .msg.inviato .msg-content { align-items: flex-end; }
-        .msg-bubble { padding: 11px 15px; border-radius: 18px; font-size: 14px; line-height: 1.6; max-width: 100%; }
+        .msg-bubble { padding: 11px 15px; border-radius: 18px; font-size: 14px; line-height: 1.6; }
         .msg.ricevuto .msg-bubble { background: white; color: var(--testo); border: 1px solid #e5e7eb; border-radius: 4px 18px 18px 18px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
         .msg.inviato .msg-bubble { background: linear-gradient(135deg, var(--blu), var(--blu-chiaro)); color: white; border-radius: 18px 4px 18px 18px; }
         .msg-time { font-size: 11px; color: var(--grigio); padding: 0 4px; }
@@ -109,6 +114,17 @@
         .btn-sm.verde:hover { background: #059669; }
         .btn-sm.rosso:hover { background: #DC2626; }
 
+        /* CARD FINE LAVORI */
+        .fine-lavori-card { background: white; border: 2px solid var(--oro); border-radius: 16px; padding: 20px 22px; align-self: center; width: 90%; max-width: 460px; }
+        .fine-lavori-title { font-size: 14px; font-weight: 700; color: var(--oro); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+        .fine-lavori-sub { font-size: 13px; color: var(--grigio); line-height: 1.6; margin-bottom: 14px; }
+        .fine-lavori-actions { display: flex; gap: 10px; }
+        .btn-fine { flex: 1; padding: 11px; border: none; border-radius: 12px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s; }
+        .btn-fine.oro { background: var(--oro); color: white; }
+        .btn-fine.oro:hover { background: var(--oro-chiaro); }
+        .btn-fine.grigio { background: var(--grigio-chiaro); color: var(--grigio); }
+
+        /* INPUT */
         .chat-input-area { background: white; border-top: 1px solid #e5e7eb; padding: 14px 20px; flex-shrink: 0; }
         .chat-input-row { display: flex; gap: 10px; align-items: flex-end; }
         .chat-input-box { flex: 1; padding: 12px 18px; border: 1.5px solid #e5e7eb; border-radius: 25px; font-size: 14px; font-family: 'Inter', sans-serif; outline: none; resize: none; max-height: 100px; transition: 0.3s; line-height: 1.5; }
@@ -116,15 +132,19 @@
         .btn-allega { background: var(--grigio-chiaro); border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; font-size: 18px; transition: 0.3s; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
         .btn-allega:hover { background: #e5e7eb; }
         .btn-invia { background: linear-gradient(135deg, var(--blu), var(--blu-chiaro)); border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; font-size: 18px; transition: 0.3s; flex-shrink: 0; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(27,58,107,0.3); }
-        .btn-invia:hover { transform: scale(1.05); box-shadow: 0 6px 18px rgba(27,58,107,0.4); }
+        .btn-invia:hover { transform: scale(1.05); }
         .chat-input-actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
         .btn-quick { background: var(--grigio-chiaro); border: 1px solid #e5e7eb; padding: 7px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; color: var(--testo); }
         .btn-quick:hover { background: var(--blu); color: white; border-color: var(--blu); }
         .btn-quick.oro { background: #FFFBEB; border-color: var(--oro); color: var(--oro); }
         .btn-quick.oro:hover { background: var(--oro); color: white; }
+        .btn-quick.verde { background: #ECFDF5; border-color: var(--verde); color: var(--verde); }
+        .btn-quick.verde:hover { background: var(--verde); color: white; }
 
+        /* POPUP */
         .popup-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
-        .popup-overlay.show { display: flex; }
+        .popup-overlay.show { display: flex; animation: fadeIn 0.25s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .popup-box { background: white; border-radius: 24px; padding: 35px 30px; max-width: 440px; width: 100%; }
         .popup-box h2 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--blu-scuro); margin-bottom: 8px; text-align: center; }
         .popup-box p { color: var(--grigio); font-size: 14px; line-height: 1.6; margin-bottom: 20px; text-align: center; }
@@ -134,16 +154,24 @@
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--blu); }
         .form-group textarea { min-height: 80px; resize: vertical; }
         .popup-avviso { background: #FEF3C7; border: 1px solid #FDE68A; border-radius: 12px; padding: 12px 15px; font-size: 13px; color: #78350F; line-height: 1.6; margin-bottom: 18px; }
+        .popup-avviso.verde { background: #ECFDF5; border-color: #A7F3D0; color: #065F46; }
         .btn-popup { width: 100%; padding: 14px; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s; margin-bottom: 8px; }
         .btn-popup.blu { background: var(--blu); color: white; }
         .btn-popup.blu:hover { background: var(--blu-chiaro); }
+        .btn-popup.verde { background: var(--verde); color: white; }
+        .btn-popup.verde:hover { background: #059669; }
+        .btn-popup.oro { background: var(--oro); color: white; }
+        .btn-popup.oro:hover { background: var(--oro-chiaro); }
         .btn-popup.grigio { background: var(--grigio-chiaro); color: var(--grigio); }
-        .btn-popup.grigio:hover { background: #e5e7eb; }
-
-        .popup-box.conferma { text-align: center; }
-        .popup-icon { font-size: 56px; margin-bottom: 15px; }
+        .btn-popup.rosso { background: var(--rosso); color: white; }
+        .popup-icon { font-size: 56px; margin-bottom: 15px; text-align: center; }
         .conferma-dettagli { background: var(--grigio-chiaro); border-radius: 14px; padding: 16px 18px; font-size: 13px; color: var(--testo); line-height: 1.9; margin-bottom: 20px; text-align: left; }
         .conferma-dettagli strong { color: var(--blu-scuro); }
+
+        /* STELLE RECENSIONE */
+        .stelle-wrap { display: flex; justify-content: center; gap: 10px; margin: 16px 0; }
+        .stella-rec { font-size: 40px; cursor: pointer; opacity: 0.3; transition: 0.2s; }
+        .stella-rec.attiva { opacity: 1; }
 
         @media (max-width: 768px) {
             .chat-list { display: none; }
@@ -165,7 +193,6 @@
     </div>
 </nav>
 
-<!-- CHAT LAYOUT -->
 <div class="chat-layout">
 
     <!-- LISTA CHAT -->
@@ -179,11 +206,11 @@
                 <div class="chat-avatar" style="background:var(--blu)">R</div>
                 <div class="chat-item-info">
                     <div class="chat-item-nome">Rossoni Edilizia</div>
-                    <div class="chat-item-preview">Perfetto, ci vediamo lunedì...</div>
+                    <div class="chat-item-preview">Lavoro completato ✅</div>
                 </div>
                 <div class="chat-item-meta">
-                    <span class="chat-item-time">09:30</span>
-                    <span class="chat-item-stato attivo">Sopralluogo ✅</span>
+                    <span class="chat-item-time">Ora</span>
+                    <span class="chat-item-stato attivo">In corso</span>
                 </div>
             </div>
             <div class="chat-item" onclick="selezionaChat(this)">
@@ -225,7 +252,8 @@
             </div>
             <div class="chat-header-actions">
                 <button class="btn-header-action" onclick="window.location.href='profilo-pro.html'">👤 Profilo</button>
-                <button class="btn-header-action blu" onclick="apriPopupSopralluogo()">📅 Fissa sopralluogo</button>
+                <button class="btn-header-action blu" onclick="apriPopupSopralluogo()">📅 Sopralluogo</button>
+                <button class="btn-header-action verde" onclick="apriDichiaraCompletato()">✅ Lavoro completato</button>
             </div>
         </div>
 
@@ -246,7 +274,7 @@
             <div class="sopralluogo-banner-data">Lunedì 11 Maggio 2026 — ore 09:30</div>
             <div class="sopralluogo-banner-sub">📍 Via Roma 15, Milano · Con Rossoni Edilizia</div>
             <div class="sopralluogo-banner-actions">
-                <button class="btn-sopralluogo verde" onclick="apriConfermaLavoro()">✅ Conferma lavoro</button>
+                <button class="btn-sopralluogo verde" onclick="apriDichiaraCompletato()">✅ Dichiara lavoro completato</button>
                 <button class="btn-sopralluogo rosso" onclick="apriRifiuto()">❌ Rifiuta lavoro</button>
                 <button class="btn-sopralluogo grigio" onclick="apriPopupSopralluogo()">✏️ Modifica data</button>
             </div>
@@ -318,7 +346,17 @@
 
             <div class="msg-sistema">
                 ⚠️ Ricorda: se non ti presenti al sopralluogo senza preavviso riceverai una segnalazione.<br>
-                Dopo 3 segnalazioni l'account viene bannato automaticamente.
+                Dopo 3 segnalazioni su professionisti diversi l'account viene bannato automaticamente.
+            </div>
+
+            <!-- MESSAGGIO FINE LAVORI DAL PROFESSIONISTA -->
+            <div class="fine-lavori-card" id="fineLavoriCard">
+                <div class="fine-lavori-title">🔧 Rossoni Edilizia ha dichiarato il lavoro completato</div>
+                <div class="fine-lavori-sub">Il professionista ha dichiarato di aver terminato il lavoro di tinteggiatura. Confermi di aver saldato il professionista per sbloccare le recensioni reciproche.</div>
+                <div class="fine-lavori-actions">
+                    <button class="btn-fine oro" onclick="apriConfermaPageSaldo()">💰 Confermo di aver saldato</button>
+                    <button class="btn-fine grigio" onclick="apriContestazione()">❓ Ho un problema</button>
+                </div>
             </div>
 
         </div>
@@ -333,7 +371,7 @@
                 <button class="btn-quick" onclick="inserisciTesto('Quando è disponibile per il sopralluogo?')">📅 Chiedi disponibilità</button>
                 <button class="btn-quick" onclick="inserisciTesto('Ho visto il suo profilo, mi interesserebbe un preventivo.')">💬 Chiedi preventivo</button>
                 <button class="btn-quick oro" onclick="apriPopupSopralluogo()">📅 Fissa sopralluogo</button>
-                <button class="btn-quick" onclick="inserisciTesto('Grazie mille per la disponibilità! A presto.')">👋 Saluta</button>
+                <button class="btn-quick verde" onclick="apriDichiaraCompletato()">✅ Lavoro completato</button>
             </div>
         </div>
 
@@ -344,10 +382,10 @@
 <div class="popup-overlay" id="popupSopralluogo">
     <div class="popup-box">
         <h2>📅 Fissa il Sopralluogo</h2>
-        <p>Concorda con il professionista la data e l'ora. Il sopralluogo verrà salvato e confermato automaticamente il giorno dopo.</p>
+        <p>Concorda con il professionista la data e l'ora del sopralluogo gratuito.</p>
         <div class="form-group">
             <label>Data sopralluogo *</label>
-            <input type="date" id="sop-data" min="">
+            <input type="date" id="sop-data">
         </div>
         <div class="form-group">
             <label>Ora *</label>
@@ -367,45 +405,113 @@
         </div>
         <div class="form-group">
             <label>Note aggiuntive</label>
-            <textarea id="sop-note" placeholder="Es. Suonare il campanello, portare campioni colore, ecc."></textarea>
+            <textarea id="sop-note" placeholder="Es. Suonare il campanello, portare campioni colore..."></textarea>
         </div>
         <div class="popup-avviso">
-            ⚠️ <strong>Importante:</strong> Fissando il sopralluogo ti impegni a essere presente. In caso di assenza senza preavviso riceverai una segnalazione. Dopo 3 segnalazioni l'account viene bannato.
+            ⚠️ Fissando il sopralluogo ti impegni a essere presente. Assenza senza preavviso = segnalazione. Tre segnalazioni su professionisti diversi = ban automatico.
         </div>
         <button class="btn-popup blu" onclick="confermaSopralluogo()">✅ Conferma sopralluogo</button>
         <button class="btn-popup grigio" onclick="chiudiPopup('popupSopralluogo')">Annulla</button>
     </div>
 </div>
 
-<!-- POPUP CONFERMA LAVORO -->
-<div class="popup-overlay" id="popupConfermaLavoro">
-    <div class="popup-box conferma">
-        <div class="popup-icon">✅</div>
-        <h2>Conferma il lavoro</h2>
-        <p>Stai confermando che il sopralluogo è avvenuto e che vuoi procedere con il lavoro.</p>
+<!-- POPUP DICHIARA LAVORO COMPLETATO (lato professionista) -->
+<div class="popup-overlay" id="popupDichiaraCompletato">
+    <div class="popup-box">
+        <div class="popup-icon">🔧</div>
+        <h2>Dichiara lavoro completato</h2>
+        <p>Stai dichiarando che il lavoro è stato completato. Il cliente riceverà una notifica e dovrà confermare il saldo.</p>
         <div class="conferma-dettagli">
-            <strong>Professionista:</strong> Rossoni Edilizia<br>
+            <strong>Cliente:</strong> Mario R.<br>
             <strong>Lavoro:</strong> Tinteggiatura appartamento 80mq<br>
-            <strong>Sopralluogo:</strong> 11 Maggio 2026 — ore 09:30<br>
-            <strong>Pagamento professionista:</strong> Già effettuato ✅<br>
-            <strong>Rimborso:</strong> ❌ Non previsto dopo conferma
+            <strong>Indirizzo:</strong> Via Roma 15, Milano<br>
+            <strong>Data completamento:</strong> 11 Maggio 2026
         </div>
-        <div class="popup-avviso">
-            ⚠️ Confermando il lavoro il pagamento è <strong>definitivo</strong>. Non sarà possibile richiedere rimborsi. Dopo il completamento entrambi lascerete una recensione obbligatoria.
+        <div class="popup-avviso verde">
+            ✅ Dopo la conferma del saldo da parte del cliente, si aprirà automaticamente la schermata delle recensioni reciproche obbligatorie.
         </div>
-        <button class="btn-popup blu" onclick="confermaLavoroFinale()">✅ Confermo il lavoro</button>
-        <button class="btn-popup grigio" onclick="chiudiPopup('popupConfermaLavoro')">Annulla</button>
+        <button class="btn-popup verde" onclick="confermaLavoroCompletato()">✅ Sì, il lavoro è completato</button>
+        <button class="btn-popup grigio" onclick="chiudiPopup('popupDichiaraCompletato')">Annulla</button>
     </div>
 </div>
 
-<!-- POPUP RIFIUTO LAVORO -->
+<!-- POPUP CONFERMA SALDO (lato cliente) -->
+<div class="popup-overlay" id="popupConfermaPageSaldo">
+    <div class="popup-box">
+        <div class="popup-icon">💰</div>
+        <h2>Confermi di aver saldato?</h2>
+        <p>Rossoni Edilizia ha dichiarato il lavoro completato. Confermi di aver saldato il professionista per il lavoro eseguito?</p>
+        <div class="conferma-dettagli">
+            <strong>Professionista:</strong> Rossoni Edilizia<br>
+            <strong>Lavoro:</strong> Tinteggiatura appartamento 80mq<br>
+            <strong>Data completamento:</strong> 11 Maggio 2026
+        </div>
+        <div class="popup-avviso verde">
+            ✅ Confermando il saldo si aprirà subito la schermata delle recensioni reciproche. Le recensioni sono obbligatorie per mantenere l'account attivo.
+        </div>
+        <button class="btn-popup oro" onclick="confermaSaldo()">💰 Sì, ho saldato il professionista</button>
+        <button class="btn-popup grigio" onclick="chiudiPopup('popupConfermaPageSaldo')">Non ancora</button>
+    </div>
+</div>
+
+<!-- POPUP RECENSIONE RECIPROCA -->
+<div class="popup-overlay" id="popupRecensione">
+    <div class="popup-box">
+        <div class="popup-icon">⭐</div>
+        <h2>Lascia la tua recensione</h2>
+        <p>Il pagamento è confermato. Ora valuta Rossoni Edilizia. La recensione è <strong>obbligatoria</strong> per mantenere il tuo account attivo.</p>
+        <div class="stelle-wrap">
+            <span class="stella-rec" onclick="setStella(1)">★</span>
+            <span class="stella-rec" onclick="setStella(2)">★</span>
+            <span class="stella-rec" onclick="setStella(3)">★</span>
+            <span class="stella-rec" onclick="setStella(4)">★</span>
+            <span class="stella-rec" onclick="setStella(5)">★</span>
+        </div>
+        <div class="form-group">
+            <label>Descrivi la tua esperienza *</label>
+            <textarea id="testo-rec" placeholder="Com'è andato il lavoro? Il professionista è stato puntuale, preciso, professionale?"></textarea>
+        </div>
+        <div class="popup-avviso">
+            ⚠️ Hai 48 ore per completare la recensione. Dopo questo termine l'account viene temporaneamente sospeso fino al completamento.
+        </div>
+        <button class="btn-popup oro" onclick="inviaRecensione()">⭐ Invia recensione</button>
+    </div>
+</div>
+
+<!-- POPUP CONTESTAZIONE -->
+<div class="popup-overlay" id="popupContestazione">
+    <div class="popup-box">
+        <div class="popup-icon">❓</div>
+        <h2>Hai un problema?</h2>
+        <p>Descrivi il problema riscontrato. Il nostro team esaminerà la situazione entro 24 ore e ti contatterà.</p>
+        <div class="form-group">
+            <label>Tipo di problema *</label>
+            <select id="tipo-contestazione">
+                <option value="">Seleziona</option>
+                <option>Lavoro non completato correttamente</option>
+                <option>Il professionista non si è presentato</option>
+                <option>Danni causati durante i lavori</option>
+                <option>Preventivo non rispettato</option>
+                <option>Altro</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Descrizione dettagliata *</label>
+            <textarea id="desc-contestazione" placeholder="Descrivi il problema in dettaglio..."></textarea>
+        </div>
+        <button class="btn-popup blu" onclick="inviaContestazione()">📨 Invia segnalazione al supporto</button>
+        <button class="btn-popup grigio" onclick="chiudiPopup('popupContestazione')">Annulla</button>
+    </div>
+</div>
+
+<!-- POPUP RIFIUTO -->
 <div class="popup-overlay" id="popupRifiuto">
-    <div class="popup-box conferma">
+    <div class="popup-box">
         <div class="popup-icon">❌</div>
         <h2>Rifiuta il lavoro</h2>
-        <p>Stai rifiutando il lavoro dopo il sopralluogo. Questo verrà registrato nel sistema.</p>
+        <p>Stai rifiutando o disdendo il sopralluogo. Specifica il motivo.</p>
         <div class="form-group">
-            <label>Motivo del rifiuto *</label>
+            <label>Motivo *</label>
             <select id="motivo-rifiuto">
                 <option value="">Seleziona motivo</option>
                 <option>Preventivo troppo alto</option>
@@ -417,20 +523,22 @@
             </select>
         </div>
         <div class="form-group">
-            <label>Descrizione (facoltativa)</label>
-            <textarea id="desc-rifiuto" placeholder="Spiega brevemente il motivo..."></textarea>
+            <label>Note (facoltative)</label>
+            <textarea id="desc-rifiuto" placeholder="Spiega brevemente..."></textarea>
         </div>
         <div class="popup-avviso">
-            ⚠️ Il rifiuto verrà registrato. Se il cliente rifiuta 3 volte senza motivo valido, l'account viene bannato.
+            ⚠️ Se il professionista non si è presentato senza preavviso, riceverà automaticamente una segnalazione.
         </div>
-        <button class="btn-popup" style="background:var(--rosso);color:white;margin-bottom:8px" onclick="confermaRifiuto()">❌ Conferma rifiuto</button>
+        <button class="btn-popup rosso" onclick="confermaRifiuto()">❌ Conferma</button>
         <button class="btn-popup grigio" onclick="chiudiPopup('popupRifiuto')">Annulla</button>
     </div>
 </div>
 
 <script>
-    const oggi = new Date();
-    const domani = new Date(oggi);
+    let stelleSelezionate = 0;
+
+    // Init data minima sopralluogo
+    const domani = new Date();
     domani.setDate(domani.getDate() + 1);
     document.getElementById('sop-data').min = domani.toISOString().split('T')[0];
     document.getElementById('sop-data').value = '2026-05-12';
@@ -441,10 +549,7 @@
     }
 
     function handleEnter(e) {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            inviaMessaggio();
-        }
+        if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); inviaMessaggio(); }
     }
 
     function inserisciTesto(testo) {
@@ -458,37 +563,101 @@
         const testo = input.value.trim();
         if (!testo) return;
         const messages = document.getElementById('chatMessages');
+        const ora = new Date().toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
         const msgDiv = document.createElement('div');
         msgDiv.className = 'msg inviato';
-        const ora = new Date().toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
         msgDiv.innerHTML = `
             <div class="msg-avatar" style="background:var(--blu-chiaro)">M</div>
             <div class="msg-content">
                 <div class="msg-bubble">${testo}</div>
                 <span class="msg-time">Ora, ${ora}</span>
-            </div>
-        `;
+            </div>`;
         messages.appendChild(msgDiv);
         input.value = '';
         messages.scrollTop = messages.scrollHeight;
     }
 
-    function apriPopupSopralluogo() {
-        document.getElementById('popupSopralluogo').classList.add('show');
+    function apriPopupSopralluogo() { document.getElementById('popupSopralluogo').classList.add('show'); }
+    function apriDichiaraCompletato() { document.getElementById('popupDichiaraCompletato').classList.add('show'); }
+    function apriConfermaPageSaldo() { chiudiPopup('popupDichiaraCompletato'); document.getElementById('popupConfermaPageSaldo').classList.add('show'); }
+    function apriRifiuto() { document.getElementById('popupRifiuto').classList.add('show'); }
+    function apriContestazione() { chiudiPopup('popupConfermaPageSaldo'); document.getElementById('popupContestazione').classList.add('show'); }
+
+    function confermaLavoroCompletato() {
+        chiudiPopup('popupDichiaraCompletato');
+        const messages = document.getElementById('chatMessages');
+        // Rimuovi la card fine lavori esistente se c'è
+        const existing = document.getElementById('fineLavoriCard');
+        if (existing) existing.remove();
+        // Aggiungi messaggio di sistema
+        const sysMsg = document.createElement('div');
+        sysMsg.className = 'msg-sistema verde';
+        sysMsg.innerHTML = '✅ <strong>Rossoni Edilizia ha dichiarato il lavoro completato.</strong><br>In attesa che il cliente confermi il saldo.';
+        messages.appendChild(sysMsg);
+        // Aggiungi card conferma saldo per il cliente
+        const card = document.createElement('div');
+        card.className = 'fine-lavori-card';
+        card.innerHTML = `
+            <div class="fine-lavori-title">💰 Conferma il saldo</div>
+            <div class="fine-lavori-sub">Rossoni Edilizia ha dichiarato il lavoro di tinteggiatura completato. Confermi di aver saldato il professionista?</div>
+            <div class="fine-lavori-actions">
+                <button class="btn-fine oro" onclick="apriConfermaPageSaldo()">💰 Confermo di aver saldato</button>
+                <button class="btn-fine grigio" onclick="apriContestazione()">❓ Ho un problema</button>
+            </div>`;
+        messages.appendChild(card);
+        messages.scrollTop = messages.scrollHeight;
+    }
+
+    function confermaSaldo() {
+        chiudiPopup('popupConfermaPageSaldo');
+        const messages = document.getElementById('chatMessages');
+        // Rimuovi la card saldo
+        const cards = messages.querySelectorAll('.fine-lavori-card');
+        cards.forEach(c => c.remove());
+        // Messaggio sistema conferma
+        const sysMsg = document.createElement('div');
+        sysMsg.className = 'msg-sistema verde';
+        sysMsg.innerHTML = '✅ <strong>Saldo confermato!</strong> Il lavoro è ufficialmente concluso.<br>Entrambe le parti devono ora lasciare una recensione obbligatoria.';
+        messages.appendChild(sysMsg);
+        messages.scrollTop = messages.scrollHeight;
+        // Apri popup recensione dopo 800ms
+        setTimeout(() => {
+            document.getElementById('popupRecensione').classList.add('show');
+        }, 800);
+    }
+
+    function setStella(n) {
+        stelleSelezionate = n;
+        document.querySelectorAll('.stella-rec').forEach((s, i) => {
+            s.classList.toggle('attiva', i < n);
+        });
+    }
+
+    function inviaRecensione() {
+        if (stelleSelezionate === 0) { alert('Seleziona almeno una stella!'); return; }
+        const testo = document.getElementById('testo-rec').value.trim();
+        if (!testo) { alert('Scrivi una descrizione della tua esperienza!'); return; }
+        chiudiPopup('popupRecensione');
+        const messages = document.getElementById('chatMessages');
+        const sysMsg = document.createElement('div');
+        sysMsg.className = 'msg-sistema verde';
+        sysMsg.innerHTML = `⭐ <strong>Recensione inviata!</strong> Hai valutato Rossoni Edilizia con ${'★'.repeat(stelleSelezionate)}${'☆'.repeat(5 - stelleSelezionate)}<br>Anche Rossoni Edilizia ti valuterà a breve. Grazie per aver usato la piattaforma!`;
+        messages.appendChild(sysMsg);
+        messages.scrollTop = messages.scrollHeight;
     }
 
     function confermaSopralluogo() {
         const data = document.getElementById('sop-data').value;
         const ora = document.getElementById('sop-ora').value;
         const indirizzo = document.getElementById('sop-indirizzo').value.trim();
-        if (!data) { alert('Inserisci la data del sopralluogo!'); return; }
+        if (!data) { alert('Inserisci la data!'); return; }
         if (!ora) { alert('Seleziona l\'orario!'); return; }
         if (!indirizzo) { alert('Inserisci l\'indirizzo!'); return; }
         chiudiPopup('popupSopralluogo');
         const messages = document.getElementById('chatMessages');
+        const dataFormattata = new Date(data).toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
         const card = document.createElement('div');
         card.className = 'sopralluogo-msg';
-        const dataFormattata = new Date(data).toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
         card.innerHTML = `
             <div class="sopralluogo-msg-title">📅 Sopralluogo concordato</div>
             <div class="sopralluogo-msg-data">${dataFormattata.charAt(0).toUpperCase() + dataFormattata.slice(1)} — ore ${ora}</div>
@@ -498,52 +667,47 @@
                 <strong>Lavoro:</strong> Tinteggiatura appartamento 80mq
             </div>
             <div class="msg-sistema verde" style="margin-bottom:10px;font-size:11px">
-                ✅ Sopralluogo salvato. Entrambi riceverete una conferma domani mattina.
-            </div>
-            <div class="sopralluogo-msg-actions">
-                <button class="btn-sm verde" onclick="alert('✅ Confermato!')">✅ Conferma</button>
-                <button class="btn-sm rosso" onclick="apriRifiuto()">❌ Disdici</button>
-            </div>
-        `;
+                ✅ Sopralluogo salvato. Entrambi riceverete una conferma domani.
+            </div>`;
         messages.appendChild(card);
         messages.scrollTop = messages.scrollHeight;
-        setTimeout(() => {
-            alert('✅ Sopralluogo fissato!\n\n📅 ' + dataFormattata + ' — ore ' + ora + '\n📍 ' + indirizzo + '\n\nEntrambi riceverete una notifica di conferma domani mattina.');
-        }, 300);
-    }
-
-    function apriConfermaLavoro() {
-        document.getElementById('popupConfermaLavoro').classList.add('show');
-    }
-
-    function confermaLavoroFinale() {
-        chiudiPopup('popupConfermaLavoro');
-        setTimeout(() => {
-            alert('✅ Lavoro confermato!\n\nIl pagamento è definitivo.\nDopo il completamento del lavoro entrambi dovrete lasciare una recensione obbligatoria.');
-        }, 300);
-    }
-
-    function apriRifiuto() {
-        document.getElementById('popupRifiuto').classList.add('show');
     }
 
     function confermaRifiuto() {
         const motivo = document.getElementById('motivo-rifiuto').value;
         if (!motivo) { alert('Seleziona un motivo!'); return; }
         chiudiPopup('popupRifiuto');
-        setTimeout(() => {
-            alert('❌ Rifiuto registrato.\n\nMotivo: ' + motivo + '\n\nIl rifiuto è stato salvato nel sistema.');
-        }, 300);
+        const messages = document.getElementById('chatMessages');
+        const sysMsg = document.createElement('div');
+        sysMsg.className = 'msg-sistema rosso';
+        sysMsg.innerHTML = '❌ Rifiuto registrato nel sistema.<br>Motivo: ' + motivo;
+        messages.appendChild(sysMsg);
+        messages.scrollTop = messages.scrollHeight;
     }
 
-    function chiudiPopup(id) {
-        document.getElementById(id).classList.remove('show');
+    function inviaContestazione() {
+        const tipo = document.getElementById('tipo-contestazione').value;
+        const desc = document.getElementById('desc-contestazione').value.trim();
+        if (!tipo) { alert('Seleziona il tipo di problema!'); return; }
+        if (!desc) { alert('Descrivi il problema!'); return; }
+        chiudiPopup('popupContestazione');
+        alert('📨 Segnalazione inviata al supporto!\n\nIl nostro team esaminerà la situazione entro 24 ore e ti contatterà via email.');
     }
 
+    function chiudiPopup(id) { document.getElementById(id).classList.remove('show'); }
+
+    // Chiudi popup cliccando fuori
     document.querySelectorAll('.popup-overlay').forEach(overlay => {
         overlay.addEventListener('click', function(e) {
             if (e.target === this) chiudiPopup(this.id);
         });
+    });
+
+    // Chiudi con ESC
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+            document.querySelectorAll('.popup-overlay.show').forEach(p => chiudiPopup(p.id));
+        }
     });
 </script>
 </body>
