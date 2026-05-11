@@ -7,467 +7,122 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         :root {
-            --blu: #1B3A6B;
-            --blu-scuro: #0F2347;
-            --blu-chiaro: #2952A3;
-            --oro: #B8972A;
-            --oro-chiaro: #D4AF37;
-            --bianco: #FFFFFF;
-            --grigio-chiaro: #F5F7FA;
-            --grigio: #6B7280;
-            --testo: #1A1A2E;
-            --verde: #10B981;
-            --rosso: #EF4444;
-            --arancio: #F59E0B;
+            --blu: #1B3A6B; --blu-scuro: #0F2347; --blu-chiaro: #2952A3;
+            --oro: #B8972A; --oro-chiaro: #D4AF37; --bianco: #FFFFFF;
+            --grigio-chiaro: #F5F7FA; --grigio: #6B7280; --testo: #1A1A2E;
+            --verde: #10B981; --rosso: #EF4444; --arancio: #F59E0B;
         }
+        body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color: var(--testo); min-height: 100vh; }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--grigio-chiaro);
-            color: var(--testo);
-            min-height: 100vh;
-        }
-
+        /* ===== NAVBAR AGGIORNATA ===== */
         .navbar {
             background: var(--blu-scuro);
-            padding: 15px 30px;
+            padding: 14px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.25);
         }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 22px;
-            font-weight: 900;
-            color: white;
-            text-decoration: none;
-        }
-
+        .navbar-left { display: flex; align-items: center; gap: 14px; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: white; text-decoration: none; }
         .logo span { color: var(--oro); }
+        .admin-badge { background: var(--oro); color: var(--blu-scuro); font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; letter-spacing: 1px; }
+        .navbar-right { display: flex; align-items: center; gap: 12px; }
+        .btn-nav { background: transparent; color: rgba(255,255,255,0.75); border: 1px solid rgba(255,255,255,0.2); padding: 7px 14px; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; transition: 0.3s; text-decoration: none; font-family: 'Inter', sans-serif; }
+        .btn-nav:hover { color: var(--oro); border-color: var(--oro); }
+        .avatar { width: 36px; height: 36px; background: var(--oro); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--blu-scuro); font-size: 15px; flex-shrink: 0; }
+        .navbar-nome { color: white; font-size: 14px; font-weight: 600; }
 
-        .admin-badge {
-            background: var(--oro);
-            color: white;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 20px;
-            letter-spacing: 1px;
-        }
+        /* LAYOUT */
+        .dashboard-layout { display: flex; min-height: calc(100vh - 65px); }
 
-        .navbar-right {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .avatar {
-            width: 38px;
-            height: 38px;
-            background: var(--oro);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: white;
-            font-size: 16px;
-        }
-
-        .dashboard-layout {
-            display: flex;
-            min-height: calc(100vh - 65px);
-        }
-
-        .sidebar {
-            width: 240px;
-            background: white;
-            border-right: 1px solid #e5e7eb;
-            padding: 25px 0;
-            flex-shrink: 0;
-        }
-
+        /* SIDEBAR */
+        .sidebar { width: 240px; background: white; border-right: 1px solid #e5e7eb; padding: 25px 0; flex-shrink: 0; }
         .sidebar-menu { list-style: none; }
-
-        .sidebar-item {
-            padding: 12px 25px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--grigio);
-            border-left: 3px solid transparent;
-        }
-
+        .sidebar-item { padding: 12px 25px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: 0.2s; font-size: 14px; font-weight: 500; color: var(--grigio); border-left: 3px solid transparent; }
         .sidebar-item:hover { background: var(--grigio-chiaro); color: var(--blu); }
-
-        .sidebar-item.active {
-            background: #EFF6FF;
-            color: var(--blu);
-            border-left-color: var(--blu);
-            font-weight: 600;
-        }
-
+        .sidebar-item.active { background: #EFF6FF; color: var(--blu); border-left-color: var(--blu); font-weight: 600; }
         .sidebar-item .icon { font-size: 18px; }
         .sidebar-divider { height: 1px; background: #e5e7eb; margin: 15px 25px; }
+        .sidebar-label { font-size: 11px; font-weight: 700; color: #9CA3AF; text-transform: uppercase; letter-spacing: 1px; padding: 5px 25px; margin-top: 10px; }
 
-        .sidebar-label {
-            font-size: 11px;
-            font-weight: 700;
-            color: #9CA3AF;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 5px 25px;
-            margin-top: 10px;
-        }
-
-        .main-content {
-            flex: 1;
-            padding: 30px;
-            overflow-y: auto;
-        }
-
+        /* MAIN */
+        .main-content { flex: 1; padding: 30px; overflow-y: auto; }
         .page-header { margin-bottom: 25px; }
-
-        .page-header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            color: var(--blu-scuro);
-            margin-bottom: 5px;
-        }
-
+        .page-header h1 { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--blu-scuro); margin-bottom: 5px; }
         .page-header p { color: var(--grigio); font-size: 14px; }
 
-        .stats-row {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .stat-card {
-            background: white;
-            border-radius: 16px;
-            padding: 20px 25px;
-            flex: 1;
-            min-width: 140px;
-            border: 1px solid #e5e7eb;
-            transition: 0.3s;
-        }
-
+        /* STATS */
+        .stats-row { display: flex; gap: 20px; margin-bottom: 30px; flex-wrap: wrap; }
+        .stat-card { background: white; border-radius: 16px; padding: 20px 25px; flex: 1; min-width: 140px; border: 1px solid #e5e7eb; transition: 0.3s; }
         .stat-card:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.08); transform: translateY(-2px); }
         .stat-card-icon { font-size: 28px; margin-bottom: 10px; }
-
-        .stat-card-numero {
-            font-family: 'Playfair Display', serif;
-            font-size: 30px;
-            font-weight: 900;
-            color: var(--blu-scuro);
-            margin-bottom: 5px;
-        }
-
+        .stat-card-numero { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 900; color: var(--blu-scuro); margin-bottom: 5px; }
         .stat-card-label { font-size: 13px; color: var(--grigio); }
         .stat-card.oro .stat-card-numero { color: var(--oro); }
         .stat-card.verde .stat-card-numero { color: var(--verde); }
         .stat-card.rosso .stat-card-numero { color: var(--rosso); }
 
-        /* ZONE BANNER */
-        .zone-banner {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 25px;
-            flex-wrap: wrap;
-        }
-
-        .zona-card {
-            background: white;
-            border-radius: 14px;
-            padding: 15px 20px;
-            border: 2px solid #e5e7eb;
-            flex: 1;
-            min-width: 200px;
-        }
-
+        /* ZONE */
+        .zone-banner { display: flex; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
+        .zona-card { background: white; border-radius: 14px; padding: 15px 20px; border: 2px solid #e5e7eb; flex: 1; min-width: 200px; }
         .zona-card.lombardia { border-color: var(--blu); }
         .zona-card.emilia { border-color: var(--oro); }
-
-        .zona-title {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--blu-scuro);
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .zona-desc {
-            font-size: 12px;
-            color: var(--grigio);
-            line-height: 1.5;
-        }
+        .zona-title { font-size: 14px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
+        .zona-desc { font-size: 12px; color: var(--grigio); line-height: 1.5; }
 
         /* FILTRI */
-        .filtri-bar {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-
-        .filtro-btn {
-            padding: 8px 16px;
-            border: 1.5px solid #e5e7eb;
-            border-radius: 20px;
-            font-size: 13px;
-            cursor: pointer;
-            background: white;
-            color: var(--grigio);
-            transition: 0.3s;
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-        }
-
+        .filtri-bar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
+        .filtro-btn { padding: 8px 16px; border: 1.5px solid #e5e7eb; border-radius: 20px; font-size: 13px; cursor: pointer; background: white; color: var(--grigio); transition: 0.3s; font-family: 'Inter', sans-serif; font-weight: 500; }
         .filtro-btn.active { background: var(--blu); color: white; border-color: var(--blu); }
         .filtro-btn:hover { border-color: var(--blu); color: var(--blu); }
 
-        .sezione-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--blu-scuro);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .count-badge {
-            background: var(--blu);
-            color: white;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 2px 8px;
-            border-radius: 10px;
-        }
-
+        .sezione-title { font-size: 16px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .count-badge { background: var(--blu); color: white; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; }
         .count-badge.oro { background: var(--oro); }
         .count-badge.rosso { background: var(--rosso); }
 
-        /* RICHIESTA ADMIN CARD */
-        .richiesta-admin-card {
-            background: white;
-            border-radius: 16px;
-            padding: 22px 25px;
-            margin-bottom: 15px;
-            border: 1px solid #e5e7eb;
-            transition: 0.3s;
-            position: relative;
-        }
-
+        /* RICHIESTA CARD */
+        .richiesta-admin-card { background: white; border-radius: 16px; padding: 22px 25px; margin-bottom: 15px; border: 1px solid #e5e7eb; transition: 0.3s; position: relative; }
         .richiesta-admin-card:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
         .richiesta-admin-card.lombardia { border-left: 5px solid var(--blu); }
         .richiesta-admin-card.emilia { border-left: 5px solid var(--oro); }
-
-        .regione-badge {
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            font-size: 10px;
-            font-weight: 700;
-            padding: 3px 10px;
-            border-radius: 10px;
-            color: white;
-        }
-
+        .regione-badge { position: absolute; top: -10px; left: 20px; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 10px; color: white; }
         .regione-badge.lombardia { background: var(--blu); }
         .regione-badge.emilia { background: var(--oro); }
-
-        .richiesta-admin-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .richiesta-categoria {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: #EFF6FF;
-            color: var(--blu);
-            font-size: 12px;
-            font-weight: 600;
-            padding: 4px 12px;
-            border-radius: 20px;
-        }
-
+        .richiesta-admin-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
+        .richiesta-categoria { display: inline-flex; align-items: center; gap: 6px; background: #EFF6FF; color: var(--blu); font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; }
         .richiesta-tempo { font-size: 12px; color: var(--grigio); }
-
-        .richiesta-luogo {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--blu-scuro);
-            margin-bottom: 8px;
-        }
-
-        .richiesta-descrizione {
-            font-size: 14px;
-            color: var(--grigio);
-            line-height: 1.6;
-            margin-bottom: 15px;
-        }
-
-        .richiesta-dettagli {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-        }
-
-        .dettaglio-chip {
-            background: var(--grigio-chiaro);
-            color: var(--testo);
-            font-size: 12px;
-            font-weight: 600;
-            padding: 5px 12px;
-            border-radius: 20px;
-        }
-
+        .richiesta-luogo { font-size: 15px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 8px; }
+        .richiesta-descrizione { font-size: 14px; color: var(--grigio); line-height: 1.6; margin-bottom: 15px; }
+        .richiesta-dettagli { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 15px; }
+        .dettaglio-chip { background: var(--grigio-chiaro); color: var(--testo); font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
         .dettaglio-chip.grande { background: #FEF3C7; color: #92400E; }
+        .richiesta-admin-footer { display: flex; gap: 12px; flex-wrap: wrap; }
 
-        .richiesta-admin-footer {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .btn-tieni {
-            background: var(--blu);
-            color: white;
-            border: none;
-            padding: 10px 22px;
-            border-radius: 25px;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-            font-family: 'Inter', sans-serif;
-        }
-
+        /* BOTTONI */
+        .btn-tieni { background: var(--blu); color: white; border: none; padding: 10px 22px; border-radius: 25px; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; }
         .btn-tieni:hover { background: var(--blu-chiaro); transform: translateY(-1px); }
-
-        .btn-pubblica {
-            background: var(--verde);
-            color: white;
-            border: none;
-            padding: 10px 22px;
-            border-radius: 25px;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-            font-family: 'Inter', sans-serif;
-        }
-
+        .btn-pubblica { background: var(--verde); color: white; border: none; padding: 10px 22px; border-radius: 25px; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; }
         .btn-pubblica:hover { background: #059669; transform: translateY(-1px); }
-
-        .btn-elimina {
-            background: transparent;
-            color: var(--rosso);
-            border: 1.5px solid var(--rosso);
-            padding: 10px 18px;
-            border-radius: 25px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            font-family: 'Inter', sans-serif;
-        }
-
+        .btn-elimina { background: transparent; color: var(--rosso); border: 1.5px solid var(--rosso); padding: 10px 18px; border-radius: 25px; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; }
         .btn-elimina:hover { background: var(--rosso); color: white; }
 
         /* TIMER */
-        .timer-badge {
-            background: #FEF3C7;
-            color: #92400E;
-            font-size: 12px;
-            font-weight: 700;
-            padding: 4px 12px;
-            border-radius: 20px;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
+        .timer-badge { background: #FEF3C7; color: #92400E; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; display: inline-flex; align-items: center; gap: 5px; }
 
         /* POPUP */
-        .popup-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 9999;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
+        .popup-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
         .popup-overlay.show { display: flex; }
-
-        .popup-box {
-            background: white;
-            border-radius: 25px;
-            padding: 40px 35px;
-            max-width: 480px;
-            width: 100%;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.3);
-            text-align: center;
-        }
-
-        .popup-box h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 24px;
-            color: var(--blu-scuro);
-            margin-bottom: 15px;
-        }
-
-        .popup-box p {
-            color: var(--grigio);
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-
-        .popup-buttons {
-            display: flex;
-            gap: 12px;
-        }
-
-        .popup-buttons button {
-            flex: 1;
-            padding: 14px;
-            border-radius: 12px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            border: none;
-            font-family: 'Inter', sans-serif;
-            transition: 0.3s;
-        }
-
+        .popup-box { background: white; border-radius: 25px; padding: 40px 35px; max-width: 480px; width: 100%; box-shadow: 0 25px 60px rgba(0,0,0,0.3); text-align: center; }
+        .popup-box h2 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--blu-scuro); margin-bottom: 15px; }
+        .popup-box p { color: var(--grigio); font-size: 14px; line-height: 1.6; margin-bottom: 25px; }
+        .popup-buttons { display: flex; gap: 12px; }
+        .popup-buttons button { flex: 1; padding: 14px; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; border: none; font-family: 'Inter', sans-serif; transition: 0.3s; }
         .btn-conferma-blu { background: var(--blu); color: white; }
         .btn-conferma-blu:hover { background: var(--blu-chiaro); }
         .btn-conferma-verde { background: var(--verde); color: white; }
@@ -477,341 +132,339 @@
         @media (max-width: 768px) {
             .sidebar { display: none; }
             .main-content { padding: 20px 15px; }
+            .navbar { padding: 12px 16px; }
+            .navbar-nome { display: none; }
+            .btn-nav { font-size: 11px; padding: 5px 10px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <div style="display:flex;align-items:center;gap:15px">
-            <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
-            <span class="admin-badge">🔧 ADMIN</span>
-        </div>
-        <div class="navbar-right">
-            <span style="color:white;font-size:14px;font-weight:600">Rossoni</span>
-            <div class="avatar">R</div>
-        </div>
-    </nav>
-
-    <div class="dashboard-layout">
-
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
-            <ul class="sidebar-menu">
-                <li class="sidebar-item active">
-                    <span class="icon">📋</span> Richieste Priority
-                </li>
-                <li class="sidebar-item" onclick="alert('In arrivo!')">
-                    <span class="icon">✅</span> Richieste pubblicate
-                </li>
-                <li class="sidebar-item" onclick="alert('In arrivo!')">
-                    <span class="icon">💼</span> Lavori miei
-                </li>
-                <div class="sidebar-divider"></div>
-                <div class="sidebar-label">Piattaforma</div>
-                <li class="sidebar-item" onclick="alert('In arrivo!')">
-                    <span class="icon">👥</span> Utenti
-                </li>
-                <li class="sidebar-item" onclick="alert('In arrivo!')">
-                    <span class="icon">🚫</span> Ban list
-                </li>
-                <li class="sidebar-item" onclick="alert('In arrivo!')">
-                    <span class="icon">💰</span> Guadagni
-                </li>
-                <li class="sidebar-item" onclick="alert('In arrivo!')">
-                    <span class="icon">📊</span> Statistiche
-                </li>
-                <div class="sidebar-divider"></div>
-                <li class="sidebar-item" onclick="window.location.href='index.html'">
-                    <span class="icon">🚪</span> Esci
-                </li>
-            </ul>
-        </aside>
-
-        <!-- MAIN -->
-        <main class="main-content">
-
-            <!-- HEADER -->
-            <div class="page-header">
-                <h1>🔧 Pannello <span style="color:var(--oro)">Admin</span></h1>
-                <p>Le richieste arrivano prima a te — decidi cosa tenere e cosa pubblicare</p>
-            </div>
-
-            <!-- STATS -->
-            <div class="stats-row">
-                <div class="stat-card oro">
-                    <div class="stat-card-icon">⏳</div>
-                    <div class="stat-card-numero">5</div>
-                    <div class="stat-card-label">In attesa di decisione</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-card-icon">💼</div>
-                    <div class="stat-card-numero">3</div>
-                    <div class="stat-card-label">Tenute per te</div>
-                </div>
-                <div class="stat-card verde">
-                    <div class="stat-card-icon">✅</div>
-                    <div class="stat-card-numero">12</div>
-                    <div class="stat-card-label">Pubblicate</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-card-icon">📊</div>
-                    <div class="stat-card-numero">87</div>
-                    <div class="stat-card-label">Totale richieste gestite</div>
-                </div>
-            </div>
-
-            <!-- ZONE -->
-            <div class="zone-banner">
-                <div class="zona-card lombardia">
-                    <div class="zona-title">🔵 Lombardia</div>
-                    <div class="zona-desc">Tutte le richieste delle tue categorie arrivano prima a te, indipendentemente dai mq.</div>
-                </div>
-                <div class="zona-card emilia">
-                    <div class="zona-title">🟡 Emilia Romagna</div>
-                    <div class="zona-desc">Solo richieste oltre <strong>200mq calpestabili</strong> arrivano prima a te.</div>
-                </div>
-                <div class="zona-card">
-                    <div class="zona-title">📋 Le tue categorie</div>
-                    <div class="zona-desc">Tinteggiatura • Decorazioni • Ristrutturazioni • Bagno • Resine • Microcemento • SPC • Laminato • Impermeabilizzazioni • Cappotti • Cartongesso • Isolamenti</div>
-                </div>
-            </div>
-
-            <!-- FILTRI -->
-            <div class="filtri-bar">
-                <button class="filtro-btn active" onclick="filtra(this)">Tutte (5)</button>
-                <button class="filtro-btn" onclick="filtra(this)">🔵 Lombardia (3)</button>
-                <button class="filtro-btn" onclick="filtra(this)">🟡 Emilia R. (2)</button>
-                <button class="filtro-btn" onclick="filtra(this)">🏗️ Ristrutturazioni</button>
-                <button class="filtro-btn" onclick="filtra(this)">🎨 Tinteggiatura</button>
-                <button class="filtro-btn" onclick="filtra(this)">🚿 Bagno</button>
-            </div>
-
-            <!-- RICHIESTE IN ATTESA -->
-            <div class="sezione-title">
-                ⏳ In attesa di decisione
-                <span class="count-badge oro">5 nuove</span>
-            </div>
-
-            <!-- RICHIESTA 1 - LOMBARDIA GRANDE -->
-            <div class="richiesta-admin-card lombardia">
-                <div class="regione-badge lombardia">🔵 LOMBARDIA</div>
-                <div class="richiesta-admin-header">
-                    <span class="richiesta-categoria">🏗️ Ristrutturazione completa</span>
-                    <div style="display:flex;gap:10px;align-items:center">
-                        <span class="timer-badge">⏰ 45 min rimasti</span>
-                        <span class="richiesta-tempo">Arrivata 15 min fa</span>
-                    </div>
-                </div>
-                <div class="richiesta-luogo">📍 Milano — Zona Brera</div>
-                <div class="richiesta-descrizione">
-                    Ristrutturazione completa appartamento 320mq al piano nobile. Rifacimento completo di tutti i pavimenti, tinteggiatura totale con finiture pregiate, ristrutturazione 3 bagni, nuovo impianto elettrico e idraulico. Budget importante, cercano azienda seria e referenziata.
-                </div>
-                <div class="richiesta-dettagli">
-                    <span class="dettaglio-chip grande">📐 320mq calpestabili</span>
-                    <span class="dettaglio-chip">🔴 Urgente</span>
-                    <span class="dettaglio-chip">💰 Budget elevato</span>
-                    <span class="dettaglio-chip">🏠 Piano nobile</span>
-                </div>
-                <div class="richiesta-admin-footer">
-                    <button class="btn-tieni" onclick="apriPopup('tieni', 'Ristrutturazione 320mq — Brera, Milano')">💼 Tengo per me</button>
-                    <button class="btn-pubblica" onclick="apriPopup('pubblica', 'Ristrutturazione 320mq — Brera, Milano')">✅ Pubblica sulla piattaforma</button>
-                    <button class="btn-elimina" onclick="eliminaRichiesta(this)">🗑️ Elimina</button>
-                </div>
-            </div>
-
-            <!-- RICHIESTA 2 - LOMBARDIA -->
-            <div class="richiesta-admin-card lombardia">
-                <div class="regione-badge lombardia">🔵 LOMBARDIA</div>
-                <div class="richiesta-admin-header">
-                    <span class="richiesta-categoria">🎨 Tinteggiatura e decorazioni</span>
-                    <div style="display:flex;gap:10px;align-items:center">
-                        <span class="timer-badge">⏰ 2 ore rimaste</span>
-                        <span class="richiesta-tempo">Arrivata 1 ora fa</span>
-                    </div>
-                </div>
-                <div class="richiesta-luogo">📍 Bergamo — Città Alta</div>
-                <div class="richiesta-descrizione">
-                    Tinteggiatura completa villa bifamiliare con decorazioni particolari in soggiorno. Totale circa 280mq. Pitture pregiate, effetti decorativi sulle pareti principali. Sopralluogo urgente richiesto.
-                </div>
-                <div class="richiesta-dettagli">
-                    <span class="dettaglio-chip grande">📐 280mq calpestabili</span>
-                    <span class="dettaglio-chip">🔴 Urgente</span>
-                    <span class="dettaglio-chip">✨ Decorazioni speciali</span>
-                </div>
-                <div class="richiesta-admin-footer">
-                    <button class="btn-tieni" onclick="apriPopup('tieni', 'Tinteggiatura villa 280mq — Bergamo')">💼 Tengo per me</button>
-                    <button class="btn-pubblica" onclick="apriPopup('pubblica', 'Tinteggiatura villa 280mq — Bergamo')">✅ Pubblica sulla piattaforma</button>
-                    <button class="btn-elimina" onclick="eliminaRichiesta(this)">🗑️ Elimina</button>
-                </div>
-            </div>
-
-            <!-- RICHIESTA 3 - EMILIA ROMAGNA GRANDE -->
-            <div class="richiesta-admin-card emilia">
-                <div class="regione-badge emilia">🟡 EMILIA ROMAGNA</div>
-                <div class="richiesta-admin-header">
-                    <span class="richiesta-categoria">🚿 Ristrutturazione bagno</span>
-                    <div style="display:flex;gap:10px;align-items:center">
-                        <span class="timer-badge">⏰ 3 ore rimaste</span>
-                        <span class="richiesta-tempo">Arrivata 2 ore fa</span>
-                    </div>
-                </div>
-                <div class="richiesta-luogo">📍 Bologna — Centro</div>
-                <div class="richiesta-descrizione">
-                    Villa con 4 bagni da ristrutturare completamente, più tinteggiatura totale dell'immobile. Superficie totale 450mq. Cercano impresa unica per tutto il lavoro. Progetto da avviare il prima possibile.
-                </div>
-                <div class="richiesta-dettagli">
-                    <span class="dettaglio-chip grande">📐 450mq — Sopra soglia 200mq ✅</span>
-                    <span class="dettaglio-chip">🔴 Urgente</span>
-                    <span class="dettaglio-chip">🏠 4 bagni</span>
-                    <span class="dettaglio-chip">💰 Budget importante</span>
-                </div>
-                <div class="richiesta-admin-footer">
-                    <button class="btn-tieni" onclick="apriPopup('tieni', 'Villa 450mq 4 bagni — Bologna')">💼 Tengo per me</button>
-                    <button class="btn-pubblica" onclick="apriPopup('pubblica', 'Villa 450mq 4 bagni — Bologna')">✅ Pubblica sulla piattaforma</button>
-                    <button class="btn-elimina" onclick="eliminaRichiesta(this)">🗑️ Elimina</button>
-                </div>
-            </div>
-
-            <!-- RICHIESTA 4 - LOMBARDIA -->
-            <div class="richiesta-admin-card lombardia">
-                <div class="regione-badge lombardia">🔵 LOMBARDIA</div>
-                <div class="richiesta-admin-header">
-                    <span class="richiesta-categoria">🧱 Resina e microcemento</span>
-                    <div style="display:flex;gap:10px;align-items:center">
-                        <span class="timer-badge">⏰ 4 ore rimaste</span>
-                        <span class="richiesta-tempo">Arrivata 3 ore fa</span>
-                    </div>
-                </div>
-                <div class="richiesta-luogo">📍 Monza — Zona residenziale</div>
-                <div class="richiesta-descrizione">
-                    Posa resina epossidica su pavimento garage e zona living open space. Microcemento su pareti bagno padronale. Circa 150mq totali. Cercano professionisti esperti con portfolio.
-                </div>
-                <div class="richiesta-dettagli">
-                    <span class="dettaglio-chip">📐 150mq</span>
-                    <span class="dettaglio-chip">🟡 Entro questo mese</span>
-                    <span class="dettaglio-chip">🎨 Resina + Microcemento</span>
-                </div>
-                <div class="richiesta-admin-footer">
-                    <button class="btn-tieni" onclick="apriPopup('tieni', 'Resina e microcemento 150mq — Monza')">💼 Tengo per me</button>
-                    <button class="btn-pubblica" onclick="apriPopup('pubblica', 'Resina e microcemento 150mq — Monza')">✅ Pubblica sulla piattaforma</button>
-                    <button class="btn-elimina" onclick="eliminaRichiesta(this)">🗑️ Elimina</button>
-                </div>
-            </div>
-
-            <!-- RICHIESTA 5 - EMILIA ROMAGNA GRANDE -->
-            <div class="richiesta-admin-card emilia">
-                <div class="regione-badge emilia">🟡 EMILIA ROMAGNA</div>
-                <div class="richiesta-admin-header">
-                    <span class="richiesta-categoria">🏗️ Impermeabilizzazione + Cappotto</span>
-                    <div style="display:flex;gap:10px;align-items:center">
-                        <span class="timer-badge">⏰ 5 ore rimaste</span>
-                        <span class="richiesta-tempo">Arrivata 4 ore fa</span>
-                    </div>
-                </div>
-                <div class="richiesta-luogo">📍 Modena — Zona industriale</div>
-                <div class="richiesta-descrizione">
-                    Capannone industriale da impermeabilizzare sul tetto (800mq) e cappotto termico sulle pareti esterne. Superficie totale edificio 600mq. Lavoro urgente per infiltrazioni evidenti.
-                </div>
-                <div class="richiesta-dettagli">
-                    <span class="dettaglio-chip grande">📐 600mq — Sopra soglia 200mq ✅</span>
-                    <span class="dettaglio-chip">🔴 Urgente — Infiltrazioni</span>
-                    <span class="dettaglio-chip">🏭 Industriale</span>
-                    <span class="dettaglio-chip">💰 Budget elevato</span>
-                </div>
-                <div class="richiesta-admin-footer">
-                    <button class="btn-tieni" onclick="apriPopup('tieni', 'Impermeabilizzazione capannone 600mq — Modena')">💼 Tengo per me</button>
-                    <button class="btn-pubblica" onclick="apriPopup('pubblica', 'Impermeabilizzazione capannone 600mq — Modena')">✅ Pubblica sulla piattaforma</button>
-                    <button class="btn-elimina" onclick="eliminaRichiesta(this)">🗑️ Elimina</button>
-                </div>
-            </div>
-
-        </main>
+<!-- NAVBAR AGGIORNATA -->
+<nav class="navbar">
+    <div class="navbar-left">
+        <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
+        <span class="admin-badge">🔧 ADMIN</span>
     </div>
+    <div class="navbar-right">
+        <a href="dashboard-pro.html" class="btn-nav">📊 Dashboard Pro</a>
+        <a href="index.html" class="btn-nav">🏠 Home</a>
+        <span class="navbar-nome">Rossoni</span>
+        <div class="avatar">R</div>
+    </div>
+</nav>
 
-    <!-- POPUP TIENI -->
-    <div class="popup-overlay" id="popupTieni">
-        <div class="popup-box">
-            <div style="font-size:60px;margin-bottom:15px">💼</div>
-            <h2>Tieni per te</h2>
-            <p id="popup-tieni-text">Stai per tenere questa richiesta per la tua impresa. Non sarà visibile agli altri professionisti sulla piattaforma.</p>
-            <div class="popup-buttons">
-                <button class="btn-annulla-gray" onclick="chiudiPopup('popupTieni')">Annulla</button>
-                <button class="btn-conferma-blu" onclick="confermaAzione('tieni')">💼 Confermo, è mia!</button>
+<div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <ul class="sidebar-menu">
+            <li class="sidebar-item active">
+                <span class="icon">📋</span> Richieste Priority
+            </li>
+            <li class="sidebar-item" onclick="alert('In arrivo!')">
+                <span class="icon">✅</span> Richieste pubblicate
+            </li>
+            <li class="sidebar-item" onclick="alert('In arrivo!')">
+                <span class="icon">💼</span> Lavori miei
+            </li>
+            <div class="sidebar-divider"></div>
+            <div class="sidebar-label">Piattaforma</div>
+            <li class="sidebar-item" onclick="alert('In arrivo!')">
+                <span class="icon">👥</span> Utenti
+            </li>
+            <li class="sidebar-item" onclick="alert('In arrivo!')">
+                <span class="icon">🚫</span> Ban list
+            </li>
+            <li class="sidebar-item" onclick="alert('In arrivo!')">
+                <span class="icon">💰</span> Guadagni
+            </li>
+            <li class="sidebar-item" onclick="alert('In arrivo!')">
+                <span class="icon">📊</span> Statistiche
+            </li>
+            <div class="sidebar-divider"></div>
+            <li class="sidebar-item" onclick="window.location.href='index.html'">
+                <span class="icon">🚪</span> Esci
+            </li>
+        </ul>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main-content">
+
+        <div class="page-header">
+            <h1>🔧 Pannello <span style="color:var(--oro)">Admin</span></h1>
+            <p>Le richieste arrivano prima a te — decidi cosa tenere e cosa pubblicare</p>
+        </div>
+
+        <!-- STATS -->
+        <div class="stats-row">
+            <div class="stat-card oro">
+                <div class="stat-card-icon">⏳</div>
+                <div class="stat-card-numero">5</div>
+                <div class="stat-card-label">In attesa di decisione</div>
             </div>
+            <div class="stat-card">
+                <div class="stat-card-icon">💼</div>
+                <div class="stat-card-numero">3</div>
+                <div class="stat-card-label">Tenute per te</div>
+            </div>
+            <div class="stat-card verde">
+                <div class="stat-card-icon">✅</div>
+                <div class="stat-card-numero">12</div>
+                <div class="stat-card-label">Pubblicate</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-card-icon">📊</div>
+                <div class="stat-card-numero">87</div>
+                <div class="stat-card-label">Totale richieste gestite</div>
+            </div>
+        </div>
+
+        <!-- ZONE -->
+        <div class="zone-banner">
+            <div class="zona-card lombardia">
+                <div class="zona-title">🔵 Lombardia</div>
+                <div class="zona-desc">Tutte le richieste delle tue categorie arrivano prima a te, indipendentemente dai mq.</div>
+            </div>
+            <div class="zona-card emilia">
+                <div class="zona-title">🟡 Emilia Romagna</div>
+                <div class="zona-desc">Solo richieste oltre <strong>200mq calpestabili</strong> arrivano prima a te.</div>
+            </div>
+            <div class="zona-card">
+                <div class="zona-title">📋 Le tue categorie</div>
+                <div class="zona-desc">Tinteggiatura • Decorazioni • Ristrutturazioni • Bagno • Resine • Microcemento • SPC • Laminato • Impermeabilizzazioni • Cappotti • Cartongesso • Isolamenti</div>
+            </div>
+        </div>
+
+        <!-- FILTRI -->
+        <div class="filtri-bar">
+            <button class="filtro-btn active" onclick="filtra(this)">Tutte (5)</button>
+            <button class="filtro-btn" onclick="filtra(this)">🔵 Lombardia (3)</button>
+            <button class="filtro-btn" onclick="filtra(this)">🟡 Emilia R. (2)</button>
+            <button class="filtro-btn" onclick="filtra(this)">🏗️ Ristrutturazioni</button>
+            <button class="filtro-btn" onclick="filtra(this)">🎨 Tinteggiatura</button>
+            <button class="filtro-btn" onclick="filtra(this)">🚿 Bagno</button>
+        </div>
+
+        <div class="sezione-title">
+            ⏳ In attesa di decisione
+            <span class="count-badge oro">5 nuove</span>
+        </div>
+
+        <!-- RICHIESTA 1 -->
+        <div class="richiesta-admin-card lombardia">
+            <div class="regione-badge lombardia">🔵 LOMBARDIA</div>
+            <div class="richiesta-admin-header">
+                <span class="richiesta-categoria">🏗️ Ristrutturazione completa</span>
+                <div style="display:flex;gap:10px;align-items:center">
+                    <span class="timer-badge">⏰ 45 min rimasti</span>
+                    <span class="richiesta-tempo">Arrivata 15 min fa</span>
+                </div>
+            </div>
+            <div class="richiesta-luogo">📍 Milano — Zona Brera</div>
+            <div class="richiesta-descrizione">Ristrutturazione completa appartamento 320mq al piano nobile. Rifacimento completo di tutti i pavimenti, tinteggiatura totale con finiture pregiate, ristrutturazione 3 bagni, nuovo impianto elettrico e idraulico. Budget importante, cercano azienda seria e referenziata.</div>
+            <div class="richiesta-dettagli">
+                <span class="dettaglio-chip grande">📐 320mq calpestabili</span>
+                <span class="dettaglio-chip">🔴 Urgente</span>
+                <span class="dettaglio-chip">💰 Budget elevato</span>
+                <span class="dettaglio-chip">🏠 Piano nobile</span>
+            </div>
+            <div class="richiesta-admin-footer">
+                <button class="btn-tieni" onclick="apriPopup('tieni', 'Ristrutturazione 320mq — Brera, Milano')">💼 Tengo per me</button>
+                <button class="btn-pubblica" onclick="apriPopup('pubblica', 'Ristrutturazione 320mq — Brera, Milano')">✅ Pubblica sulla piattaforma</button>
+                <button class="btn-elimina" onclick="eliminaRichiesta(this)">🗑️ Elimina</button>
+            </div>
+        </div>
+
+        <!-- RICHIESTA 2 -->
+        <div class="richiesta-admin-card lombardia">
+            <div class="regione-badge lombardia">🔵 LOMBARDIA</div>
+            <div class="richiesta-admin-header">
+                <span class="richiesta-categoria">🎨 Tinteggiatura e decorazioni</span>
+                <div style="display:flex;gap:10px;align-items:center">
+                    <span class="timer-badge">⏰ 2 ore rimaste</span>
+                    <span class="richiesta-tempo">Arrivata 1 ora fa</span>
+                </div>
+            </div>
+            <div class="richiesta-luogo">📍 Bergamo — Città Alta</div>
+            <div class="richiesta-descrizione">Tinteggiatura completa villa bifamiliare con decorazioni particolari in soggiorno. Totale circa 280mq. Pitture pregiate, effetti decorativi sulle pareti principali. Sopralluogo urgente richiesto.</div>
+            <div class="richiesta-dettagli">
+                <span class="dettaglio-chip grande">📐 280mq calpestabili</span>
+                <span class="dettaglio-chip">🔴 Urgente</span>
+                <span class="dettaglio-chip">✨ Decorazioni speciali</span>
+            </div>
+            <div class="richiesta-admin-footer">
+                <button class="btn-tieni" onclick="apriPopup('tieni', 'Tinteggiatura villa 280mq — Bergamo')">💼 Tengo per me</button>
+                <button class="btn-pubblica" onclick="apriPopup('pubblica', 'Tinteggiatura villa 280mq — Bergamo')">✅ Pubblica sulla piattaforma</button>
+                <button class="btn-elimina" onclick="eliminaRichiesta(this)">🗑️ Elimina</button>
+            </div>
+        </div>
+
+        <!-- RICHIESTA 3 -->
+        <div class="richiesta-admin-card emilia">
+            <div class="regione-badge emilia">🟡 EMILIA ROMAGNA</div>
+            <div class="richiesta-admin-header">
+                <span class="richiesta-categoria">🚿 Ristrutturazione bagno</span>
+                <div style="display:flex;gap:10px;align-items:center">
+                    <span class="timer-badge">⏰ 3 ore rimaste</span>
+                    <span class="richiesta-tempo">Arrivata 2 ore fa</span>
+                </div>
+            </div>
+            <div class="richiesta-luogo">📍 Bologna — Centro</div>
+            <div class="richiesta-descrizione">Villa con 4 bagni da ristrutturare completamente, più tinteggiatura totale dell'immobile. Superficie totale 450mq. Cercano impresa unica per tutto il lavoro. Progetto da avviare il prima possibile.</div>
+            <div class="richiesta-dettagli">
+                <span class="dettaglio-chip grande">📐 450mq — Sopra soglia 200mq ✅</span>
+                <span class="dettaglio-chip">🔴 Urgente</span>
+                <span class="dettaglio-chip">🏠 4 bagni</span>
+                <span class="dettaglio-chip">💰 Budget importante</span>
+            </div>
+            <div class="richiesta-admin-footer">
+                <button class="btn-tieni" onclick="apriPopup('tieni', 'Villa 450mq 4 bagni — Bologna')">💼 Tengo per me</button>
+                <button class="btn-pubblica" onclick="apriPopup('pubblica', 'Villa 450mq 4 bagni — Bologna')">✅ Pubblica sulla piattaforma</button>
+                <button class="btn-elimina" onclick="eliminaRichiesta(this)">🗑️ Elimina</button>
+            </div>
+        </div>
+
+        <!-- RICHIESTA 4 -->
+        <div class="richiesta-admin-card lombardia">
+            <div class="regione-badge lombardia">🔵 LOMBARDIA</div>
+            <div class="richiesta-admin-header">
+                <span class="richiesta-categoria">🧱 Resina e microcemento</span>
+                <div style="display:flex;gap:10px;align-items:center">
+                    <span class="timer-badge">⏰ 4 ore rimaste</span>
+                    <span class="richiesta-tempo">Arrivata 3 ore fa</span>
+                </div>
+            </div>
+            <div class="richiesta-luogo">📍 Monza — Zona residenziale</div>
+            <div class="richiesta-descrizione">Posa resina epossidica su pavimento garage e zona living open space. Microcemento su pareti bagno padronale. Circa 150mq totali. Cercano professionisti esperti con portfolio.</div>
+            <div class="richiesta-dettagli">
+                <span class="dettaglio-chip">📐 150mq</span>
+                <span class="dettaglio-chip">🟡 Entro questo mese</span>
+                <span class="dettaglio-chip">🎨 Resina + Microcemento</span>
+            </div>
+            <div class="richiesta-admin-footer">
+                <button class="btn-tieni" onclick="apriPopup('tieni', 'Resina e microcemento 150mq — Monza')">💼 Tengo per me</button>
+                <button class="btn-pubblica" onclick="apriPopup('pubblica', 'Resina e microcemento 150mq — Monza')">✅ Pubblica sulla piattaforma</button>
+                <button class="btn-elimina" onclick="eliminaRichiesta(this)">🗑️ Elimina</button>
+            </div>
+        </div>
+
+        <!-- RICHIESTA 5 -->
+        <div class="richiesta-admin-card emilia">
+            <div class="regione-badge emilia">🟡 EMILIA ROMAGNA</div>
+            <div class="richiesta-admin-header">
+                <span class="richiesta-categoria">🏗️ Impermeabilizzazione + Cappotto</span>
+                <div style="display:flex;gap:10px;align-items:center">
+                    <span class="timer-badge">⏰ 5 ore rimaste</span>
+                    <span class="richiesta-tempo">Arrivata 4 ore fa</span>
+                </div>
+            </div>
+            <div class="richiesta-luogo">📍 Modena — Zona industriale</div>
+            <div class="richiesta-descrizione">Capannone industriale da impermeabilizzare sul tetto (800mq) e cappotto termico sulle pareti esterne. Superficie totale edificio 600mq. Lavoro urgente per infiltrazioni evidenti.</div>
+            <div class="richiesta-dettagli">
+                <span class="dettaglio-chip grande">📐 600mq — Sopra soglia 200mq ✅</span>
+                <span class="dettaglio-chip">🔴 Urgente — Infiltrazioni</span>
+                <span class="dettaglio-chip">🏭 Industriale</span>
+                <span class="dettaglio-chip">💰 Budget elevato</span>
+            </div>
+            <div class="richiesta-admin-footer">
+                <button class="btn-tieni" onclick="apriPopup('tieni', 'Impermeabilizzazione capannone 600mq — Modena')">💼 Tengo per me</button>
+                <button class="btn-pubblica" onclick="apriPopup('pubblica', 'Impermeabilizzazione capannone 600mq — Modena')">✅ Pubblica sulla piattaforma</button>
+                <button class="btn-elimina" onclick="eliminaRichiesta(this)">🗑️ Elimina</button>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<!-- POPUP TIENI -->
+<div class="popup-overlay" id="popupTieni">
+    <div class="popup-box">
+        <div style="font-size:60px;margin-bottom:15px">💼</div>
+        <h2>Tieni per te</h2>
+        <p id="popup-tieni-text">Stai per tenere questa richiesta per la tua impresa. Non sarà visibile agli altri professionisti sulla piattaforma.</p>
+        <div class="popup-buttons">
+            <button class="btn-annulla-gray" onclick="chiudiPopup('popupTieni')">Annulla</button>
+            <button class="btn-conferma-blu" onclick="confermaAzione('tieni')">💼 Confermo, è mia!</button>
         </div>
     </div>
+</div>
 
-    <!-- POPUP PUBBLICA -->
-    <div class="popup-overlay" id="popupPubblica">
-        <div class="popup-box">
-            <div style="font-size:60px;margin-bottom:15px">✅</div>
-            <h2>Pubblica sulla piattaforma</h2>
-            <p id="popup-pubblica-text">Stai per pubblicare questa richiesta. Sarà visibile a tutti i professionisti della zona che potranno acquistare il contatto.</p>
-            <div class="popup-buttons">
-                <button class="btn-annulla-gray" onclick="chiudiPopup('popupPubblica')">Annulla</button>
-                <button class="btn-conferma-verde" onclick="confermaAzione('pubblica')">✅ Pubblica ora</button>
-            </div>
+<!-- POPUP PUBBLICA -->
+<div class="popup-overlay" id="popupPubblica">
+    <div class="popup-box">
+        <div style="font-size:60px;margin-bottom:15px">✅</div>
+        <h2>Pubblica sulla piattaforma</h2>
+        <p id="popup-pubblica-text">Stai per pubblicare questa richiesta. Sarà visibile a tutti i professionisti della zona che potranno acquistare il contatto.</p>
+        <div class="popup-buttons">
+            <button class="btn-annulla-gray" onclick="chiudiPopup('popupPubblica')">Annulla</button>
+            <button class="btn-conferma-verde" onclick="confermaAzione('pubblica')">✅ Pubblica ora</button>
         </div>
     </div>
+</div>
 
-    <script>
-        let richiestaCorrente = '';
-        let cardCorrente = null;
+<script>
+    let richiestaCorrente = '';
+    let cardCorrente = null;
 
-        function filtra(btn) {
-            document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+    function filtra(btn) {
+        document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    }
+
+    function apriPopup(tipo, richiesta) {
+        richiestaCorrente = richiesta;
+        cardCorrente = event.target.closest('.richiesta-admin-card');
+        if (tipo === 'tieni') {
+            document.getElementById('popup-tieni-text').textContent =
+                'Stai per tenere per te: "' + richiesta + '". Non sarà visibile agli altri professionisti.';
+            document.getElementById('popupTieni').classList.add('show');
+        } else {
+            document.getElementById('popup-pubblica-text').textContent =
+                'Stai per pubblicare: "' + richiesta + '". Sarà visibile a tutti i professionisti della zona.';
+            document.getElementById('popupPubblica').classList.add('show');
         }
+    }
 
-        function apriPopup(tipo, richiesta) {
-            richiestaCorrente = richiesta;
-            cardCorrente = event.target.closest('.richiesta-admin-card');
+    function chiudiPopup(id) {
+        document.getElementById(id).classList.remove('show');
+    }
 
-            if (tipo === 'tieni') {
-                document.getElementById('popup-tieni-text').textContent =
-                    'Stai per tenere per te: "' + richiesta + '". Non sarà visibile agli altri professionisti.';
-                document.getElementById('popupTieni').classList.add('show');
-            } else {
-                document.getElementById('popup-pubblica-text').textContent =
-                    'Stai per pubblicare: "' + richiesta + '". Sarà visibile a tutti i professionisti della zona.';
-                document.getElementById('popupPubblica').classList.add('show');
-            }
+    function confermaAzione(tipo) {
+        chiudiPopup(tipo === 'tieni' ? 'popupTieni' : 'popupPubblica');
+        if (cardCorrente) {
+            cardCorrente.style.opacity = '0';
+            cardCorrente.style.transform = 'translateX(20px)';
+            cardCorrente.style.transition = '0.3s';
+            setTimeout(() => {
+                cardCorrente.remove();
+                if (tipo === 'tieni') {
+                    alert('✅ Richiesta assegnata a Rossoni Edilizia!\n\nLa trovi nella sezione "Lavori miei".');
+                } else {
+                    alert('✅ Richiesta pubblicata sulla piattaforma!\n\nI professionisti della zona possono ora vederla.');
+                }
+            }, 300);
         }
+    }
 
-        function chiudiPopup(id) {
-            document.getElementById(id).classList.remove('show');
+    function eliminaRichiesta(btn) {
+        const card = btn.closest('.richiesta-admin-card');
+        if (confirm('Sei sicuro di voler eliminare questa richiesta?')) {
+            card.style.opacity = '0';
+            card.style.transform = 'translateX(-20px)';
+            card.style.transition = '0.3s';
+            setTimeout(() => card.remove(), 300);
         }
+    }
 
-        function confermaAzione(tipo) {
-            chiudiPopup(tipo === 'tieni' ? 'popupTieni' : 'popupPubblica');
-
-            if (cardCorrente) {
-                cardCorrente.style.opacity = '0';
-                cardCorrente.style.transform = 'translateX(20px)';
-                cardCorrente.style.transition = '0.3s';
-                setTimeout(() => {
-                    cardCorrente.remove();
-                    if (tipo === 'tieni') {
-                        alert('✅ Richiesta assegnata a Rossoni Edilizia!\n\nLa trovi nella sezione "Lavori miei".');
-                    } else {
-                        alert('✅ Richiesta pubblicata sulla piattaforma!\n\nI professionisti della zona possono ora vederla.');
-                    }
-                }, 300);
-            }
+    // Chiudi popup con ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            chiudiPopup('popupTieni');
+            chiudiPopup('popupPubblica');
         }
-
-        function eliminaRichiesta(btn) {
-            const card = btn.closest('.richiesta-admin-card');
-            if (confirm('Sei sicuro di voler eliminare questa richiesta?')) {
-                card.style.opacity = '0';
-                card.style.transform = 'translateX(-20px)';
-                card.style.transition = '0.3s';
-                setTimeout(() => card.remove(), 300);
-            }
-        }
-    </script>
-
+    });
+</script>
 </body>
 </html>
