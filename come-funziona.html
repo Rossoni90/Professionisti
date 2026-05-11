@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professionisti — Come Funziona</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --blu: #1B3A6B; --blu-scuro: #0F2347; --blu-chiaro: #2952A3;
+            --oro: #B8972A; --oro-chiaro: #D4AF37; --bianco: #FFFFFF;
+            --grigio-chiaro: #F5F7FA; --grigio: #6B7280; --testo: #1A1A2E;
+            --verde: #10B981; --rosso: #EF4444; --arancio: #F59E0B;
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color: var(--testo); min-height: 100vh; }
+
+        /* NAVBAR */
+        .navbar { background: var(--blu-scuro); padding: 14px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 15px rgba(0,0,0,0.25); position: sticky; top: 0; z-index: 100; }
+        .logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: white; text-decoration: none; }
+        .logo span { color: var(--oro); }
+        .navbar-links { display: flex; gap: 10px; align-items: center; }
+        .btn-nav { background: transparent; color: rgba(255,255,255,0.75); border: 1px solid rgba(255,255,255,0.2); padding: 7px 14px; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; transition: 0.3s; text-decoration: none; }
+        .btn-nav:hover { color: var(--oro); border-color: var(--oro); }
+        .btn-nav-cta { background: var(--oro); color: var(--blu-scuro); border: none; padding: 8px 18px; border-radius: 20px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.3s; text-decoration: none; }
+        .btn-nav-cta:hover { background: var(--oro-chiaro); transform: translateY(-1px); }
+
+        /* HERO */
+        .hero { background: linear-gradient(135deg, var(--blu-scuro) 0%, var(--blu) 100%); padding: 70px 30px 80px; text-align: center; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 900; color: white; margin-bottom: 16px; line-height: 1.2; }
+        .hero h1 span { color: var(--oro); }
+        .hero p { color: rgba(255,255,255,0.75); font-size: 17px; max-width: 580px; margin: 0 auto 30px; line-height: 1.7; }
+        .hero-tabs { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .hero-tab { padding: 12px 28px; border-radius: 25px; font-size: 15px; font-weight: 700; cursor: pointer; transition: 0.3s; border: 2px solid rgba(255,255,255,0.3); color: white; background: transparent; font-family: 'Inter', sans-serif; }
+        .hero-tab.active { background: var(--oro); border-color: var(--oro); color: var(--blu-scuro); }
+        .hero-tab:hover:not(.active) { border-color: white; }
+
+        /* CONTAINER */
+        .container { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+
+        /* SEZIONE */
+        .sezione { padding: 60px 0; }
+        .sezione-alt { background: white; }
+        .sezione-inner { max-width: 860px; margin: 0 auto; padding: 60px 20px; }
+
+        .sezione-label { font-size: 12px; font-weight: 700; color: var(--oro); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+        .sezione-titolo { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; color: var(--blu-scuro); margin-bottom: 14px; }
+        .sezione-sub { font-size: 16px; color: var(--grigio); line-height: 1.7; margin-bottom: 40px; max-width: 620px; }
+
+        /* STEPS */
+        .steps { display: flex; flex-direction: column; gap: 0; }
+        .step { display: flex; gap: 30px; align-items: flex-start; position: relative; padding-bottom: 40px; }
+        .step:last-child { padding-bottom: 0; }
+        .step-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+        .step-num { width: 52px; height: 52px; border-radius: 50%; background: var(--blu); color: white; font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 15px rgba(27,58,107,0.3); }
+        .step-num.oro { background: var(--oro); color: var(--blu-scuro); box-shadow: 0 4px 15px rgba(184,151,42,0.3); }
+        .step-num.verde { background: var(--verde); box-shadow: 0 4px 15px rgba(16,185,129,0.3); }
+        .step-line { width: 2px; flex: 1; background: linear-gradient(to bottom, #e5e7eb, transparent); margin-top: 8px; min-height: 40px; }
+        .step:last-child .step-line { display: none; }
+        .step-body { flex: 1; padding-top: 10px; }
+        .step-icon { font-size: 28px; margin-bottom: 8px; }
+        .step-titolo { font-size: 18px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 8px; }
+        .step-desc { font-size: 14px; color: var(--grigio); line-height: 1.75; }
+        .step-note { background: #EFF6FF; border-left: 3px solid var(--blu); border-radius: 0 10px 10px 0; padding: 10px 14px; font-size: 13px; color: var(--blu); margin-top: 12px; line-height: 1.6; }
+        .step-note.verde { background: #ECFDF5; border-color: var(--verde); color: #065F46; }
+        .step-note.oro { background: #FFFBEB; border-color: var(--oro); color: #78350F; }
+        .step-note.rosso { background: #FEF2F2; border-color: var(--rosso); color: #991B1B; }
+
+        /* REGOLE BAN */
+        .regole-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 10px; }
+        .regola-card { border-radius: 20px; padding: 28px; border: 2px solid #e5e7eb; }
+        .regola-card.rosso { border-color: #FECACA; background: #FEF2F2; }
+        .regola-card.verde { border-color: #A7F3D0; background: #ECFDF5; }
+        .regola-icon { font-size: 36px; margin-bottom: 14px; }
+        .regola-titolo { font-size: 16px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 10px; }
+        .regola-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--grigio); padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.05); line-height: 1.5; }
+        .regola-item:last-child { border-bottom: none; }
+        .regola-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--rosso); flex-shrink: 0; margin-top: 4px; }
+        .regola-dot.verde { background: var(--verde); }
+
+        /* FLUSSO FINE LAVORI */
+        .flusso-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 10px; }
+        .flusso-card { background: white; border-radius: 16px; padding: 22px 16px; text-align: center; border: 1px solid #e5e7eb; position: relative; }
+        .flusso-card::after { content: '→'; position: absolute; right: -14px; top: 50%; transform: translateY(-50%); font-size: 20px; color: #e5e7eb; font-weight: 700; z-index: 1; }
+        .flusso-card:last-child::after { display: none; }
+        .flusso-icon { font-size: 32px; margin-bottom: 10px; }
+        .flusso-titolo { font-size: 13px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 6px; }
+        .flusso-desc { font-size: 11px; color: var(--grigio); line-height: 1.5; }
+        .flusso-chi { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 3px 8px; border-radius: 8px; margin-bottom: 8px; display: inline-block; }
+        .flusso-chi.pro { background: #EFF6FF; color: var(--blu); }
+        .flusso-chi.cliente { background: #ECFDF5; color: #065F46; }
+        .flusso-chi.entrambi { background: #FFFBEB; color: #78350F; }
+
+        /* TUTELE */
+        .tutele-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .tutela-card { background: white; border-radius: 18px; padding: 26px; border: 1px solid #e5e7eb; }
+        .tutela-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+        .tutela-icon { font-size: 32px; }
+        .tutela-titolo { font-size: 16px; font-weight: 700; color: var(--blu-scuro); }
+        .tutela-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--grigio); padding: 8px 0; border-bottom: 1px solid #f3f4f6; line-height: 1.55; }
+        .tutela-item:last-child { border-bottom: none; }
+        .tutela-check { color: var(--verde); font-size: 15px; flex-shrink: 0; }
+
+        /* FAQ */
+        .faq-list { display: flex; flex-direction: column; gap: 12px; }
+        .faq-item { background: white; border-radius: 16px; border: 1px solid #e5e7eb; overflow: hidden; }
+        .faq-domanda { padding: 20px 24px; font-size: 15px; font-weight: 600; color: var(--blu-scuro); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; transition: 0.2s; }
+        .faq-domanda:hover { background: var(--grigio-chiaro); }
+        .faq-arrow { font-size: 18px; color: var(--oro); transition: 0.3s; flex-shrink: 0; }
+        .faq-risposta { display: none; padding: 0 24px 20px; font-size: 14px; color: var(--grigio); line-height: 1.75; border-top: 1px solid #f3f4f6; padding-top: 16px; }
+        .faq-item.open .faq-risposta { display: block; }
+        .faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+        /* CTA FINALE */
+        .cta-section { background: linear-gradient(135deg, var(--blu-scuro) 0%, var(--blu) 100%); padding: 70px 30px; text-align: center; }
+        .cta-section h2 { font-family: 'Playfair Display', serif; font-size: 36px; color: white; margin-bottom: 14px; }
+        .cta-section h2 span { color: var(--oro); }
+        .cta-section p { color: rgba(255,255,255,0.75); font-size: 16px; margin-bottom: 35px; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+        .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+        .btn-cta { padding: 15px 32px; border-radius: 25px; font-size: 15px; font-weight: 700; cursor: pointer; transition: 0.3s; border: none; font-family: 'Inter', sans-serif; text-decoration: none; display: inline-block; }
+        .btn-cta.oro { background: var(--oro); color: white; box-shadow: 0 4px 20px rgba(184,151,42,0.4); }
+        .btn-cta.oro:hover { background: var(--oro-chiaro); transform: translateY(-2px); }
+        .btn-cta.outline { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.4); }
+        .btn-cta.outline:hover { border-color: white; transform: translateY(-2px); }
+
+        /* ANCHOR NAV */
+        .anchor-nav { background: white; border-bottom: 1px solid #e5e7eb; position: sticky; top: 65px; z-index: 90; overflow-x: auto; }
+        .anchor-nav-inner { display: flex; gap: 0; max-width: 860px; margin: 0 auto; padding: 0 20px; }
+        .anchor-link { padding: 14px 20px; font-size: 13px; font-weight: 600; color: var(--grigio); text-decoration: none; white-space: nowrap; border-bottom: 3px solid transparent; transition: 0.2s; }
+        .anchor-link:hover { color: var(--blu); border-bottom-color: var(--blu); }
+        .anchor-link.active { color: var(--blu); border-bottom-color: var(--blu); }
+
+        @media (max-width: 700px) {
+            .hero h1 { font-size: 28px; }
+            .regole-grid { grid-template-columns: 1fr; }
+            .flusso-grid { grid-template-columns: repeat(2, 1fr); }
+            .flusso-card::after { display: none; }
+            .tutele-grid { grid-template-columns: 1fr; }
+            .navbar { padding: 12px 16px; }
+            .navbar-links { gap: 6px; }
+            .btn-nav { font-size: 11px; padding: 5px 9px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
+    <div class="navbar-links">
+        <a href="index.html" class="btn-nav">🏠 Home</a>
+        <a href="contatti.html" class="btn-nav">✉️ Contatti</a>
+        <a href="cliente.html" class="btn-nav-cta">📋 Pubblica richiesta</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>Come <span>funziona</span> la piattaforma</h1>
+    <p>Tutto quello che devi sapere su come funziona, come sei tutelato e cosa succede dalla richiesta fino alla recensione finale.</p>
+    <div class="hero-tabs">
+        <button class="hero-tab active" onclick="scrollTo('clienti')">👤 Per i clienti</button>
+        <button class="hero-tab" onclick="scrollTo('professionisti')">🔧 Per i professionisti</button>
+        <button class="hero-tab" onclick="scrollTo('regole')">⚖️ Regole & tutele</button>
+        <button class="hero-tab" onclick="scrollTo('faq')">❓ FAQ</button>
+    </div>
+</div>
+
+<!-- ANCHOR NAV -->
+<div class="anchor-nav">
+    <div class="anchor-nav-inner">
+        <a href="#clienti" class="anchor-link active">👤 Clienti</a>
+        <a href="#professionisti" class="anchor-link">🔧 Professionisti</a>
+        <a href="#fine-lavori" class="anchor-link">✅ Fine lavori</a>
+        <a href="#regole" class="anchor-link">⚖️ Regole & ban</a>
+        <a href="#tutele" class="anchor-link">🛡️ Tutele</a>
+        <a href="#faq" class="anchor-link">❓ FAQ</a>
+    </div>
+</div>
+
+<!-- SEZIONE CLIENTI -->
+<section id="clienti">
+    <div class="sezione-inner">
+        <div class="sezione-label">Per i clienti</div>
+        <div class="sezione-titolo">Come funziona per te che cerchi un professionista</div>
+        <div class="sezione-sub">Trovare un professionista affidabile non è mai stato così semplice. È completamente gratuito per i clienti e richiede meno di 5 minuti.</div>
+        <div class="steps">
+
+            <div class="step">
+                <div class="step-left">
+                    <div class="step-num">1</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step-body">
+                    <div class="step-icon">📝</div>
+                    <div class="step-titolo">Registrati e descrivi il lavoro — gratis</div>
+                    <div class="step-desc">Ti chiediamo solo nome, email e numero di telefono (verificato con codice OTP). I tuoi dati personali non saranno mai visibili ai professionisti. Poi descrivi il lavoro: scegli la categoria, inserisci la città e spiega cosa ti serve. Nessun impegno.</div>
+                    <div class="step-note">✅ La registrazione è gratuita e i tuoi dati non vengono mai venduti o ceduti a terzi.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-left">
+                    <div class="step-num">2</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step-body">
+                    <div class="step-icon">📩</div>
+                    <div class="step-titolo">Ricevi fino a 5 offerte da professionisti verificati</div>
+                    <div class="step-desc">I professionisti nella tua zona vedono la tua richiesta in forma anonima (solo descrizione e città, mai il tuo nome o telefono). Se sono interessati, pagano per sbloccare il tuo contatto e si apre la chat privata. Massimo 5 professionisti possono rispondere per ogni richiesta — zero spam, zero chiamate indesiderate.</div>
+                    <div class="step-note">📱 Ricevi una notifica SMS ogni volta che un professionista sblocca il tuo contatto.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-left">
+                    <div class="step-num">3</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step-body">
+                    <div class="step-icon">💬</div>
+                    <div class="step-titolo">Chatta e scegli il migliore</div>
+                    <div class="step-desc">Nella chat privata puoi leggere il profilo completo del professionista, vedere le foto dei lavori, il video di presentazione e tutte le recensioni ricevute. Confronta le offerte e scegli quello che ti convince di più. Il tutto prima di impegnarti in qualsiasi modo.</div>
+                    <div class="step-note verde">✅ Puoi chattare con tutti i professionisti che hanno sbloccato il tuo contatto senza nessun costo aggiuntivo.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-left">
+                    <div class="step-num">4</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step-body">
+                    <div class="step-icon">🏠</div>
+                    <div class="step-titolo">Sopralluogo gratuito e preventivo</div>
+                    <div class="step-desc">Una volta scelto il professionista, concordate in chat la data e l'ora del sopralluogo gratuito. Il professionista viene da te, valuta il lavoro sul posto e ti fornisce un preventivo dettagliato senza impegno. Solo dopo aver accettato il preventivo il lavoro inizia.</div>
+                    <div class="step-note oro">⚠️ Attenzione: se accetti il sopralluogo ma poi non sei presente senza averlo comunicato in anticipo, ricevi una segnalazione. Alla terza segnalazione l'account viene sospeso.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-left">
+                    <div class="step-num verde">5</div>
+                </div>
+                <div class="step-body">
+                    <div class="step-icon">⭐</div>
+                    <div class="step-titolo">Conferma pagamento e lascia la recensione</div>
+                    <div class="step-desc">Quando il lavoro è terminato, il professionista lo dichiara completato nella chat. Tu ricevi una notifica e confermi di aver saldato il professionista. A quel punto si apre automaticamente la schermata delle recensioni reciproche: tu valuti il professionista e lui valuta te. Le recensioni sono obbligatorie per mantenere l'account attivo.</div>
+                    <div class="step-note verde">✅ Le recensioni sono reali e verificate — vengono rilasciate solo dopo la conferma del pagamento.</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- SEZIONE PROFESSIONISTI -->
+<section id="professionisti" class="sezione-alt">
+    <div class="sezione-inner">
+        <div class="sezione-label">Per i professionisti</div>
+        <div class="sezione-titolo">Come funziona per te che offri un servizio</div>
+        <div class="sezione-sub">Ricevi richieste qualificate da clienti reali nella tua zona. Paghi solo per i contatti che ti interessano davvero.</div>
+        <div class="steps">
+
+            <div class="step">
+                <div class="step-left">
+                    <div class="step-num oro">1</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step-body">
+                    <div class="step-icon">📋</div>
+                    <div class="step-titolo">Registrati e crea il tuo profilo</div>
+                    <div class="step-desc">La registrazione richiede 5 step: dati personali con verifica OTP, scelta categoria, caricamento documenti di verifica (P.IVA e visura camerale per le categorie standard, documento identità per le categorie semplificate), foto dei tuoi lavori (minimo 2 obbligatorie), video di presentazione facoltativo ma consigliato (+60% di visibilità), e scelta del piano di abbonamento.</div>
+                    <div class="step-note">📷 Profili con foto e video ricevono mediamente il 60% di richieste in più rispetto ai profili senza.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-left">
+                    <div class="step-num oro">2</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step-body">
+                    <div class="step-icon">🔍</div>
+                    <div class="step-titolo">Vedi le richieste nella tua zona</div>
+                    <div class="step-desc">Dalla dashboard ricevi in tempo reale tutte le richieste pubblicate nella tua zona e nella tua categoria. Ogni richiesta mostra la descrizione del lavoro, la città e i dettagli utili — ma mai i dati personali del cliente. Valuti tu se è un lavoro che ti interessa, senza nessuna pressione.</div>
+                    <div class="step-note verde">✅ Vedi la richiesta completa prima di decidere se sbloccare il contatto. Non paghi mai al buio.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-left">
+                    <div class="step-num oro">3</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step-body">
+                    <div class="step-icon">🔓</div>
+                    <div class="step-titolo">Sblocca il contatto e apri la chat</div>
+                    <div class="step-desc">Se la richiesta ti interessa, acquisti lo sblocco del contatto (da €8 per categorie base, da €9,90 per edilizia e categorie standard). Il pagamento è unico e non ricorrente. Si apre subito la chat privata con il cliente e puoi presentarti, rispondere alle domande e proporre la data per il sopralluogo.</div>
+                    <div class="step-note oro">⚠️ Ricorda: una volta sbloccato il contatto, sei tenuto a presentarti al sopralluogo concordato. Le mancanze senza preavviso generano segnalazioni.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-left">
+                    <div class="step-num oro">4</div>
+                    <div class="step-line"></div>
+                </div>
+                <div class="step-body">
+                    <div class="step-icon">🏠</div>
+                    <div class="step-titolo">Sopralluogo gratuito e preventivo</div>
+                    <div class="step-desc">Vai dal cliente, valuti il lavoro sul posto e fornisci un preventivo dettagliato. Il sopralluogo è sempre gratuito per il cliente. Se il cliente accetta il preventivo, il lavoro inizia. Se non accetta, nessun problema — hai comunque avuto visibilità e contatto diretto.</div>
+                    <div class="step-note verde">✅ Il sopralluogo va confermato in chat con data e ora precisa. Entrambi ricevete una notifica di promemoria il giorno prima.</div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-left">
+                    <div class="step-num verde">5</div>
+                </div>
+                <div class="step-body">
+                    <div class="step-icon">✅</div>
+                    <div class="step-titolo">Dichiara il lavoro completato e ricevi la recensione</div>
+                    <div class="step-desc">Quando hai finito il lavoro, premi il pulsante "Dichiara lavoro completato" nella chat. Il cliente riceve una notifica e conferma di averti saldato. A quel punto si apre automaticamente la schermata delle recensioni: il cliente ti valuta e tu valuti il cliente. Le recensioni sono obbligatorie e aumentano la tua visibilità sulla piattaforma.</div>
+                    <div class="step-note verde">⭐ Più recensioni positive hai, più appari in alto nelle ricerche dei clienti. La reputazione è il tuo asset più importante.</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- SEZIONE FINE LAVORI -->
+<section id="fine-lavori">
+    <div class="sezione-inner">
+        <div class="sezione-label">Flusso fine lavori</div>
+        <div class="sezione-titolo">Cosa succede quando il lavoro è concluso</div>
+        <div class="sezione-sub">Il flusso è automatico e protegge entrambe le parti. Nessuna ambiguità su chi fa cosa e quando.</div>
+        <div class="flusso-grid">
+            <div class="flusso-card">
+                <div class="flusso-chi pro">Professionista</div>
+                <div class="flusso-icon">🔧</div>
+                <div class="flusso-titolo">Dichiara completato</div>
+                <div class="flusso-desc">Preme "Lavoro completato" nella chat quando ha finito</div>
+            </div>
+            <div class="flusso-card">
+                <div class="flusso-chi cliente">Cliente</div>
+                <div class="flusso-icon">💰</div>
+                <div class="flusso-titolo">Conferma il saldo</div>
+                <div class="flusso-desc">Riceve notifica e conferma di aver saldato il professionista</div>
+            </div>
+            <div class="flusso-card">
+                <div class="flusso-chi entrambi">Entrambi</div>
+                <div class="flusso-icon">⭐</div>
+                <div class="flusso-titolo">Recensione reciproca</div>
+                <div class="flusso-desc">Si apre automaticamente la schermata di valutazione per entrambi</div>
+            </div>
+            <div class="flusso-card">
+                <div class="flusso-chi entrambi">Sistema</div>
+                <div class="flusso-icon">✅</div>
+                <div class="flusso-titolo">Account aggiornato</div>
+                <div class="flusso-desc">Le recensioni vengono pubblicate e i profili aggiornati automaticamente</div>
+            </div>
+        </div>
+        <div style="background:#FEF3C7;border:1px solid #F59E0B;border-radius:14px;padding:20px 24px;margin-top:24px;font-size:14px;color:#78350F;line-height:1.75">
+            ⚠️ <strong>Importante:</strong> Le recensioni sono obbligatorie per entrambe le parti. Chi non lascia la recensione entro 48 ore dalla conferma del pagamento riceve un promemoria automatico. L'account rimane attivo solo con recensioni reciproche completate.
+        </div>
+    </div>
+</section>
+
+<!-- SEZIONE REGOLE E BAN -->
+<section id="regole" class="sezione-alt">
+    <div class="sezione-inner">
+        <div class="sezione-label">Regole & Ban</div>
+        <div class="sezione-titolo">Le regole che rendono la piattaforma sicura per tutti</div>
+        <div class="sezione-sub">Le regole esistono per tutelare sia i clienti che i professionisti. Vengono applicate in modo automatico e trasparente.</div>
+        <div class="regole-grid">
+
+            <div class="regola-card rosso">
+                <div class="regola-icon">🚫</div>
+                <div class="regola-titolo">Quando viene bannato un cliente</div>
+                <div class="regola-item"><div class="regola-dot"></div><div>Non permette al professionista di effettuare il sopralluogo senza preavviso: <strong>1 segnalazione</strong></div></div>
+                <div class="regola-item"><div class="regola-dot"></div><div>Accumula 3 segnalazioni su professionisti diversi nel tempo: <strong>ban immediato</strong></div></div>
+                <div class="regola-item"><div class="regola-dot"></div><div>Il ban blocca permanentemente email e numero di telefono utilizzati</div></div>
+                <div class="regola-item"><div class="regola-dot"></div><div>Non lascia la recensione obbligatoria entro 48 ore: <strong>account sospeso</strong> fino al completamento</div></div>
+            </div>
+
+            <div class="regola-card rosso">
+                <div class="regola-icon">🔨</div>
+                <div class="regola-titolo">Quando viene bannato un professionista</div>
+                <div class="regola-item"><div class="regola-dot"></div><div>Non si presenta al sopralluogo senza preavviso dopo aver sbloccato il contatto: <strong>1 segnalazione</strong></div></div>
+                <div class="regola-item"><div class="regola-dot"></div><div>Accumula 3 segnalazioni su clienti diversi nel tempo: <strong>ban immediato</strong></div></div>
+                <div class="regola-item"><div class="regola-dot"></div><div>Il ban blocca permanentemente P.IVA, email e telefono registrati</div></div>
+                <div class="regola-item"><div class="regola-dot"></div><div>Non lascia la recensione obbligatoria entro 48 ore: <strong>account sospeso</strong> fino al completamento</div></div>
+            </div>
+
+            <div class="regola-card verde">
+                <div class="regola-icon">✅</div>
+                <div class="regola-titolo">Come evitare una segnalazione</div>
+                <div class="regola-item"><div class="regola-dot verde"></div><div>Comunica in chat con almeno <strong>24 ore di anticipo</strong> se non puoi presentarti al sopralluogo</div></div>
+                <div class="regola-item"><div class="regola-dot verde"></div><div>Proponi una data alternativa nella stessa conversazione</div></div>
+                <div class="regola-item"><div class="regola-dot verde"></div><div>Il disdire con preavviso non genera segnalazioni: la piattaforma capisce gli imprevisti</div></div>
+                <div class="regola-item"><div class="regola-dot verde"></div><div>In caso di emergenza documentata, contatta il supporto entro 2 ore</div></div>
+            </div>
+
+            <div class="regola-card verde">
+                <div class="regola-icon">🛡️</div>
+                <div class="regola-titolo">Come funziona il sistema di segnalazioni</div>
+                <div class="regola-item"><div class="regola-dot verde"></div><div>Ogni segnalazione è registrata nel sistema con data, ora e nome del professionista/cliente coinvolto</div></div>
+                <div class="regola-item"><div class="regola-dot verde"></div><div>Dopo la <strong>1ª segnalazione</strong>: avviso via SMS e email</div></div>
+                <div class="regola-item"><div class="regola-dot verde"></div><div>Dopo la <strong>2ª segnalazione</strong>: avviso urgente con avvertimento di ban imminente</div></div>
+                <div class="regola-item"><div class="regola-dot verde"></div><div>Dopo la <strong>3ª segnalazione</strong>: ban automatico e definitivo</div></div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- SEZIONE TUTELE -->
+<section id="tutele">
+    <div class="sezione-inner">
+        <div class="sezione-label">Tutele</div>
+        <div class="sezione-titolo">Come sei protetto sulla piattaforma</div>
+        <div class="sezione-sub">La piattaforma è progettata per essere equa e trasparente per entrambe le parti. Ecco tutte le tutele attive.</div>
+        <div class="tutele-grid">
+
+            <div class="tutela-card">
+                <div class="tutela-header">
+                    <div class="tutela-icon">👤</div>
+                    <div class="tutela-titolo">Tutele per il cliente</div>
+                </div>
+                <div class="tutela-item"><span class="tutela-check">✅</span><div>I tuoi dati personali (nome, telefono, indirizzo) non sono mai visibili ai professionisti prima che tu li condivida volontariamente in chat</div></div>
+                <div class="tutela-item"><span class="tutela-check">✅</span><div>Massimo 5 professionisti possono contattarti per ogni richiesta — zero spam</div></div>
+                <div class="tutela-item"><span class="tutela-check">✅</span><div>Ogni professionista è verificato con documento d'identità, P.IVA e visura camerale</div></div>
+                <div class="tutela-item"><span class="tutela-check">✅</span><div>Il professionista che non si presenta al sopralluogo riceve una segnalazione automatica</div></div>
+                <div class="tutela-item"><span class="tutela-check">✅</span><div>Le recensioni sono reali, verificate e rilasciate solo dopo la conferma del pagamento</div></div>
+                <div class="tutela-item"><span class="tutela-check">✅</span><div>Il servizio è completamente gratuito per i clienti — non paghi mai nulla</div></div>
+            </div>
+
+            <div class="tutela-card">
+                <div class="tutela-header">
+                    <div class="tutela-icon">🔧</div>
+                    <div class="tutela-titolo">Tutele per il professionista</div>
+                </div>
+                <div class="tutela-item"><span class="tutela-check">✅</span><div>Vedi la descrizione completa del lavoro prima di pagare lo sblocco — non paghi mai al buio</div></div>
+                <div class="tutela-item"><span class="tutela-check">✅</span><div>Il cliente che non ti permette di fare il sopralluogo riceve una segnalazione automatica</div></div>
+                <div class="tutela-item"><span class="tutela-check">✅</span><div>Dopo 3 segnalazioni il cliente viene bannato dalla piattaforma definitivamente</div></div>
+                <div class="tutela-item"><span class="tutela-check">✅</span><div>Le recensioni che ricevi sono verificate — provengono solo da clienti con cui hai lavorato</div></div>
+                <div class="tutela-item"><span class="tutela-check">✅</span><div>Puoi valutare il cliente al termine del lavoro — costruisci la tua rete di clienti affidabili</div></div>
+                <div class="tutela-item"><span class="tutela-check">✅</span><div>Il tuo profilo verificato ti distingue dai concorrenti non verificati</div></div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- SEZIONE FAQ -->
+<section id="faq" class="sezione-alt">
+    <div class="sezione-inner">
+        <div class="sezione-label">Domande frequenti</div>
+        <div class="sezione-titolo">Hai ancora dubbi? Trovi tutto qui</div>
+        <div class="sezione-sub">Le domande che ci vengono fatte più spesso, con risposte chiare e dirette.</div>
+        <div class="faq-list">
+
+            <div class="faq-item">
+                <div class="faq-domanda" onclick="toggleFaq(this)">
+                    Quanto costa per un cliente usare la piattaforma?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-risposta">Assolutamente niente. Per i clienti la piattaforma è completamente gratuita: registrazione, pubblicazione della richiesta, ricezione delle offerte, chat con i professionisti e recensioni. Non ti viene mai chiesto un pagamento.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-domanda" onclick="toggleFaq(this)">
+                    Perché il professionista paga per sbloccare il mio contatto?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-risposta">Questo meccanismo garantisce che solo i professionisti seriamente interessati al tuo lavoro ti contattino. Chi paga per sbloccare il tuo contatto ha già valutato la tua richiesta e ritiene di poter fare un buon lavoro. Questo elimina lo spam e le offerte casuali.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-domanda" onclick="toggleFaq(this)">
+                    Cosa succede se il professionista non si presenta al sopralluogo?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-risposta">Se il professionista non si presenta senza preavviso, riceve automaticamente una segnalazione. Alla terza segnalazione su clienti diversi viene bannato definitivamente dalla piattaforma (P.IVA, email e telefono bloccati). Non perdi nulla: puoi continuare a ricevere offerte dagli altri professionisti che hanno risposto alla tua richiesta.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-domanda" onclick="toggleFaq(this)">
+                    Cosa significa esattamente "3 segnalazioni su professionisti diversi" per il ban del cliente?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-risposta">Significa che le segnalazioni si accumulano nel tempo, anche su richieste diverse e con professionisti diversi. Non si tratta di 3 mancanze con lo stesso professionista nella stessa richiesta, ma di un conteggio globale sull'account. Esempio: se non fai entrare il professionista A (1ª segnalazione), poi non fai entrare il professionista B in una richiesta successiva (2ª segnalazione), poi ancora il professionista C (3ª segnalazione) → ban immediato.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-domanda" onclick="toggleFaq(this)">
+                    Posso disdire un sopralluogo senza ricevere una segnalazione?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-risposta">Sì, purché lo comunichi in chat con almeno 24 ore di anticipo e proponga una data alternativa. La piattaforma capisce che gli imprevisti esistono. La segnalazione scatta solo in caso di assenza totale senza alcuna comunicazione preventiva.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-domanda" onclick="toggleFaq(this)">
+                    Le recensioni sono obbligatorie?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-risposta">Sì, per entrambe le parti. Dopo che il professionista dichiara il lavoro completato e il cliente conferma di aver saldato, si apre automaticamente la schermata delle recensioni. Entrambi hanno 48 ore per completarla. Chi non lo fa riceve prima un promemoria, poi il proprio account viene temporaneamente sospeso fino al completamento della recensione.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-domanda" onclick="toggleFaq(this)">
+                    Come vengono verificati i professionisti?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-risposta">I professionisti delle categorie standard (edilizia, impianti, automotive, legale, salute, estetica, digitale) devono caricare P.IVA (verificata automaticamente) e visura camerale. Le categorie semplificate (babysitter, dog sitter, cuochi, tuttofare, pulizie, badanti, istruzione) richiedono solo un documento d'identità. La categoria Escort richiede verifica identità e verifica dell'età. Tutti devono verificare il numero di telefono con OTP.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-domanda" onclick="toggleFaq(this)">
+                    Posso pubblicare più richieste contemporaneamente?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-risposta">Sì, puoi pubblicare quante richieste vuoi, anche per categorie diverse (es. un elettricista e un imbianchino contemporaneamente). Ogni richiesta è indipendente e riceve le proprie offerte.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-domanda" onclick="toggleFaq(this)">
+                    Cosa succede se non sono soddisfatto del lavoro?
+                    <span class="faq-arrow">▼</span>
+                </div>
+                <div class="faq-risposta">La piattaforma gestisce la messa in contatto tra clienti e professionisti ma non si interpone nel rapporto contrattuale tra le parti. Ti consigliamo di concordare sempre per iscritto (in chat) i dettagli del lavoro, i costi e i tempi prima di iniziare. In caso di controversie puoi contattare il nostro supporto che valuterà la situazione caso per caso.</div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CTA FINALE -->
+<div class="cta-section">
+    <h2>Pronto a <span>iniziare</span>?</h2>
+    <p>Sei un cliente? È gratis e ci vogliono 3 minuti. Sei un professionista? Inizia a ricevere richieste qualificate oggi stesso.</p>
+    <div class="cta-buttons">
+        <a href="cliente.html" class="btn-cta oro">📋 Pubblica una richiesta — gratis</a>
+        <a href="professionista.html" class="btn-cta outline">🔧 Registrati come professionista</a>
+    </div>
+</div>
+
+<script>
+    function scrollTo(id) {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function toggleFaq(el) {
+        const item = el.parentElement;
+        item.classList.toggle('open');
+    }
+
+    // Anchor nav active link on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const anchorLinks = document.querySelectorAll('.anchor-link');
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(s => {
+            if (window.scrollY >= s.offsetTop - 120) current = s.id;
+        });
+        anchorLinks.forEach(a => {
+            a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+        });
+    });
+</script>
+</body>
+</html>
