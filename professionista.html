@@ -23,7 +23,6 @@
         }
         body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color: var(--testo); min-height: 100vh; }
 
-        /* NAVBAR */
         .navbar { background: var(--blu-scuro); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 15px rgba(0,0,0,0.3); }
         .logo { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 900; color: white; text-decoration: none; letter-spacing: 1px; }
         .logo span { color: var(--oro); }
@@ -33,7 +32,6 @@
         .btn-cliente { background: var(--oro); color: white; border: none; padding: 9px 22px; border-radius: 25px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; text-decoration: none; }
         .btn-cliente:hover { background: var(--oro-chiaro); transform: translateY(-1px); }
 
-        /* HERO */
         .page-hero { background: linear-gradient(135deg, var(--blu-scuro) 0%, var(--blu) 50%, var(--blu-chiaro) 100%); padding: 60px 30px 50px; text-align: center; position: relative; overflow: hidden; }
         .page-hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(184,151,42,0.1) 0%, transparent 60%); pointer-events: none; }
         .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(184,151,42,0.2); border: 1px solid rgba(184,151,42,0.4); color: var(--oro-chiaro); font-size: 13px; font-weight: 600; padding: 6px 18px; border-radius: 20px; margin-bottom: 20px; }
@@ -45,19 +43,15 @@
         .hero-stat-num { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; color: var(--oro); }
         .hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 3px; }
 
-        /* CONTENUTO */
         .container { max-width: 750px; margin: 0 auto; padding: 40px 20px 60px; }
 
-        /* TABS */
         .tabs { display: flex; gap: 0; background: white; border-radius: 16px 16px 0 0; overflow: hidden; border: 1px solid #e5e7eb; border-bottom: none; }
         .tab { flex: 1; padding: 16px; border: none; background: transparent; cursor: pointer; font-size: 15px; font-weight: 600; color: var(--grigio); transition: 0.3s; font-family: 'Inter', sans-serif; }
         .tab.active { background: white; color: var(--blu); border-bottom: 3px solid var(--oro); }
         .tab:hover:not(.active) { background: var(--grigio-chiaro); }
 
-        /* CARD */
         .card { background: white; border-radius: 0 0 20px 20px; padding: 35px 40px; border: 1px solid #e5e7eb; border-top: none; box-shadow: 0 10px 40px rgba(0,0,0,0.06); }
 
-        /* STEP INDICATOR */
         .steps-indicator { display: flex; align-items: center; justify-content: center; margin-bottom: 35px; gap: 0; }
         .step-dot { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; background: #e5e7eb; color: var(--grigio); transition: 0.4s; flex-shrink: 0; }
         .step-dot.active { background: var(--blu); color: white; box-shadow: 0 4px 12px rgba(27,58,107,0.3); }
@@ -65,29 +59,22 @@
         .step-line { height: 3px; flex: 1; background: #e5e7eb; transition: 0.4s; max-width: 80px; }
         .step-line.done { background: var(--verde); }
 
-        /* STEPS */
         .step-content { display: none; }
         .step-content.active { display: block; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* FORM */
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--testo); margin-bottom: 8px; }
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%; padding: 13px 18px; border: 1.5px solid #e5e7eb; border-radius: 12px;
-            font-size: 15px; font-family: 'Inter', sans-serif; transition: 0.3s; background: white; color: var(--testo);
-        }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 13px 18px; border: 1.5px solid #e5e7eb; border-radius: 12px; font-size: 15px; font-family: 'Inter', sans-serif; transition: 0.3s; background: white; color: var(--testo); }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--blu); outline: none; box-shadow: 0 0 0 3px rgba(27,58,107,0.08); }
         .form-group textarea { min-height: 100px; resize: vertical; }
 
-        /* OTP GROUP */
         .otp-group { display: flex; gap: 10px; }
         .otp-group input { flex: 1; }
         .btn-otp { background: var(--blu); color: white; border: none; padding: 13px 20px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; white-space: nowrap; flex-shrink: 0; }
         .btn-otp:hover { background: var(--blu-chiaro); }
         .btn-otp:disabled { background: var(--grigio); cursor: not-allowed; }
 
-        /* OTP BOXES */
         .otp-verify { display: none; margin-top: 15px; }
         .otp-verify.show { display: block; }
         .otp-boxes { display: flex; gap: 10px; justify-content: center; margin: 15px 0; }
@@ -97,10 +84,8 @@
         .otp-timer { text-align: center; font-size: 13px; color: var(--grigio); }
         .otp-timer span { color: var(--blu); cursor: pointer; font-weight: 600; }
 
-        /* PIVA RESULT */
         #piva-result { margin-top: 10px; }
 
-        /* CATEGORIE */
         .categorie-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 15px 0 20px; }
         .categoria-btn { padding: 14px 12px; border: 2px solid #e5e7eb; border-radius: 14px; background: white; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--grigio); transition: 0.3s; text-align: center; font-family: 'Inter', sans-serif; display: flex; flex-direction: column; align-items: center; gap: 6px; }
         .categoria-btn:hover { border-color: var(--blu); color: var(--blu); background: #EFF6FF; }
@@ -110,7 +95,6 @@
         .categoria-btn.escort-btn:hover { border-color: #F43F5E; background: #FFF1F2; color: #F43F5E; }
         .categoria-btn.escort-btn.selected { border-color: #F43F5E; background: #FFF1F2; color: #F43F5E; }
 
-        /* PRICING */
         .pricing-box { background: var(--grigio-chiaro); border-radius: 16px; padding: 22px; margin: 20px 0; border: 1px solid #e5e7eb; }
         .pricing-box h3 { font-size: 15px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
         .pricing-options { display: flex; gap: 12px; flex-wrap: wrap; }
@@ -124,14 +108,12 @@
         .pricing-card .unita { font-size: 12px; color: var(--grigio); }
         .pricing-card .risparmio { font-size: 11px; color: var(--verde); font-weight: 600; margin-top: 6px; }
 
-        /* CONTATTI SBLOCCO */
         .sblocco-info { background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 14px; padding: 18px 20px; font-size: 14px; color: var(--blu-scuro); line-height: 1.8; margin: 15px 0; }
         .sblocco-info strong { display: block; margin-bottom: 8px; font-size: 15px; }
         .sblocco-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid rgba(27,58,107,0.08); font-size: 13px; }
         .sblocco-row:last-child { border-bottom: none; }
         .sblocco-prezzo { font-weight: 700; color: var(--oro); font-size: 15px; }
 
-        /* AVVISI */
         .avviso-blu { background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 12px; padding: 15px 18px; font-size: 13px; color: #1E40AF; line-height: 1.7; margin-bottom: 20px; }
         .avviso-blu strong { display: block; margin-bottom: 5px; }
         .avviso-oro { background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 12px; padding: 15px 18px; font-size: 13px; color: #78350F; line-height: 1.7; margin-bottom: 20px; }
@@ -141,14 +123,12 @@
         .avviso-verde { background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 12px; padding: 15px 18px; font-size: 13px; color: #065F46; line-height: 1.7; margin-bottom: 20px; }
         .avviso-verde strong { display: block; margin-bottom: 5px; }
 
-        /* UPLOAD */
         .upload-area { border: 2px dashed #e5e7eb; border-radius: 14px; padding: 30px 20px; text-align: center; cursor: pointer; transition: 0.3s; margin-bottom: 15px; }
         .upload-area:hover { border-color: var(--blu); background: #EFF6FF; }
         .upload-area .upload-icon { font-size: 36px; margin-bottom: 10px; }
         .upload-area p { font-size: 14px; color: var(--grigio); }
         .upload-area strong { color: var(--blu); }
 
-        /* BUTTON */
         .btn-main { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--blu) 0%, var(--blu-chiaro) 100%); color: white; border: none; border-radius: 14px; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; margin-top: 10px; letter-spacing: 0.3px; box-shadow: 0 4px 15px rgba(27,58,107,0.3); }
         .btn-main:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(27,58,107,0.35); }
         .btn-main:active { transform: translateY(0); }
@@ -157,24 +137,20 @@
         .btn-back { background: transparent; color: var(--grigio); border: 1.5px solid #e5e7eb; padding: 12px; border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; width: 100%; margin-top: 10px; }
         .btn-back:hover { border-color: var(--grigio); color: var(--testo); }
 
-        /* STEP TITLE */
         .step-title { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--blu-scuro); margin-bottom: 6px; font-weight: 700; }
         .step-subtitle { font-size: 14px; color: var(--grigio); margin-bottom: 25px; line-height: 1.6; }
 
-        /* FOTO GALLERY */
         .foto-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 15px 0; }
         .foto-slot { aspect-ratio: 1; border: 2px dashed #e5e7eb; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; transition: 0.3s; background: var(--grigio-chiaro); }
         .foto-slot:hover { border-color: var(--oro); background: #FFFBEB; }
         .foto-slot.loaded { border-color: var(--verde); background: #ECFDF5; }
 
-        /* RAGGIO */
         .raggio-container { margin: 10px 0 20px; }
         .raggio-value { text-align: center; font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; color: var(--blu); margin-bottom: 10px; }
         .raggio-value span { font-size: 16px; color: var(--grigio); }
         input[type="range"] { width: 100%; height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--blu) 0%, #e5e7eb 0%); outline: none; cursor: pointer; }
         input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--blu); cursor: pointer; box-shadow: 0 2px 8px rgba(27,58,107,0.3); }
 
-        /* SUCCESS */
         .success-screen { text-align: center; padding: 20px 0; }
         .success-icon { font-size: 72px; margin-bottom: 20px; animation: pulse 1s ease; }
         @keyframes pulse { 0% { transform: scale(0); } 70% { transform: scale(1.1); } 100% { transform: scale(1); } }
@@ -184,7 +160,6 @@
         .highlight-item { background: var(--grigio-chiaro); border-radius: 12px; padding: 15px; font-size: 13px; color: var(--testo); line-height: 1.5; }
         .highlight-item strong { display: block; color: var(--blu-scuro); margin-bottom: 4px; font-size: 14px; }
 
-        /* POPUP ADULT */
         .adult-popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
         .adult-popup.show { display: flex; }
         .adult-box { background: white; border-radius: 25px; padding: 40px 30px; max-width: 400px; width: 100%; text-align: center; }
@@ -196,14 +171,11 @@
         .btn-adult-si:hover { background: #DC2626; }
         .btn-adult-no:hover { background: #e5e7eb; color: var(--testo); }
 
-        /* LINK BACK */
         .link-back { display: block; text-align: center; color: var(--grigio); font-size: 14px; text-decoration: none; margin-top: 20px; padding: 10px; transition: 0.2s; }
         .link-back:hover { color: var(--blu); }
 
-        /* DIVIDER */
         .divider { height: 1px; background: #e5e7eb; margin: 25px 0; }
 
-        /* CHECKBOX */
         .checkbox-group { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 15px; cursor: pointer; }
         .checkbox-group input[type="checkbox"] { width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px; accent-color: var(--blu); cursor: pointer; }
         .checkbox-group span { font-size: 13px; color: var(--grigio); line-height: 1.6; }
@@ -217,6 +189,9 @@
             .foto-grid { grid-template-columns: repeat(3, 1fr); }
             .success-highlights { grid-template-columns: 1fr; }
             .pricing-options { flex-direction: column; }
+            .navbar { padding: 12px 20px; }
+            .navbar-links { gap: 8px; }
+            .btn-login, .btn-cliente { padding: 7px 14px; font-size: 12px; }
         }
     </style>
 </head>
@@ -227,7 +202,7 @@
     <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
     <div class="navbar-links">
         <a href="cliente.html" class="btn-cliente">Sei un cliente?</a>
-        <a href="#tab-accedi" class="btn-login" onclick="switchTab('accedi'); return false;">Accedi</a>
+        <a href="professionista.html?tab=accedi" class="btn-login" onclick="switchTab('accedi'); return false;">🔑 Accedi</a>
     </div>
 </nav>
 
@@ -246,7 +221,6 @@
 
 <!-- CONTENUTO -->
 <div class="container">
-    <!-- TABS -->
     <div class="tabs">
         <button class="tab active" id="tab-reg-btn" onclick="switchTab('registrati')">📝 Registrati</button>
         <button class="tab" id="tab-acc-btn" onclick="switchTab('accedi')">🔑 Accedi</button>
@@ -257,7 +231,6 @@
         <!-- ==================== TAB REGISTRAZIONE ==================== -->
         <div id="tab-registrati">
 
-            <!-- STEP INDICATOR -->
             <div class="steps-indicator">
                 <div class="step-dot active" id="dot1">1</div>
                 <div class="step-line" id="line12"></div>
@@ -270,16 +243,14 @@
                 <div class="step-dot" id="dot5">5</div>
             </div>
 
-            <!-- ===== STEP 1: DATI PERSONALI + OTP ===== -->
+            <!-- STEP 1 -->
             <div class="step-content active" id="step1">
                 <div class="step-title">Dati personali</div>
                 <div class="step-subtitle">Crea il tuo account professionale. Tutti i professionisti devono verificare il numero di telefono.</div>
-
                 <div class="avviso-blu">
                     <strong>ℹ️ Come funziona la registrazione</strong>
                     La registrazione è in 5 step. Creerai il profilo, sceglierai la categoria, caricherai i documenti (dove richiesto), sceglierai il piano e inizierai a ricevere richieste.
                 </div>
-
                 <div class="form-group">
                     <label>Nome e Cognome *</label>
                     <input type="text" id="reg-nome" placeholder="Es. Marco Bianchi">
@@ -315,91 +286,48 @@
                     <label>Conferma Password *</label>
                     <input type="password" id="reg-password2" placeholder="Ripeti la password">
                 </div>
-
                 <div class="divider"></div>
-
                 <div class="avviso-rosso">
                     <strong>⚠️ Regole anti-abbandono — LEGGI ATTENTAMENTE</strong>
                     • Se accetti una richiesta, paghi e poi non ti presenti al sopralluogo senza preavviso: ricevi una segnalazione.<br>
                     • Dopo <strong>3 segnalazioni</strong> il tuo account viene <strong>bannato definitivamente</strong> (P.IVA e telefono bloccati).<br>
                     • La piattaforma tutela sempre i clienti e i professionisti: comportamenti scorretti non sono tollerati.
                 </div>
-
                 <div class="checkbox-group">
                     <input type="checkbox" id="check-regole">
                     <span>Ho letto e accetto le <a href="#">Regole della piattaforma</a>, i <a href="#">Termini di Servizio</a> e la <a href="#">Privacy Policy</a></span>
                 </div>
-
                 <button class="btn-main" onclick="goStep(1,2)">Continua — Scegli categoria →</button>
             </div>
 
-            <!-- ===== STEP 2: CATEGORIA + VERIFICA ===== -->
+            <!-- STEP 2 -->
             <div class="step-content" id="step2">
                 <div class="step-title">Categoria e verifica</div>
                 <div class="step-subtitle">Scegli la tua categoria professionale. In base alla categoria cambierà il tipo di verifica richiesta.</div>
-
                 <div class="form-group">
                     <label>Seleziona la tua categoria *</label>
                     <div class="categorie-grid">
-                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="edilizia">
-                            <span class="emoji">🏗️</span>Edilizia & Costruzioni
-                        </button>
-                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="impianti">
-                            <span class="emoji">⚡🔧</span>Impianti
-                        </button>
-                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="automotive">
-                            <span class="emoji">🚗</span>Automotive
-                        </button>
-                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="legale">
-                            <span class="emoji">⚖️</span>Legale & Finanza
-                        </button>
-                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="salute">
-                            <span class="emoji">🩺</span>Salute & Benessere
-                        </button>
-                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="estetica">
-                            <span class="emoji">💅</span>Estetica & Persona
-                        </button>
-                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="giardinieri">
-                            <span class="emoji">🌿</span>Giardinieri
-                        </button>
-                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="traslochi">
-                            <span class="emoji">📦</span>Traslochi & Facchinaggio
-                        </button>
-                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="digitale">
-                            <span class="emoji">💻</span>Digitale & Tech
-                        </button>
-                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="eventi">
-                            <span class="emoji">🎉</span>Organizzatori eventi
-                        </button>
-                        <!-- SEMPLIFICATE (no P.IVA) -->
-                        <button class="categoria-btn" onclick="selezionaCategoria(this,'semplificata')" data-cat="pulizie">
-                            <span class="emoji">🧹</span>Pulizie domestiche
-                        </button>
-                        <button class="categoria-btn" onclick="selezionaCategoria(this,'semplificata')" data-cat="badanti">
-                            <span class="emoji">🤝</span>Badanti & Assistenti
-                        </button>
-                        <button class="categoria-btn" onclick="selezionaCategoria(this,'semplificata')" data-cat="babysitter">
-                            <span class="emoji">👶</span>Baby sitter
-                        </button>
-                        <button class="categoria-btn" onclick="selezionaCategoria(this,'semplificata')" data-cat="dogsitter">
-                            <span class="emoji">🐾</span>Dog sitter & Toelettatori
-                        </button>
-                        <button class="categoria-btn" onclick="selezionaCategoria(this,'semplificata')" data-cat="cuochi">
-                            <span class="emoji">👨‍🍳</span>Cuochi a domicilio
-                        </button>
-                        <button class="categoria-btn" onclick="selezionaCategoria(this,'semplificata')" data-cat="tuttofare">
-                            <span class="emoji">🔨</span>Tuttofare & Sbrigafaccende
-                        </button>
-                        <button class="categoria-btn" onclick="selezionaCategoria(this,'semplificata')" data-cat="istruzione">
-                            <span class="emoji">📚</span>Istruzione & Formazione
-                        </button>
-                        <button class="categoria-btn escort-btn" onclick="selezionaCategoria(this,'escort')" data-cat="escort">
-                            <span class="emoji">🔞</span>Escort & Accompagnatrici +18
-                        </button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="edilizia"><span class="emoji">🏗️</span>Edilizia & Costruzioni</button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="impianti"><span class="emoji">⚡🔧</span>Impianti</button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="automotive"><span class="emoji">🚗</span>Automotive</button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="legale"><span class="emoji">⚖️</span>Legale & Finanza</button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="salute"><span class="emoji">🩺</span>Salute & Benessere</button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="estetica"><span class="emoji">💅</span>Estetica & Persona</button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="giardinieri"><span class="emoji">🌿</span>Giardinieri</button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="traslochi"><span class="emoji">📦</span>Traslochi & Facchinaggio</button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="digitale"><span class="emoji">💻</span>Digitale & Tech</button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'standard')" data-cat="eventi"><span class="emoji">🎉</span>Organizzatori eventi</button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'semplificata')" data-cat="pulizie"><span class="emoji">🧹</span>Pulizie domestiche</button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'semplificata')" data-cat="badanti"><span class="emoji">🤝</span>Badanti & Assistenti</button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'semplificata')" data-cat="babysitter"><span class="emoji">👶</span>Baby sitter</button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'semplificata')" data-cat="dogsitter"><span class="emoji">🐾</span>Dog sitter & Toelettatori</button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'semplificata')" data-cat="cuochi"><span class="emoji">👨‍🍳</span>Cuochi a domicilio</button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'semplificata')" data-cat="tuttofare"><span class="emoji">🔨</span>Tuttofare & Sbrigafaccende</button>
+                        <button class="categoria-btn" onclick="selezionaCategoria(this,'semplificata')" data-cat="istruzione"><span class="emoji">📚</span>Istruzione & Formazione</button>
+                        <button class="categoria-btn escort-btn" onclick="selezionaCategoria(this,'escort')" data-cat="escort"><span class="emoji">🔞</span>Escort & Accompagnatrici +18</button>
                     </div>
                 </div>
 
-                <!-- BOX VERIFICA STANDARD (P.IVA) -->
                 <div id="box-standard" style="display:none">
                     <div class="avviso-oro">
                         <strong>📋 Verifica richiesta per questa categoria</strong>
@@ -440,7 +368,6 @@
                     </div>
                 </div>
 
-                <!-- BOX VERIFICA SEMPLIFICATA (no P.IVA) -->
                 <div id="box-semplificata" style="display:none">
                     <div class="avviso-verde">
                         <strong>✅ Registrazione semplificata</strong>
@@ -458,7 +385,6 @@
                     </div>
                 </div>
 
-                <!-- BOX ESCORT -->
                 <div id="box-escort" style="display:none">
                     <div class="avviso-rosso">
                         <strong>🔞 Sezione riservata a maggiorenni</strong>
@@ -481,11 +407,10 @@
                 <button class="btn-back" onclick="goStep(2,1)">← Indietro</button>
             </div>
 
-            <!-- ===== STEP 3: PROFILO ===== -->
+            <!-- STEP 3 -->
             <div class="step-content" id="step3">
                 <div class="step-title">Il tuo profilo</div>
                 <div class="step-subtitle">Crea un profilo completo per attirare più clienti. Foto e video aumentano le probabilità di essere scelto.</div>
-
                 <div class="form-group">
                     <label>Descrizione professionale *</label>
                     <textarea id="descrizione" placeholder="Descrivi la tua attività, la tua esperienza, le tue specializzazioni e perché i clienti dovrebbero sceglierti..."></textarea>
@@ -506,9 +431,7 @@
                         <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--grigio);margin-top:5px"><span>5 km</span><span>200 km</span></div>
                     </div>
                 </div>
-
                 <div class="divider"></div>
-
                 <div class="form-group">
                     <label>Foto del lavoro — <span style="font-weight:400;color:var(--grigio)">carica fino a 5 foto (obbligatorie almeno 2)</span></label>
                     <div class="foto-grid">
@@ -520,7 +443,6 @@
                     </div>
                     <input type="file" id="upload-foto-input" style="display:none" accept="image/*" onchange="fotoCaricata(this)">
                 </div>
-
                 <div class="form-group">
                     <label>Video di presentazione <span style="font-weight:400;color:var(--grigio)">(facoltativo — aumenta la visibilità del 60%)</span></label>
                     <div class="upload-area" onclick="document.getElementById('upload-video').click()">
@@ -530,42 +452,30 @@
                     <input type="file" id="upload-video" style="display:none" accept="video/mp4,video/mov" onchange="fileCaricato(this,'video-label')">
                     <div id="video-label" style="font-size:12px;color:var(--verde);margin-top:5px"></div>
                 </div>
-
                 <div class="form-group">
                     <label>Sito web <span style="font-weight:400;color:var(--grigio)">(facoltativo)</span></label>
                     <input type="url" id="sito-web" placeholder="https://www.tuosito.it">
                 </div>
-
                 <button class="btn-main" onclick="goStep(3,4)">Continua — Scegli piano →</button>
                 <button class="btn-back" onclick="goStep(3,2)">← Indietro</button>
             </div>
 
-            <!-- ===== STEP 4: PIANO E PREZZI ===== -->
+            <!-- STEP 4 -->
             <div class="step-content" id="step4">
                 <div class="step-title">Scegli il piano</div>
                 <div class="step-subtitle">Abbonati per attivare la tua pagina profilo e iniziare a ricevere richieste qualificate.</div>
-
-                <!-- Prezzo dinamico per categoria -->
-                <div id="pricing-container">
-                    <!-- Sarà popolato dal JS in base alla categoria -->
-                </div>
-
+                <div id="pricing-container"></div>
                 <div class="divider"></div>
-
-                <div id="sblocco-container">
-                    <!-- Sarà popolato dal JS in base alla categoria -->
-                </div>
-
+                <div id="sblocco-container"></div>
                 <div class="avviso-blu" style="margin-top:15px">
                     <strong>ℹ️ Come funziona lo sblocco contatti</strong>
                     Quando un cliente pubblica una richiesta nella tua zona e categoria, la vedi anonimizzata (solo descrizione lavoro e città). Se ti interessa, paghi lo sblocco per accedere alla chat privata e concordare sopralluogo e preventivo.
                 </div>
-
                 <button class="btn-main oro" onclick="goStep(4,5)" id="btn-continua-piano">Attiva abbonamento e vai avanti →</button>
                 <button class="btn-back" onclick="goStep(4,3)">← Indietro</button>
             </div>
 
-            <!-- ===== STEP 5: CONFERMA ===== -->
+            <!-- STEP 5 -->
             <div class="step-content" id="step5">
                 <div class="success-screen">
                     <div class="success-icon">🎉</div>
@@ -589,7 +499,6 @@
         <div id="tab-accedi" style="display:none">
             <div class="step-title" style="margin-bottom:6px">Bentornato 👋</div>
             <div class="step-subtitle">Accedi alla tua area professionista.</div>
-
             <div class="form-group">
                 <label>Email</label>
                 <input type="email" id="login-email" placeholder="La tua email">
@@ -598,19 +507,20 @@
                 <label>Password</label>
                 <input type="password" id="login-password" placeholder="La tua password">
             </div>
-            <button class="btn-main" onclick="alert('✅ Login in arrivo con il backend!')">🔑 Accedi</button>
+            <button class="btn-main" onclick="eseguiLoginPro()">🔑 Accedi</button>
             <a href="#" class="link-back" style="color:var(--blu);font-weight:600">Hai dimenticato la password?</a>
             <div class="divider"></div>
-            <p style="text-align:center;font-size:14px;color:var(--grigio)">Non hai ancora un account? <a href="#" onclick="switchTab('registrati');return false" style="color:var(--blu);font-weight:600">Registrati gratis</a></p>
+            <p style="text-align:center;font-size:14px;color:var(--grigio)">
+                Non hai ancora un account?
+                <a href="#" onclick="switchTab('registrati');return false" style="color:var(--blu);font-weight:600">Registrati gratis</a>
+            </p>
         </div>
 
         <a href="index.html" class="link-back">← Torna alla homepage</a>
     </div>
-    <!-- Fine card -->
 </div>
-<!-- Fine container -->
 
-<!-- POPUP ADULTI (escort) -->
+<!-- POPUP ADULTI -->
 <div class="adult-popup" id="adultPopup">
     <div class="adult-box">
         <div style="font-size:48px;margin-bottom:15px">🔞</div>
@@ -624,9 +534,8 @@
 </div>
 
 <script>
-    // ========== STATO GLOBALE ==========
     let currentStep = 1;
-    let tipoRegistrazione = 'standard'; // standard | semplificata | escort
+    let tipoRegistrazione = 'standard';
     let categoriaSelezionata = '';
     let pianoSelezionato = 'mensile';
     let pivaVerificata = false;
@@ -634,32 +543,33 @@
     let fotoCaricate = 0;
     let pendingEscort = false;
 
-    // ========== PREZZI PER CATEGORIA ==========
     const PREZZI = {
-        // Semplificate
-        babysitter:  { mensile: 10,  annuale: null,  contatto: 8,   tipo: 'semplificata' },
-        dogsitter:   { mensile: 10,  annuale: null,  contatto: 8,   tipo: 'semplificata' },
-        cuochi:      { mensile: 10,  annuale: null,  contatto: 8,   tipo: 'semplificata' },
-        tuttofare:   { mensile: 10,  annuale: null,  contatto: 8,   tipo: 'semplificata' },
-        istruzione:  { mensile: 10,  annuale: null,  contatto: 8,   tipo: 'semplificata' },
-        pulizie:     { mensile: 10,  annuale: null,  contatto: 8,   tipo: 'semplificata' },
-        badanti:     { mensile: 10,  annuale: null,  contatto: 8,   tipo: 'semplificata' },
-        // Escort
-        escort:      { mensile: 150, annuale: 999,   contatto: 9,   tipo: 'escort'       },
-        // Standard
-        edilizia:    { mensile: 99,  annuale: 888,   contatto: null, tipo: 'standard', sbloccoCat: 'edilizia' },
-        impianti:    { mensile: 99,  annuale: 888,   contatto: 9,   tipo: 'standard' },
-        automotive:  { mensile: 99,  annuale: 888,   contatto: 9,   tipo: 'standard' },
-        legale:      { mensile: 99,  annuale: 888,   contatto: 9,   tipo: 'standard' },
-        salute:      { mensile: 99,  annuale: 888,   contatto: 9,   tipo: 'standard' },
-        estetica:    { mensile: 99,  annuale: 888,   contatto: 9,   tipo: 'standard' },
-        giardinieri: { mensile: 99,  annuale: 888,   contatto: 9,   tipo: 'standard' },
-        traslochi:   { mensile: 99,  annuale: 888,   contatto: 9,   tipo: 'standard' },
-        digitale:    { mensile: 99,  annuale: 888,   contatto: 9,   tipo: 'standard' },
-        eventi:      { mensile: 99,  annuale: 888,   contatto: 9,   tipo: 'standard' },
+        babysitter:  { mensile: 10,  annuale: null, contatto: 8,  tipo: 'semplificata' },
+        dogsitter:   { mensile: 10,  annuale: null, contatto: 8,  tipo: 'semplificata' },
+        cuochi:      { mensile: 10,  annuale: null, contatto: 8,  tipo: 'semplificata' },
+        tuttofare:   { mensile: 10,  annuale: null, contatto: 8,  tipo: 'semplificata' },
+        istruzione:  { mensile: 10,  annuale: null, contatto: 8,  tipo: 'semplificata' },
+        pulizie:     { mensile: 10,  annuale: null, contatto: 8,  tipo: 'semplificata' },
+        badanti:     { mensile: 10,  annuale: null, contatto: 8,  tipo: 'semplificata' },
+        escort:      { mensile: 150, annuale: 999,  contatto: 9,  tipo: 'escort' },
+        edilizia:    { mensile: 99,  annuale: 888,  contatto: null, tipo: 'standard', sbloccoCat: 'edilizia' },
+        impianti:    { mensile: 99,  annuale: 888,  contatto: 9,  tipo: 'standard' },
+        automotive:  { mensile: 99,  annuale: 888,  contatto: 9,  tipo: 'standard' },
+        legale:      { mensile: 99,  annuale: 888,  contatto: 9,  tipo: 'standard' },
+        salute:      { mensile: 99,  annuale: 888,  contatto: 9,  tipo: 'standard' },
+        estetica:    { mensile: 99,  annuale: 888,  contatto: 9,  tipo: 'standard' },
+        giardinieri: { mensile: 99,  annuale: 888,  contatto: 9,  tipo: 'standard' },
+        traslochi:   { mensile: 99,  annuale: 888,  contatto: 9,  tipo: 'standard' },
+        digitale:    { mensile: 99,  annuale: 888,  contatto: 9,  tipo: 'standard' },
+        eventi:      { mensile: 99,  annuale: 888,  contatto: 9,  tipo: 'standard' },
     };
 
-    // ========== TABS ==========
+    // LEGGI URL PARAMS
+    window.addEventListener('DOMContentLoaded', function() {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('tab') === 'accedi') switchTab('accedi');
+    });
+
     function switchTab(tab) {
         document.getElementById('tab-registrati').style.display = tab === 'registrati' ? 'block' : 'none';
         document.getElementById('tab-accedi').style.display = tab === 'accedi' ? 'block' : 'none';
@@ -667,7 +577,6 @@
         document.getElementById('tab-acc-btn').classList.toggle('active', tab === 'accedi');
     }
 
-    // ========== OTP ==========
     function inviaOTP() {
         const tel = document.getElementById('reg-telefono').value.trim();
         if (!tel || tel.length < 9) { alert('Inserisci un numero di telefono valido!'); return; }
@@ -683,7 +592,6 @@
         if (current.value.length > 1) current.value = current.value.slice(-1);
         if (current.value && nextId) document.getElementById(nextId).focus();
         if (!current.value && prevId) document.getElementById(prevId).focus();
-        // check auto completamento
         const codice = ['otp1','otp2','otp3','otp4','otp5','otp6'].map(id => document.getElementById(id).value).join('');
         if (codice.length === 6) verificaOTP(codice);
     }
@@ -694,10 +602,8 @@
         }
     }
 
-    // ========== STEP NAVIGATION ==========
     function goStep(from, to) {
         if (to > from) {
-            // Validazioni avanti
             if (from === 1) {
                 const nome = document.getElementById('reg-nome').value.trim();
                 const email = document.getElementById('reg-email').value.trim();
@@ -712,9 +618,7 @@
             }
             if (from === 2) {
                 if (!categoriaSelezionata) { alert('Seleziona una categoria!'); return; }
-                if (tipoRegistrazione === 'standard') {
-                    if (!pivaVerificata) { alert('Verifica la Partita IVA prima di continuare!'); return; }
-                }
+                if (tipoRegistrazione === 'standard' && !pivaVerificata) { alert('Verifica la Partita IVA prima di continuare!'); return; }
             }
             if (from === 3) {
                 const desc = document.getElementById('descrizione').value.trim();
@@ -723,12 +627,8 @@
                 if (!citta) { alert('Inserisci la tua città!'); return; }
             }
         }
-        // Aggiorna dots e lines
-        const stepCurrent = document.getElementById('step' + from);
-        const stepNext = document.getElementById('step' + to);
-        if (stepCurrent) { stepCurrent.classList.remove('active'); }
-        if (stepNext) { stepNext.classList.add('active'); }
-        // Aggiorna indicatori
+        document.getElementById('step' + from).classList.remove('active');
+        document.getElementById('step' + to).classList.add('active');
         for (let i = 1; i <= 5; i++) {
             const dot = document.getElementById('dot' + i);
             if (i < to) { dot.classList.remove('active'); dot.classList.add('done'); dot.textContent = '✓'; }
@@ -740,12 +640,10 @@
             if (line) line.classList.toggle('done', i < to);
         }
         currentStep = to;
-        // Se siamo allo step 4, popola i prezzi
-        if (to === 4) { popolaPrezzi(); }
+        if (to === 4) popolaPrezzi();
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // ========== CATEGORIE ==========
     function selezionaCategoria(btn, tipo) {
         if (tipo === 'escort') {
             pendingEscort = true;
@@ -763,7 +661,6 @@
         document.getElementById('box-standard').style.display = tipo === 'standard' ? 'block' : 'none';
         document.getElementById('box-semplificata').style.display = tipo === 'semplificata' ? 'block' : 'none';
         document.getElementById('box-escort').style.display = tipo === 'escort' ? 'block' : 'none';
-        // reset piva
         if (tipo !== 'standard') pivaVerificata = true;
     }
 
@@ -779,7 +676,6 @@
         pendingEscort = false;
     }
 
-    // ========== VERIFICA P.IVA ==========
     async function verificaPIVA() {
         const piva = document.getElementById('piva').value.trim();
         const result = document.getElementById('piva-result');
@@ -814,7 +710,6 @@
         btn.disabled = false; btn.textContent = 'Verifica';
     }
 
-    // ========== FILE UPLOAD ==========
     function fileCaricato(input, labelId) {
         if (input.files && input.files[0]) {
             document.getElementById(labelId).innerHTML = '✅ File caricato: <strong>' + input.files[0].name + '</strong>';
@@ -836,7 +731,6 @@
         }
     }
 
-    // ========== RAGGIO ==========
     function aggiornaRaggio(val) {
         document.getElementById('raggio-display').innerHTML = val + ' <span>km</span>';
         document.getElementById('raggio-text').textContent = val + ' km';
@@ -845,14 +739,12 @@
         slider.style.background = `linear-gradient(90deg, var(--blu) ${pct}%, #e5e7eb ${pct}%)`;
     }
 
-    // ========== PREZZI ==========
     function popolaPrezzi() {
         const p = PREZZI[categoriaSelezionata];
         if (!p) return;
         const container = document.getElementById('pricing-container');
         const sbloccoContainer = document.getElementById('sblocco-container');
 
-        // Box abbonamento
         let html = '<div class="pricing-box"><h3>📦 Abbonamento pagina profilo</h3><p style="font-size:13px;color:var(--grigio);margin-bottom:15px">Abbonati per attivare il tuo profilo pubblico e ricevere richieste.</p><div class="pricing-options">';
         html += `<div class="pricing-card ${pianoSelezionato === 'mensile' ? 'selected' : ''}" onclick="selezionaPiano('mensile', this)">
             <div class="periodo">Mensile</div>
@@ -874,7 +766,6 @@
         html += '</div></div>';
         container.innerHTML = html;
 
-        // Box sblocco contatti
         let sbloccoHtml = '<div class="sblocco-info"><strong>🔓 Costo sblocco contatti</strong>';
         if (p.sbloccoCat === 'edilizia') {
             sbloccoHtml += `
@@ -892,6 +783,13 @@
         pianoSelezionato = piano;
         document.querySelectorAll('.pricing-card').forEach(c => c.classList.remove('selected'));
         el.classList.add('selected');
+    }
+
+    function eseguiLoginPro() {
+        const email = document.getElementById('login-email').value;
+        const pass = document.getElementById('login-password').value;
+        if (!email || !pass) { alert('Inserisci email e password!'); return; }
+        window.location.href = 'dashboard-pro.html';
     }
 </script>
 
