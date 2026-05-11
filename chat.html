@@ -15,18 +15,17 @@
         }
         body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color: var(--testo); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
 
-        /* NAVBAR */
         .navbar { background: var(--blu-scuro); padding: 14px 25px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; box-shadow: 0 2px 15px rgba(0,0,0,0.25); }
         .logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: white; text-decoration: none; }
         .logo span { color: var(--oro); }
-        .navbar-right { display: flex; align-items: center; gap: 12px; }
+        .navbar-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
         .btn-back-nav { background: transparent; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.25); padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; text-decoration: none; }
         .btn-back-nav:hover { color: var(--oro); border-color: var(--oro); }
+        .btn-logout { background: transparent; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.3); padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s; text-decoration: none; }
+        .btn-logout:hover { color: white; border-color: white; }
 
-        /* CHAT LAYOUT */
         .chat-layout { display: flex; flex: 1; overflow: hidden; }
 
-        /* LISTA CHAT (sidebar sinistra) */
         .chat-list { width: 300px; background: white; border-right: 1px solid #e5e7eb; display: flex; flex-direction: column; flex-shrink: 0; }
         .chat-list-header { padding: 18px 20px; border-bottom: 1px solid #e5e7eb; }
         .chat-list-header h3 { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--blu-scuro); margin-bottom: 10px; }
@@ -47,10 +46,8 @@
         .chat-item-stato.attivo { background: #ECFDF5; color: var(--verde); }
         .chat-item-stato.attesa { background: #FEF3C7; color: var(--arancio); }
 
-        /* AREA CHAT PRINCIPALE */
         .chat-main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 
-        /* HEADER CHAT */
         .chat-header { background: white; padding: 15px 22px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; box-shadow: 0 1px 8px rgba(0,0,0,0.05); }
         .chat-header-info { display: flex; align-items: center; gap: 14px; }
         .chat-header-avatar { width: 46px; height: 46px; background: var(--blu); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--oro); font-size: 18px; }
@@ -65,7 +62,6 @@
         .btn-header-action.oro { background: var(--oro); color: white; }
         .btn-header-action.oro:hover { background: var(--oro-chiaro); }
 
-        /* BANNER RICHIESTA */
         .richiesta-banner { background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); border-bottom: 1px solid #BFDBFE; padding: 12px 22px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; flex-wrap: wrap; gap: 8px; }
         .richiesta-banner-info { font-size: 13px; color: var(--blu-scuro); line-height: 1.6; }
         .richiesta-banner-info strong { display: block; font-size: 14px; margin-bottom: 2px; }
@@ -75,7 +71,6 @@
         .chip-small.verde { background: #ECFDF5; color: var(--verde); }
         .chip-small.oro { background: #FEF3C7; color: var(--arancio); }
 
-        /* SOPRALLUOGO BANNER */
         .sopralluogo-banner { background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border-bottom: 1px solid #A7F3D0; padding: 14px 22px; flex-shrink: 0; }
         .sopralluogo-banner-title { font-size: 13px; font-weight: 700; color: #065F46; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
         .sopralluogo-banner-data { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 900; color: #065F46; margin-bottom: 4px; }
@@ -86,7 +81,6 @@
         .btn-sopralluogo.rosso { background: var(--rosso); color: white; }
         .btn-sopralluogo.grigio { background: #e5e7eb; color: var(--grigio); }
 
-        /* MESSAGGI */
         .chat-messages { flex: 1; overflow-y: auto; padding: 20px 22px; display: flex; flex-direction: column; gap: 14px; }
         .msg { display: flex; gap: 10px; max-width: 75%; }
         .msg.inviato { align-self: flex-end; flex-direction: row-reverse; }
@@ -98,13 +92,11 @@
         .msg.inviato .msg-bubble { background: linear-gradient(135deg, var(--blu), var(--blu-chiaro)); color: white; border-radius: 18px 4px 18px 18px; }
         .msg-time { font-size: 11px; color: var(--grigio); padding: 0 4px; }
 
-        /* MESSAGGIO SISTEMA */
         .msg-sistema { align-self: center; background: #FEF3C7; border: 1px solid #FDE68A; border-radius: 12px; padding: 10px 16px; font-size: 12px; color: #78350F; text-align: center; max-width: 85%; line-height: 1.6; }
         .msg-sistema.verde { background: #ECFDF5; border-color: #A7F3D0; color: #065F46; }
         .msg-sistema.blu { background: #EFF6FF; border-color: #BFDBFE; color: #1E40AF; }
         .msg-sistema.rosso { background: #FEF2F2; border-color: #FECACA; color: #991B1B; }
 
-        /* CARD SOPRALLUOGO IN CHAT */
         .sopralluogo-msg { background: white; border: 2px solid var(--verde); border-radius: 16px; padding: 16px 18px; align-self: center; width: 90%; max-width: 420px; }
         .sopralluogo-msg-title { font-size: 13px; font-weight: 700; color: var(--verde); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
         .sopralluogo-msg-data { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 900; color: var(--blu-scuro); margin-bottom: 6px; }
@@ -117,7 +109,6 @@
         .btn-sm.verde:hover { background: #059669; }
         .btn-sm.rosso:hover { background: #DC2626; }
 
-        /* INPUT CHAT */
         .chat-input-area { background: white; border-top: 1px solid #e5e7eb; padding: 14px 20px; flex-shrink: 0; }
         .chat-input-row { display: flex; gap: 10px; align-items: flex-end; }
         .chat-input-box { flex: 1; padding: 12px 18px; border: 1.5px solid #e5e7eb; border-radius: 25px; font-size: 14px; font-family: 'Inter', sans-serif; outline: none; resize: none; max-height: 100px; transition: 0.3s; line-height: 1.5; }
@@ -132,7 +123,6 @@
         .btn-quick.oro { background: #FFFBEB; border-color: var(--oro); color: var(--oro); }
         .btn-quick.oro:hover { background: var(--oro); color: white; }
 
-        /* POPUP SOPRALLUOGO */
         .popup-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
         .popup-overlay.show { display: flex; }
         .popup-box { background: white; border-radius: 24px; padding: 35px 30px; max-width: 440px; width: 100%; }
@@ -150,7 +140,6 @@
         .btn-popup.grigio { background: var(--grigio-chiaro); color: var(--grigio); }
         .btn-popup.grigio:hover { background: #e5e7eb; }
 
-        /* POPUP CONFERMA LAVORO */
         .popup-box.conferma { text-align: center; }
         .popup-icon { font-size: 56px; margin-bottom: 15px; }
         .conferma-dettagli { background: var(--grigio-chiaro); border-radius: 14px; padding: 16px 18px; font-size: 13px; color: var(--testo); line-height: 1.9; margin-bottom: 20px; text-align: left; }
@@ -159,6 +148,8 @@
         @media (max-width: 768px) {
             .chat-list { display: none; }
             .richiesta-banner { flex-direction: column; align-items: flex-start; }
+            .navbar-right { gap: 6px; }
+            .btn-back-nav { padding: 6px 10px; font-size: 11px; }
         }
     </style>
 </head>
@@ -168,8 +159,9 @@
 <nav class="navbar">
     <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
     <div class="navbar-right">
-        <a href="dashboard-cliente.html" class="btn-back-nav">← Dashboard Cliente</a>
-        <a href="dashboard-pro.html" class="btn-back-nav">← Dashboard Pro</a>
+        <a href="dashboard-cliente.html" class="btn-back-nav">👤 Dashboard Cliente</a>
+        <a href="dashboard-pro.html" class="btn-back-nav">💼 Dashboard Pro</a>
+        <a href="index.html" class="btn-logout">🚪 Esci</a>
     </div>
 </nav>
 
@@ -183,7 +175,6 @@
             <input type="text" class="chat-search" placeholder="🔍 Cerca conversazione...">
         </div>
         <div class="chat-list-items">
-
             <div class="chat-item active" onclick="selezionaChat(this)">
                 <div class="chat-avatar" style="background:var(--blu)">R</div>
                 <div class="chat-item-info">
@@ -195,7 +186,6 @@
                     <span class="chat-item-stato attivo">Sopralluogo ✅</span>
                 </div>
             </div>
-
             <div class="chat-item" onclick="selezionaChat(this)">
                 <div class="chat-avatar" style="background:var(--oro)">B</div>
                 <div class="chat-item-info">
@@ -208,7 +198,6 @@
                     <span class="chat-item-stato attesa">In attesa</span>
                 </div>
             </div>
-
             <div class="chat-item" onclick="selezionaChat(this)">
                 <div class="chat-avatar" style="background:var(--verde)">V</div>
                 <div class="chat-item-info">
@@ -220,14 +209,12 @@
                     <span class="chat-item-stato attivo">Completato ✅</span>
                 </div>
             </div>
-
         </div>
     </div>
 
     <!-- CHAT PRINCIPALE -->
     <div class="chat-main">
 
-        <!-- HEADER CHAT -->
         <div class="chat-header">
             <div class="chat-header-info">
                 <div class="chat-header-avatar">R</div>
@@ -242,7 +229,6 @@
             </div>
         </div>
 
-        <!-- BANNER RICHIESTA -->
         <div class="richiesta-banner">
             <div class="richiesta-banner-info">
                 <strong>📋 Richiesta: Tinteggiatura appartamento 80mq — Milano</strong>
@@ -255,19 +241,17 @@
             </div>
         </div>
 
-        <!-- BANNER SOPRALLUOGO FISSATO -->
         <div class="sopralluogo-banner" id="sopralluogoBanner">
             <div class="sopralluogo-banner-title">📅 Sopralluogo confermato</div>
-            <div class="sopralluogo-banner-data">Lunedì 6 Maggio 2026 — ore 09:30</div>
+            <div class="sopralluogo-banner-data">Lunedì 11 Maggio 2026 — ore 09:30</div>
             <div class="sopralluogo-banner-sub">📍 Via Roma 15, Milano · Con Rossoni Edilizia</div>
             <div class="sopralluogo-banner-actions">
                 <button class="btn-sopralluogo verde" onclick="apriConfermaLavoro()">✅ Conferma lavoro</button>
                 <button class="btn-sopralluogo rosso" onclick="apriRifiuto()">❌ Rifiuta lavoro</button>
-                <button class="btn-sopralluogo grigio" onclick="apriModificaSopralluogo()">✏️ Modifica data</button>
+                <button class="btn-sopralluogo grigio" onclick="apriPopupSopralluogo()">✏️ Modifica data</button>
             </div>
         </div>
 
-        <!-- MESSAGGI -->
         <div class="chat-messages" id="chatMessages">
 
             <div class="msg-sistema blu">
@@ -307,10 +291,9 @@
                 </div>
             </div>
 
-            <!-- CARD SOPRALLUOGO IN CHAT -->
             <div class="sopralluogo-msg">
                 <div class="sopralluogo-msg-title">📅 Sopralluogo concordato</div>
-                <div class="sopralluogo-msg-data">Lunedì 6 Maggio 2026 — ore 09:30</div>
+                <div class="sopralluogo-msg-data">Lunedì 11 Maggio 2026 — ore 09:30</div>
                 <div class="sopralluogo-msg-info">
                     <strong>Professionista:</strong> Rossoni Edilizia<br>
                     <strong>Indirizzo:</strong> Via Roma 15, Milano (3° piano int. 8)<br>
@@ -340,12 +323,11 @@
 
         </div>
 
-        <!-- INPUT AREA -->
         <div class="chat-input-area">
             <div class="chat-input-row">
                 <button class="btn-allega" onclick="alert('Allega foto in arrivo!')">📎</button>
                 <textarea class="chat-input-box" id="msgInput" placeholder="Scrivi un messaggio..." rows="1" onkeydown="handleEnter(event)"></textarea>
-                <button class="btn-invia" onclick="inviaMsgaggio()">➤</button>
+                <button class="btn-invia" onclick="inviaMessaggio()">➤</button>
             </div>
             <div class="chat-input-actions">
                 <button class="btn-quick" onclick="inserisciTesto('Quando è disponibile per il sopralluogo?')">📅 Chiedi disponibilità</button>
@@ -404,7 +386,7 @@
         <div class="conferma-dettagli">
             <strong>Professionista:</strong> Rossoni Edilizia<br>
             <strong>Lavoro:</strong> Tinteggiatura appartamento 80mq<br>
-            <strong>Sopralluogo:</strong> 6 Maggio 2026 — ore 09:30<br>
+            <strong>Sopralluogo:</strong> 11 Maggio 2026 — ore 09:30<br>
             <strong>Pagamento professionista:</strong> Già effettuato ✅<br>
             <strong>Rimborso:</strong> ❌ Non previsto dopo conferma
         </div>
@@ -447,12 +429,11 @@
 </div>
 
 <script>
-    // Imposta data minima
     const oggi = new Date();
     const domani = new Date(oggi);
     domani.setDate(domani.getDate() + 1);
     document.getElementById('sop-data').min = domani.toISOString().split('T')[0];
-    document.getElementById('sop-data').value = '2026-05-06';
+    document.getElementById('sop-data').value = '2026-05-12';
 
     function selezionaChat(el) {
         document.querySelectorAll('.chat-item').forEach(i => i.classList.remove('active'));
@@ -462,7 +443,7 @@
     function handleEnter(e) {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
-            inviaMsgaggio();
+            inviaMessaggio();
         }
     }
 
@@ -472,11 +453,10 @@
         input.focus();
     }
 
-    function inviaMsgaggio() {
+    function inviaMessaggio() {
         const input = document.getElementById('msgInput');
         const testo = input.value.trim();
         if (!testo) return;
-
         const messages = document.getElementById('chatMessages');
         const msgDiv = document.createElement('div');
         msgDiv.className = 'msg inviato';
@@ -504,10 +484,7 @@
         if (!data) { alert('Inserisci la data del sopralluogo!'); return; }
         if (!ora) { alert('Seleziona l\'orario!'); return; }
         if (!indirizzo) { alert('Inserisci l\'indirizzo!'); return; }
-
         chiudiPopup('popupSopralluogo');
-
-        // Aggiunge messaggio in chat
         const messages = document.getElementById('chatMessages');
         const card = document.createElement('div');
         card.className = 'sopralluogo-msg';
@@ -530,7 +507,6 @@
         `;
         messages.appendChild(card);
         messages.scrollTop = messages.scrollHeight;
-
         setTimeout(() => {
             alert('✅ Sopralluogo fissato!\n\n📅 ' + dataFormattata + ' — ore ' + ora + '\n📍 ' + indirizzo + '\n\nEntrambi riceverete una notifica di conferma domani mattina.');
         }, 300);
@@ -551,11 +527,6 @@
         document.getElementById('popupRifiuto').classList.add('show');
     }
 
-    function apriModificaSopralluogo() {
-        chiudiPopup('popupSopralluogo');
-        document.getElementById('popupSopralluogo').classList.add('show');
-    }
-
     function confermaRifiuto() {
         const motivo = document.getElementById('motivo-rifiuto').value;
         if (!motivo) { alert('Seleziona un motivo!'); return; }
@@ -569,7 +540,6 @@
         document.getElementById(id).classList.remove('show');
     }
 
-    // Chiudi popup cliccando fuori
     document.querySelectorAll('.popup-overlay').forEach(overlay => {
         overlay.addEventListener('click', function(e) {
             if (e.target === this) chiudiPopup(this.id);
