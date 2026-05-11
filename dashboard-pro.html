@@ -15,7 +15,6 @@
         }
         body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color: var(--testo); min-height: 100vh; }
 
-        /* NAVBAR */
         .navbar { background: var(--blu-scuro); padding: 14px 25px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 15px rgba(0,0,0,0.25); }
         .logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: white; text-decoration: none; }
         .logo span { color: var(--oro); }
@@ -26,14 +25,14 @@
         .navbar-nome { color: white; font-size: 14px; font-weight: 600; }
         .abbonamento-badge { background: var(--verde); color: white; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
         .abbonamento-badge.scaduto { background: var(--rosso); }
+        .btn-logout { background: transparent; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.3); padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s; text-decoration: none; }
+        .btn-logout:hover { color: white; border-color: white; }
 
-        /* LAYOUT */
         .layout { display: flex; min-height: calc(100vh - 66px); }
 
-        /* SIDEBAR */
         .sidebar { width: 240px; background: white; border-right: 1px solid #e5e7eb; padding: 20px 0; flex-shrink: 0; }
         .sidebar-menu { list-style: none; }
-        .sidebar-item { padding: 12px 22px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: 0.2s; font-size: 14px; font-weight: 500; color: var(--grigio); border-left: 3px solid transparent; }
+        .sidebar-item { padding: 12px 22px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: 0.2s; font-size: 14px; font-weight: 500; color: var(--grigio); border-left: 3px solid transparent; text-decoration: none; }
         .sidebar-item:hover { background: var(--grigio-chiaro); color: var(--blu); }
         .sidebar-item.active { background: #EFF6FF; color: var(--blu); border-left-color: var(--oro); font-weight: 600; }
         .sidebar-item .icon { font-size: 18px; }
@@ -41,22 +40,19 @@
         .sidebar-label { font-size: 11px; font-weight: 700; color: #9CA3AF; text-transform: uppercase; letter-spacing: 1px; padding: 5px 22px; margin-top: 8px; }
         .sidebar-notifica { background: var(--rosso); color: white; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; margin-left: auto; }
 
-        /* MAIN */
         .main { flex: 1; padding: 28px; overflow-y: auto; }
         .page-header { margin-bottom: 22px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 15px; }
         .page-header-left h1 { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--blu-scuro); margin-bottom: 4px; }
         .page-header-left p { color: var(--grigio); font-size: 14px; }
 
-        /* ABBONAMENTO ALERT */
         .abbonamento-bar { background: linear-gradient(135deg, var(--blu) 0%, var(--blu-chiaro) 100%); border-radius: 16px; padding: 18px 22px; margin-bottom: 22px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
         .abbonamento-bar.scaduto { background: linear-gradient(135deg, var(--rosso) 0%, #DC2626 100%); }
         .abbonamento-bar-info { color: white; }
         .abbonamento-bar-info strong { display: block; font-size: 15px; margin-bottom: 3px; }
         .abbonamento-bar-info span { font-size: 13px; opacity: 0.85; }
-        .btn-rinnova { background: var(--oro); color: white; border: none; padding: 10px 22px; border-radius: 25px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; flex-shrink: 0; }
+        .btn-rinnova { background: var(--oro); color: white; border: none; padding: 10px 22px; border-radius: 25px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; flex-shrink: 0; text-decoration: none; }
         .btn-rinnova:hover { background: var(--oro-chiaro); transform: translateY(-1px); }
 
-        /* STATS */
         .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
         .stat-card { background: white; border-radius: 16px; padding: 20px; border: 1px solid #e5e7eb; transition: 0.3s; }
         .stat-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.07); transform: translateY(-2px); }
@@ -67,13 +63,11 @@
         .stat-card.verde .stat-num { color: var(--verde); }
         .stat-card.rosso .stat-num { color: var(--rosso); }
 
-        /* SEZIONE TITLE */
         .sez-title { font-size: 16px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
         .count-badge { background: var(--blu); color: white; font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 10px; }
         .count-badge.oro { background: var(--oro); }
         .count-badge.rosso { background: var(--rosso); }
 
-        /* RICHIESTA CARD */
         .richiesta-card { background: white; border-radius: 16px; padding: 20px 22px; margin-bottom: 14px; border: 1px solid #e5e7eb; transition: 0.3s; position: relative; }
         .richiesta-card:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.08); border-color: var(--oro); }
         .richiesta-card.nuova { border-left: 4px solid var(--oro); }
@@ -94,7 +88,6 @@
         .btn-sblocca:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(184,151,42,0.4); }
         .btn-sblocca:disabled { background: #e5e7eb; color: var(--grigio); box-shadow: none; cursor: not-allowed; transform: none; }
 
-        /* SOPRALLUOGO */
         .sopralluogo-card { background: white; border-radius: 16px; padding: 20px 22px; margin-bottom: 14px; border: 1px solid #e5e7eb; border-left: 4px solid var(--verde); transition: 0.3s; }
         .sopralluogo-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.07); }
         .sopralluogo-stato { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 10px; }
@@ -104,7 +97,6 @@
         .sopralluogo-info { font-size: 13px; color: var(--grigio); line-height: 1.8; }
         .sopralluogo-info strong { color: var(--blu-scuro); }
 
-        /* CREDITI */
         .crediti-box { background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%); border: 1.5px solid var(--oro); border-radius: 16px; padding: 20px 22px; margin-bottom: 22px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
         .crediti-info strong { display: block; font-size: 15px; color: var(--blu-scuro); margin-bottom: 4px; }
         .crediti-info span { font-size: 13px; color: var(--grigio); }
@@ -113,7 +105,6 @@
         .btn-ricarica { background: var(--oro); color: white; border: none; padding: 10px 22px; border-radius: 25px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; }
         .btn-ricarica:hover { background: var(--oro-chiaro); transform: translateY(-1px); }
 
-        /* RECENSIONI */
         .recensione-card { background: white; border-radius: 16px; padding: 18px 22px; margin-bottom: 12px; border: 1px solid #e5e7eb; border-left: 4px solid var(--arancio); }
         .rec-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
         .rec-nome { font-weight: 700; color: var(--blu-scuro); font-size: 14px; }
@@ -121,7 +112,6 @@
         .rec-testo { font-size: 13px; color: var(--grigio); line-height: 1.6; }
         .rec-data { font-size: 11px; color: #9CA3AF; margin-top: 6px; }
 
-        /* POPUP SBLOCCO */
         .popup-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
         .popup-overlay.show { display: flex; }
         .popup-box { background: white; border-radius: 24px; padding: 38px 32px; max-width: 430px; width: 100%; text-align: center; }
@@ -136,7 +126,6 @@
         .btn-popup-cancel { width: 100%; padding: 13px; background: var(--grigio-chiaro); color: var(--grigio); border: none; border-radius: 14px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s; }
         .btn-popup-cancel:hover { background: #e5e7eb; }
 
-        /* POPUP RECENSIONE */
         .recensione-popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
         .recensione-popup.show { display: flex; }
         .recensione-box { background: white; border-radius: 24px; padding: 38px 30px; max-width: 420px; width: 100%; text-align: center; }
@@ -152,11 +141,15 @@
         .btn-rec.oro { background: var(--oro); }
         .btn-rec.grigio { background: var(--grigio-chiaro); color: var(--grigio); }
 
-        /* TWO COLS */
         .two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 22px; }
 
         @media (max-width: 900px) { .stats-row { grid-template-columns: repeat(2, 1fr); } .two-cols { grid-template-columns: 1fr; } }
-        @media (max-width: 768px) { .sidebar { display: none; } .main { padding: 18px 14px; } .stats-row { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .main { padding: 18px 14px; }
+            .stats-row { grid-template-columns: repeat(2, 1fr); }
+            .navbar-nome { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -169,6 +162,7 @@
         <div class="notifica-badge" onclick="alert('3 nuove richieste nella tua zona!')">🔔<div class="badge">3</div></div>
         <div class="navbar-nome">Rossoni Edilizia</div>
         <div class="avatar">R</div>
+        <a href="index.html" class="btn-logout">🚪 Esci</a>
     </div>
 </nav>
 
@@ -180,14 +174,14 @@
         <ul class="sidebar-menu">
             <li class="sidebar-item active"><span class="icon">🏠</span> Dashboard</li>
             <li class="sidebar-item" onclick="alert('In arrivo!')"><span class="icon">📋</span> Richieste zona <span class="sidebar-notifica">3</span></li>
-            <li class="sidebar-item" onclick="alert('In arrivo!')"><span class="icon">💬</span> Chat</li>
+            <li class="sidebar-item" onclick="window.location.href='chat.html'"><span class="icon">💬</span> Chat</li>
             <li class="sidebar-item" onclick="alert('In arrivo!')"><span class="icon">📅</span> Sopralluoghi</li>
             <li class="sidebar-item" onclick="alert('In arrivo!')"><span class="icon">⭐</span> Recensioni</li>
             <li class="sidebar-item" onclick="alert('In arrivo!')"><span class="icon">📊</span> Statistiche</li>
             <div class="sidebar-divider"></div>
             <div class="sidebar-label">Account</div>
             <li class="sidebar-item" onclick="window.location.href='profilo-pro.html'"><span class="icon">👤</span> Il mio profilo</li>
-            <li class="sidebar-item" onclick="alert('In arrivo!')"><span class="icon">💳</span> Abbonamento</li>
+            <li class="sidebar-item" onclick="window.location.href='pagamento.html'"><span class="icon">💳</span> Abbonamento</li>
             <li class="sidebar-item" onclick="alert('In arrivo!')"><span class="icon">🔓</span> Crediti sblocco</li>
             <div class="sidebar-divider"></div>
             <li class="sidebar-item" onclick="window.location.href='index.html'"><span class="icon">🚪</span> Esci</li>
@@ -197,223 +191,186 @@
     <!-- MAIN CONTENT -->
     <main class="main">
 
-        <!-- HEADER -->
         <div class="page-header">
             <div class="page-header-left">
-                <h1>Ciao, <span style="color:var(--oro)">Rossoni</span> 👋</h1>
-                <p>Hai 3 nuove richieste nella tua zona — Milano e dintorni</p>
+                <h1>Ciao, <span style="color:var(--oro)">Rossoni Edilizia</span> 👋</h1>
+                <p>Lunedì 11 Maggio 2026 — Ecco il riepilogo della tua attività</p>
             </div>
         </div>
 
         <!-- ABBONAMENTO BAR -->
         <div class="abbonamento-bar">
             <div class="abbonamento-bar-info">
-                <strong>✅ Abbonamento Annuale — Edilizia — Attivo</strong>
-                <span>Scade il 15 Aprile 2027 · €888/anno · Prossimo rinnovo automatico</span>
+                <strong>✅ Abbonamento annuale attivo</strong>
+                <span>Scade il 15 Aprile 2027 • €888/anno • Rinnovo automatico attivo</span>
             </div>
-            <button class="btn-rinnova" onclick="alert('Gestione abbonamento in arrivo!')">Gestisci abbonamento</button>
+            <a href="pagamento.html" class="btn-rinnova">Gestisci abbonamento</a>
         </div>
 
-        <!-- CREDITI SBLOCCO -->
+        <!-- CREDITI -->
         <div class="crediti-box">
             <div class="crediti-info">
-                <strong>🔓 I tuoi crediti sblocco</strong>
-                <span>Usa i crediti per sbloccare i contatti dei clienti interessati.<br>Ogni sblocco dipende dal tipo di lavoro richiesto.</span>
+                <strong>🔓 Crediti disponibili</strong>
+                <span>Ogni credito ti permette di sbloccare il contatto di un cliente interessato</span>
             </div>
-            <div style="text-align:center">
-                <div class="crediti-num">5<span>crediti disponibili</span></div>
-            </div>
-            <button class="btn-ricarica" onclick="apriRicarica()">+ Ricarica crediti</button>
+            <div class="crediti-num">5 <span>crediti</span></div>
+            <button class="btn-ricarica" onclick="alert('Ricarica crediti in arrivo!')">+ Ricarica crediti</button>
         </div>
 
         <!-- STATS -->
         <div class="stats-row">
-            <div class="stat-card"><div class="stat-icon">📋</div><div class="stat-num">3</div><div class="stat-label">Richieste nuove</div></div>
-            <div class="stat-card oro"><div class="stat-icon">🔓</div><div class="stat-num">8</div><div class="stat-label">Contatti sbloccati</div></div>
-            <div class="stat-card verde"><div class="stat-icon">✅</div><div class="stat-num">12</div><div class="stat-label">Lavori completati</div></div>
-            <div class="stat-card"><div class="stat-icon">⭐</div><div class="stat-num">4.9</div><div class="stat-label">Valutazione media</div></div>
+            <div class="stat-card rosso">
+                <div class="stat-icon">📋</div>
+                <div class="stat-num">3</div>
+                <div class="stat-label">Nuove richieste</div>
+            </div>
+            <div class="stat-card oro">
+                <div class="stat-icon">🔓</div>
+                <div class="stat-num">8</div>
+                <div class="stat-label">Contatti sbloccati</div>
+            </div>
+            <div class="stat-card verde">
+                <div class="stat-icon">✅</div>
+                <div class="stat-num">12</div>
+                <div class="stat-label">Lavori completati</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⭐</div>
+                <div class="stat-num">4.9</div>
+                <div class="stat-label">Valutazione media</div>
+            </div>
         </div>
 
-        <!-- TWO COLS: SOPRALLUOGO + PROSSIMO LAVORO -->
+        <!-- DUE COLONNE: PROSSIMO SOPRALLUOGO + ULTIME RECENSIONI -->
         <div class="two-cols">
             <div>
                 <div class="sez-title">📅 Prossimo sopralluogo</div>
                 <div class="sopralluogo-card">
                     <div class="sopralluogo-stato confermato">✅ Confermato</div>
-                    <div class="sopralluogo-data">Lunedì 6 Maggio 2026 — 09:30</div>
+                    <div class="sopralluogo-data">Lunedì 11 Maggio 2026 — 09:30</div>
                     <div class="sopralluogo-info">
                         <strong>Cliente:</strong> Mario R. (Milano)<br>
-                        <strong>Lavoro:</strong> Tinteggiatura appartamento 80mq<br>
+                        <strong>Lavoro:</strong> Tinteggiatura appartamento ~80 m²<br>
                         <strong>Indirizzo:</strong> Via Roma 15, Milano<br>
-                        <br>
-                        ⚠️ Se non ti presenti senza preavviso ricevi una segnalazione.
+                        <strong>Note:</strong> Chiamare 30 min prima dell'arrivo
+                    </div>
+                </div>
+                <div class="sez-title" style="margin-top:10px">✅ Ultimo lavoro completato</div>
+                <div class="sopralluogo-card" style="border-left-color:var(--grigio)">
+                    <div class="sopralluogo-stato confermato">💰 Pagamento confermato</div>
+                    <div class="sopralluogo-data">28 Aprile 2026</div>
+                    <div class="sopralluogo-info">
+                        <strong>Cliente:</strong> Luca B.<br>
+                        <strong>Lavoro:</strong> Posa piastrelle bagno 6 m²<br>
+                        <strong>Importo:</strong> Confermato dal cliente ✅
                     </div>
                 </div>
             </div>
             <div>
-                <div class="sez-title">⭐ Recensione da lasciare</div>
-                <div class="sopralluogo-card" style="border-left-color:var(--arancio)">
-                    <div class="sopralluogo-stato" style="background:#FEF3C7;color:var(--arancio)">⭐ In attesa tua recensione</div>
-                    <div class="sopralluogo-data" style="font-size:16px">Lavoro completato il 28/04/2026</div>
-                    <div class="sopralluogo-info">
-                        <strong>Cliente:</strong> Luca B.<br>
-                        <strong>Lavoro:</strong> Posa piastrelle bagno 6mq<br>
-                        <strong>Pagamento:</strong> Confermato ✅
+                <div class="sez-title">⭐ Ultime recensioni ricevute</div>
+                <div class="recensione-card">
+                    <div class="rec-header">
+                        <div class="rec-nome">Mario R.</div>
+                        <div class="rec-stelle">★★★★★</div>
                     </div>
-                    <button style="margin-top:12px;width:100%;padding:10px;background:var(--arancio);color:white;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif" onclick="apriRecensione()">⭐ Lascia recensione al cliente</button>
+                    <div class="rec-testo">"Ottimo lavoro di tinteggiatura, puntuale e professionale. Consigliatissimo!"</div>
+                    <div class="rec-data">28 Aprile 2026</div>
+                </div>
+                <div class="recensione-card">
+                    <div class="rec-header">
+                        <div class="rec-nome">Luca B.</div>
+                        <div class="rec-stelle">★★★★☆</div>
+                    </div>
+                    <div class="rec-testo">"Ottimo lavoro nel bagno, leggero ritardo ma risultato soddisfacente."</div>
+                    <div class="rec-data">15 Aprile 2026</div>
                 </div>
             </div>
         </div>
 
-        <!-- NUOVE RICHIESTE -->
-        <div class="sez-title" style="margin-top:10px">
-            📋 Nuove richieste nella tua zona
-            <span class="count-badge oro">3 nuove</span>
-        </div>
+        <!-- NUOVE RICHIESTE ZONA -->
+        <div class="sez-title">📋 Nuove richieste nella tua zona <span class="count-badge rosso">3</span></div>
 
-        <!-- RICHIESTA 1 — Piccolo lavoro -->
         <div class="richiesta-card nuova">
             <div class="nuovo-tag">🆕 NUOVA</div>
             <div class="richiesta-header">
-                <span class="richiesta-cat">🏗️ Edilizia — Tinteggiatura</span>
-                <span class="richiesta-tempo">30 minuti fa</span>
+                <div class="richiesta-cat">🏗️ Edilizia</div>
+                <div class="richiesta-tempo">⏰ 2 ore fa</div>
             </div>
-            <div class="richiesta-desc">
-                "Cerco imbianchino per tinteggiatura di appartamento al secondo piano. Muri e soffitti in 3 stanze più corridoio. Appartamento libero e non arredato. Zona Navigli."
-            </div>
+            <div class="richiesta-desc">Cerco imbianchino per tinteggiatura completa appartamento ~65 m². Pareti e soffitti, colori chiari. Zona Navigli.</div>
             <div class="richiesta-chips">
                 <span class="chip">📍 Milano — Navigli</span>
-                <span class="chip">📐 Circa 65mq</span>
-                <span class="chip">🏠 Non arredato</span>
-                <span class="chip verde">🟢 Piccolo lavoro</span>
-                <span class="chip">⏰ Entro 2 settimane</span>
+                <span class="chip verde">⏳ Entro 2 settimane</span>
+                <span class="chip oro">💰 Budget medio</span>
             </div>
             <div class="richiesta-footer">
-                <div class="costo-sblocco">Costo sblocco: <strong>€9,90</strong></div>
-                <button class="btn-sblocca" onclick="apriSblocco('€9,90', 'Tinteggiatura Navigli', 'piccolo')">🔓 Sblocca contatto</button>
+                <div class="costo-sblocco">Sblocco contatto: <strong>€9,90</strong></div>
+                <button class="btn-sblocca" onclick="apriPopupSblocco('Tinteggiatura 65m²','€9,90')">🔓 Sblocca contatto</button>
             </div>
         </div>
 
-        <!-- RICHIESTA 2 — Medio lavoro -->
         <div class="richiesta-card nuova">
             <div class="nuovo-tag">🆕 NUOVA</div>
             <div class="richiesta-header">
-                <span class="richiesta-cat">🏗️ Edilizia — Ristrutturazione bagno</span>
-                <span class="richiesta-tempo">2 ore fa</span>
+                <div class="richiesta-cat">🏗️ Edilizia</div>
+                <div class="richiesta-tempo">⏰ 5 ore fa</div>
             </div>
-            <div class="richiesta-desc">
-                "Devo ristrutturare completamente il bagno di casa mia: sostituzione sanitari, nuove piastrelle, rifacimento impianto idraulico e nuova doccia al posto della vasca. Bagno di circa 7mq."
-            </div>
+            <div class="richiesta-desc">Ristrutturazione completa bagno 7 m². Sostituzione sanitari, piastrelle, impianto idraulico. Zona Porta Romana. Urgente.</div>
             <div class="richiesta-chips">
                 <span class="chip">📍 Milano — Porta Romana</span>
-                <span class="chip">📐 7mq bagno</span>
-                <span class="chip">🏠 Arredato</span>
-                <span class="chip oro">🟡 Medio lavoro</span>
-                <span class="chip">⏰ Entro 1 mese</span>
                 <span class="chip rosso">🔴 Urgente</span>
+                <span class="chip oro">💰 Budget alto</span>
             </div>
             <div class="richiesta-footer">
-                <div class="costo-sblocco">Costo sblocco: <strong>€19,90</strong></div>
-                <button class="btn-sblocca" onclick="apriSblocco('€19,90', 'Ristrutturazione bagno Porta Romana', 'medio')">🔓 Sblocca contatto</button>
+                <div class="costo-sblocco">Sblocco contatto: <strong>€19,90</strong></div>
+                <button class="btn-sblocca" onclick="apriPopupSblocco('Ristrutturazione bagno 7m²','€19,90')">🔓 Sblocca contatto</button>
             </div>
         </div>
 
-        <!-- RICHIESTA 3 — Grande lavoro -->
         <div class="richiesta-card nuova">
             <div class="nuovo-tag">🆕 NUOVA</div>
             <div class="richiesta-header">
-                <span class="richiesta-cat">🏗️ Edilizia — Ristrutturazione completa</span>
-                <span class="richiesta-tempo">5 ore fa</span>
+                <div class="richiesta-cat">🏗️ Edilizia</div>
+                <div class="richiesta-tempo">⏰ 1 giorno fa</div>
             </div>
-            <div class="richiesta-desc">
-                "Appartamento da ristrutturare completamente. 3 camere + soggiorno + 2 bagni. Pavimenti da rifare, pareti da intonacare e tinteggiare, cucina e bagni da rifare, impianti elettrico e idraulico da aggiornare. Zona Brera."
-            </div>
+            <div class="richiesta-desc">Ristrutturazione completa appartamento ~130 m². Zona Brera. Cucina, bagni, pavimenti, tinteggiatura totale. Budget elevato, tempi flessibili.</div>
             <div class="richiesta-chips">
                 <span class="chip">📍 Milano — Brera</span>
-                <span class="chip">📐 Circa 130mq</span>
-                <span class="chip">🏠 Da svuotare</span>
-                <span class="chip rosso">🔴 Grande lavoro</span>
-                <span class="chip">⏰ Flessibile</span>
-                <span class="chip verde">💰 Budget alto</span>
+                <span class="chip verde">⏳ Tempi flessibili</span>
+                <span class="chip oro">💰 Budget elevato</span>
             </div>
             <div class="richiesta-footer">
-                <div class="costo-sblocco">Costo sblocco: <strong>€29,90</strong></div>
-                <button class="btn-sblocca" onclick="apriSblocco('€29,90', 'Ristrutturazione completa Brera', 'grande')">🔓 Sblocca contatto</button>
+                <div class="costo-sblocco">Sblocco contatto: <strong>€29,90</strong></div>
+                <button class="btn-sblocca" onclick="apriPopupSblocco('Ristrutturazione completa 130m²','€29,90')">🔓 Sblocca contatto</button>
             </div>
-        </div>
-
-        <!-- RECENSIONI RICEVUTE -->
-        <div class="sez-title" style="margin-top:10px">⭐ Ultime recensioni ricevute</div>
-        <div class="recensione-card">
-            <div class="rec-header"><div class="rec-nome">Mario R.</div><div class="rec-stelle">★★★★★</div></div>
-            <div class="rec-testo">"Lavoro eccellente! Puntuale, preciso e molto professionale. Consigliatissimo per tinteggiature di qualità."</div>
-            <div class="rec-data">28 Aprile 2026</div>
-        </div>
-        <div class="recensione-card">
-            <div class="rec-header"><div class="rec-nome">Giulia M.</div><div class="rec-stelle">★★★★☆</div></div>
-            <div class="rec-testo">"Ottimo lavoro sul bagno, qualche piccolo ritardo ma risultato finale molto soddisfacente."</div>
-            <div class="rec-data">15 Aprile 2026</div>
         </div>
 
     </main>
 </div>
 
-<!-- POPUP SBLOCCO CONTATTO -->
+<!-- POPUP SBLOCCO -->
 <div class="popup-overlay" id="popupSblocco">
     <div class="popup-box">
         <div class="popup-icon">🔓</div>
         <h2>Sblocca il contatto</h2>
-        <p id="popup-desc">Pagando sblocchi la chat privata con il cliente. Potrai concordare sopralluogo, data e preventivo.</p>
-        <div class="popup-prezzo" id="popup-prezzo">€9,90</div>
-        <div class="popup-prezzo-sub">pagamento una tantum per questa richiesta</div>
+        <p>Stai per sbloccare il contatto del cliente per la richiesta: <strong id="popup-lavoro"></strong></p>
+        <div class="popup-prezzo" id="popup-prezzo-val"></div>
+        <div class="popup-prezzo-sub">addebito una tantum da un credito</div>
         <div class="popup-info">
-            ✅ Sblocchi la <strong>chat privata</strong> con il cliente<br>
-            ✅ Puoi concordare <strong>sopralluogo e preventivo</strong><br>
-            ✅ Se il lavoro non parte, <strong>nessun rimborso</strong><br>
-            ⚠️ Mancata presentazione al sopralluogo = <strong>segnalazione</strong>
+            ✅ Accesso immediato alla chat privata<br>
+            📅 Concorda data e ora del sopralluogo<br>
+            ⭐ Recensione reciproca dopo il lavoro<br>
+            ⚠️ Dopo il pagamento sei obbligato a presentarti al sopralluogo
         </div>
-        <button class="btn-popup-main" onclick="confermaSblocco()">💳 Paga e sblocca chat</button>
-        <button class="btn-popup-cancel" onclick="chiudiPopup('popupSblocco')">Annulla</button>
-    </div>
-</div>
-
-<!-- POPUP RICARICA CREDITI -->
-<div class="popup-overlay" id="popupRicarica">
-    <div class="popup-box">
-        <div class="popup-icon">💰</div>
-        <h2>Ricarica crediti sblocco</h2>
-        <p>Acquista crediti da usare per sbloccare i contatti dei clienti nelle richieste che ti interessano.</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px">
-            <div style="border:2px solid #e5e7eb;border-radius:14px;padding:16px;text-align:center;cursor:pointer;transition:0.3s" onclick="selezionaPacchetto(this,'5 crediti','€45')" onmouseover="this.style.borderColor='var(--oro)'" onmouseout="if(!this.classList.contains('sel'))this.style.borderColor='#e5e7eb'">
-                <div style="font-size:24px;margin-bottom:6px">🔓</div>
-                <div style="font-weight:700;color:var(--blu-scuro);font-size:14px">5 crediti</div>
-                <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:var(--oro);margin:5px 0">€45</div>
-                <div style="font-size:11px;color:var(--grigio)">€9/credito</div>
-            </div>
-            <div style="border:2px solid var(--oro);border-radius:14px;padding:16px;text-align:center;cursor:pointer;transition:0.3s;background:#FFFBEB;position:relative" onclick="selezionaPacchetto(this,'10 crediti','€80')">
-                <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--verde);color:white;font-size:10px;font-weight:700;padding:3px 10px;border-radius:10px">MIGLIOR VALORE</div>
-                <div style="font-size:24px;margin-bottom:6px">🔓🔓</div>
-                <div style="font-weight:700;color:var(--blu-scuro);font-size:14px">10 crediti</div>
-                <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:var(--oro);margin:5px 0">€80</div>
-                <div style="font-size:11px;color:var(--verde);font-weight:600">€8/credito</div>
-            </div>
-            <div style="border:2px solid #e5e7eb;border-radius:14px;padding:16px;text-align:center;cursor:pointer;transition:0.3s" onclick="selezionaPacchetto(this,'25 crediti','€175')" onmouseover="this.style.borderColor='var(--oro)'" onmouseout="if(!this.classList.contains('sel'))this.style.borderColor='#e5e7eb'">
-                <div style="font-size:24px;margin-bottom:6px">🔓🔓🔓</div>
-                <div style="font-weight:700;color:var(--blu-scuro);font-size:14px">25 crediti</div>
-                <div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:var(--oro);margin:5px 0">€175</div>
-                <div style="font-size:11px;color:var(--grigio)">€7/credito</div>
-            </div>
-        </div>
-        <button class="btn-popup-main" onclick="confermaRicarica()">💳 Acquista crediti</button>
-        <button class="btn-popup-cancel" onclick="chiudiPopup('popupRicarica')">Annulla</button>
+        <button class="btn-popup-main" onclick="confermaSblocco()">✅ Conferma e sblocca</button>
+        <button class="btn-popup-cancel" onclick="chiudiPopup()">Annulla</button>
     </div>
 </div>
 
 <!-- POPUP RECENSIONE -->
 <div class="recensione-popup" id="recensionePopup">
     <div class="recensione-box">
-        <h2>⭐ Valuta il cliente</h2>
-        <p>Il pagamento è confermato. Valuta la tua esperienza con <strong>Luca B.</strong> La recensione è <strong>obbligatoria</strong> per mantenere l'account attivo.</p>
+        <h2>⭐ Lascia una Recensione</h2>
+        <p>Il lavoro è stato completato. Valuta il cliente per mantenere il tuo account attivo.</p>
         <div class="stelle">
             <span class="stella" onclick="setStella(1)">★</span>
             <span class="stella" onclick="setStella(2)">★</span>
@@ -421,71 +378,43 @@
             <span class="stella" onclick="setStella(4)">★</span>
             <span class="stella" onclick="setStella(5)">★</span>
         </div>
-        <textarea placeholder="Descrivi la tua esperienza con questo cliente: puntualità, disponibilità, correttezza nei pagamenti..."></textarea>
-        <button class="btn-rec oro" onclick="inviaRecensione()">✅ Invia recensione</button>
-        <button class="btn-rec grigio" style="margin-top:8px" onclick="chiudiPopup('recensionePopup')">Dopo</button>
+        <textarea placeholder="Descrivi la tua esperienza con il cliente..."></textarea>
+        <button class="btn-rec oro" onclick="inviaRecensione()">Invia Recensione ✅</button>
+        <button class="btn-rec grigio" onclick="document.getElementById('recensionePopup').classList.remove('show')">Chiudi</button>
     </div>
 </div>
 
 <script>
     let stelleSelezionate = 0;
-    let pacchettoPagamento = '';
 
-    function apriSblocco(prezzo, titolo, tipo) {
-        document.getElementById('popup-prezzo').textContent = prezzo;
-        document.getElementById('popup-desc').textContent =
-            'Richiesta: ' + titolo + '. Pagando sblocchi la chat privata con il cliente e puoi concordare sopralluogo e preventivo.';
+    function apriPopupSblocco(lavoro, prezzo) {
+        document.getElementById('popup-lavoro').textContent = lavoro;
+        document.getElementById('popup-prezzo-val').textContent = prezzo;
         document.getElementById('popupSblocco').classList.add('show');
     }
 
+    function chiudiPopup() {
+        document.getElementById('popupSblocco').classList.remove('show');
+    }
+
     function confermaSblocco() {
-        chiudiPopup('popupSblocco');
-        setTimeout(() => {
-            alert('✅ Contatto sbloccato!\n\nLa chat privata è ora disponibile.\nVai nella sezione "Chat" per comunicare con il cliente.');
-            window.location.href = 'chat.html';
-        }, 300);
-    }
-
-    function apriRicarica() {
-        document.getElementById('popupRicarica').classList.add('show');
-    }
-
-    function selezionaPacchetto(el, nome, prezzo) {
-        document.querySelectorAll('#popupRicarica [style*="border"]').forEach(e => {
-            e.style.borderColor = '#e5e7eb';
-            e.style.background = '';
-            e.classList.remove('sel');
-        });
-        el.style.borderColor = 'var(--oro)';
-        el.style.background = '#FFFBEB';
-        el.classList.add('sel');
-        pacchettoPagamento = nome + ' — ' + prezzo;
-    }
-
-    function confermaRicarica() {
-        if (!pacchettoPagamento) { alert('Seleziona un pacchetto!'); return; }
-        chiudiPopup('popupRicarica');
-        setTimeout(() => { alert('✅ Crediti acquistati!\n\n' + pacchettoPagamento + '\n\nI crediti sono stati aggiunti al tuo account.'); }, 300);
-    }
-
-    function apriRecensione() {
-        document.getElementById('recensionePopup').classList.add('show');
+        chiudiPopup();
+        window.location.href = 'chat.html';
     }
 
     function setStella(n) {
         stelleSelezionate = n;
-        document.querySelectorAll('.stella').forEach((s, i) => s.classList.toggle('attiva', i < n));
+        document.querySelectorAll('.stella').forEach((s, i) => {
+            s.classList.toggle('attiva', i < n);
+        });
     }
 
     function inviaRecensione() {
         if (stelleSelezionate === 0) { alert('Seleziona almeno una stella!'); return; }
-        chiudiPopup('recensionePopup');
-        setTimeout(() => { alert('✅ Recensione inviata!\n\nAnche il cliente ti recensirà a breve.'); }, 300);
-    }
-
-    function chiudiPopup(id) {
-        document.getElementById(id).classList.remove('show');
+        document.getElementById('recensionePopup').classList.remove('show');
+        alert('Recensione inviata! Grazie.');
     }
 </script>
+
 </body>
 </html>
