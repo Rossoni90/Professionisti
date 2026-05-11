@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" id="html-root">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,14 +19,16 @@
         .navbar { background: var(--blu-scuro); padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 20px rgba(0,0,0,0.3); }
         .logo { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 900; color: white; text-decoration: none; letter-spacing: 1px; }
         .logo span { color: var(--oro); }
-        .navbar-links { display: flex; gap: 12px; align-items: center; }
+        .navbar-links { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
         .lang-btn { background: transparent; color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.2); padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; }
         .lang-btn.active, .lang-btn:hover { color: var(--oro); border-color: var(--oro); }
-        .btn-nav { padding: 9px 22px; border-radius: 25px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; text-decoration: none; border: none; }
+        .btn-nav { padding: 9px 22px; border-radius: 25px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; text-decoration: none; border: none; display: inline-block; }
         .btn-nav-outline { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.4); }
         .btn-nav-outline:hover { border-color: var(--oro); color: var(--oro); }
         .btn-nav-oro { background: var(--oro); color: white; }
         .btn-nav-oro:hover { background: var(--oro-chiaro); transform: translateY(-1px); }
+        .btn-nav-ghost { background: transparent; color: rgba(255,255,255,0.75); border: none; font-size: 14px; font-weight: 500; cursor: pointer; font-family: 'Inter', sans-serif; text-decoration: none; padding: 9px 14px; transition: 0.2s; }
+        .btn-nav-ghost:hover { color: var(--oro); }
 
         /* HERO */
         .hero { background: linear-gradient(135deg, var(--blu-scuro) 0%, var(--blu) 55%, var(--blu-chiaro) 100%); padding: 90px 40px 80px; text-align: center; position: relative; overflow: hidden; }
@@ -41,23 +43,23 @@
         .btn-hero-sec { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.5); padding: 17px 38px; border-radius: 30px; font-size: 16px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
         .btn-hero-sec:hover { border-color: white; background: rgba(255,255,255,0.1); transform: translateY(-2px); }
 
-        /* STATS BAR */
+        /* STATS */
         .stats-bar { display: flex; justify-content: center; gap: 50px; flex-wrap: wrap; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; padding: 25px 40px; max-width: 800px; margin: 0 auto; }
         .stat-item { text-align: center; }
         .stat-num { font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; color: var(--oro); }
         .stat-label { font-size: 13px; color: rgba(255,255,255,0.65); margin-top: 4px; }
 
-        /* COME FUNZIONA */
+        /* SEZIONI */
         .section { padding: 80px 40px; }
         .section-alt { background: var(--grigio-chiaro); }
         .section-title { text-align: center; margin-bottom: 50px; }
         .section-title h2 { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--blu-scuro); margin-bottom: 12px; }
         .section-title p { color: var(--grigio); font-size: 16px; max-width: 500px; margin: 0 auto; line-height: 1.6; }
-        .section-title .oro-line { width: 60px; height: 4px; background: var(--oro); border-radius: 2px; margin: 15px auto 0; }
+        .oro-line { width: 60px; height: 4px; background: var(--oro); border-radius: 2px; margin: 15px auto 0; }
 
         /* STEPS */
         .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px; max-width: 1000px; margin: 0 auto; }
-        .step-card { text-align: center; padding: 30px 20px; background: white; border-radius: 20px; border: 1px solid #e5e7eb; transition: 0.3s; position: relative; }
+        .step-card { text-align: center; padding: 30px 20px; background: white; border-radius: 20px; border: 1px solid #e5e7eb; transition: 0.3s; }
         .step-card:hover { box-shadow: 0 10px 35px rgba(0,0,0,0.08); transform: translateY(-4px); border-color: var(--oro); }
         .step-num { width: 50px; height: 50px; background: linear-gradient(135deg, var(--blu), var(--blu-chiaro)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 900; color: var(--oro); margin: 0 auto 18px; }
         .step-emoji { font-size: 36px; margin-bottom: 15px; }
@@ -122,7 +124,6 @@
         .footer-links a { display: block; color: rgba(255,255,255,0.55); font-size: 13px; text-decoration: none; margin-bottom: 8px; transition: 0.2s; }
         .footer-links a:hover { color: var(--oro); }
         .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 25px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 12px; }
-        .footer-bottom span { color: var(--oro); }
 
         /* POPUP ADULTI */
         .adult-popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.88); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
@@ -148,6 +149,7 @@
             .vantaggi-grid { grid-template-columns: repeat(2, 1fr); }
             .section { padding: 50px 20px; }
             .footer-top { flex-direction: column; }
+            .navbar-links .btn-nav-ghost { display: none; }
         }
     </style>
 </head>
@@ -157,84 +159,65 @@
 <nav class="navbar">
     <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
     <div class="navbar-links">
-        <button class="lang-btn active" onclick="setLang('it')">🇮🇹 IT</button>
-        <button class="lang-btn" onclick="setLang('en')">🇬🇧 EN</button>
-        <a href="professionista.html" class="btn-nav btn-nav-outline" data-it="Sei un professionista?" data-en="Are you a professional?">Sei un professionista?</a>
-        <a href="cliente.html" class="btn-nav btn-nav-oro" data-it="Pubblica richiesta" data-en="Post a request">Pubblica richiesta</a>
+        <button class="lang-btn active" id="btn-it" onclick="setLang('it')">🇮🇹 IT</button>
+        <button class="lang-btn" id="btn-en" onclick="setLang('en')">🇬🇧 EN</button>
+        <a href="professionista.html" class="btn-nav btn-nav-ghost" id="nav-pro">Sei un professionista?</a>
+        <a href="cliente.html" class="btn-nav btn-nav-outline" id="nav-accedi">🔑 Accedi</a>
+        <a href="cliente.html" class="btn-nav btn-nav-oro" id="nav-pubblica">Pubblica richiesta</a>
     </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-    <div class="hero-badge">⭐ La piattaforma #1 per trovare professionisti verificati</div>
-    <h1 data-it="Trova il <span>Professionista Giusto</span> per Te" data-en="Find the <span>Right Professional</span> for You">Trova il <span>Professionista Giusto</span> per Te</h1>
-    <p data-it="Gratis per i clienti. Professionisti verificati. Max 5 offerte per richiesta. Chat privata e sopralluogo garantito." data-en="Free for clients. Verified professionals. Max 5 offers per request. Private chat and guaranteed site visit.">Gratis per i clienti. Professionisti verificati. Max 5 offerte per richiesta. Chat privata e sopralluogo garantito.</p>
+    <div class="hero-badge" id="hero-badge">⭐ La piattaforma #1 per trovare professionisti verificati</div>
+    <h1 id="hero-h1">Trova il <span>Professionista Giusto</span> per Te</h1>
+    <p id="hero-p">Gratis per i clienti. Professionisti verificati. Max 5 offerte per richiesta. Chat privata e sopralluogo garantito.</p>
     <div class="hero-buttons">
-        <a href="cliente.html" class="btn-hero-main" data-it="🔍 Cerca un professionista" data-en="🔍 Find a professional">🔍 Cerca un professionista</a>
-        <a href="professionista.html" class="btn-hero-sec" data-it="💼 Sei un professionista?" data-en="💼 Are you a professional?">💼 Sei un professionista?</a>
+        <a href="cliente.html" class="btn-hero-main" id="hero-btn1">🔍 Cerca un professionista</a>
+        <a href="professionista.html" class="btn-hero-sec" id="hero-btn2">💼 Sei un professionista?</a>
     </div>
     <div class="stats-bar">
-        <div class="stat-item"><div class="stat-num">10.000+</div><div class="stat-label" data-it="Professionisti verificati" data-en="Verified professionals">Professionisti verificati</div></div>
-        <div class="stat-item"><div class="stat-num">50.000+</div><div class="stat-label" data-it="Richieste completate" data-en="Completed requests">Richieste completate</div></div>
-        <div class="stat-item"><div class="stat-num">Max 5</div><div class="stat-label" data-it="Offerte per richiesta" data-en="Offers per request">Offerte per richiesta</div></div>
-        <div class="stat-item"><div class="stat-num">4.9★</div><div class="stat-label" data-it="Valutazione media" data-en="Average rating">Valutazione media</div></div>
+        <div class="stat-item"><div class="stat-num">10.000+</div><div class="stat-label" id="stat1">Professionisti verificati</div></div>
+        <div class="stat-item"><div class="stat-num">50.000+</div><div class="stat-label" id="stat2">Richieste completate</div></div>
+        <div class="stat-item"><div class="stat-num">Max 5</div><div class="stat-label" id="stat3">Offerte per richiesta</div></div>
+        <div class="stat-item"><div class="stat-num">4.9★</div><div class="stat-label" id="stat4">Valutazione media</div></div>
     </div>
 </section>
 
 <!-- COME FUNZIONA -->
 <section class="section">
     <div class="section-title">
-        <h2 data-it="Come funziona" data-en="How it works">Come funziona</h2>
-        <p data-it="Semplice, veloce e sicuro. Dalla richiesta al sopralluogo in pochi click." data-en="Simple, fast and safe. From request to site visit in a few clicks.">Semplice, veloce e sicuro. Dalla richiesta al sopralluogo in pochi click.</p>
+        <h2 id="sez1-title">Come funziona</h2>
+        <p id="sez1-sub">Semplice, veloce e sicuro. Dalla richiesta al sopralluogo in pochi click.</p>
         <div class="oro-line"></div>
     </div>
     <div class="steps-grid">
-        <div class="step-card">
-            <div class="step-num">1</div>
-            <div class="step-emoji">📝</div>
-            <h3 data-it="Descrivi il lavoro" data-en="Describe the job">Descrivi il lavoro</h3>
-            <p data-it="Inserisci categoria, città e descrizione. Gratis, nessun dato personale richiesto." data-en="Enter category, city and description. Free, no personal data required.">Inserisci categoria, città e descrizione. Gratis, nessun dato personale richiesto.</p>
-        </div>
-        <div class="step-card">
-            <div class="step-num">2</div>
-            <div class="step-emoji">📩</div>
-            <h3 data-it="Ricevi le offerte" data-en="Receive offers">Ricevi le offerte</h3>
-            <p data-it="Massimo 5 professionisti verificati ti contatteranno. Nessuno spam." data-en="Maximum 5 verified professionals will contact you. No spam.">Massimo 5 professionisti verificati ti contatteranno. Nessuno spam.</p>
-        </div>
-        <div class="step-card">
-            <div class="step-num">3</div>
-            <div class="step-emoji">💬</div>
-            <h3 data-it="Scegli e chatta" data-en="Choose and chat">Scegli e chatta</h3>
-            <p data-it="Leggi i profili, scegli il migliore e chatta in privato per concordare i dettagli." data-en="Read profiles, choose the best and chat privately to agree on details.">Leggi i profili, scegli il migliore e chatta in privato per concordare i dettagli.</p>
-        </div>
-        <div class="step-card">
-            <div class="step-num">4</div>
-            <div class="step-emoji">🏠</div>
-            <h3 data-it="Sopralluogo e lavoro" data-en="Site visit and work">Sopralluogo e lavoro</h3>
-            <p data-it="Il professionista viene da te, valuta il lavoro e inizia. Recensione finale per entrambi." data-en="The professional comes to you, evaluates and starts. Final review for both.">Il professionista viene da te, valuta il lavoro e inizia. Recensione finale per entrambi.</p>
-        </div>
+        <div class="step-card"><div class="step-num">1</div><div class="step-emoji">📝</div><h3 id="step1-t">Descrivi il lavoro</h3><p id="step1-p">Inserisci categoria, città e descrizione. Gratis, nessun dato personale richiesto.</p></div>
+        <div class="step-card"><div class="step-num">2</div><div class="step-emoji">📩</div><h3 id="step2-t">Ricevi le offerte</h3><p id="step2-p">Massimo 5 professionisti verificati ti contatteranno. Nessuno spam.</p></div>
+        <div class="step-card"><div class="step-num">3</div><div class="step-emoji">💬</div><h3 id="step3-t">Scegli e chatta</h3><p id="step3-p">Leggi i profili, scegli il migliore e chatta in privato per concordare i dettagli.</p></div>
+        <div class="step-card"><div class="step-num">4</div><div class="step-emoji">🏠</div><h3 id="step4-t">Sopralluogo e lavoro</h3><p id="step4-p">Il professionista viene da te, valuta il lavoro e inizia. Recensione finale per entrambi.</p></div>
     </div>
 </section>
 
 <!-- CATEGORIE -->
 <section class="section section-alt">
     <div class="section-title">
-        <h2 data-it="Tutte le categorie" data-en="All categories">Tutte le categorie</h2>
-        <p data-it="Professionisti verificati in ogni settore, nella tua città." data-en="Verified professionals in every sector, in your city.">Professionisti verificati in ogni settore, nella tua città.</p>
+        <h2 id="sez2-title">Tutte le categorie</h2>
+        <p id="sez2-sub">Professionisti verificati in ogni settore, nella tua città.</p>
         <div class="oro-line"></div>
     </div>
     <div class="categorie-section">
         <div class="categorie-grid">
-            <a href="cliente.html" class="cat-card"><div class="cat-emoji">🏗️</div><div class="cat-name">Edilizia & Costruzioni</div><div class="cat-count">Muratori, imbianchini, ristrutturazioni...</div></a>
-            <a href="cliente.html" class="cat-card"><div class="cat-emoji">⚡🔧</div><div class="cat-name">Impianti</div><div class="cat-count">Elettricisti, idraulici, termoidraulici...</div></a>
-            <a href="cliente.html" class="cat-card"><div class="cat-emoji">🚗</div><div class="cat-name">Automotive</div><div class="cat-count">Meccanici, carrozzieri, gommisti...</div></a>
-            <a href="cliente.html" class="cat-card"><div class="cat-emoji">⚖️</div><div class="cat-name">Legale & Finanza</div><div class="cat-count">Avvocati, commercialisti, notai...</div></a>
-            <a href="cliente.html" class="cat-card"><div class="cat-emoji">🩺</div><div class="cat-name">Salute & Benessere</div><div class="cat-count">Dentisti, fisioterapisti, nutrizionisti...</div></a>
-            <a href="cliente.html" class="cat-card"><div class="cat-emoji">💅</div><div class="cat-name">Estetica & Persona</div><div class="cat-count">Parrucchieri, estetiste, nail artist...</div></a>
-            <a href="cliente.html" class="cat-card"><div class="cat-emoji">🏠</div><div class="cat-name">Casa & Servizi</div><div class="cat-count">Pulizie, badanti, baby sitter, cuochi...</div></a>
-            <a href="cliente.html" class="cat-card"><div class="cat-emoji">💻</div><div class="cat-name">Digitale & Tech</div><div class="cat-count">Web designer, grafici, fotografi...</div></a>
-            <a href="cliente.html" class="cat-card"><div class="cat-emoji">📚</div><div class="cat-name">Istruzione</div><div class="cat-count">Ripetizioni, lingue, coaching...</div></a>
-            <a href="cliente.html" class="cat-card escort-card" onclick="checkEscort(event)"><div class="cat-emoji">🔞</div><div class="cat-name">Escort & Accompagnatrici</div><div class="cat-count">Sezione riservata +18</div></a>
+            <a href="cliente.html?cat=edilizia" class="cat-card"><div class="cat-emoji">🏗️</div><div class="cat-name" id="cat1">Edilizia & Costruzioni</div><div class="cat-count">Muratori, imbianchini, ristrutturazioni...</div></a>
+            <a href="cliente.html?cat=impianti" class="cat-card"><div class="cat-emoji">⚡🔧</div><div class="cat-name" id="cat2">Impianti</div><div class="cat-count">Elettricisti, idraulici, termoidraulici...</div></a>
+            <a href="cliente.html?cat=automotive" class="cat-card"><div class="cat-emoji">🚗</div><div class="cat-name" id="cat3">Automotive</div><div class="cat-count">Meccanici, carrozzieri, gommisti...</div></a>
+            <a href="cliente.html?cat=legale" class="cat-card"><div class="cat-emoji">⚖️</div><div class="cat-name" id="cat4">Legale & Finanza</div><div class="cat-count">Avvocati, commercialisti, notai...</div></a>
+            <a href="cliente.html?cat=salute" class="cat-card"><div class="cat-emoji">🩺</div><div class="cat-name" id="cat5">Salute & Benessere</div><div class="cat-count">Dentisti, fisioterapisti, nutrizionisti...</div></a>
+            <a href="cliente.html?cat=estetica" class="cat-card"><div class="cat-emoji">💅</div><div class="cat-name" id="cat6">Estetica & Persona</div><div class="cat-count">Parrucchieri, estetiste, nail artist...</div></a>
+            <a href="cliente.html?cat=casa" class="cat-card"><div class="cat-emoji">🏠</div><div class="cat-name" id="cat7">Casa & Servizi</div><div class="cat-count">Pulizie, badanti, baby sitter, cuochi...</div></a>
+            <a href="cliente.html?cat=digitale" class="cat-card"><div class="cat-emoji">💻</div><div class="cat-name" id="cat8">Digitale & Tech</div><div class="cat-count">Web designer, grafici, fotografi...</div></a>
+            <a href="cliente.html?cat=istruzione" class="cat-card"><div class="cat-emoji">📚</div><div class="cat-name" id="cat9">Istruzione</div><div class="cat-count">Ripetizioni, lingue, coaching...</div></a>
+            <a href="#" class="cat-card escort-card" onclick="checkEscort(event)"><div class="cat-emoji">🔞</div><div class="cat-name" id="cat10">Escort & Accompagnatrici</div><div class="cat-count">Sezione riservata +18</div></a>
         </div>
     </div>
 </section>
@@ -242,45 +225,45 @@
 <!-- PREZZI -->
 <section class="section">
     <div class="section-title">
-        <h2 data-it="Piani e prezzi" data-en="Plans and pricing">Piani e prezzi</h2>
-        <p data-it="Abbonati e inizia a ricevere richieste qualificate nella tua zona." data-en="Subscribe and start receiving qualified requests in your area.">Abbonati e inizia a ricevere richieste qualificate nella tua zona.</p>
+        <h2 id="sez3-title">Piani e prezzi</h2>
+        <p id="sez3-sub">Abbonati e inizia a ricevere richieste qualificate nella tua zona.</p>
         <div class="oro-line"></div>
     </div>
     <div class="prezzi-section">
         <div class="prezzi-tabs">
-            <button class="prezzi-tab active" onclick="switchPrezzi('mensile', this)" data-it="Mensile" data-en="Monthly">Mensile</button>
-            <button class="prezzi-tab" onclick="switchPrezzi('annuale', this)" data-it="Annuale" data-en="Annual">Annuale</button>
+            <button class="prezzi-tab active" onclick="switchPrezzi('mensile',this)" id="tab-mens">Mensile</button>
+            <button class="prezzi-tab" onclick="switchPrezzi('annuale',this)" id="tab-ann">Annuale</button>
         </div>
         <div class="prezzi-grid">
             <div class="prezzo-card">
                 <div class="prezzo-cat">🏠</div>
-                <div class="prezzo-nome" data-it="Casa, Cura & Istruzione" data-en="Home, Care & Education">Casa, Cura & Istruzione</div>
+                <div class="prezzo-nome" id="p1-nome">Casa, Cura & Istruzione</div>
                 <div class="prezzo-val" id="prezzo-1">€10 <span>/mese</span></div>
                 <div class="prezzo-sub" id="sub-1">Baby sitter, Dog sitter, Cuochi, Tuttofare, Pulizie, Badanti, Istruzione</div>
                 <ul class="prezzo-features">
-                    <li>✅ Pagina profilo attiva</li>
-                    <li>✅ Sblocco contatto €8,00</li>
-                    <li>✅ Registrazione semplificata</li>
-                    <li>✅ Chat privata inclusa</li>
-                    <li>✅ Sistema recensioni</li>
+                    <li>✅ <span id="f1-1">Pagina profilo attiva</span></li>
+                    <li>✅ <span id="f1-2">Sblocco contatto €8,00</span></li>
+                    <li>✅ <span id="f1-3">Registrazione semplificata</span></li>
+                    <li>✅ <span id="f1-4">Chat privata inclusa</span></li>
+                    <li>✅ <span id="f1-5">Sistema recensioni</span></li>
                 </ul>
-                <button class="btn-prezzo" onclick="window.location.href='professionista.html'">Inizia ora</button>
+                <button class="btn-prezzo" onclick="window.location.href='professionista.html'" id="btn-p1">Inizia ora</button>
             </div>
             <div class="prezzo-card featured">
-                <div class="featured-badge">⭐ PIÙ SCELTO</div>
+                <div class="featured-badge" id="feat-badge">⭐ PIÙ SCELTO</div>
                 <div class="prezzo-cat">🏗️</div>
-                <div class="prezzo-nome" data-it="Edilizia & Tutti gli altri" data-en="Construction & All others">Edilizia & Tutti gli altri</div>
+                <div class="prezzo-nome" id="p2-nome">Edilizia & Tutti gli altri</div>
                 <div class="prezzo-val" id="prezzo-2">€99 <span>/mese</span></div>
                 <div class="prezzo-sub" id="sub-2">Edilizia, Impianti, Automotive, Legale, Salute, Estetica, Digitale...</div>
                 <ul class="prezzo-features">
-                    <li>✅ Pagina profilo verificata</li>
-                    <li>✅ Sblocco contatto da €9,90</li>
-                    <li>✅ Verifica P.IVA automatica</li>
-                    <li>✅ Chat privata inclusa</li>
-                    <li>✅ Sistema recensioni</li>
-                    <li>✅ Video presentazione</li>
+                    <li>✅ <span id="f2-1">Pagina profilo verificata</span></li>
+                    <li>✅ <span id="f2-2">Sblocco contatto da €9,90</span></li>
+                    <li>✅ <span id="f2-3">Verifica P.IVA automatica</span></li>
+                    <li>✅ <span id="f2-4">Chat privata inclusa</span></li>
+                    <li>✅ <span id="f2-5">Sistema recensioni</span></li>
+                    <li>✅ <span id="f2-6">Video presentazione</span></li>
                 </ul>
-                <button class="btn-prezzo oro" onclick="window.location.href='professionista.html'">Inizia ora</button>
+                <button class="btn-prezzo oro" onclick="window.location.href='professionista.html'" id="btn-p2">Inizia ora</button>
             </div>
             <div class="prezzo-card">
                 <div class="prezzo-cat">🔞</div>
@@ -294,7 +277,7 @@
                     <li>✅ Chat privata inclusa</li>
                     <li>✅ Sistema recensioni</li>
                 </ul>
-                <button class="btn-prezzo" onclick="checkEscortReg()">Inizia ora</button>
+                <button class="btn-prezzo" onclick="checkEscortReg()" id="btn-p3">Inizia ora</button>
             </div>
         </div>
     </div>
@@ -303,41 +286,25 @@
 <!-- VANTAGGI -->
 <section class="section section-alt">
     <div class="section-title">
-        <h2 data-it="Perché sceglierci" data-en="Why choose us">Perché sceglierci</h2>
-        <p data-it="La piattaforma progettata per tutelare sia i clienti che i professionisti." data-en="The platform designed to protect both clients and professionals.">La piattaforma progettata per tutelare sia i clienti che i professionisti.</p>
+        <h2 id="sez4-title">Perché sceglierci</h2>
+        <p id="sez4-sub">La piattaforma progettata per tutelare sia i clienti che i professionisti.</p>
         <div class="oro-line"></div>
     </div>
     <div class="vantaggi-grid">
-        <div class="vantaggio-card">
-            <div class="vantaggio-icon">🔒</div>
-            <h3 data-it="Zero truffe" data-en="Zero scams">Zero truffe</h3>
-            <p data-it="Tutti i professionisti sono verificati con P.IVA e visura camerale. I clienti verificano il telefono con OTP." data-en="All professionals are verified with VAT and chamber registration. Clients verify their phone with OTP.">Tutti i professionisti sono verificati con P.IVA e visura camerale. I clienti verificano il telefono con OTP.</p>
-        </div>
-        <div class="vantaggio-card">
-            <div class="vantaggio-icon">5️⃣</div>
-            <h3 data-it="Max 5 offerte" data-en="Max 5 offers">Max 5 offerte</h3>
-            <p data-it="Ogni richiesta riceve massimo 5 offerte. Nessuno spam, solo professionisti seriamente interessati." data-en="Each request receives maximum 5 offers. No spam, only seriously interested professionals.">Ogni richiesta riceve massimo 5 offerte. Nessuno spam, solo professionisti seriamente interessati.</p>
-        </div>
-        <div class="vantaggio-card">
-            <div class="vantaggio-icon">🚫</div>
-            <h3 data-it="Sistema anti-abbandono" data-en="Anti-abandonment system">Sistema anti-abbandono</h3>
-            <p data-it="Clienti e professionisti che non rispettano i sopralluoghi vengono bannati automaticamente dopo 3 mancanze." data-en="Clients and professionals who miss site visits are automatically banned after 3 failures.">Clienti e professionisti che non rispettano i sopralluoghi vengono bannati automaticamente dopo 3 mancanze.</p>
-        </div>
-        <div class="vantaggio-card">
-            <div class="vantaggio-icon">⭐</div>
-            <h3 data-it="Recensioni reali" data-en="Real reviews">Recensioni reali</h3>
-            <p data-it="Cliente valuta il professionista e il professionista valuta il cliente. Solo dopo la conferma del pagamento." data-en="Client rates the professional and the professional rates the client. Only after payment confirmation.">Cliente valuta il professionista e il professionista valuta il cliente. Solo dopo la conferma del pagamento.</p>
-        </div>
+        <div class="vantaggio-card"><div class="vantaggio-icon">🔒</div><h3 id="v1-t">Zero truffe</h3><p id="v1-p">Tutti i professionisti sono verificati con P.IVA e visura camerale. I clienti verificano il telefono con OTP.</p></div>
+        <div class="vantaggio-card"><div class="vantaggio-icon">5️⃣</div><h3 id="v2-t">Max 5 offerte</h3><p id="v2-p">Ogni richiesta riceve massimo 5 offerte. Nessuno spam, solo professionisti seriamente interessati.</p></div>
+        <div class="vantaggio-card"><div class="vantaggio-icon">🚫</div><h3 id="v3-t">Sistema anti-abbandono</h3><p id="v3-p">Clienti e professionisti che non rispettano i sopralluoghi vengono bannati automaticamente dopo 3 mancanze.</p></div>
+        <div class="vantaggio-card"><div class="vantaggio-icon">⭐</div><h3 id="v4-t">Recensioni reali</h3><p id="v4-p">Cliente valuta il professionista e il professionista valuta il cliente. Solo dopo la conferma del pagamento.</p></div>
     </div>
 </section>
 
 <!-- CTA -->
 <section class="cta-section">
-    <h2 data-it="Pronto a iniziare?" data-en="Ready to start?">Pronto a iniziare?</h2>
-    <p data-it="Sei un cliente? È gratis. Sei un professionista? Inizia a ricevere richieste oggi." data-en="Are you a client? It's free. Are you a professional? Start receiving requests today.">Sei un cliente? È gratis. Sei un professionista? Inizia a ricevere richieste oggi.</p>
+    <h2 id="cta-title">Pronto a iniziare?</h2>
+    <p id="cta-sub">Sei un cliente? È gratis. Sei un professionista? Inizia a ricevere richieste oggi.</p>
     <div class="cta-buttons">
-        <a href="cliente.html" class="btn-hero-main" data-it="🔍 Trova un professionista" data-en="🔍 Find a professional">🔍 Trova un professionista</a>
-        <a href="professionista.html" class="btn-hero-sec" data-it="💼 Registrati come professionista" data-en="💼 Register as professional">💼 Registrati come professionista</a>
+        <a href="cliente.html" class="btn-hero-main" id="cta-btn1">🔍 Trova un professionista</a>
+        <a href="professionista.html" class="btn-hero-sec" id="cta-btn2">💼 Registrati come professionista</a>
     </div>
 </section>
 
@@ -346,31 +313,31 @@
     <div class="footer-top">
         <div>
             <div class="footer-logo">PROFES<span>SIONISTI</span></div>
-            <div class="footer-desc">La piattaforma che collega clienti e professionisti verificati in tutta Italia. Gratis per i clienti, abbonamento per i professionisti.</div>
+            <div class="footer-desc" id="footer-desc">La piattaforma che collega clienti e professionisti verificati in tutta Italia. Gratis per i clienti, abbonamento per i professionisti.</div>
         </div>
         <div class="footer-links">
-            <h4>Piattaforma</h4>
-            <a href="cliente.html">Come funziona</a>
-            <a href="professionista.html">Diventa professionista</a>
-            <a href="#">Chi siamo</a>
+            <h4 id="fl1-title">Piattaforma</h4>
+            <a href="cliente.html" id="fl1-1">Come funziona</a>
+            <a href="professionista.html" id="fl1-2">Diventa professionista</a>
+            <a href="#" id="fl1-3">Chi siamo</a>
         </div>
         <div class="footer-links">
-            <h4>Categorie</h4>
-            <a href="cliente.html">Edilizia</a>
-            <a href="cliente.html">Impianti</a>
-            <a href="cliente.html">Legale & Finanza</a>
+            <h4 id="fl2-title">Categorie</h4>
+            <a href="cliente.html?cat=edilizia">Edilizia</a>
+            <a href="cliente.html?cat=impianti">Impianti</a>
+            <a href="cliente.html?cat=legale">Legale & Finanza</a>
             <a href="cliente.html">Tutte le categorie</a>
         </div>
         <div class="footer-links">
-            <h4>Legale</h4>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Termini di servizio</a>
-            <a href="#">Cookie Policy</a>
-            <a href="#">Contatti</a>
+            <h4 id="fl3-title">Legale</h4>
+            <a href="#" id="fl3-1">Privacy Policy</a>
+            <a href="#" id="fl3-2">Termini di servizio</a>
+            <a href="#" id="fl3-3">Cookie Policy</a>
+            <a href="#" id="fl3-4">Contatti</a>
         </div>
     </div>
     <div class="footer-bottom">
-        <span>© 2026 Professionisti — Tutti i diritti riservati</span>
+        <span id="footer-copy">© 2026 Professionisti — Tutti i diritti riservati</span>
         <span style="color:var(--oro)">🇮🇹 Made in Italy</span>
     </div>
 </footer>
@@ -379,68 +346,135 @@
 <div class="adult-popup" id="adultPopup">
     <div class="adult-box">
         <div style="font-size:52px;margin-bottom:15px">🔞</div>
-        <h2>Sezione riservata +18</h2>
-        <p>Questa sezione è accessibile solo a persone maggiorenni. Confermando dichiari di avere almeno 18 anni e di accettare le condizioni di utilizzo per questa categoria.</p>
+        <h2 id="adult-title">Sezione riservata +18</h2>
+        <p id="adult-p">Questa sezione è accessibile solo a persone maggiorenni. Confermando dichiari di avere almeno 18 anni e di accettare le condizioni di utilizzo per questa categoria.</p>
         <div class="adult-buttons">
-            <button class="btn-adult-no" onclick="denyAdult()">❌ Sono minorenne</button>
-            <button class="btn-adult-si" onclick="confirmAdult()">✅ Ho 18+ anni</button>
+            <button class="btn-adult-no" onclick="denyAdult()" id="adult-no">❌ Sono minorenne</button>
+            <button class="btn-adult-si" onclick="confirmAdult()" id="adult-si">✅ Ho 18+ anni</button>
         </div>
     </div>
 </div>
 
 <script>
-    let currentLang = 'it';
+    let currentLang = localStorage.getItem('lang') || 'it';
     let escortTarget = 'cliente';
+
+    const translations = {
+        it: {
+            'nav-pro': 'Sei un professionista?',
+            'nav-accedi': '🔑 Accedi',
+            'nav-pubblica': 'Pubblica richiesta',
+            'hero-badge': '⭐ La piattaforma #1 per trovare professionisti verificati',
+            'hero-h1': 'Trova il <span>Professionista Giusto</span> per Te',
+            'hero-p': 'Gratis per i clienti. Professionisti verificati. Max 5 offerte per richiesta. Chat privata e sopralluogo garantito.',
+            'hero-btn1': '🔍 Cerca un professionista',
+            'hero-btn2': '💼 Sei un professionista?',
+            'stat1': 'Professionisti verificati', 'stat2': 'Richieste completate', 'stat3': 'Offerte per richiesta', 'stat4': 'Valutazione media',
+            'sez1-title': 'Come funziona', 'sez1-sub': 'Semplice, veloce e sicuro. Dalla richiesta al sopralluogo in pochi click.',
+            'step1-t': 'Descrivi il lavoro', 'step1-p': 'Inserisci categoria, città e descrizione. Gratis, nessun dato personale richiesto.',
+            'step2-t': 'Ricevi le offerte', 'step2-p': 'Massimo 5 professionisti verificati ti contatteranno. Nessuno spam.',
+            'step3-t': 'Scegli e chatta', 'step3-p': 'Leggi i profili, scegli il migliore e chatta in privato per concordare i dettagli.',
+            'step4-t': 'Sopralluogo e lavoro', 'step4-p': 'Il professionista viene da te, valuta il lavoro e inizia. Recensione finale per entrambi.',
+            'sez2-title': 'Tutte le categorie', 'sez2-sub': 'Professionisti verificati in ogni settore, nella tua città.',
+            'cat1': 'Edilizia & Costruzioni', 'cat2': 'Impianti', 'cat3': 'Automotive', 'cat4': 'Legale & Finanza',
+            'cat5': 'Salute & Benessere', 'cat6': 'Estetica & Persona', 'cat7': 'Casa & Servizi', 'cat8': 'Digitale & Tech',
+            'cat9': 'Istruzione', 'cat10': 'Escort & Accompagnatrici',
+            'sez3-title': 'Piani e prezzi', 'sez3-sub': 'Abbonati e inizia a ricevere richieste qualificate nella tua zona.',
+            'tab-mens': 'Mensile', 'tab-ann': 'Annuale',
+            'p1-nome': 'Casa, Cura & Istruzione', 'p2-nome': 'Edilizia & Tutti gli altri',
+            'feat-badge': '⭐ PIÙ SCELTO', 'btn-p1': 'Inizia ora', 'btn-p2': 'Inizia ora', 'btn-p3': 'Inizia ora',
+            'f1-1': 'Pagina profilo attiva', 'f1-2': 'Sblocco contatto €8,00', 'f1-3': 'Registrazione semplificata', 'f1-4': 'Chat privata inclusa', 'f1-5': 'Sistema recensioni',
+            'f2-1': 'Pagina profilo verificata', 'f2-2': 'Sblocco contatto da €9,90', 'f2-3': 'Verifica P.IVA automatica', 'f2-4': 'Chat privata inclusa', 'f2-5': 'Sistema recensioni', 'f2-6': 'Video presentazione',
+            'sez4-title': 'Perché sceglierci', 'sez4-sub': 'La piattaforma progettata per tutelare sia i clienti che i professionisti.',
+            'v1-t': 'Zero truffe', 'v1-p': 'Tutti i professionisti sono verificati con P.IVA e visura camerale. I clienti verificano il telefono con OTP.',
+            'v2-t': 'Max 5 offerte', 'v2-p': 'Ogni richiesta riceve massimo 5 offerte. Nessuno spam, solo professionisti seriamente interessati.',
+            'v3-t': 'Sistema anti-abbandono', 'v3-p': 'Clienti e professionisti che non rispettano i sopralluoghi vengono bannati automaticamente dopo 3 mancanze.',
+            'v4-t': 'Recensioni reali', 'v4-p': 'Cliente valuta il professionista e il professionista valuta il cliente. Solo dopo la conferma del pagamento.',
+            'cta-title': 'Pronto a iniziare?', 'cta-sub': 'Sei un cliente? È gratis. Sei un professionista? Inizia a ricevere richieste oggi.',
+            'cta-btn1': '🔍 Trova un professionista', 'cta-btn2': '💼 Registrati come professionista',
+            'fl1-title': 'Piattaforma', 'fl1-1': 'Come funziona', 'fl1-2': 'Diventa professionista', 'fl1-3': 'Chi siamo',
+            'fl2-title': 'Categorie', 'fl3-title': 'Legale',
+            'fl3-1': 'Privacy Policy', 'fl3-2': 'Termini di servizio', 'fl3-3': 'Cookie Policy', 'fl3-4': 'Contatti',
+            'footer-desc': 'La piattaforma che collega clienti e professionisti verificati in tutta Italia. Gratis per i clienti, abbonamento per i professionisti.',
+            'footer-copy': '© 2026 Professionisti — Tutti i diritti riservati',
+            'adult-title': 'Sezione riservata +18',
+            'adult-p': 'Questa sezione è accessibile solo a persone maggiorenni. Confermando dichiari di avere almeno 18 anni.',
+            'adult-no': '❌ Sono minorenne', 'adult-si': '✅ Ho 18+ anni'
+        },
+        en: {
+            'nav-pro': 'Are you a professional?',
+            'nav-accedi': '🔑 Sign in',
+            'nav-pubblica': 'Post a request',
+            'hero-badge': '⭐ The #1 platform to find verified professionals',
+            'hero-h1': 'Find the <span>Right Professional</span> for You',
+            'hero-p': 'Free for clients. Verified professionals. Max 5 offers per request. Private chat and guaranteed site visit.',
+            'hero-btn1': '🔍 Find a professional',
+            'hero-btn2': '💼 Are you a professional?',
+            'stat1': 'Verified professionals', 'stat2': 'Completed requests', 'stat3': 'Offers per request', 'stat4': 'Average rating',
+            'sez1-title': 'How it works', 'sez1-sub': 'Simple, fast and safe. From request to site visit in a few clicks.',
+            'step1-t': 'Describe the job', 'step1-p': 'Enter category, city and description. Free, no personal data required.',
+            'step2-t': 'Receive offers', 'step2-p': 'Maximum 5 verified professionals will contact you. No spam.',
+            'step3-t': 'Choose and chat', 'step3-p': 'Read profiles, choose the best and chat privately to agree on details.',
+            'step4-t': 'Site visit and work', 'step4-p': 'The professional comes to you, evaluates and starts. Final review for both.',
+            'sez2-title': 'All categories', 'sez2-sub': 'Verified professionals in every sector, in your city.',
+            'cat1': 'Construction & Building', 'cat2': 'Electrical & Plumbing', 'cat3': 'Automotive', 'cat4': 'Legal & Finance',
+            'cat5': 'Health & Wellness', 'cat6': 'Beauty & Personal Care', 'cat7': 'Home & Services', 'cat8': 'Digital & Tech',
+            'cat9': 'Education', 'cat10': 'Escort & Companions',
+            'sez3-title': 'Plans & Pricing', 'sez3-sub': 'Subscribe and start receiving qualified requests in your area.',
+            'tab-mens': 'Monthly', 'tab-ann': 'Annual',
+            'p1-nome': 'Home, Care & Education', 'p2-nome': 'Construction & All others',
+            'feat-badge': '⭐ MOST POPULAR', 'btn-p1': 'Start now', 'btn-p2': 'Start now', 'btn-p3': 'Start now',
+            'f1-1': 'Active profile page', 'f1-2': 'Contact unlock €8.00', 'f1-3': 'Simplified registration', 'f1-4': 'Private chat included', 'f1-5': 'Reviews system',
+            'f2-1': 'Verified profile page', 'f2-2': 'Contact unlock from €9.90', 'f2-3': 'Automatic VAT verification', 'f2-4': 'Private chat included', 'f2-5': 'Reviews system', 'f2-6': 'Presentation video',
+            'sez4-title': 'Why choose us', 'sez4-sub': 'The platform designed to protect both clients and professionals.',
+            'v1-t': 'Zero scams', 'v1-p': 'All professionals are verified with VAT and chamber registration. Clients verify phone with OTP.',
+            'v2-t': 'Max 5 offers', 'v2-p': 'Each request receives maximum 5 offers. No spam, only seriously interested professionals.',
+            'v3-t': 'Anti-abandonment system', 'v3-p': 'Clients and professionals who miss site visits are automatically banned after 3 failures.',
+            'v4-t': 'Real reviews', 'v4-p': 'Client rates the professional and the professional rates the client. Only after payment confirmation.',
+            'cta-title': 'Ready to start?', 'cta-sub': 'Are you a client? It\'s free. Are you a professional? Start receiving requests today.',
+            'cta-btn1': '🔍 Find a professional', 'cta-btn2': '💼 Register as professional',
+            'fl1-title': 'Platform', 'fl1-1': 'How it works', 'fl1-2': 'Become a professional', 'fl1-3': 'About us',
+            'fl2-title': 'Categories', 'fl3-title': 'Legal',
+            'fl3-1': 'Privacy Policy', 'fl3-2': 'Terms of Service', 'fl3-3': 'Cookie Policy', 'fl3-4': 'Contact',
+            'footer-desc': 'The platform connecting clients and verified professionals across Italy. Free for clients, subscription for professionals.',
+            'footer-copy': '© 2026 Professionisti — All rights reserved',
+            'adult-title': '+18 Restricted Section',
+            'adult-p': 'This section is only accessible to adults. By confirming you declare you are at least 18 years old.',
+            'adult-no': '❌ I am under 18', 'adult-si': '✅ I am 18+'
+        }
+    };
 
     function setLang(lang) {
         currentLang = lang;
-        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-        document.querySelector(`.lang-btn:${lang === 'it' ? 'first-child' : 'last-child'}`).classList.add('active');
-        document.querySelectorAll('[data-it]').forEach(el => {
-            const val = el.getAttribute('data-' + lang);
-            if (val) el.innerHTML = val;
+        localStorage.setItem('lang', lang);
+        document.getElementById('btn-it').classList.toggle('active', lang === 'it');
+        document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+        const t = translations[lang];
+        Object.keys(t).forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.innerHTML = t[id];
         });
     }
 
     function switchPrezzi(tipo, btn) {
         document.querySelectorAll('.prezzi-tab').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        if (tipo === 'mensile') {
-            document.getElementById('prezzo-1').innerHTML = '€10 <span>/mese</span>';
-            document.getElementById('sub-1').textContent = 'Baby sitter, Dog sitter, Cuochi, Tuttofare, Pulizie, Badanti, Istruzione';
-            document.getElementById('prezzo-2').innerHTML = '€99 <span>/mese</span>';
-            document.getElementById('sub-2').textContent = 'Edilizia, Impianti, Automotive, Legale, Salute, Estetica, Digitale...';
-            document.getElementById('prezzo-3').innerHTML = '€150 <span>/mese</span>';
-            document.getElementById('sub-3').textContent = 'Solo +18 — verifica identità obbligatoria';
-        } else {
-            document.getElementById('prezzo-1').innerHTML = '€10 <span>/mese</span>';
-            document.getElementById('sub-1').textContent = '⚠️ Piano annuale non disponibile per questa categoria';
-            document.getElementById('prezzo-2').innerHTML = '€888 <span>/anno</span>';
-            document.getElementById('sub-2').textContent = '💚 Risparmia €300 rispetto al mensile!';
-            document.getElementById('prezzo-3').innerHTML = '€999 <span>/anno</span>';
-            document.getElementById('sub-3').textContent = '💚 Risparmia €801 rispetto al mensile!';
-        }
+        const isMens = tipo === 'mensile';
+        document.getElementById('prezzo-1').innerHTML = '€10 <span>/mese</span>';
+        document.getElementById('sub-1').textContent = isMens ? 'Baby sitter, Dog sitter, Cuochi, Tuttofare, Pulizie, Badanti, Istruzione' : '⚠️ Piano annuale non disponibile per questa categoria';
+        document.getElementById('prezzo-2').innerHTML = isMens ? '€99 <span>/mese</span>' : '€888 <span>/anno</span>';
+        document.getElementById('sub-2').textContent = isMens ? 'Edilizia, Impianti, Automotive, Legale, Salute, Estetica, Digitale...' : '💚 Risparmia €300 rispetto al mensile!';
+        document.getElementById('prezzo-3').innerHTML = isMens ? '€150 <span>/mese</span>' : '€999 <span>/anno</span>';
+        document.getElementById('sub-3').textContent = isMens ? 'Solo +18 — verifica identità obbligatoria' : '💚 Risparmia €801 rispetto al mensile!';
     }
 
-    function checkEscort(e) {
-        e.preventDefault();
-        escortTarget = 'cliente';
-        document.getElementById('adultPopup').classList.add('show');
-    }
+    function checkEscort(e) { e.preventDefault(); escortTarget = 'cliente'; document.getElementById('adultPopup').classList.add('show'); }
+    function checkEscortReg() { escortTarget = 'professionista'; document.getElementById('adultPopup').classList.add('show'); }
+    function confirmAdult() { document.getElementById('adultPopup').classList.remove('show'); window.location.href = escortTarget + '.html?cat=escort'; }
+    function denyAdult() { document.getElementById('adultPopup').classList.remove('show'); }
 
-    function checkEscortReg() {
-        escortTarget = 'professionista';
-        document.getElementById('adultPopup').classList.add('show');
-    }
-
-    function confirmAdult() {
-        document.getElementById('adultPopup').classList.remove('show');
-        window.location.href = escortTarget + '.html';
-    }
-
-    function denyAdult() {
-        document.getElementById('adultPopup').classList.remove('show');
-    }
+    // Applica lingua salvata al caricamento
+    document.addEventListener('DOMContentLoaded', () => setLang(currentLang));
 </script>
 </body>
 </html>
