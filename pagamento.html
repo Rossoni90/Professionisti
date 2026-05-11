@@ -19,8 +19,11 @@
         .navbar { background: var(--blu-scuro); padding: 14px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 15px rgba(0,0,0,0.25); }
         .logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: white; text-decoration: none; }
         .logo span { color: var(--oro); }
-        .btn-back { background: transparent; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.25); padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; text-decoration: none; }
-        .btn-back:hover { color: var(--oro); border-color: var(--oro); }
+        .navbar-links { display: flex; gap: 10px; align-items: center; }
+        .btn-nav { background: transparent; color: rgba(255,255,255,0.75); border: 1px solid rgba(255,255,255,0.2); padding: 7px 14px; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; text-decoration: none; }
+        .btn-nav:hover { color: var(--oro); border-color: var(--oro); }
+        .btn-nav-dashboard { background: var(--oro); color: var(--blu-scuro); border: none; padding: 8px 18px; border-radius: 20px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; text-decoration: none; }
+        .btn-nav-dashboard:hover { background: var(--oro-chiaro); transform: translateY(-1px); }
 
         /* HERO */
         .page-hero { background: linear-gradient(135deg, var(--blu-scuro) 0%, var(--blu) 100%); padding: 45px 30px 40px; text-align: center; }
@@ -40,7 +43,7 @@
         .tipo-tab-nome { font-size: 15px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 4px; }
         .tipo-tab-desc { font-size: 12px; color: var(--grigio); }
 
-        /* SEZIONE ABBONAMENTO */
+        /* SEZIONE */
         .sezione { display: none; }
         .sezione.active { display: block; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
@@ -69,7 +72,7 @@
         .switch.on .switch-knob { left: 27px; }
         .risparmio-tag { background: var(--verde); color: white; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 10px; }
 
-        /* CREDITI SBLOCCO */
+        /* CREDITI */
         .crediti-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 30px; }
         .credito-card { background: white; border: 2px solid #e5e7eb; border-radius: 18px; padding: 24px 18px; text-align: center; cursor: pointer; transition: 0.3s; position: relative; }
         .credito-card:hover { border-color: var(--blu); box-shadow: 0 6px 20px rgba(0,0,0,0.07); transform: translateY(-2px); }
@@ -84,7 +87,7 @@
         .credito-unitario { font-size: 11px; color: var(--grigio); }
         .credito-risparmio { font-size: 11px; color: var(--verde); font-weight: 600; margin-top: 4px; height: 16px; }
 
-        /* RIEPILOGO ORDINE */
+        /* RIEPILOGO */
         .riepilogo { background: white; border-radius: 20px; padding: 28px 30px; border: 1px solid #e5e7eb; margin-bottom: 24px; }
         .riepilogo h3 { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--blu-scuro); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
         .riepilogo-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f3f4f6; font-size: 14px; }
@@ -113,7 +116,6 @@
         /* BOTTONE PAGA */
         .btn-paga { width: 100%; padding: 18px; background: linear-gradient(135deg, var(--oro) 0%, var(--oro-chiaro) 100%); color: white; border: none; border-radius: 16px; font-size: 18px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; box-shadow: 0 6px 20px rgba(184,151,42,0.35); display: flex; align-items: center; justify-content: center; gap: 10px; }
         .btn-paga:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(184,151,42,0.45); }
-        .btn-paga:active { transform: translateY(0); }
         .note-pagamento { text-align: center; font-size: 12px; color: var(--grigio); margin-top: 14px; line-height: 1.6; }
 
         /* AVVISI */
@@ -138,6 +140,10 @@
             .form-row { grid-template-columns: 1fr; }
             .tipo-tabs { flex-direction: column; }
             .success-grid { grid-template-columns: 1fr; }
+            .navbar { padding: 12px 16px; }
+            .navbar-links { gap: 6px; }
+            .btn-nav { font-size: 11px; padding: 6px 10px; }
+            .btn-nav-dashboard { font-size: 11px; padding: 6px 12px; }
         }
     </style>
 </head>
@@ -146,7 +152,12 @@
 <!-- NAVBAR -->
 <nav class="navbar">
     <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
-    <a href="dashboard-pro.html" class="btn-back">← Torna alla dashboard</a>
+    <div class="navbar-links">
+        <a href="dashboard-pro.html" class="btn-nav">📊 Dashboard Pro</a>
+        <a href="dashboard-cliente.html" class="btn-nav">👤 Dashboard Cliente</a>
+        <a href="index.html" class="btn-nav">🏠 Home</a>
+        <a href="index.html" class="btn-nav-dashboard">🚪 Esci</a>
+    </div>
 </nav>
 
 <!-- HERO -->
@@ -226,12 +237,10 @@
 
     <!-- SEZIONE CREDITI -->
     <div class="sezione" id="sez-crediti">
-
-        <div class="avviso-blu" style="margin-bottom:20px">
+        <div class="avviso-blu">
             <strong>ℹ️ Come funzionano i crediti</strong>
             Ogni credito vale per sbloccare un contatto. Il costo effettivo dipende dal tipo di lavoro (€8 per categorie base, €9 per standard, €9,90–€29,90 per edilizia).
         </div>
-
         <div class="crediti-grid">
             <div class="credito-card" onclick="selezionaCrediti('5', this)">
                 <div class="credito-icon">🔓</div>
@@ -259,18 +268,15 @@
                 <div class="credito-risparmio">Risparmi €50 rispetto a 25 singoli</div>
             </div>
         </div>
-
     </div>
 
     <!-- SEZIONE SBLOCCO SINGOLO -->
     <div class="sezione" id="sez-singolo">
-
-        <div class="avviso-blu" style="margin-bottom:20px">
+        <div class="avviso-blu">
             <strong>⚡ Sblocco singolo richiesta</strong>
             Stai pagando per sbloccare il contatto di una specifica richiesta cliente. Una volta sbloccato avrai accesso alla chat privata.
         </div>
-
-        <div class="crediti-grid" style="grid-template-columns: repeat(3,1fr)">
+        <div class="crediti-grid">
             <div class="credito-card selected" id="singolo-piccolo" onclick="selezionaSingolo('piccolo', this)">
                 <div class="credito-icon">🟢</div>
                 <div class="credito-num" style="font-size:22px">Piccolo lavoro</div>
@@ -296,7 +302,6 @@
                 <div class="credito-risparmio"></div>
             </div>
         </div>
-
     </div>
 
     <!-- RIEPILOGO ORDINE -->
@@ -323,17 +328,16 @@
     <!-- FORM PAGAMENTO -->
     <div class="form-pagamento" id="formPagamento">
         <h3>💳 Dati di pagamento</h3>
-
         <div class="secure-badge">
             🔒 Pagamento sicuro con crittografia SSL 256-bit — I tuoi dati sono al sicuro
         </div>
-
         <div class="metodo-tabs">
             <div class="metodo-tab active" onclick="selezionaMetodo('carta', this)">💳 Carta di credito</div>
             <div class="metodo-tab" onclick="selezionaMetodo('paypal', this)">🅿️ PayPal</div>
             <div class="metodo-tab" onclick="selezionaMetodo('bonifico', this)">🏦 Bonifico</div>
         </div>
 
+        <!-- CARTA -->
         <div id="form-carta">
             <div class="card-icons">
                 <div class="card-icon">💳</div>
@@ -360,6 +364,7 @@
             </div>
         </div>
 
+        <!-- PAYPAL -->
         <div id="form-paypal" style="display:none">
             <div style="text-align:center;padding:30px;background:var(--grigio-chiaro);border-radius:14px;margin-bottom:18px">
                 <div style="font-size:48px;margin-bottom:12px">🅿️</div>
@@ -367,6 +372,7 @@
             </div>
         </div>
 
+        <!-- BONIFICO -->
         <div id="form-bonifico" style="display:none">
             <div style="background:var(--grigio-chiaro);border-radius:14px;padding:20px;margin-bottom:18px;font-size:13px;line-height:1.9;color:var(--testo)">
                 <strong style="display:block;font-size:15px;color:var(--blu-scuro);margin-bottom:10px">🏦 Dati bonifico</strong>
@@ -451,8 +457,6 @@
         sw.classList.toggle('on', annuale);
         document.getElementById('label-mensile').classList.toggle('active', !annuale);
         document.getElementById('label-annuale').classList.toggle('active', annuale);
-
-        // Aggiorna prezzi cards
         Object.keys(PREZZI_ABBONAMENTO).forEach(p => {
             const prezzi = PREZZI_ABBONAMENTO[p];
             if (annuale && prezzi.annuale) {
@@ -461,8 +465,8 @@
                 const risparmio = Math.round(((prezzi.mensile * 12) - prezzi.annuale) / (prezzi.mensile * 12) * 100);
                 document.getElementById('risparmio-' + p).textContent = '💚 Risparmi il ' + risparmio + '%';
             } else {
-                document.getElementById('prezzo-' + p).textContent = prezzi.annuale ? '€' + prezzi.mensile : '€' + prezzi.mensile;
-                document.getElementById('unita-' + p).textContent = prezzi.annuale ? '/mese' : '/mese (no annuale)';
+                document.getElementById('prezzo-' + p).textContent = '€' + prezzi.mensile;
+                document.getElementById('unita-' + p).textContent = prezzi.annuale ? '/mese' : '/mese';
                 document.getElementById('risparmio-' + p).textContent = '';
             }
         });
@@ -478,7 +482,7 @@
 
     function selezionaCrediti(num, el) {
         creditiSelezionati = num;
-        document.querySelectorAll('.credito-card').forEach(c => c.classList.remove('selected'));
+        document.querySelectorAll('#sez-crediti .credito-card').forEach(c => c.classList.remove('selected'));
         el.classList.add('selected');
         aggiornaRiepilogo();
     }
@@ -494,82 +498,100 @@
         metodoSelezionato = metodo;
         document.querySelectorAll('.metodo-tab').forEach(t => t.classList.remove('active'));
         el.classList.add('active');
-        document.getElementById('form-carta').style.display = metodo === 'carta' ? 'block' : 'none';
-        document.getElementById('form-paypal').style.display = metodo === 'paypal' ? 'block' : 'none';
+        document.getElementById('form-carta').style.display    = metodo === 'carta'    ? 'block' : 'none';
+        document.getElementById('form-paypal').style.display   = metodo === 'paypal'   ? 'block' : 'none';
         document.getElementById('form-bonifico').style.display = metodo === 'bonifico' ? 'block' : 'none';
     }
 
-    function aggiornaRiepilogo() {
-        let tipo, piano, importo;
+    function getImporto() {
         if (tipoSelezionato === 'abbonamento') {
             const p = PREZZI_ABBONAMENTO[pianoSelezionato];
-            importo = annuale && p.annuale ? p.annuale : p.mensile;
-            tipo = annuale && p.annuale ? 'Abbonamento annuale' : 'Abbonamento mensile';
+            return annuale && p.annuale ? p.annuale : p.mensile;
+        }
+        if (tipoSelezionato === 'crediti') return PREZZI_CREDITI[creditiSelezionati];
+        if (tipoSelezionato === 'singolo') return PREZZI_SINGOLO[singoloSelezionato];
+        return 0;
+    }
+
+    function aggiornaRiepilogo() {
+        const importo = getImporto();
+        const iva = +(importo * 0.22).toFixed(2);
+        let tipo = '', piano = '';
+        if (tipoSelezionato === 'abbonamento') {
+            tipo  = annuale ? 'Abbonamento annuale' : 'Abbonamento mensile';
             piano = NOMI_PIANO[pianoSelezionato];
         } else if (tipoSelezionato === 'crediti') {
-            importo = PREZZI_CREDITI[creditiSelezionati];
-            tipo = 'Pacchetto crediti sblocco';
+            tipo  = 'Acquisto crediti';
             piano = creditiSelezionati + ' crediti';
         } else {
-            importo = PREZZI_SINGOLO[singoloSelezionato];
-            tipo = 'Sblocco singolo';
+            tipo  = 'Sblocco singolo';
             piano = singoloSelezionato.charAt(0).toUpperCase() + singoloSelezionato.slice(1) + ' lavoro';
         }
-        const iva = (importo * 0.22).toFixed(2);
-        document.getElementById('riepilogo-tipo').textContent = tipo;
-        document.getElementById('riepilogo-piano').textContent = piano;
-        document.getElementById('riepilogo-iva').textContent = '€' + iva;
+        document.getElementById('riepilogo-tipo').textContent   = tipo;
+        document.getElementById('riepilogo-piano').textContent  = piano;
+        document.getElementById('riepilogo-iva').textContent    = '€' + iva.toFixed(2).replace('.', ',');
         document.getElementById('riepilogo-totale').textContent = '€' + importo.toFixed(2).replace('.', ',');
-        document.getElementById('btn-importo').textContent = '€' + importo.toFixed(2).replace('.', ',');
-        document.getElementById('bonifico-importo').textContent = '€' + importo.toFixed(2).replace('.', ',');
+        document.getElementById('btn-importo').textContent      = '€' + importo.toFixed(2).replace('.', ',');
+        const bonEl = document.getElementById('bonifico-importo');
+        if (bonEl) bonEl.textContent = '€' + importo.toFixed(2).replace('.', ',');
     }
 
     function formatCarta(input) {
-        let val = input.value.replace(/\D/g, '').slice(0, 16);
-        input.value = val.replace(/(.{4})/g, '$1 ').trim();
+        let v = input.value.replace(/\D/g, '').substring(0, 16);
+        input.value = v.replace(/(.{4})/g, '$1 ').trim();
     }
 
     function formatScadenza(input) {
-        let val = input.value.replace(/\D/g, '').slice(0, 4);
-        if (val.length >= 2) val = val.slice(0, 2) + '/' + val.slice(2);
-        input.value = val;
+        let v = input.value.replace(/\D/g, '').substring(0, 4);
+        if (v.length >= 3) v = v.substring(0, 2) + '/' + v.substring(2);
+        input.value = v;
     }
 
     function elaboraPagamento() {
-        const email = document.getElementById('email-fattura').value.trim();
-        if (!email || !email.includes('@')) { alert('Inserisci un\'email valida per la fattura!'); return; }
-
+        const email = document.getElementById('email-fattura').value;
+        if (!email) { alert('Inserisci la tua email per la fattura!'); return; }
         if (metodoSelezionato === 'carta') {
-            const numero = document.getElementById('carta-numero').value.replace(/\s/g, '');
-            const nome = document.getElementById('carta-nome').value.trim();
+            const num  = document.getElementById('carta-numero').value.replace(/\s/g,'');
+            const nome = document.getElementById('carta-nome').value;
             const scad = document.getElementById('carta-scadenza').value;
-            const cvv = document.getElementById('carta-cvv').value;
-            if (numero.length < 16) { alert('Inserisci un numero di carta valido!'); return; }
-            if (!nome) { alert('Inserisci il nome intestatario!'); return; }
-            if (scad.length < 5) { alert('Inserisci la scadenza (MM/AA)!'); return; }
-            if (cvv.length < 3) { alert('Inserisci il CVV!'); return; }
+            const cvv  = document.getElementById('carta-cvv').value;
+            if (!num || num.length < 16) { alert('Inserisci un numero di carta valido!'); return; }
+            if (!nome)                   { alert('Inserisci il nome intestatario!'); return; }
+            if (!scad || scad.length < 5){ alert('Inserisci la data di scadenza!'); return; }
+            if (!cvv  || cvv.length < 3) { alert('Inserisci il CVV!'); return; }
         }
-
-        // Simula elaborazione
-        const btn = document.querySelector('.btn-paga');
-        btn.textContent = '⏳ Elaborazione in corso...';
-        btn.disabled = true;
-
-        setTimeout(() => {
-            document.querySelector('.container').style.display = 'none';
-            document.querySelector('.page-hero').style.display = 'none';
-            const successMsg = tipoSelezionato === 'abbonamento'
-                ? 'Il tuo abbonamento è attivo. Puoi iniziare subito a ricevere richieste nella tua zona!'
-                : tipoSelezionato === 'crediti'
-                ? 'I tuoi crediti sono stati aggiunti. Vai alla dashboard per sbloccare i contatti!'
-                : 'Il contatto è sbloccato. Vai alla chat per comunicare con il cliente!';
-            document.getElementById('success-msg').textContent = successMsg;
-            document.getElementById('successScreen').classList.add('show');
-        }, 2000);
+        document.getElementById('riepilogoBox').style.display  = 'none';
+        document.getElementById('formPagamento').style.display = 'none';
+        document.querySelectorAll('.tipo-tabs, .sezione').forEach(el => el.style.display = 'none');
+        const msg = tipoSelezionato === 'crediti'
+            ? 'Hai acquistato ' + creditiSelezionati + ' crediti. Puoi usarli subito per sbloccare i contatti!'
+            : tipoSelezionato === 'singolo'
+            ? 'Contatto sbloccato! Puoi ora accedere alla chat privata con il cliente.'
+            : 'Il tuo abbonamento è attivo. Puoi iniziare subito a ricevere richieste nella tua zona!';
+        document.getElementById('success-msg').textContent = msg;
+        document.getElementById('successScreen').classList.add('show');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Init
+    // Inizializzazione
     aggiornaRiepilogo();
+
+    // Gestione parametro URL ?tipo=crediti o ?tipo=singolo
+    window.addEventListener('DOMContentLoaded', function() {
+        const params = new URLSearchParams(window.location.search);
+        const tipo = params.get('tipo');
+        if (tipo && ['abbonamento','crediti','singolo'].includes(tipo)) {
+            selezionaTipo(tipo);
+        }
+        const piano = params.get('piano');
+        if (piano && PREZZI_ABBONAMENTO[piano]) {
+            pianoSelezionato = piano;
+            document.querySelectorAll('.abbonamento-card').forEach(c => c.classList.remove('selected'));
+            const cardEl = document.getElementById('card-' + piano);
+            if (cardEl) cardEl.classList.add('selected');
+            aggiornaRiepilogo();
+        }
+    });
 </script>
 </body>
 </html>
