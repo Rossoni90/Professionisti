@@ -161,6 +161,8 @@
     <div class="navbar-links">
         <button class="lang-btn active" id="btn-it" onclick="setLang('it')">🇮🇹 IT</button>
         <button class="lang-btn" id="btn-en" onclick="setLang('en')">🇬🇧 EN</button>
+        <a href="come-funziona.html" class="btn-nav btn-nav-ghost" id="nav-comefunziona">Come funziona</a>
+        <a href="contatti.html" class="btn-nav btn-nav-ghost" id="nav-contatti">Contatti</a>
         <a href="professionista.html" class="btn-nav btn-nav-ghost" id="nav-pro">Sei un professionista?</a>
         <a href="cliente.html" class="btn-nav btn-nav-outline" id="nav-accedi">🔑 Accedi</a>
         <a href="cliente.html" class="btn-nav btn-nav-oro" id="nav-pubblica">Pubblica richiesta</a>
@@ -317,9 +319,9 @@
         </div>
         <div class="footer-links">
             <h4 id="fl1-title">Piattaforma</h4>
-            <a href="cliente.html" id="fl1-1">Come funziona</a>
+            <a href="come-funziona.html" id="fl1-1">Come funziona</a>
             <a href="professionista.html" id="fl1-2">Diventa professionista</a>
-            <a href="#" id="fl1-3">Chi siamo</a>
+            <a href="contatti.html" id="fl1-3">Contatti</a>
         </div>
         <div class="footer-links">
             <h4 id="fl2-title">Categorie</h4>
@@ -333,7 +335,7 @@
             <a href="#" id="fl3-1">Privacy Policy</a>
             <a href="#" id="fl3-2">Termini di servizio</a>
             <a href="#" id="fl3-3">Cookie Policy</a>
-            <a href="#" id="fl3-4">Contatti</a>
+            <a href="contatti.html" id="fl3-4">Contatti</a>
         </div>
     </div>
     <div class="footer-bottom">
@@ -361,6 +363,8 @@
 
     const translations = {
         it: {
+            'nav-comefunziona': 'Come funziona',
+            'nav-contatti': 'Contatti',
             'nav-pro': 'Sei un professionista?',
             'nav-accedi': '🔑 Accedi',
             'nav-pubblica': 'Pubblica richiesta',
@@ -392,7 +396,7 @@
             'v4-t': 'Recensioni reali', 'v4-p': 'Cliente valuta il professionista e il professionista valuta il cliente. Solo dopo la conferma del pagamento.',
             'cta-title': 'Pronto a iniziare?', 'cta-sub': 'Sei un cliente? È gratis. Sei un professionista? Inizia a ricevere richieste oggi.',
             'cta-btn1': '🔍 Trova un professionista', 'cta-btn2': '💼 Registrati come professionista',
-            'fl1-title': 'Piattaforma', 'fl1-1': 'Come funziona', 'fl1-2': 'Diventa professionista', 'fl1-3': 'Chi siamo',
+            'fl1-title': 'Piattaforma', 'fl1-1': 'Come funziona', 'fl1-2': 'Diventa professionista', 'fl1-3': 'Contatti',
             'fl2-title': 'Categorie', 'fl3-title': 'Legale',
             'fl3-1': 'Privacy Policy', 'fl3-2': 'Termini di servizio', 'fl3-3': 'Cookie Policy', 'fl3-4': 'Contatti',
             'footer-desc': 'La piattaforma che collega clienti e professionisti verificati in tutta Italia. Gratis per i clienti, abbonamento per i professionisti.',
@@ -402,6 +406,8 @@
             'adult-no': '❌ Sono minorenne', 'adult-si': '✅ Ho 18+ anni'
         },
         en: {
+            'nav-comefunziona': 'How it works',
+            'nav-contatti': 'Contact',
             'nav-pro': 'Are you a professional?',
             'nav-accedi': '🔑 Sign in',
             'nav-pubblica': 'Post a request',
@@ -433,7 +439,7 @@
             'v4-t': 'Real reviews', 'v4-p': 'Client rates the professional and the professional rates the client. Only after payment confirmation.',
             'cta-title': 'Ready to start?', 'cta-sub': 'Are you a client? It\'s free. Are you a professional? Start receiving requests today.',
             'cta-btn1': '🔍 Find a professional', 'cta-btn2': '💼 Register as professional',
-            'fl1-title': 'Platform', 'fl1-1': 'How it works', 'fl1-2': 'Become a professional', 'fl1-3': 'About us',
+            'fl1-title': 'Platform', 'fl1-1': 'How it works', 'fl1-2': 'Become a professional', 'fl1-3': 'Contact',
             'fl2-title': 'Categories', 'fl3-title': 'Legal',
             'fl3-1': 'Privacy Policy', 'fl3-2': 'Terms of Service', 'fl3-3': 'Cookie Policy', 'fl3-4': 'Contact',
             'footer-desc': 'The platform connecting clients and verified professionals across Italy. Free for clients, subscription for professionals.',
@@ -473,7 +479,6 @@
     function confirmAdult() { document.getElementById('adultPopup').classList.remove('show'); window.location.href = escortTarget + '.html?cat=escort'; }
     function denyAdult() { document.getElementById('adultPopup').classList.remove('show'); }
 
-    // Applica lingua salvata al caricamento
     document.addEventListener('DOMContentLoaded', () => setLang(currentLang));
 </script>
 </body>
