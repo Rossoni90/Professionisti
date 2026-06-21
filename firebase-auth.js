@@ -10,7 +10,6 @@ import { getFirestore, doc, setDoc, getDoc, serverTimestamp } from "https://www.
 // CONFIG FIREBASE
 const firebaseConfig = {
   apiKey: "AIzaSyCQHoCYYfdmkXnV2CTGBSq3gpE986QOq2o",
-,
   authDomain: "rossoni-f069a.firebaseapp.com",
   projectId: "rossoni-f069a",
   storageBucket: "rossoni-f069a.firebasestorage.app",
