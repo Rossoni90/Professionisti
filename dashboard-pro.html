@@ -1,419 +1,702 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professionisti — Dashboard Professionista</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --blu: #1B3A6B; --blu-scuro: #0F2347; --blu-chiaro: #2952A3;
-            --oro: #B8972A; --oro-chiaro: #D4AF37; --bianco: #FFFFFF;
-            --grigio-chiaro: #F5F7FA; --grigio: #6B7280; --testo: #1A1A2E;
-            --verde: #10B981; --rosso: #EF4444; --arancio: #F59E0B;
-        }
-        body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color: var(--testo); min-height: 100vh; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professionisti — Dashboard Professionista</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --blu: #1B3A6B; --blu-scuro: #0F2347; --blu-chiaro: #2952A3;
+  --oro: #B8972A; --oro-chiaro: #D4AF37; --bianco: #FFFFFF;
+  --grigio-chiaro: #F5F7FA; --grigio: #6B7280; --testo: #1A1A2E;
+  --verde: #10B981; --rosso: #EF4444; --arancio: #F59E0B;
+}
+body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color: var(--testo); min-height: 100vh; }
 
-        .navbar { background: var(--blu-scuro); padding: 14px 25px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 15px rgba(0,0,0,0.25); }
-        .logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: white; text-decoration: none; }
-        .logo span { color: var(--oro); }
-        .navbar-right { display: flex; align-items: center; gap: 15px; }
-        .notifica-badge { position: relative; cursor: pointer; font-size: 20px; }
-        .notifica-badge .badge { position: absolute; top: -8px; right: -8px; background: var(--rosso); color: white; font-size: 10px; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-        .avatar { width: 38px; height: 38px; background: var(--oro); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; font-size: 16px; cursor: pointer; }
-        .navbar-nome { color: white; font-size: 14px; font-weight: 600; }
-        .abbonamento-badge { background: var(--verde); color: white; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
-        .abbonamento-badge.scaduto { background: var(--rosso); }
-        .btn-logout { background: transparent; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.3); padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s; text-decoration: none; }
-        .btn-logout:hover { color: white; border-color: white; }
+/* ── NAVBAR ── */
+.navbar {
+  background: var(--blu-scuro); padding: 14px 25px;
+  display: flex; justify-content: space-between; align-items: center;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.25);
+}
+.logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: white; text-decoration: none; }
+.logo span { color: var(--oro); }
+.navbar-right { display: flex; align-items: center; gap: 15px; }
+.notifica-badge { position: relative; cursor: pointer; font-size: 20px; }
+.notifica-badge .badge {
+  position: absolute; top: -8px; right: -8px;
+  background: var(--rosso); color: white; font-size: 10px; font-weight: 700;
+  width: 18px; height: 18px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.avatar {
+  width: 38px; height: 38px; background: var(--oro); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; color: white; font-size: 16px; cursor: pointer;
+}
+.navbar-nome { color: white; font-size: 14px; font-weight: 600; }
+.abbonamento-badge { background: var(--verde); color: white; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
+.abbonamento-badge.scaduto { background: var(--rosso); }
+.btn-logout {
+  background: transparent; color: rgba(255,255,255,0.7);
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;
+  cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s;
+}
+.btn-logout:hover { color: white; border-color: white; }
 
-        .layout { display: flex; min-height: calc(100vh - 66px); }
+/* ── LAYOUT ── */
+.layout { display: flex; min-height: calc(100vh - 66px); }
 
-        .sidebar { width: 240px; background: white; border-right: 1px solid #e5e7eb; padding: 20px 0; flex-shrink: 0; }
-        .sidebar-menu { list-style: none; }
-        .sidebar-item { padding: 12px 22px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: 0.2s; font-size: 14px; font-weight: 500; color: var(--grigio); border-left: 3px solid transparent; text-decoration: none; }
-        .sidebar-item:hover { background: var(--grigio-chiaro); color: var(--blu); }
-        .sidebar-item.active { background: #EFF6FF; color: var(--blu); border-left-color: var(--oro); font-weight: 600; }
-        .sidebar-item .icon { font-size: 18px; }
-        .sidebar-divider { height: 1px; background: #e5e7eb; margin: 12px 22px; }
-        .sidebar-label { font-size: 11px; font-weight: 700; color: #9CA3AF; text-transform: uppercase; letter-spacing: 1px; padding: 5px 22px; margin-top: 8px; }
-        .sidebar-notifica { background: var(--rosso); color: white; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; margin-left: auto; }
+/* ── SIDEBAR ── */
+.sidebar { width: 240px; background: white; border-right: 1px solid #e5e7eb; padding: 20px 0; flex-shrink: 0; }
+.sidebar-menu { list-style: none; }
+.sidebar-item {
+  padding: 12px 22px; display: flex; align-items: center; gap: 12px;
+  cursor: pointer; transition: 0.2s; font-size: 14px; font-weight: 500;
+  color: var(--grigio); border-left: 3px solid transparent; text-decoration: none;
+}
+.sidebar-item:hover { background: var(--grigio-chiaro); color: var(--blu); }
+.sidebar-item.active { background: #EFF6FF; color: var(--blu); border-left-color: var(--oro); font-weight: 600; }
+.sidebar-item .icon { font-size: 18px; }
+.sidebar-divider { height: 1px; background: #e5e7eb; margin: 12px 22px; }
+.sidebar-label { font-size: 11px; font-weight: 700; color: #9CA3AF; text-transform: uppercase; letter-spacing: 1px; padding: 5px 22px; margin-top: 8px; }
+.sidebar-notifica { background: var(--rosso); color: white; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; margin-left: auto; }
 
-        .main { flex: 1; padding: 28px; overflow-y: auto; }
-        .page-header { margin-bottom: 22px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 15px; }
-        .page-header-left h1 { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--blu-scuro); margin-bottom: 4px; }
-        .page-header-left p { color: var(--grigio); font-size: 14px; }
+/* ── MAIN ── */
+.main { flex: 1; padding: 28px; overflow-y: auto; }
+.page-header { margin-bottom: 22px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 15px; }
+.page-header-left h1 { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--blu-scuro); margin-bottom: 4px; }
+.page-header-left p { color: var(--grigio); font-size: 14px; }
 
-        .abbonamento-bar { background: linear-gradient(135deg, var(--blu) 0%, var(--blu-chiaro) 100%); border-radius: 16px; padding: 18px 22px; margin-bottom: 22px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-        .abbonamento-bar.scaduto { background: linear-gradient(135deg, var(--rosso) 0%, #DC2626 100%); }
-        .abbonamento-bar-info { color: white; }
-        .abbonamento-bar-info strong { display: block; font-size: 15px; margin-bottom: 3px; }
-        .abbonamento-bar-info span { font-size: 13px; opacity: 0.85; }
-        .btn-rinnova { background: var(--oro); color: white; border: none; padding: 10px 22px; border-radius: 25px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; flex-shrink: 0; text-decoration: none; }
-        .btn-rinnova:hover { background: var(--oro-chiaro); transform: translateY(-1px); }
+/* ── ABBONAMENTO BAR ── */
+.abbonamento-bar {
+  background: linear-gradient(135deg, var(--blu) 0%, var(--blu-chiaro) 100%);
+  border-radius: 16px; padding: 18px 22px; margin-bottom: 22px;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+}
+.abbonamento-bar.scaduto { background: linear-gradient(135deg, var(--rosso) 0%, #DC2626 100%); }
+.abbonamento-bar-info { color: white; }
+.abbonamento-bar-info strong { display: block; font-size: 15px; margin-bottom: 3px; }
+.abbonamento-bar-info span { font-size: 13px; opacity: 0.85; }
+.btn-rinnova {
+  background: var(--oro); color: white; border: none; padding: 10px 22px;
+  border-radius: 25px; font-size: 13px; font-weight: 700; cursor: pointer;
+  transition: 0.3s; font-family: 'Inter', sans-serif; flex-shrink: 0; text-decoration: none;
+}
+.btn-rinnova:hover { background: var(--oro-chiaro); transform: translateY(-1px); }
 
-        .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
-        .stat-card { background: white; border-radius: 16px; padding: 20px; border: 1px solid #e5e7eb; transition: 0.3s; }
-        .stat-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.07); transform: translateY(-2px); }
-        .stat-icon { font-size: 26px; margin-bottom: 10px; }
-        .stat-num { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; color: var(--blu-scuro); margin-bottom: 4px; }
-        .stat-label { font-size: 12px; color: var(--grigio); }
-        .stat-card.oro .stat-num { color: var(--oro); }
-        .stat-card.verde .stat-num { color: var(--verde); }
-        .stat-card.rosso .stat-num { color: var(--rosso); }
+/* ── CREDITI ── */
+.crediti-box {
+  background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+  border: 1.5px solid var(--oro); border-radius: 16px; padding: 20px 22px; margin-bottom: 22px;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+}
+.crediti-info strong { display: block; font-size: 15px; color: var(--blu-scuro); margin-bottom: 4px; }
+.crediti-info span { font-size: 13px; color: var(--grigio); }
+.crediti-num { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 900; color: var(--oro); text-align: center; }
+.crediti-num span { font-size: 14px; color: var(--grigio); font-family: 'Inter', sans-serif; font-weight: 400; display: block; }
+.btn-ricarica {
+  background: var(--oro); color: white; border: none; padding: 10px 22px;
+  border-radius: 25px; font-size: 13px; font-weight: 700; cursor: pointer;
+  transition: 0.3s; font-family: 'Inter', sans-serif;
+}
+.btn-ricarica:hover { background: var(--oro-chiaro); transform: translateY(-1px); }
 
-        .sez-title { font-size: 16px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
-        .count-badge { background: var(--blu); color: white; font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 10px; }
-        .count-badge.oro { background: var(--oro); }
-        .count-badge.rosso { background: var(--rosso); }
+/* ── STATS ── */
+.stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+.stat-card { background: white; border-radius: 16px; padding: 20px; border: 1px solid #e5e7eb; transition: 0.3s; }
+.stat-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.07); transform: translateY(-2px); }
+.stat-icon { font-size: 26px; margin-bottom: 10px; }
+.stat-num { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; color: var(--blu-scuro); margin-bottom: 4px; }
+.stat-label { font-size: 12px; color: var(--grigio); }
+.stat-card.oro .stat-num { color: var(--oro); }
+.stat-card.verde .stat-num { color: var(--verde); }
+.stat-card.rosso .stat-num { color: var(--rosso); }
 
-        .richiesta-card { background: white; border-radius: 16px; padding: 20px 22px; margin-bottom: 14px; border: 1px solid #e5e7eb; transition: 0.3s; position: relative; }
-        .richiesta-card:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.08); border-color: var(--oro); }
-        .richiesta-card.nuova { border-left: 4px solid var(--oro); }
-        .nuovo-tag { position: absolute; top: -8px; left: 18px; background: var(--oro); color: white; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 10px; }
-        .richiesta-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
-        .richiesta-cat { display: inline-flex; align-items: center; gap: 6px; background: #EFF6FF; color: var(--blu); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
-        .richiesta-tempo { font-size: 12px; color: var(--grigio); }
-        .richiesta-desc { font-size: 14px; color: var(--testo); line-height: 1.6; margin-bottom: 14px; background: var(--grigio-chiaro); border-radius: 10px; padding: 12px 15px; }
-        .richiesta-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
-        .chip { background: var(--grigio-chiaro); color: var(--testo); font-size: 12px; font-weight: 500; padding: 5px 12px; border-radius: 20px; }
-        .chip.verde { background: #ECFDF5; color: var(--verde); font-weight: 600; }
-        .chip.oro { background: #FFFBEB; color: var(--oro); font-weight: 600; }
-        .chip.rosso { background: #FEF2F2; color: var(--rosso); font-weight: 600; }
-        .richiesta-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
-        .costo-sblocco { font-size: 13px; color: var(--grigio); }
-        .costo-sblocco strong { color: var(--blu-scuro); font-size: 16px; }
-        .btn-sblocca { background: linear-gradient(135deg, var(--oro) 0%, var(--oro-chiaro) 100%); color: white; border: none; padding: 11px 24px; border-radius: 25px; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; box-shadow: 0 4px 12px rgba(184,151,42,0.3); }
-        .btn-sblocca:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(184,151,42,0.4); }
-        .btn-sblocca:disabled { background: #e5e7eb; color: var(--grigio); box-shadow: none; cursor: not-allowed; transform: none; }
+/* ── SEZIONI ── */
+.sez-title { font-size: 16px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+.count-badge { background: var(--blu); color: white; font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 10px; }
+.count-badge.oro { background: var(--oro); }
+.count-badge.rosso { background: var(--rosso); }
 
-        .sopralluogo-card { background: white; border-radius: 16px; padding: 20px 22px; margin-bottom: 14px; border: 1px solid #e5e7eb; border-left: 4px solid var(--verde); transition: 0.3s; }
-        .sopralluogo-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.07); }
-        .sopralluogo-stato { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 10px; }
-        .sopralluogo-stato.confermato { background: #ECFDF5; color: var(--verde); }
-        .sopralluogo-stato.attesa { background: #FEF3C7; color: var(--arancio); }
-        .sopralluogo-data { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 900; color: var(--blu-scuro); margin-bottom: 8px; }
-        .sopralluogo-info { font-size: 13px; color: var(--grigio); line-height: 1.8; }
-        .sopralluogo-info strong { color: var(--blu-scuro); }
+/* ── RICHIESTA CARD ── */
+.richiesta-card {
+  background: white; border-radius: 16px; padding: 20px 22px; margin-bottom: 14px;
+  border: 1px solid #e5e7eb; transition: 0.3s; position: relative;
+}
+.richiesta-card:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.08); border-color: var(--oro); }
+.richiesta-card.nuova { border-left: 4px solid var(--oro); }
+.nuovo-tag {
+  position: absolute; top: -8px; left: 18px;
+  background: var(--oro); color: white; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 10px;
+}
+.richiesta-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+.richiesta-cat { display: inline-flex; align-items: center; gap: 6px; background: #EFF6FF; color: var(--blu); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
+.richiesta-tempo { font-size: 12px; color: var(--grigio); }
+.richiesta-desc { font-size: 14px; color: var(--testo); line-height: 1.6; margin-bottom: 14px; background: var(--grigio-chiaro); border-radius: 10px; padding: 12px 15px; }
+.richiesta-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.chip { background: var(--grigio-chiaro); color: var(--testo); font-size: 12px; font-weight: 500; padding: 5px 12px; border-radius: 20px; }
+.chip.verde { background: #ECFDF5; color: var(--verde); font-weight: 600; }
+.chip.oro { background: #FFFBEB; color: var(--oro); font-weight: 600; }
+.chip.rosso { background: #FEF2F2; color: var(--rosso); font-weight: 600; }
+.richiesta-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+.costo-sblocco { font-size: 13px; color: var(--grigio); }
+.costo-sblocco strong { color: var(--blu-scuro); font-size: 16px; }
+.btn-sblocca {
+  background: linear-gradient(135deg, var(--oro) 0%, var(--oro-chiaro) 100%);
+  color: white; border: none; padding: 11px 24px; border-radius: 25px;
+  font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s;
+  font-family: 'Inter', sans-serif; box-shadow: 0 4px 12px rgba(184,151,42,0.3);
+}
+.btn-sblocca:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(184,151,42,0.4); }
+.btn-sblocca:disabled { background: #e5e7eb; color: var(--grigio); box-shadow: none; cursor: not-allowed; transform: none; }
+.btn-sblocca.sbloccato { background: var(--verde); }
 
-        .crediti-box { background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%); border: 1.5px solid var(--oro); border-radius: 16px; padding: 20px 22px; margin-bottom: 22px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
-        .crediti-info strong { display: block; font-size: 15px; color: var(--blu-scuro); margin-bottom: 4px; }
-        .crediti-info span { font-size: 13px; color: var(--grigio); }
-        .crediti-num { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 900; color: var(--oro); text-align: center; }
-        .crediti-num span { font-size: 14px; color: var(--grigio); font-family: 'Inter', sans-serif; font-weight: 400; display: block; }
-        .btn-ricarica { background: var(--oro); color: white; border: none; padding: 10px 22px; border-radius: 25px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; }
-        .btn-ricarica:hover { background: var(--oro-chiaro); transform: translateY(-1px); }
+/* ── SOPRALLUOGO CARD ── */
+.sopralluogo-card {
+  background: white; border-radius: 16px; padding: 20px 22px; margin-bottom: 14px;
+  border: 1px solid #e5e7eb; border-left: 4px solid var(--verde); transition: 0.3s;
+}
+.sopralluogo-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.07); }
+.sopralluogo-stato { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 10px; }
+.sopralluogo-stato.confermato { background: #ECFDF5; color: var(--verde); }
+.sopralluogo-stato.attesa { background: #FEF3C7; color: var(--arancio); }
+.sopralluogo-data { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 900; color: var(--blu-scuro); margin-bottom: 8px; }
+.sopralluogo-info { font-size: 13px; color: var(--grigio); line-height: 1.8; }
+.sopralluogo-info strong { color: var(--blu-scuro); }
 
-        .recensione-card { background: white; border-radius: 16px; padding: 18px 22px; margin-bottom: 12px; border: 1px solid #e5e7eb; border-left: 4px solid var(--arancio); }
-        .rec-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-        .rec-nome { font-weight: 700; color: var(--blu-scuro); font-size: 14px; }
-        .rec-stelle { color: var(--arancio); font-size: 16px; }
-        .rec-testo { font-size: 13px; color: var(--grigio); line-height: 1.6; }
-        .rec-data { font-size: 11px; color: #9CA3AF; margin-top: 6px; }
+/* ── RECENSIONE CARD ── */
+.recensione-card {
+  background: white; border-radius: 16px; padding: 18px 22px; margin-bottom: 12px;
+  border: 1px solid #e5e7eb; border-left: 4px solid var(--arancio);
+}
+.rec-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.rec-nome { font-weight: 700; color: var(--blu-scuro); font-size: 14px; }
+.rec-stelle { color: var(--arancio); font-size: 16px; }
+.rec-testo { font-size: 13px; color: var(--grigio); line-height: 1.6; }
+.rec-data { font-size: 11px; color: #9CA3AF; margin-top: 6px; }
 
-        .popup-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
-        .popup-overlay.show { display: flex; }
-        .popup-box { background: white; border-radius: 24px; padding: 38px 32px; max-width: 430px; width: 100%; text-align: center; }
-        .popup-icon { font-size: 56px; margin-bottom: 16px; }
-        .popup-box h2 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--blu-scuro); margin-bottom: 10px; }
-        .popup-box p { font-size: 14px; color: var(--grigio); line-height: 1.7; margin-bottom: 22px; }
-        .popup-prezzo { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 900; color: var(--oro); margin-bottom: 6px; }
-        .popup-prezzo-sub { font-size: 13px; color: var(--grigio); margin-bottom: 25px; }
-        .popup-info { background: var(--grigio-chiaro); border-radius: 12px; padding: 14px 18px; font-size: 13px; color: var(--testo); line-height: 1.7; margin-bottom: 22px; text-align: left; }
-        .btn-popup-main { width: 100%; padding: 15px; background: linear-gradient(135deg, var(--oro), var(--oro-chiaro)); color: white; border: none; border-radius: 14px; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; margin-bottom: 10px; }
-        .btn-popup-main:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(184,151,42,0.35); }
-        .btn-popup-cancel { width: 100%; padding: 13px; background: var(--grigio-chiaro); color: var(--grigio); border: none; border-radius: 14px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s; }
-        .btn-popup-cancel:hover { background: #e5e7eb; }
+/* ── AVVISO NESSUN ELEMENTO ── */
+.vuoto-msg { text-align: center; padding: 30px; color: var(--grigio); font-size: 14px; background: white; border-radius: 16px; border: 1px dashed #e5e7eb; }
 
-        .recensione-popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
-        .recensione-popup.show { display: flex; }
-        .recensione-box { background: white; border-radius: 24px; padding: 38px 30px; max-width: 420px; width: 100%; text-align: center; }
-        .recensione-box h2 { font-family: 'Playfair Display', serif; color: var(--blu-scuro); font-size: 22px; margin-bottom: 10px; }
-        .recensione-box p { color: var(--grigio); font-size: 14px; line-height: 1.6; margin-bottom: 20px; }
-        .stelle { display: flex; justify-content: center; gap: 10px; margin-bottom: 18px; }
-        .stella { font-size: 36px; cursor: pointer; opacity: 0.3; transition: 0.2s; }
-        .stella.attiva { opacity: 1; }
-        .recensione-box textarea { width: 100%; padding: 13px 16px; border: 1.5px solid #e5e7eb; border-radius: 12px; font-size: 14px; font-family: 'Inter', sans-serif; margin-bottom: 14px; min-height: 85px; resize: vertical; outline: none; }
-        .recensione-box textarea:focus { border-color: var(--blu); }
-        .btn-rec { width: 100%; padding: 14px; background: var(--blu); color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s; margin-bottom: 8px; }
-        .btn-rec:hover { background: var(--blu-chiaro); }
-        .btn-rec.oro { background: var(--oro); }
-        .btn-rec.grigio { background: var(--grigio-chiaro); color: var(--grigio); }
+/* ── POPUP SBLOCCO ── */
+.popup-overlay {
+  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.75); z-index: 9999;
+  justify-content: center; align-items: center; padding: 20px;
+}
+.popup-overlay.show { display: flex; }
+.popup-box { background: white; border-radius: 24px; padding: 38px 32px; max-width: 430px; width: 100%; text-align: center; }
+.popup-icon { font-size: 56px; margin-bottom: 16px; }
+.popup-box h2 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--blu-scuro); margin-bottom: 10px; }
+.popup-box p { font-size: 14px; color: var(--grigio); line-height: 1.7; margin-bottom: 22px; }
+.popup-prezzo { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 900; color: var(--oro); margin-bottom: 6px; }
+.popup-prezzo-sub { font-size: 13px; color: var(--grigio); margin-bottom: 25px; }
+.popup-info { background: var(--grigio-chiaro); border-radius: 12px; padding: 14px 18px; font-size: 13px; color: var(--testo); line-height: 1.7; margin-bottom: 22px; text-align: left; }
+.btn-popup-main {
+  width: 100%; padding: 15px;
+  background: linear-gradient(135deg, var(--oro), var(--oro-chiaro));
+  color: white; border: none; border-radius: 14px; font-size: 16px; font-weight: 700;
+  cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; margin-bottom: 10px;
+}
+.btn-popup-main:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(184,151,42,0.35); }
+.btn-popup-cancel {
+  width: 100%; padding: 13px; background: var(--grigio-chiaro);
+  color: var(--grigio); border: none; border-radius: 14px; font-size: 14px; font-weight: 600;
+  cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s;
+}
+.btn-popup-cancel:hover { background: #e5e7eb; }
 
-        .two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 22px; }
+/* ── POPUP RECENSIONE ── */
+.recensione-popup {
+  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.8); z-index: 9999;
+  justify-content: center; align-items: center; padding: 20px;
+}
+.recensione-popup.show { display: flex; }
+.recensione-box { background: white; border-radius: 24px; padding: 38px 30px; max-width: 420px; width: 100%; text-align: center; }
+.recensione-box h2 { font-family: 'Playfair Display', serif; color: var(--blu-scuro); font-size: 22px; margin-bottom: 10px; }
+.recensione-box p { color: var(--grigio); font-size: 14px; line-height: 1.6; margin-bottom: 20px; }
+.stelle { display: flex; justify-content: center; gap: 10px; margin-bottom: 18px; }
+.stella { font-size: 36px; cursor: pointer; opacity: 0.3; transition: 0.2s; }
+.stella.attiva { opacity: 1; }
+.recensione-box textarea {
+  width: 100%; padding: 13px 16px; border: 1.5px solid #e5e7eb; border-radius: 12px;
+  font-size: 14px; font-family: 'Inter', sans-serif; margin-bottom: 14px;
+  min-height: 85px; resize: vertical; outline: none;
+}
+.recensione-box textarea:focus { border-color: var(--blu); }
+.btn-rec { width: 100%; padding: 14px; background: var(--blu); color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s; margin-bottom: 8px; }
+.btn-rec:hover { background: var(--blu-chiaro); }
+.btn-rec.oro { background: var(--oro); }
+.btn-rec.grigio { background: var(--grigio-chiaro); color: var(--grigio); }
 
-        @media (max-width: 900px) { .stats-row { grid-template-columns: repeat(2, 1fr); } .two-cols { grid-template-columns: 1fr; } }
-        @media (max-width: 768px) {
-            .sidebar { display: none; }
-            .main { padding: 18px 14px; }
-            .stats-row { grid-template-columns: repeat(2, 1fr); }
-            .navbar-nome { display: none; }
-        }
-    </style>
+/* ── TWO COLS ── */
+.two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 22px; }
+
+/* ── LOADING ── */
+.loading-spinner { text-align: center; padding: 40px; color: var(--grigio); font-size: 14px; }
+
+@media (max-width: 900px) { .stats-row { grid-template-columns: repeat(2, 1fr); } .two-cols { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { .sidebar { display: none; } .main { padding: 18px 14px; } .stats-row { grid-template-columns: repeat(2, 1fr); } .navbar-nome { display: none; } }
+</style>
 </head>
 <body>
 
 <!-- NAVBAR -->
 <nav class="navbar">
-    <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
-    <div class="navbar-right">
-        <div class="abbonamento-badge">✅ Abbonamento attivo</div>
-        <div class="notifica-badge" onclick="alert('3 nuove richieste nella tua zona!')">🔔<div class="badge">3</div></div>
-        <div class="navbar-nome">Rossoni Edilizia</div>
-        <div class="avatar">R</div>
-        <a href="index.html" class="btn-logout">🚪 Esci</a>
-    </div>
+  <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
+  <div class="navbar-right">
+    <div class="abbonamento-badge" id="abbonamento-badge">⏳ Caricamento...</div>
+    <div class="notifica-badge" id="notifica-btn">🔔<div class="badge" id="notifica-count">0</div></div>
+    <div class="navbar-nome" id="navbar-nome">Caricamento...</div>
+    <div class="avatar" id="navbar-avatar">?</div>
+    <button class="btn-logout" onclick="eseguiLogout()">🚪 Esci</button>
+  </div>
 </nav>
 
 <!-- LAYOUT -->
 <div class="layout">
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-        <ul class="sidebar-menu">
-            <li class="sidebar-item active"><span class="icon">🏠</span> Dashboard</li>
-            <li class="sidebar-item" onclick="alert('In arrivo!')"><span class="icon">📋</span> Richieste zona <span class="sidebar-notifica">3</span></li>
-            <li class="sidebar-item" onclick="window.location.href='chat.html'"><span class="icon">💬</span> Chat</li>
-            <li class="sidebar-item" onclick="alert('In arrivo!')"><span class="icon">📅</span> Sopralluoghi</li>
-            <li class="sidebar-item" onclick="alert('In arrivo!')"><span class="icon">⭐</span> Recensioni</li>
-            <li class="sidebar-item" onclick="alert('In arrivo!')"><span class="icon">📊</span> Statistiche</li>
-            <div class="sidebar-divider"></div>
-            <div class="sidebar-label">Account</div>
-            <li class="sidebar-item" onclick="window.location.href='profilo-pro.html'"><span class="icon">👤</span> Il mio profilo</li>
-            <li class="sidebar-item" onclick="window.location.href='pagamento.html'"><span class="icon">💳</span> Abbonamento</li>
-            <li class="sidebar-item" onclick="alert('In arrivo!')"><span class="icon">🔓</span> Crediti sblocco</li>
-            <div class="sidebar-divider"></div>
-            <li class="sidebar-item" onclick="window.location.href='index.html'"><span class="icon">🚪</span> Esci</li>
-        </ul>
-    </aside>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <ul class="sidebar-menu">
+      <li class="sidebar-item active"><span class="icon">🏠</span> Dashboard</li>
+      <li class="sidebar-item" onclick="alert('In arrivo!')"><span class="icon">📋</span> Richieste zona <span class="sidebar-notifica" id="sidebar-notifica">0</span></li>
+      <li class="sidebar-item" onclick="window.location.href='chat.html'"><span class="icon">💬</span> Chat</li>
+      <li class="sidebar-item" onclick="alert('In arrivo!')"><span class="icon">📅</span> Sopralluoghi</li>
+      <li class="sidebar-item" onclick="alert('In arrivo!')"><span class="icon">⭐</span> Recensioni</li>
+      <li class="sidebar-item" onclick="alert('In arrivo!')"><span class="icon">📊</span> Statistiche</li>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-label">Account</div>
+      <li class="sidebar-item" id="sidebar-profilo" onclick="window.location.href='profilo-pro.html'"><span class="icon">👤</span> Il mio profilo</li>
+      <li class="sidebar-item" onclick="window.location.href='pagamento.html'"><span class="icon">💳</span> Abbonamento</li>
+      <li class="sidebar-item" onclick="alert('In arrivo!')"><span class="icon">🔓</span> Crediti sblocco</li>
+      <div class="sidebar-divider"></div>
+      <li class="sidebar-item" onclick="eseguiLogout()"><span class="icon">🚪</span> Esci</li>
+    </ul>
+  </aside>
 
-    <!-- MAIN CONTENT -->
-    <main class="main">
+  <!-- MAIN CONTENT -->
+  <main class="main">
 
-        <div class="page-header">
-            <div class="page-header-left">
-                <h1>Ciao, <span style="color:var(--oro)">Rossoni Edilizia</span> 👋</h1>
-                <p>Lunedì 11 Maggio 2026 — Ecco il riepilogo della tua attività</p>
-            </div>
-        </div>
+    <div class="page-header">
+      <div class="page-header-left">
+        <h1 id="saluto-nome">Caricamento...</h1>
+        <p id="data-oggi">—</p>
+      </div>
+    </div>
 
-        <!-- ABBONAMENTO BAR -->
-        <div class="abbonamento-bar">
-            <div class="abbonamento-bar-info">
-                <strong>✅ Abbonamento annuale attivo</strong>
-                <span>Scade il 15 Aprile 2027 • €888/anno • Rinnovo automatico attivo</span>
-            </div>
-            <a href="pagamento.html" class="btn-rinnova">Gestisci abbonamento</a>
-        </div>
+    <!-- ABBONAMENTO BAR -->
+    <div class="abbonamento-bar" id="abbonamento-bar">
+      <div class="abbonamento-bar-info">
+        <strong id="abbonamento-titolo">⏳ Verifica abbonamento...</strong>
+        <span id="abbonamento-dettaglio"></span>
+      </div>
+      <a href="pagamento.html" class="btn-rinnova" id="abbonamento-btn">Gestisci abbonamento</a>
+    </div>
 
-        <!-- CREDITI -->
-        <div class="crediti-box">
-            <div class="crediti-info">
-                <strong>🔓 Crediti disponibili</strong>
-                <span>Ogni credito ti permette di sbloccare il contatto di un cliente interessato</span>
-            </div>
-            <div class="crediti-num">5 <span>crediti</span></div>
-            <button class="btn-ricarica" onclick="alert('Ricarica crediti in arrivo!')">+ Ricarica crediti</button>
-        </div>
+    <!-- CREDITI -->
+    <div class="crediti-box">
+      <div class="crediti-info">
+        <strong>🔓 Crediti disponibili</strong>
+        <span>Ogni credito ti permette di sbloccare il contatto di un cliente interessato</span>
+      </div>
+      <div class="crediti-num" id="crediti-num">— <span>crediti</span></div>
+      <button class="btn-ricarica" onclick="alert('Ricarica crediti in arrivo!')">+ Ricarica crediti</button>
+    </div>
 
-        <!-- STATS -->
-        <div class="stats-row">
-            <div class="stat-card rosso">
-                <div class="stat-icon">📋</div>
-                <div class="stat-num">3</div>
-                <div class="stat-label">Nuove richieste</div>
-            </div>
-            <div class="stat-card oro">
-                <div class="stat-icon">🔓</div>
-                <div class="stat-num">8</div>
-                <div class="stat-label">Contatti sbloccati</div>
-            </div>
-            <div class="stat-card verde">
-                <div class="stat-icon">✅</div>
-                <div class="stat-num">12</div>
-                <div class="stat-label">Lavori completati</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">⭐</div>
-                <div class="stat-num">4.9</div>
-                <div class="stat-label">Valutazione media</div>
-            </div>
-        </div>
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="stat-card rosso">
+        <div class="stat-icon">📋</div>
+        <div class="stat-num" id="stat-richieste">—</div>
+        <div class="stat-label">Nuove richieste</div>
+      </div>
+      <div class="stat-card oro">
+        <div class="stat-icon">🔓</div>
+        <div class="stat-num" id="stat-sbloccati">—</div>
+        <div class="stat-label">Contatti sbloccati</div>
+      </div>
+      <div class="stat-card verde">
+        <div class="stat-icon">✅</div>
+        <div class="stat-num" id="stat-completati">—</div>
+        <div class="stat-label">Lavori completati</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⭐</div>
+        <div class="stat-num" id="stat-rating">—</div>
+        <div class="stat-label">Valutazione media</div>
+      </div>
+    </div>
 
-        <!-- DUE COLONNE: PROSSIMO SOPRALLUOGO + ULTIME RECENSIONI -->
-        <div class="two-cols">
-            <div>
-                <div class="sez-title">📅 Prossimo sopralluogo</div>
-                <div class="sopralluogo-card">
-                    <div class="sopralluogo-stato confermato">✅ Confermato</div>
-                    <div class="sopralluogo-data">Lunedì 11 Maggio 2026 — 09:30</div>
-                    <div class="sopralluogo-info">
-                        <strong>Cliente:</strong> Mario R. (Milano)<br>
-                        <strong>Lavoro:</strong> Tinteggiatura appartamento ~80 m²<br>
-                        <strong>Indirizzo:</strong> Via Roma 15, Milano<br>
-                        <strong>Note:</strong> Chiamare 30 min prima dell'arrivo
-                    </div>
-                </div>
-                <div class="sez-title" style="margin-top:10px">✅ Ultimo lavoro completato</div>
-                <div class="sopralluogo-card" style="border-left-color:var(--grigio)">
-                    <div class="sopralluogo-stato confermato">💰 Pagamento confermato</div>
-                    <div class="sopralluogo-data">28 Aprile 2026</div>
-                    <div class="sopralluogo-info">
-                        <strong>Cliente:</strong> Luca B.<br>
-                        <strong>Lavoro:</strong> Posa piastrelle bagno 6 m²<br>
-                        <strong>Importo:</strong> Confermato dal cliente ✅
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="sez-title">⭐ Ultime recensioni ricevute</div>
-                <div class="recensione-card">
-                    <div class="rec-header">
-                        <div class="rec-nome">Mario R.</div>
-                        <div class="rec-stelle">★★★★★</div>
-                    </div>
-                    <div class="rec-testo">"Ottimo lavoro di tinteggiatura, puntuale e professionale. Consigliatissimo!"</div>
-                    <div class="rec-data">28 Aprile 2026</div>
-                </div>
-                <div class="recensione-card">
-                    <div class="rec-header">
-                        <div class="rec-nome">Luca B.</div>
-                        <div class="rec-stelle">★★★★☆</div>
-                    </div>
-                    <div class="rec-testo">"Ottimo lavoro nel bagno, leggero ritardo ma risultato soddisfacente."</div>
-                    <div class="rec-data">15 Aprile 2026</div>
-                </div>
-            </div>
-        </div>
+    <!-- DUE COLONNE: SOPRALLUOGO + RECENSIONI -->
+    <div class="two-cols">
+      <div>
+        <div class="sez-title">📅 Prossimo sopralluogo</div>
+        <div id="sopralluogo-container"><div class="loading-spinner">⏳ Caricamento...</div></div>
+        <div class="sez-title" style="margin-top:16px">✅ Ultimo lavoro completato</div>
+        <div id="ultimo-lavoro-container"><div class="loading-spinner">⏳ Caricamento...</div></div>
+      </div>
+      <div>
+        <div class="sez-title">⭐ Ultime recensioni ricevute</div>
+        <div id="recensioni-container"><div class="loading-spinner">⏳ Caricamento...</div></div>
+      </div>
+    </div>
 
-        <!-- NUOVE RICHIESTE ZONA -->
-        <div class="sez-title">📋 Nuove richieste nella tua zona <span class="count-badge rosso">3</span></div>
+    <!-- NUOVE RICHIESTE ZONA -->
+    <div class="sez-title">
+      📋 Nuove richieste nella tua zona
+      <span class="count-badge rosso" id="count-richieste">0</span>
+    </div>
+    <div id="richieste-container"><div class="loading-spinner">⏳ Caricamento richieste...</div></div>
 
-        <div class="richiesta-card nuova">
-            <div class="nuovo-tag">🆕 NUOVA</div>
-            <div class="richiesta-header">
-                <div class="richiesta-cat">🏗️ Edilizia</div>
-                <div class="richiesta-tempo">⏰ 2 ore fa</div>
-            </div>
-            <div class="richiesta-desc">Cerco imbianchino per tinteggiatura completa appartamento ~65 m². Pareti e soffitti, colori chiari. Zona Navigli.</div>
-            <div class="richiesta-chips">
-                <span class="chip">📍 Milano — Navigli</span>
-                <span class="chip verde">⏳ Entro 2 settimane</span>
-                <span class="chip oro">💰 Budget medio</span>
-            </div>
-            <div class="richiesta-footer">
-                <div class="costo-sblocco">Sblocco contatto: <strong>€9,90</strong></div>
-                <button class="btn-sblocca" onclick="apriPopupSblocco('Tinteggiatura 65m²','€9,90')">🔓 Sblocca contatto</button>
-            </div>
-        </div>
-
-        <div class="richiesta-card nuova">
-            <div class="nuovo-tag">🆕 NUOVA</div>
-            <div class="richiesta-header">
-                <div class="richiesta-cat">🏗️ Edilizia</div>
-                <div class="richiesta-tempo">⏰ 5 ore fa</div>
-            </div>
-            <div class="richiesta-desc">Ristrutturazione completa bagno 7 m². Sostituzione sanitari, piastrelle, impianto idraulico. Zona Porta Romana. Urgente.</div>
-            <div class="richiesta-chips">
-                <span class="chip">📍 Milano — Porta Romana</span>
-                <span class="chip rosso">🔴 Urgente</span>
-                <span class="chip oro">💰 Budget alto</span>
-            </div>
-            <div class="richiesta-footer">
-                <div class="costo-sblocco">Sblocco contatto: <strong>€19,90</strong></div>
-                <button class="btn-sblocca" onclick="apriPopupSblocco('Ristrutturazione bagno 7m²','€19,90')">🔓 Sblocca contatto</button>
-            </div>
-        </div>
-
-        <div class="richiesta-card nuova">
-            <div class="nuovo-tag">🆕 NUOVA</div>
-            <div class="richiesta-header">
-                <div class="richiesta-cat">🏗️ Edilizia</div>
-                <div class="richiesta-tempo">⏰ 1 giorno fa</div>
-            </div>
-            <div class="richiesta-desc">Ristrutturazione completa appartamento ~130 m². Zona Brera. Cucina, bagni, pavimenti, tinteggiatura totale. Budget elevato, tempi flessibili.</div>
-            <div class="richiesta-chips">
-                <span class="chip">📍 Milano — Brera</span>
-                <span class="chip verde">⏳ Tempi flessibili</span>
-                <span class="chip oro">💰 Budget elevato</span>
-            </div>
-            <div class="richiesta-footer">
-                <div class="costo-sblocco">Sblocco contatto: <strong>€29,90</strong></div>
-                <button class="btn-sblocca" onclick="apriPopupSblocco('Ristrutturazione completa 130m²','€29,90')">🔓 Sblocca contatto</button>
-            </div>
-        </div>
-
-    </main>
+  </main>
 </div>
 
 <!-- POPUP SBLOCCO -->
 <div class="popup-overlay" id="popupSblocco">
-    <div class="popup-box">
-        <div class="popup-icon">🔓</div>
-        <h2>Sblocca il contatto</h2>
-        <p>Stai per sbloccare il contatto del cliente per la richiesta: <strong id="popup-lavoro"></strong></p>
-        <div class="popup-prezzo" id="popup-prezzo-val"></div>
-        <div class="popup-prezzo-sub">addebito una tantum da un credito</div>
-        <div class="popup-info">
-            ✅ Accesso immediato alla chat privata<br>
-            📅 Concorda data e ora del sopralluogo<br>
-            ⭐ Recensione reciproca dopo il lavoro<br>
-            ⚠️ Dopo il pagamento sei obbligato a presentarti al sopralluogo
-        </div>
-        <button class="btn-popup-main" onclick="confermaSblocco()">✅ Conferma e sblocca</button>
-        <button class="btn-popup-cancel" onclick="chiudiPopup()">Annulla</button>
+  <div class="popup-box">
+    <div class="popup-icon">🔓</div>
+    <h2>Sblocca il contatto</h2>
+    <p>Stai per sbloccare il contatto del cliente per la richiesta: <strong id="popup-lavoro"></strong></p>
+    <div class="popup-prezzo" id="popup-prezzo-val"></div>
+    <div class="popup-prezzo-sub">addebito una tantum • pagamento sicuro</div>
+    <div class="popup-info">
+      ✅ Accesso immediato alla chat privata<br>
+      📅 Concorda data e ora del sopralluogo<br>
+      ⭐ Recensione reciproca dopo il lavoro<br>
+      ⚠️ Dopo lo sblocco sei obbligato a presentarti al sopralluogo
     </div>
+    <button class="btn-popup-main" onclick="confermaSblocco()">✅ Conferma e sblocca</button>
+    <button class="btn-popup-cancel" onclick="chiudiPopup()">Annulla</button>
+  </div>
 </div>
 
 <!-- POPUP RECENSIONE -->
 <div class="recensione-popup" id="recensionePopup">
-    <div class="recensione-box">
-        <h2>⭐ Lascia una Recensione</h2>
-        <p>Il lavoro è stato completato. Valuta il cliente per mantenere il tuo account attivo.</p>
-        <div class="stelle">
-            <span class="stella" onclick="setStella(1)">★</span>
-            <span class="stella" onclick="setStella(2)">★</span>
-            <span class="stella" onclick="setStella(3)">★</span>
-            <span class="stella" onclick="setStella(4)">★</span>
-            <span class="stella" onclick="setStella(5)">★</span>
-        </div>
-        <textarea placeholder="Descrivi la tua esperienza con il cliente..."></textarea>
-        <button class="btn-rec oro" onclick="inviaRecensione()">Invia Recensione ✅</button>
-        <button class="btn-rec grigio" onclick="document.getElementById('recensionePopup').classList.remove('show')">Chiudi</button>
+  <div class="recensione-box">
+    <h2>⭐ Lascia una Recensione</h2>
+    <p>Il lavoro è stato completato. Valuta il cliente per mantenere il tuo account attivo.</p>
+    <div class="stelle">
+      <span class="stella" onclick="setStella(1)">★</span>
+      <span class="stella" onclick="setStella(2)">★</span>
+      <span class="stella" onclick="setStella(3)">★</span>
+      <span class="stella" onclick="setStella(4)">★</span>
+      <span class="stella" onclick="setStella(5)">★</span>
     </div>
+    <textarea id="rec-testo" placeholder="Descrivi la tua esperienza con il cliente..."></textarea>
+    <button class="btn-rec oro" onclick="inviaRecensione()">Invia Recensione ✅</button>
+    <button class="btn-rec grigio" onclick="document.getElementById('recensionePopup').classList.remove('show')">Chiudi</button>
+  </div>
 </div>
 
-<script>
-    let stelleSelezionate = 0;
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js';
+import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js';
+import { getFirestore, doc, getDoc, collection, query, where, orderBy, limit, getDocs, updateDoc, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js';
 
-    function apriPopupSblocco(lavoro, prezzo) {
-        document.getElementById('popup-lavoro').textContent = lavoro;
-        document.getElementById('popup-prezzo-val').textContent = prezzo;
-        document.getElementById('popupSblocco').classList.add('show');
-    }
+const firebaseConfig = {
+  apiKey: "AIzaSyCQHoCYYfdmkXnV2CTGBSq3gpE986QOq2o",
+  authDomain: "rossoni-f069a.firebaseapp.com",
+  projectId: "rossoni-f069a",
+  storageBucket: "rossoni-f069a.firebasestorage.app",
+  messagingSenderId: "708686815315",
+  appId: "1:708686815315:web:0810734346e679e7c066a6"
+};
 
-    function chiudiPopup() {
-        document.getElementById('popupSblocco').classList.remove('show');
-    }
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-    function confermaSblocco() {
-        chiudiPopup();
-        window.location.href = 'chat.html';
-    }
+let currentUID = null;
+let currentRichiesta = null;
+let stelleSelezionate = 0;
 
-    function setStella(n) {
-        stelleSelezionate = n;
-        document.querySelectorAll('.stella').forEach((s, i) => {
-            s.classList.toggle('attiva', i < n);
-        });
-    }
+// ── LOGOUT ──
+window.eseguiLogout = async () => {
+  await signOut(auth);
+  localStorage.clear();
+  window.location.href = 'index.html';
+};
 
-    function inviaRecensione() {
-        if (stelleSelezionate === 0) { alert('Seleziona almeno una stella!'); return; }
-        document.getElementById('recensionePopup').classList.remove('show');
-        alert('Recensione inviata! Grazie.');
+// ── DATA OGGI ──
+function dataOggi() {
+  return new Date().toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+// ── STELLE ──
+window.setStella = (n) => {
+  stelleSelezionate = n;
+  document.querySelectorAll('.stella').forEach((s, i) => s.classList.toggle('attiva', i < n));
+};
+
+// ── POPUP SBLOCCO ──
+window.apriPopupSblocco = (lavoro, prezzo, richiestaId) => {
+  document.getElementById('popup-lavoro').textContent = lavoro;
+  document.getElementById('popup-prezzo-val').textContent = prezzo;
+  currentRichiesta = richiestaId;
+  document.getElementById('popupSblocco').classList.add('show');
+};
+window.chiudiPopup = () => document.getElementById('popupSblocco').classList.remove('show');
+window.confermaSblocco = () => {
+  chiudiPopup();
+  window.location.href = 'chat.html';
+};
+
+// ── RECENSIONE ──
+window.inviaRecensione = async () => {
+  if (stelleSelezionate === 0) { alert('Seleziona almeno una stella!'); return; }
+  const testo = document.getElementById('rec-testo').value.trim();
+  try {
+    await addDoc(collection(db, 'recensioni'), {
+      daUID: currentUID,
+      stelle: stelleSelezionate,
+      testo,
+      timestamp: serverTimestamp()
+    });
+    document.getElementById('recensionePopup').classList.remove('show');
+    alert('Recensione inviata! Grazie.');
+  } catch(e) {
+    alert('Errore invio recensione: ' + e.message);
+  }
+};
+
+// ── AUTH STATE ──
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    window.location.href = 'professionista.html?tab=accedi';
+    return;
+  }
+  currentUID = user.uid;
+
+  // Leggi dati professionista
+  const utenteDoc = await getDoc(doc(db, 'utenti', user.uid));
+  if (!utenteDoc.exists()) {
+    window.location.href = 'professionista.html?tab=accedi';
+    return;
+  }
+  const dati = utenteDoc.data();
+
+  // Verifica ruolo
+  if (dati.ruolo !== 'professionista') {
+    window.location.href = 'dashboard-cliente.html';
+    return;
+  }
+
+  const nome = dati.ragioneSociale || dati.nome || 'Professionista';
+  const iniziale = nome.charAt(0).toUpperCase();
+
+  // ── Navbar & Saluto ──
+  document.getElementById('navbar-nome').textContent = nome;
+  document.getElementById('navbar-avatar').textContent = iniziale;
+  document.getElementById('saluto-nome').innerHTML = `Ciao, <span style="color:var(--oro)">${nome}</span> 👋`;
+  document.getElementById('data-oggi').textContent = dataOggi() + ' — Ecco il riepilogo della tua attività';
+
+  // Link profilo con UID
+  document.getElementById('sidebar-profilo').onclick = () => window.location.href = `profilo-pro.html?uid=${user.uid}`;
+
+  // ── Abbonamento ──
+  const abbBar = document.getElementById('abbonamento-bar');
+  const abbTitolo = document.getElementById('abbonamento-titolo');
+  const abbDettaglio = document.getElementById('abbonamento-dettaglio');
+  const abbBadge = document.getElementById('abbonamento-badge');
+  const abbBtn = document.getElementById('abbonamento-btn');
+
+  if (dati.abbonamento && dati.abbonamento.attivo) {
+    const piano = dati.abbonamento.piano || 'mensile';
+    const scadenza = dati.abbonamento.scadenza ? new Date(dati.abbonamento.scadenza.seconds * 1000).toLocaleDateString('it-IT') : '—';
+    const prezzo = piano === 'annuale' ? '€888/anno' : piano === 'mensile' ? '€99/mese' : '€10/mese';
+    abbTitolo.textContent = `✅ Abbonamento ${piano} attivo`;
+    abbDettaglio.textContent = `Scade il ${scadenza} • ${prezzo} • Rinnovo automatico attivo`;
+    abbBadge.textContent = '✅ Abbonamento attivo';
+    abbBadge.classList.remove('scaduto');
+    abbBtn.textContent = 'Gestisci abbonamento';
+  } else {
+    abbBar.classList.add('scaduto');
+    abbTitolo.textContent = '⚠️ Abbonamento scaduto o non attivo';
+    abbDettaglio.textContent = 'Rinnova ora per continuare a ricevere richieste dalla tua zona';
+    abbBadge.textContent = '⚠️ Abbonamento scaduto';
+    abbBadge.classList.add('scaduto');
+    abbBtn.textContent = 'Rinnova ora';
+  }
+
+  // ── Crediti ──
+  const crediti = dati.crediti ?? 0;
+  document.getElementById('crediti-num').innerHTML = `${crediti} <span>crediti</span>`;
+
+  // ── Stats ──
+  // Richieste nuove nella zona
+  let nRichieste = 0;
+  try {
+    const zona = dati.citta || '';
+    const categoria = dati.categoria || '';
+    const qRichieste = query(
+      collection(db, 'richieste'),
+      where('stato', '==', 'aperta'),
+      orderBy('timestamp', 'desc'),
+      limit(20)
+    );
+    const snapRichieste = await getDocs(qRichieste);
+    nRichieste = snapRichieste.size;
+    document.getElementById('stat-richieste').textContent = nRichieste;
+    document.getElementById('count-richieste').textContent = nRichieste;
+    document.getElementById('notifica-count').textContent = nRichieste;
+    document.getElementById('sidebar-notifica').textContent = nRichieste;
+
+    // Render richieste
+    const container = document.getElementById('richieste-container');
+    if (snapRichieste.empty) {
+      container.innerHTML = '<div class="vuoto-msg">📭 Nessuna richiesta attiva nella tua zona al momento.</div>';
+    } else {
+      container.innerHTML = '';
+      snapRichieste.forEach(docSnap => {
+        const r = docSnap.data();
+        const tempo = r.timestamp ? tempoFa(r.timestamp.seconds) : 'poco fa';
+        const prezzo = r.budget === 'alto' ? '€19,90' : r.budget === 'elevato' ? '€29,90' : '€9,90';
+        const chipBudget = r.budget === 'alto' ? '<span class="chip oro">💰 Budget alto</span>' : r.budget === 'elevato' ? '<span class="chip oro">💰 Budget elevato</span>' : '<span class="chip oro">💰 Budget medio</span>';
+        const chipUrgenza = r.urgente ? '<span class="chip rosso">🔴 Urgente</span>' : '<span class="chip verde">⏳ Tempi flessibili</span>';
+        container.innerHTML += `
+          <div class="richiesta-card nuova">
+            <div class="nuovo-tag">🆕 NUOVA</div>
+            <div class="richiesta-header">
+              <div class="richiesta-cat">🏗️ ${r.categoria || categoria}</div>
+              <div class="richiesta-tempo">⏰ ${tempo}</div>
+            </div>
+            <div class="richiesta-desc">${r.descrizione || 'Nessuna descrizione fornita.'}</div>
+            <div class="richiesta-chips">
+              <span class="chip">📍 ${r.citta || '—'}</span>
+              ${chipUrgenza}
+              ${chipBudget}
+            </div>
+            <div class="richiesta-footer">
+              <div class="costo-sblocco">Sblocco contatto: <strong>${prezzo}</strong></div>
+              <button class="btn-sblocca" onclick="apriPopupSblocco('${(r.titolo || r.categoria || 'Richiesta').replace(/'/g,"\\'")}','${prezzo}','${docSnap.id}')">🔓 Sblocca contatto</button>
+            </div>
+          </div>`;
+      });
     }
+  } catch(e) {
+    document.getElementById('richieste-container').innerHTML = '<div class="vuoto-msg">⚠️ Errore caricamento richieste.</div>';
+  }
+
+  // Contatti sbloccati
+  document.getElementById('stat-sbloccati').textContent = dati.contattiSbloccati ?? 0;
+
+  // Lavori completati
+  document.getElementById('stat-completati').textContent = dati.lavoriCompletati ?? 0;
+
+  // Rating medio
+  document.getElementById('stat-rating').textContent = dati.ratingMedio ? dati.ratingMedio.toFixed(1) : '—';
+
+  // ── Prossimo Sopralluogo ──
+  try {
+    const qSop = query(
+      collection(db, 'sopralluoghi'),
+      where('proUID', '==', user.uid),
+      where('stato', '==', 'confermato'),
+      orderBy('data', 'asc'),
+      limit(1)
+    );
+    const snapSop = await getDocs(qSop);
+    const sopCont = document.getElementById('sopralluogo-container');
+    if (snapSop.empty) {
+      sopCont.innerHTML = '<div class="vuoto-msg">📅 Nessun sopralluogo programmato.</div>';
+    } else {
+      const s = snapSop.docs[0].data();
+      const dataSop = s.data ? new Date(s.data.seconds * 1000).toLocaleString('it-IT', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '—';
+      sopCont.innerHTML = `
+        <div class="sopralluogo-card">
+          <div class="sopralluogo-stato confermato">✅ Confermato</div>
+          <div class="sopralluogo-data">${dataSop}</div>
+          <div class="sopralluogo-info">
+            <strong>Cliente:</strong> ${s.clienteNome || '—'}<br>
+            <strong>Lavoro:</strong> ${s.lavoro || '—'}<br>
+            <strong>Indirizzo:</strong> ${s.indirizzo || '—'}<br>
+            ${s.note ? `<strong>Note:</strong> ${s.note}` : ''}
+          </div>
+        </div>`;
+    }
+  } catch(e) {
+    document.getElementById('sopralluogo-container').innerHTML = '<div class="vuoto-msg">📅 Nessun sopralluogo programmato.</div>';
+  }
+
+  // ── Ultimo Lavoro Completato ──
+  try {
+    const qLav = query(
+      collection(db, 'sopralluoghi'),
+      where('proUID', '==', user.uid),
+      where('stato', '==', 'completato'),
+      orderBy('data', 'desc'),
+      limit(1)
+    );
+    const snapLav = await getDocs(qLav);
+    const lavCont = document.getElementById('ultimo-lavoro-container');
+    if (snapLav.empty) {
+      lavCont.innerHTML = '<div class="vuoto-msg">✅ Nessun lavoro completato ancora.</div>';
+    } else {
+      const l = snapLav.docs[0].data();
+      const dataLav = l.data ? new Date(l.data.seconds * 1000).toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' }) : '—';
+      lavCont.innerHTML = `
+        <div class="sopralluogo-card" style="border-left-color:var(--grigio)">
+          <div class="sopralluogo-stato confermato">💰 Pagamento confermato</div>
+          <div class="sopralluogo-data">${dataLav}</div>
+          <div class="sopralluogo-info">
+            <strong>Cliente:</strong> ${l.clienteNome || '—'}<br>
+            <strong>Lavoro:</strong> ${l.lavoro || '—'}<br>
+            <strong>Importo:</strong> Confermato dal cliente ✅
+          </div>
+        </div>`;
+    }
+  } catch(e) {
+    document.getElementById('ultimo-lavoro-container').innerHTML = '<div class="vuoto-msg">✅ Nessun lavoro completato ancora.</div>';
+  }
+
+  // ── Recensioni ricevute ──
+  try {
+    const qRec = query(
+      collection(db, 'recensioni'),
+      where('aUID', '==', user.uid),
+      orderBy('timestamp', 'desc'),
+      limit(3)
+    );
+    const snapRec = await getDocs(qRec);
+    const recCont = document.getElementById('recensioni-container');
+    if (snapRec.empty) {
+      recCont.innerHTML = '<div class="vuoto-msg">⭐ Nessuna recensione ricevuta ancora.</div>';
+    } else {
+      recCont.innerHTML = '';
+      snapRec.forEach(docSnap => {
+        const r = docSnap.data();
+        const stelle = '★'.repeat(r.stelle) + '☆'.repeat(5 - r.stelle);
+        const data = r.timestamp ? new Date(r.timestamp.seconds * 1000).toLocaleDateString('it-IT') : '—';
+        recCont.innerHTML += `
+          <div class="recensione-card">
+            <div class="rec-header">
+              <div class="rec-nome">${r.clienteNome || 'Cliente'}</div>
+              <div class="rec-stelle">${stelle}</div>
+            </div>
+            <div class="rec-testo">"${r.testo || '—'}"</div>
+            <div class="rec-data">${data}</div>
+          </div>`;
+      });
+    }
+  } catch(e) {
+    document.getElementById('recensioni-container').innerHTML = '<div class="vuoto-msg">⭐ Nessuna recensione disponibile.</div>';
+  }
+});
+
+// ── UTILITY: TEMPO FA ──
+function tempoFa(secondi) {
+  const diff = Math.floor(Date.now() / 1000) - secondi;
+  if (diff < 3600) return `${Math.floor(diff / 60)} min fa`;
+  if (diff < 86400) return `${Math.floor(diff / 3600)} ore fa`;
+  return `${Math.floor(diff / 86400)} giorni fa`;
+}
 </script>
 
 </body>
