@@ -84,21 +84,8 @@
         .otp-timer span { color: var(--blu); font-weight: 600; cursor: pointer; }
         .link-back { display: block; text-align: center; margin-top: 20px; color: var(--grigio); font-size: 14px; text-decoration: none; }
         .link-back:hover { color: var(--blu); }
-
-        /* CATEGORIA SELEZIONATA BANNER */
-        .cat-preselezionata {
-            background: linear-gradient(135deg, var(--blu-scuro), var(--blu));
-            color: white;
-            border-radius: 12px;
-            padding: 14px 20px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            display: none;
-        }
+        .cat-preselezionata { background: linear-gradient(135deg, var(--blu-scuro), var(--blu)); color: white; border-radius: 12px; padding: 14px 20px; margin-bottom: 20px; font-size: 14px; font-weight: 600; display: none; }
         .cat-preselezionata.show { display: block; }
-
-        /* RECENSIONE POPUP */
         .recensione-popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
         .recensione-popup.show { display: flex; }
         .recensione-box { background: white; border-radius: 25px; padding: 40px 30px; max-width: 440px; width: 100%; text-align: center; box-shadow: 0 25px 60px rgba(0,0,0,0.3); }
@@ -108,7 +95,6 @@
         .stella { font-size: 36px; cursor: pointer; opacity: 0.3; transition: 0.2s; }
         .stella.attiva { opacity: 1; }
         .recensione-box textarea { margin-bottom: 15px; min-height: 90px; }
-
         @media (max-width: 480px) {
             nav { padding: 15px 20px; }
             .nav-links a { font-size: 12px; padding: 6px 10px; }
@@ -119,402 +105,371 @@
 </head>
 <body>
 
-    <!-- NAVBAR -->
-    <nav>
-        <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
-        <div class="nav-links">
-            <a href="professionista.html">Sei un professionista?</a>
-            <a href="cliente.html?tab=accedi" class="btn-accedi">🔑 Accedi</a>
-        </div>
-    </nav>
-
-    <!-- HERO -->
-    <div class="page-hero">
-        <h1>Area <span>Cliente</span></h1>
-        <p>Gratuito • Verificato • Sicuro</p>
+<nav>
+    <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
+    <div class="nav-links">
+        <a href="professionista.html">Sei un professionista?</a>
+        <a href="cliente.html?tab=accedi" class="btn-accedi">🔑 Accedi</a>
     </div>
+</nav>
 
-    <!-- CONTAINER -->
-    <div class="container">
-        <div class="card">
+<div class="page-hero">
+    <h1>Area <span>Cliente</span></h1>
+    <p>Gratuito • Verificato • Sicuro</p>
+</div>
 
-            <!-- TABS -->
-            <div class="tabs">
-                <button class="tab active" id="tab-btn-registrati" onclick="switchTab('registrati')">📝 Registrati</button>
-                <button class="tab" id="tab-btn-accedi" onclick="switchTab('accedi')">🔑 Accedi</button>
+<div class="container">
+    <div class="card">
+        <div class="tabs">
+            <button class="tab active" id="tab-btn-registrati" onclick="switchTab('registrati')">📝 Registrati</button>
+            <button class="tab" id="tab-btn-accedi" onclick="switchTab('accedi')">🔑 Accedi</button>
+        </div>
+
+        <!-- REGISTRAZIONE -->
+        <div id="tab-registrati">
+            <div class="steps-indicator">
+                <div class="step-dot active" id="dot1">1</div>
+                <div class="step-line" id="line1"></div>
+                <div class="step-dot" id="dot2">2</div>
+                <div class="step-line" id="line2"></div>
+                <div class="step-dot" id="dot3">3</div>
             </div>
 
-            <!-- ===== REGISTRAZIONE ===== -->
-            <div id="tab-registrati">
-
-                <div class="steps-indicator">
-                    <div class="step-dot active" id="dot1">1</div>
-                    <div class="step-line" id="line1"></div>
-                    <div class="step-dot" id="dot2">2</div>
-                    <div class="step-line" id="line2"></div>
-                    <div class="step-dot" id="dot3">3</div>
+            <!-- STEP 1 -->
+            <div class="step-content active" id="step1">
+                <div class="avviso-blu">
+                    <strong>ℹ️ Registrazione gratuita</strong>
+                    Ti chiediamo solo email e telefono per verificare che tu sia una persona reale. I tuoi dati personali non saranno mai visibili ai professionisti.
                 </div>
-
-                <!-- STEP 1 -->
-                <div class="step-content active" id="step1">
-                    <div class="avviso-blu">
-                        <strong>ℹ️ Registrazione gratuita</strong>
-                        Ti chiediamo solo email e telefono per verificare che tu sia una persona reale. I tuoi dati personali non saranno mai visibili ai professionisti.
-                    </div>
-                    <div class="avviso-ban">
-                        <strong>⚠️ Regole della piattaforma — Leggi prima di procedere:</strong>
-                        🔴 <strong>Come cliente:</strong> Se non permetti a nessuno dei 5 professionisti di effettuare il sopralluogo, il tuo account verrà <strong>bannato immediatamente</strong> insieme a numero di telefono ed email.<br><br>
-                        🟢 <strong>Sei tutelato:</strong> Se un professionista paga per sbloccare la tua richiesta e poi non si presenta al sopralluogo senza giustificazione, verrà <strong>bannato dopo 3 mancanze</strong>. La piattaforma tutela entrambe le parti in modo equo.<br><br>
-                        ⭐ <strong>Recensioni:</strong> Al termine del lavoro e dopo la conferma del pagamento, si aprirà automaticamente la schermata di recensione reciproca. Sia tu che il professionista dovrete recensirvi a vicenda per mantenere l'account attivo.
-                    </div>
-                    <div class="form-group">
-                        <label>Nome e Cognome</label>
-                        <input type="text" id="reg-nome" placeholder="Es. Mario Rossi">
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" id="reg-email" placeholder="Es. mario@email.com">
-                    </div>
-                    <div class="form-group">
-                        <label>Numero di Telefono</label>
-                        <div class="otp-group">
-                            <input type="tel" id="reg-telefono" placeholder="+39 333 1234567">
-                            <button class="btn-otp" id="btn-invia-otp" onclick="inviaOTP()">Invia OTP</button>
-                        </div>
-                    </div>
-                    <div class="otp-verify" id="otp-verify">
-                        <label>Inserisci il codice OTP ricevuto via SMS</label>
-                        <div class="otp-boxes">
-                            <input class="otp-box" type="number" maxlength="1" id="otp1" oninput="moveOTP(this, null, 'otp2')">
-                            <input class="otp-box" type="number" maxlength="1" id="otp2" oninput="moveOTP(this, 'otp1', 'otp3')">
-                            <input class="otp-box" type="number" maxlength="1" id="otp3" oninput="moveOTP(this, 'otp2', 'otp4')">
-                            <input class="otp-box" type="number" maxlength="1" id="otp4" oninput="moveOTP(this, 'otp3', 'otp5')">
-                            <input class="otp-box" type="number" maxlength="1" id="otp5" oninput="moveOTP(this, 'otp4', 'otp6')">
-                            <input class="otp-box" type="number" maxlength="1" id="otp6" oninput="moveOTP(this, 'otp5', null)">
-                        </div>
-                        <div class="otp-timer">Non hai ricevuto il codice? <span onclick="inviaOTP()">Reinvia</span></div>
-                    </div>
-                    <div class="form-group" style="margin-top:20px">
-                        <label>Password</label>
-                        <input type="password" id="reg-password" placeholder="Minimo 8 caratteri">
-                    </div>
-                    <button class="btn-main" onclick="goStep2()">Continua →</button>
+                <div class="avviso-ban">
+                    <strong>⚠️ Regole della piattaforma — Leggi prima di procedere:</strong>
+                    🔴 <strong>Come cliente:</strong> Se non permetti a nessuno dei 5 professionisti di effettuare il sopralluogo, il tuo account verrà <strong>bannato immediatamente</strong> insieme a numero di telefono ed email.<br><br>
+                    🟢 <strong>Sei tutelato:</strong> Se un professionista paga per sbloccare la tua richiesta e poi non si presenta al sopralluogo senza giustificazione, verrà <strong>bannato dopo 3 mancanze</strong>. La piattaforma tutela entrambe le parti in modo equo.<br><br>
+                    ⭐ <strong>Recensioni:</strong> Al termine del lavoro e dopo la conferma del pagamento, si aprirà automaticamente la schermata di recensione reciproca. Sia tu che il professionista dovrete recensirvi a vicenda per mantenere l'account attivo.
                 </div>
-
-                <!-- STEP 2 -->
-                <div class="step-content" id="step2">
-                    <div class="avviso-verde">
-                        <strong>✅ Telefono verificato!</strong>
-                        Ora descrivi il lavoro o servizio che stai cercando. I professionisti vedranno solo la descrizione e la città, mai i tuoi dati personali.
-                    </div>
-
-                    <!-- BANNER CATEGORIA PRE-SELEZIONATA -->
-                    <div class="cat-preselezionata" id="cat-banner">
-                        ✅ Categoria pre-selezionata: <span id="cat-banner-nome"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Categoria</label>
-                        <div class="categoria-grid" id="categoria-grid">
-                            <button class="cat-btn" data-cat="edilizia" onclick="selezionaCategoria(this)">🏗️ Edilizia</button>
-                            <button class="cat-btn" data-cat="impianti" onclick="selezionaCategoria(this)">⚡💧 Impianti</button>
-                            <button class="cat-btn" data-cat="automotive" onclick="selezionaCategoria(this)">🚗 Automotive</button>
-                            <button class="cat-btn" data-cat="legale" onclick="selezionaCategoria(this)">⚖️ Legale</button>
-                            <button class="cat-btn" data-cat="salute" onclick="selezionaCategoria(this)">🏥 Salute</button>
-                            <button class="cat-btn" data-cat="estetica" onclick="selezionaCategoria(this)">💇 Estetica</button>
-                            <button class="cat-btn" data-cat="casa" onclick="selezionaCategoria(this)">🏠 Casa</button>
-                            <button class="cat-btn" data-cat="digitale" onclick="selezionaCategoria(this)">💻 Digitale</button>
-                            <button class="cat-btn" data-cat="istruzione" onclick="selezionaCategoria(this)">🎓 Istruzione</button>
-                            <button class="cat-btn" data-cat="escort" onclick="selezionaCategoria(this, true)">🔞 Escort +18</button>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Città / Paese</label>
-                        <input type="text" id="req-citta" placeholder="Es. Milano, Roma, Bergamo...">
-                    </div>
-                    <div class="form-group">
-                        <label>Descrizione del lavoro / servizio</label>
-                        <textarea id="req-descrizione" placeholder="Descrivi quello di cui hai bisogno nel dettaglio. Più sei preciso, migliori saranno le offerte che ricevi..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Quando hai bisogno?</label>
-                        <select id="req-quando">
-                            <option value="">Seleziona...</option>
-                            <option>Il prima possibile</option>
-                            <option>Entro questa settimana</option>
-                            <option>Entro questo mese</option>
-                            <option>Nessuna fretta, sto valutando</option>
-                        </select>
-                    </div>
-                    <button class="btn-main" onclick="goStep3()">Invia Richiesta →</button>
-                    <button class="btn-main grigio" onclick="goToStep(1)" style="margin-top:10px">← Indietro</button>
+                <div class="form-group">
+                    <label>Nome e Cognome</label>
+                    <input type="text" id="reg-nome" placeholder="Es. Mario Rossi">
                 </div>
-
-                <!-- STEP 3 -->
-                <div class="step-content" id="step3">
-                    <div class="success-box">
-                        <div class="success-icon">🎉</div>
-                        <h2>Richiesta Inviata!</h2>
-                        <p>La tua richiesta è stata pubblicata. Entro poche ore riceverai le offerte dei professionisti verificati nella tua zona.</p>
-                        <div class="highlight">
-                            📱 Riceverai un SMS quando un professionista è interessato.<br><br>
-                            👤 Massimo <strong>5 professionisti</strong> possono rispondere alla tua richiesta.<br><br>
-                            💬 La chat si sblocca solo dopo che il professionista acquista il tuo contatto.<br><br>
-                            📅 In chat concorderete data e ora del sopralluogo.<br><br>
-                            ✅ Al termine del lavoro e dopo la <strong>conferma del pagamento</strong>, si aprirà automaticamente la schermata per le <strong>recensioni reciproche</strong>. Entrambi dovrete recensirvi per mantenere l'account attivo.
-                        </div>
-                        <div class="avviso-ban">
-                            <strong>⚠️ Ricorda:</strong>
-                            🔴 Se non permetti a nessuno dei 5 professionisti di fare il sopralluogo → <strong>ban immediato</strong><br><br>
-                            🟢 Se un professionista non si presenta → <strong>viene bannato lui</strong> dopo 3 mancanze. Sei sempre tutelato!
-                        </div>
-                        <button class="btn-main oro" onclick="window.location.href='index.html'">🏠 Torna alla Home</button>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- ===== ACCEDI ===== -->
-            <div id="tab-accedi" style="display:none">
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" id="login-email" placeholder="La tua email">
+                    <input type="email" id="reg-email" placeholder="Es. mario@email.com">
                 </div>
                 <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" id="login-password" placeholder="La tua password">
+                    <label>Numero di Telefono</label>
+                    <div class="otp-group">
+                        <input type="tel" id="reg-telefono" placeholder="+39 333 1234567">
+                        <button class="btn-otp" id="btn-invia-otp" onclick="inviaOTP()">Invia OTP</button>
+                    </div>
                 </div>
-                <button class="btn-main" onclick="eseguiLogin()">🔑 Accedi</button>
-                <a href="#" class="link-back" style="margin-top:15px;color:var(--blu)">Hai dimenticato la password?</a>
-                <p style="text-align:center;margin-top:20px;font-size:14px;color:var(--grigio)">Non hai un account? <a href="cliente.html" style="color:var(--blu);font-weight:600">Registrati gratis</a></p>
+                <div class="otp-verify" id="otp-verify">
+                    <label>Inserisci il codice OTP ricevuto via SMS</label>
+                    <div class="otp-boxes">
+                        <input class="otp-box" type="number" maxlength="1" id="otp1" oninput="moveOTP(this, null, 'otp2')">
+                        <input class="otp-box" type="number" maxlength="1" id="otp2" oninput="moveOTP(this, 'otp1', 'otp3')">
+                        <input class="otp-box" type="number" maxlength="1" id="otp3" oninput="moveOTP(this, 'otp2', 'otp4')">
+                        <input class="otp-box" type="number" maxlength="1" id="otp4" oninput="moveOTP(this, 'otp3', 'otp5')">
+                        <input class="otp-box" type="number" maxlength="1" id="otp5" oninput="moveOTP(this, 'otp4', 'otp6')">
+                        <input class="otp-box" type="number" maxlength="1" id="otp6" oninput="moveOTP(this, 'otp5', null)">
+                    </div>
+                    <div class="otp-timer">Non hai ricevuto il codice? <span onclick="inviaOTP()">Reinvia</span></div>
+                </div>
+                <div class="form-group" style="margin-top:20px">
+                    <label>Password</label>
+                    <input type="password" id="reg-password" placeholder="Minimo 6 caratteri">
+                </div>
+                <button class="btn-main" onclick="goStep2()">Continua →</button>
             </div>
 
-            <a href="index.html" class="link-back">← Torna alla Home</a>
-        </div>
-    </div>
+            <!-- STEP 2 -->
+            <div class="step-content" id="step2">
+                <div class="avviso-verde">
+                    <strong>✅ Telefono verificato!</strong>
+                    Ora descrivi il lavoro o servizio che stai cercando. I professionisti vedranno solo la descrizione e la città, mai i tuoi dati personali.
+                </div>
+                <div class="cat-preselezionata" id="cat-banner">
+                    ✅ Categoria pre-selezionata: <span id="cat-banner-nome"></span>
+                </div>
+                <div class="form-group">
+                    <label>Categoria</label>
+                    <div class="categoria-grid" id="categoria-grid">
+                        <button class="cat-btn" data-cat="edilizia" onclick="selezionaCategoria(this)">🏗️ Edilizia</button>
+                        <button class="cat-btn" data-cat="impianti" onclick="selezionaCategoria(this)">⚡💧 Impianti</button>
+                        <button class="cat-btn" data-cat="automotive" onclick="selezionaCategoria(this)">🚗 Automotive</button>
+                        <button class="cat-btn" data-cat="legale" onclick="selezionaCategoria(this)">⚖️ Legale</button>
+                        <button class="cat-btn" data-cat="salute" onclick="selezionaCategoria(this)">🏥 Salute</button>
+                        <button class="cat-btn" data-cat="estetica" onclick="selezionaCategoria(this)">💇 Estetica</button>
+                        <button class="cat-btn" data-cat="casa" onclick="selezionaCategoria(this)">🏠 Casa</button>
+                        <button class="cat-btn" data-cat="digitale" onclick="selezionaCategoria(this)">💻 Digitale</button>
+                        <button class="cat-btn" data-cat="istruzione" onclick="selezionaCategoria(this)">🎓 Istruzione</button>
+                        <button class="cat-btn" data-cat="escort" onclick="selezionaCategoria(this, true)">🔞 Escort +18</button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Città / Paese</label>
+                    <input type="text" id="req-citta" placeholder="Es. Milano, Roma, Bergamo...">
+                </div>
+                <div class="form-group">
+                    <label>Descrizione del lavoro / servizio</label>
+                    <textarea id="req-descrizione" placeholder="Descrivi quello di cui hai bisogno nel dettaglio..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Quando hai bisogno?</label>
+                    <select id="req-quando">
+                        <option value="">Seleziona...</option>
+                        <option>Il prima possibile</option>
+                        <option>Entro questa settimana</option>
+                        <option>Entro questo mese</option>
+                        <option>Nessuna fretta, sto valutando</option>
+                    </select>
+                </div>
+                <button class="btn-main" onclick="goStep3()">Invia Richiesta →</button>
+                <button class="btn-main grigio" onclick="goToStep(1)" style="margin-top:10px">← Indietro</button>
+            </div>
 
-    <!-- ADULT POPUP -->
-    <div id="adultPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:9999;justify-content:center;align-items:center;padding:20px;">
-        <div style="background:white;border-radius:25px;padding:45px 30px;max-width:400px;text-align:center;box-shadow:0 25px 60px rgba(0,0,0,0.3);">
-            <h2 style="font-family:'Playfair Display',serif;color:#0F2347;font-size:26px;margin-bottom:15px;">🔞 Contenuto +18</h2>
-            <p style="color:#6B7280;margin-bottom:30px;line-height:1.6;">Questa sezione è riservata esclusivamente ai maggiorenni. Confermi di avere più di 18 anni e di accettare i termini di accesso?</p>
-            <div style="display:flex;gap:15px;justify-content:center;flex-wrap:wrap;">
-                <button onclick="confirmAdult()" style="background:#1B3A6B;color:white;border:none;padding:14px 25px;border-radius:25px;font-size:15px;font-weight:600;cursor:pointer;">✅ Sì, ho +18 anni</button>
-                <button onclick="denyAdult()" style="background:transparent;color:#B8972A;border:2px solid #B8972A;padding:14px 25px;border-radius:25px;font-size:15px;font-weight:600;cursor:pointer;">❌ No, sono minorenne</button>
+            <!-- STEP 3 -->
+            <div class="step-content" id="step3">
+                <div class="success-box">
+                    <div class="success-icon">🎉</div>
+                    <h2>Richiesta Inviata!</h2>
+                    <p>La tua richiesta è stata pubblicata. Entro poche ore riceverai le offerte dei professionisti verificati nella tua zona.</p>
+                    <div class="highlight">
+                        📱 Riceverai un SMS quando un professionista è interessato.<br><br>
+                        👤 Massimo <strong>5 professionisti</strong> possono rispondere alla tua richiesta.<br><br>
+                        💬 La chat si sblocca solo dopo che il professionista acquista il tuo contatto.<br><br>
+                        📅 In chat concorderete data e ora del sopralluogo.<br><br>
+                        ✅ Al termine del lavoro e dopo la <strong>conferma del pagamento</strong>, si aprirà automaticamente la schermata per le <strong>recensioni reciproche</strong>. Entrambi dovrete recensirvi per mantenere l'account attivo.
+                    </div>
+                    <div class="avviso-ban">
+                        <strong>⚠️ Ricorda:</strong>
+                        🔴 Se non permetti a nessuno dei 5 professionisti di fare il sopralluogo → <strong>ban immediato</strong><br><br>
+                        🟢 Se un professionista non si presenta → <strong>viene bannato lui</strong> dopo 3 mancanze. Sei sempre tutelato!
+                    </div>
+                    <button class="btn-main oro" onclick="window.location.href='index.html'">🏠 Torna alla Home</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- RECENSIONE POPUP -->
-    <div class="recensione-popup" id="recensionePopup">
-        <div class="recensione-box">
-            <h2>⭐ Lascia una Recensione</h2>
-            <p>Il lavoro è stato completato e il pagamento confermato. Ora valuta la tua esperienza con il professionista. La recensione è <strong>obbligatoria</strong> per mantenere il tuo account attivo.</p>
-            <div class="stelle">
-                <span class="stella" onclick="setStella(1)">★</span>
-                <span class="stella" onclick="setStella(2)">★</span>
-                <span class="stella" onclick="setStella(3)">★</span>
-                <span class="stella" onclick="setStella(4)">★</span>
-                <span class="stella" onclick="setStella(5)">★</span>
+        <!-- ACCEDI -->
+        <div id="tab-accedi" style="display:none">
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="login-email" placeholder="Es. mario@email.com">
             </div>
-            <textarea placeholder="Descrivi la tua esperienza con il professionista..."></textarea>
-            <button class="btn-main" onclick="inviaRecensione()">Invia Recensione ✅</button>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="login-password" placeholder="La tua password">
+            </div>
+            <button class="btn-main" onclick="eseguiLogin()">🔑 Accedi</button>
+            <p style="text-align:center; margin-top:15px; font-size:13px; color:var(--grigio)">
+                <a href="#" style="color:var(--blu)">Password dimenticata?</a>
+            </p>
+            <p style="text-align:center; margin-top:10px; font-size:13px; color:var(--grigio)">
+                Non hai un account? <a href="cliente.html" style="color:var(--blu); font-weight:600">Registrati gratis</a>
+            </p>
         </div>
+
+        <a href="index.html" class="link-back">← Torna alla Home</a>
     </div>
+</div>
 
-    <script>
-        let categoriaSelezionata = '';
-        let otpInviato = false;
-        let stelleSelezionate = 0;
+<!-- POPUP ADULTI -->
+<div id="adultPopup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:9999; justify-content:center; align-items:center; padding:20px;">
+    <div style="background:white; border-radius:20px; padding:40px 30px; max-width:400px; width:100%; text-align:center;">
+        <div style="font-size:50px; margin-bottom:15px;">🔞</div>
+        <h2 style="font-family:'Playfair Display',serif; color:var(--blu-scuro); margin-bottom:15px;">Verifica età</h2>
+        <p style="color:var(--grigio); margin-bottom:25px;">Questa categoria è riservata agli adulti. Confermi di avere almeno 18 anni?</p>
+        <button class="btn-main" onclick="confirmAdult()" style="margin-bottom:10px">✅ Sì, ho 18+ anni</button>
+        <button class="btn-main grigio" onclick="denyAdult()">❌ No, torna indietro</button>
+    </div>
+</div>
 
-        // =============================================
-        // LEGGI PARAMETRI URL ALL'AVVIO
-        // =============================================
-        window.addEventListener('DOMContentLoaded', function() {
-            const params = new URLSearchParams(window.location.search);
+<!-- POPUP RECENSIONE -->
+<div class="recensione-popup" id="recensionePopup">
+    <div class="recensione-box">
+        <h2>⭐ Lascia una Recensione</h2>
+        <p>Come valuti il lavoro svolto?</p>
+        <div class="stelle">
+            <span class="stella" onclick="setStella(1)">★</span>
+            <span class="stella" onclick="setStella(2)">★</span>
+            <span class="stella" onclick="setStella(3)">★</span>
+            <span class="stella" onclick="setStella(4)">★</span>
+            <span class="stella" onclick="setStella(5)">★</span>
+        </div>
+        <textarea placeholder="Scrivi un commento..."></textarea>
+        <button class="btn-main" onclick="inviaRecensione()">Invia Recensione</button>
+    </div>
+</div>
 
-            // Se ?tab=accedi apri il tab login
-            const tab = params.get('tab');
-            if (tab === 'accedi') {
-                switchTab('accedi');
-            }
+<script>
+    let categoriaSelezionata = null;
+    let otpInviato = false;
+    let stelleSelezionate = 0;
 
-            // Se ?cat=edilizia pre-seleziona la categoria
-            const cat = params.get('cat');
-            if (cat) {
-                // Salva la categoria per quando si arriva allo step 2
-                window._catDaURL = cat.toLowerCase();
-            }
-        });
+    // Leggi parametri URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const tabParam = urlParams.get('tab');
+    const catParam = urlParams.get('cat');
 
-        // Pre-seleziona categoria quando si entra nello step 2
-        function applicaCategoriaURL() {
-            const cat = window._catDaURL;
-            if (!cat) return;
+    if (tabParam === 'accedi') switchTab('accedi');
 
-            const btns = document.querySelectorAll('.cat-btn');
-            btns.forEach(btn => {
-                if (btn.getAttribute('data-cat') === cat) {
-                    if (cat === 'escort') {
-                        // Non auto-selezionare escort, mostra popup
-                        return;
-                    }
+    function applicaCategoriaURL() {
+        if (catParam) {
+            const btn = document.querySelector('[data-cat="' + catParam + '"]');
+            if (btn) {
+                if (catParam === 'escort') {
+                    document.getElementById('adultPopup').style.display = 'flex';
+                } else {
+                    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
                     btn.classList.add('selected');
                     categoriaSelezionata = btn.textContent;
-                    // Mostra banner
                     document.getElementById('cat-banner-nome').textContent = btn.textContent;
                     document.getElementById('cat-banner').classList.add('show');
                 }
-            });
-        }
-
-        function switchTab(tab) {
-            document.getElementById('tab-registrati').style.display = tab === 'registrati' ? 'block' : 'none';
-            document.getElementById('tab-accedi').style.display = tab === 'accedi' ? 'block' : 'none';
-            document.getElementById('tab-btn-registrati').classList.toggle('active', tab === 'registrati');
-            document.getElementById('tab-btn-accedi').classList.toggle('active', tab === 'accedi');
-        }
-
-        function inviaOTP() {
-            const tel = document.getElementById('reg-telefono').value;
-            if (!tel) { alert('Inserisci il numero di telefono!'); return; }
-            document.getElementById('otp-verify').classList.add('show');
-            document.getElementById('btn-invia-otp').disabled = true;
-            document.getElementById('btn-invia-otp').textContent = 'Inviato ✓';
-            otpInviato = true;
-            alert('Codice OTP inviato al numero ' + tel + '\n\n(Demo: usa 123456)');
-        }
-
-        function moveOTP(current, prevId, nextId) {
-            if (current.value.length >= 1 && nextId) document.getElementById(nextId).focus();
-            if (current.value.length === 0 && prevId) document.getElementById(prevId).focus();
-        }
-
-        function selezionaCategoria(btn, isEscort = false) {
-            if (isEscort) {
-                document.getElementById('adultPopup').style.display = 'flex';
-                return;
             }
-            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-            categoriaSelezionata = btn.textContent;
-            document.getElementById('cat-banner').classList.remove('show');
         }
-
-        function confirmAdult() {
-            document.getElementById('adultPopup').style.display = 'none';
-            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
-            document.querySelectorAll('.cat-btn').forEach(b => {
-                if (b.getAttribute('data-cat') === 'escort') b.classList.add('selected');
-            });
-            categoriaSelezionata = '🔞 Escort +18';
-        }
-
-        function denyAdult() {
-            document.getElementById('adultPopup').style.display = 'none';
-        }
-
-        function goStep2() {
-            const nome = document.getElementById('reg-nome').value;
-            const email = document.getElementById('reg-email').value;
-            const tel = document.getElementById('reg-telefono').value;
-            const pass = document.getElementById('reg-password').value;
-            if (!nome || !email || !tel || !pass) { alert('Compila tutti i campi!'); return; }
-            if (!otpInviato) { alert('Verifica prima il numero di telefono con OTP!'); return; }
-            goToStep(2);
-            // Applica categoria da URL dopo aver caricato step 2
-            setTimeout(applicaCategoriaURL, 100);
-        }
-
-        function goStep3() {
-    if (window._goStep3Running) return;
-    window._goStep3Running = true;
-    if (window.goStep3Firebase) {
-        window.goStep3Firebase().finally(() => { window._goStep3Running = false; });
-    } else {
-        window._goStep3Running = false;
     }
-}
 
-        function goToStep(n) {
-            document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
-            document.getElementById('step' + n).classList.add('active');
-            document.querySelectorAll('.step-dot').forEach((d, i) => {
-                d.classList.remove('active', 'done');
-                if (i + 1 < n) d.classList.add('done');
-                if (i + 1 === n) d.classList.add('active');
-            });
-            document.querySelectorAll('.step-line').forEach((l, i) => {
-                l.classList.toggle('done', i + 1 < n);
-            });
-        }
+    function switchTab(tab) {
+        document.getElementById('tab-registrati').style.display = tab === 'registrati' ? 'block' : 'none';
+        document.getElementById('tab-accedi').style.display = tab === 'accedi' ? 'block' : 'none';
+        document.getElementById('tab-btn-registrati').classList.toggle('active', tab === 'registrati');
+        document.getElementById('tab-btn-accedi').classList.toggle('active', tab === 'accedi');
+    }
 
-        function eseguiLogin() {
-            const email = document.getElementById('login-email').value;
-            const pass = document.getElementById('login-password').value;
-            if (!email || !pass) { alert('Inserisci email e password!'); return; }
-            alert('Login in arrivo! Il sistema di autenticazione sarà attivo presto.');
-        }
+    function inviaOTP() {
+        const tel = document.getElementById('reg-telefono').value;
+        if (!tel) { alert('Inserisci il numero di telefono!'); return; }
+        document.getElementById('otp-verify').classList.add('show');
+        document.getElementById('btn-invia-otp').disabled = true;
+        document.getElementById('btn-invia-otp').textContent = 'Inviato ✓';
+        otpInviato = true;
+        alert('Codice OTP inviato al numero ' + tel + '\n\n(Demo: usa 123456)');
+    }
 
-        function setStella(n) {
-            stelleSelezionate = n;
-            document.querySelectorAll('.stella').forEach((s, i) => {
-                s.classList.toggle('attiva', i < n);
-            });
-        }
+    function moveOTP(current, prevId, nextId) {
+        if (current.value.length >= 1 && nextId) document.getElementById(nextId).focus();
+        if (current.value.length === 0 && prevId) document.getElementById(prevId).focus();
+    }
 
-        function inviaRecensione() {
-            if (stelleSelezionate === 0) { alert('Seleziona almeno una stella!'); return; }
-            document.getElementById('recensionePopup').classList.remove('show');
-            alert('Recensione inviata! Grazie per il tuo feedback.');
+    function selezionaCategoria(btn, isEscort = false) {
+        if (isEscort) {
+            document.getElementById('adultPopup').style.display = 'flex';
+            return;
         }
-    </script>
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        categoriaSelezionata = btn.textContent;
+        document.getElementById('cat-banner').classList.remove('show');
+    }
+
+    function confirmAdult() {
+        document.getElementById('adultPopup').style.display = 'none';
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
+        document.querySelectorAll('.cat-btn').forEach(b => {
+            if (b.getAttribute('data-cat') === 'escort') b.classList.add('selected');
+        });
+        categoriaSelezionata = '🔞 Escort +18';
+    }
+
+    function denyAdult() {
+        document.getElementById('adultPopup').style.display = 'none';
+    }
+
+    function goStep2() {
+        const nome = document.getElementById('reg-nome').value;
+        const email = document.getElementById('reg-email').value;
+        const tel = document.getElementById('reg-telefono').value;
+        const pass = document.getElementById('reg-password').value;
+        if (!nome || !email || !tel || !pass) { alert('Compila tutti i campi!'); return; }
+        if (!otpInviato) { alert('Verifica prima il numero di telefono con OTP!'); return; }
+        goToStep(2);
+        setTimeout(applicaCategoriaURL, 100);
+    }
+
+    function goStep3() {
+        if (window.goStep3Async) {
+            window.goStep3Async();
+        }
+    }
+
+    function goToStep(n) {
+        document.querySelectorAll('.step-content').forEach(s => s.classList.remove('active'));
+        document.getElementById('step' + n).classList.add('active');
+        document.querySelectorAll('.step-dot').forEach((d, i) => {
+            d.classList.remove('active', 'done');
+            if (i + 1 < n) d.classList.add('done');
+            if (i + 1 === n) d.classList.add('active');
+        });
+        document.querySelectorAll('.step-line').forEach((l, i) => {
+            l.classList.toggle('done', i + 1 < n);
+        });
+    }
+
+    function eseguiLogin() {
+        if (window.eseguiLoginAsync) {
+            window.eseguiLoginAsync();
+        }
+    }
+
+    function setStella(n) {
+        stelleSelezionate = n;
+        document.querySelectorAll('.stella').forEach((s, i) => {
+            s.classList.toggle('attiva', i < n);
+        });
+    }
+
+    function inviaRecensione() {
+        if (stelleSelezionate === 0) { alert('Seleziona almeno una stella!'); return; }
+        document.getElementById('recensionePopup').classList.remove('show');
+        alert('Recensione inviata! Grazie per il tuo feedback.');
+    }
+</script>
+
 <script type="module" src="firebase-auth.js"></script>
 <script type="module">
-window.goStep3 = async function() {
-  const citta = document.getElementById('req-citta').value;
-  const desc = document.getElementById('req-descrizione').value;
-  const quando = document.getElementById('req-quando').value;
-  if (!categoriaSelezionata) { alert('Seleziona una categoria!'); return; }
-  if (!citta || !desc || !quando) { alert('Compila tutti i campi!'); return; }
+window.goStep3Async = async function() {
+    const citta = document.getElementById('req-citta').value;
+    const desc = document.getElementById('req-descrizione').value;
+    const quando = document.getElementById('req-quando').value;
+    if (!categoriaSelezionata) { alert('Seleziona una categoria!'); return; }
+    if (!citta || !desc || !quando) { alert('Compila tutti i campi!'); return; }
 
-  const nome = document.getElementById('reg-nome').value;
-  const email = document.getElementById('reg-email').value;
-  const pass = document.getElementById('reg-password').value;
+    const nome = document.getElementById('reg-nome').value;
+    const email = document.getElementById('reg-email').value;
+    const pass = document.getElementById('reg-password').value;
 
-  const btn = document.querySelector('#step2 .btn-main');
-  btn.textContent = 'Registrazione in corso...';
-  btn.disabled = true;
+    const btn = document.querySelector('#step2 .btn-main');
+    btn.textContent = 'Registrazione in corso...';
+    btn.disabled = true;
 
-  const ris = await window.registraCliente(nome, email, pass, categoriaSelezionata, citta, desc, quando);
-  if (ris.successo) {
-    goToStep(3);
-  } else {
-    alert(ris.errore);
-    btn.textContent = 'Invia Richiesta →';
-    btn.disabled = false;
-  }
+    const ris = await window.registraCliente(nome, email, pass, categoriaSelezionata, citta, desc, quando);
+    if (ris.successo) {
+        goToStep(3);
+    } else {
+        alert(ris.errore);
+        btn.textContent = 'Invia Richiesta →';
+        btn.disabled = false;
+    }
 };
 
-window.eseguiLogin = async function() {
-  const email = document.getElementById('login-email').value;
-  const pass = document.getElementById('login-password').value;
-  if (!email || !pass) { alert('Inserisci email e password!'); return; }
+window.eseguiLoginAsync = async function() {
+    const email = document.getElementById('login-email').value;
+    const pass = document.getElementById('login-password').value;
+    if (!email || !pass) { alert('Inserisci email e password!'); return; }
 
-  const btn = document.querySelector('#tab-accedi .btn-main');
-  btn.textContent = 'Accesso in corso...';
-  btn.disabled = true;
+    const btn = document.querySelector('#tab-accedi .btn-main');
+    btn.textContent = 'Accesso in corso...';
+    btn.disabled = true;
 
-  const ris = await window.loginUtente(email, pass);
-  if (!ris.successo) {
-    alert(ris.errore);
-    btn.textContent = '🔑 Accedi';
-    btn.disabled = false;
-  }
+    const ris = await window.loginUtente(email, pass);
+    if (!ris.successo) {
+        alert(ris.errore);
+        btn.textContent = '🔑 Accedi';
+        btn.disabled = false;
+    }
 };
-
-
+</script>
 
 </body>
 </html>
