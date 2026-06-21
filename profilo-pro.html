@@ -14,8 +14,6 @@
             --verde: #10B981; --rosso: #EF4444; --arancio: #F59E0B;
         }
         body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color: var(--testo); min-height: 100vh; }
-
-        /* NAVBAR */
         .navbar { background: var(--blu-scuro); padding: 14px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 15px rgba(0,0,0,0.25); position: sticky; top: 0; z-index: 100; }
         .logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: white; text-decoration: none; }
         .logo span { color: var(--oro); }
@@ -24,12 +22,9 @@
         .btn-nav:hover { color: var(--oro); border-color: var(--oro); }
         .btn-nav-cta { background: var(--oro); color: var(--blu-scuro); border: none; padding: 8px 18px; border-radius: 20px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.3s; text-decoration: none; }
         .btn-nav-cta:hover { background: var(--oro-chiaro); transform: translateY(-1px); }
-
-        /* HERO PROFILO */
         .hero-profilo { background: linear-gradient(135deg, var(--blu-scuro) 0%, var(--blu) 100%); padding: 50px 30px 80px; }
         .hero-inner { max-width: 900px; margin: 0 auto; display: flex; gap: 35px; align-items: flex-start; flex-wrap: wrap; }
         .avatar-wrap { position: relative; flex-shrink: 0; }
-        .avatar { width: 130px; height: 130px; border-radius: 50%; border: 4px solid var(--oro); object-fit: cover; background: var(--blu-chiaro); display: flex; align-items: center; justify-content: center; font-size: 52px; overflow: hidden; }
         .avatar-emoji { width: 130px; height: 130px; border-radius: 50%; border: 4px solid var(--oro); background: var(--blu-chiaro); display: flex; align-items: center; justify-content: center; font-size: 52px; }
         .badge-online { position: absolute; bottom: 8px; right: 8px; width: 22px; height: 22px; background: var(--verde); border-radius: 50%; border: 3px solid white; }
         .hero-info { flex: 1; min-width: 250px; }
@@ -49,53 +44,35 @@
         .stelle-grandi { color: var(--oro-chiaro); font-size: 20px; letter-spacing: 2px; }
         .rating-num { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 900; color: white; }
         .rating-count { color: rgba(255,255,255,0.6); font-size: 13px; }
-
-        /* MAIN LAYOUT */
         .main-wrap { max-width: 900px; margin: -40px auto 60px; padding: 0 20px; }
         .grid-layout { display: grid; grid-template-columns: 1fr 300px; gap: 24px; align-items: start; }
-
-        /* CARD GENERICA */
         .card { background: white; border-radius: 20px; padding: 28px; border: 1px solid #e5e7eb; margin-bottom: 20px; }
         .card-title { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--blu-scuro); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-
-        /* TABS */
         .tabs-nav { display: flex; border-bottom: 2px solid #e5e7eb; margin-bottom: 25px; gap: 5px; overflow-x: auto; }
         .tab-btn { padding: 10px 18px; font-size: 14px; font-weight: 600; color: var(--grigio); background: none; border: none; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: 0.3s; white-space: nowrap; font-family: 'Inter', sans-serif; }
         .tab-btn.active { color: var(--blu); border-bottom-color: var(--blu); }
-        .tab-btn:hover { color: var(--blu); }
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: fadeIn 0.25s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* GALLERIA FOTO */
+        @keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
         .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
         .gallery-item { aspect-ratio: 1; border-radius: 12px; background: var(--grigio-chiaro); display: flex; align-items: center; justify-content: center; font-size: 36px; overflow: hidden; cursor: pointer; transition: 0.3s; border: 2px solid #e5e7eb; }
         .gallery-item:hover { border-color: var(--oro); transform: scale(1.02); }
         .gallery-item.main-photo { grid-column: span 2; aspect-ratio: 16/9; }
-
-        /* VIDEO */
         .video-wrap { background: var(--blu-scuro); border-radius: 16px; aspect-ratio: 16/9; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; position: relative; margin-bottom: 16px; }
         .video-play { width: 65px; height: 65px; background: var(--oro); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; margin-bottom: 14px; box-shadow: 0 6px 20px rgba(0,0,0,0.3); transition: 0.3s; }
         .video-wrap:hover .video-play { transform: scale(1.1); background: var(--oro-chiaro); }
         .video-title { color: white; font-size: 15px; font-weight: 600; }
         .video-sub { color: rgba(255,255,255,0.6); font-size: 12px; margin-top: 6px; }
-
-        /* RECENSIONI */
         .rec-card { background: var(--grigio-chiaro); border-radius: 16px; padding: 20px; margin-bottom: 14px; border: 1px solid #e5e7eb; }
         .rec-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
         .rec-autore { font-weight: 700; font-size: 14px; color: var(--blu-scuro); }
         .rec-data { font-size: 12px; color: var(--grigio); }
         .rec-stelle { color: var(--oro-chiaro); font-size: 15px; margin-bottom: 8px; }
         .rec-testo { font-size: 13px; color: var(--grigio); line-height: 1.65; }
-        .rec-lavoro { display: inline-block; background: #EFF6FF; color: var(--blu); font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 8px; margin-bottom: 8px; }
-
-        /* STATS BAR */
         .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 20px; }
         .stat-box { text-align: center; background: var(--grigio-chiaro); border-radius: 14px; padding: 16px 10px; }
         .stat-num { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 900; color: var(--blu-scuro); }
         .stat-lab { font-size: 11px; color: var(--grigio); margin-top: 4px; }
-
-        /* SIDEBAR */
         .sidebar-card { background: white; border-radius: 20px; padding: 24px; border: 1px solid #e5e7eb; margin-bottom: 18px; }
         .sidebar-title { font-size: 14px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px; }
         .info-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid #f3f4f6; font-size: 13px; }
@@ -110,31 +87,27 @@
         .btn-sidebar:hover { background: var(--blu-chiaro); transform: translateY(-1px); }
         .btn-sidebar.oro { background: var(--oro); color: var(--blu-scuro); }
         .btn-sidebar.oro:hover { background: var(--oro-chiaro); }
-
-        /* ZONE DI LAVORO */
         .zone-grid { display: flex; flex-wrap: wrap; gap: 8px; }
         .zona-tag { background: var(--grigio-chiaro); border: 1px solid #e5e7eb; color: var(--testo); border-radius: 10px; padding: 5px 12px; font-size: 12px; }
-
-        /* POPUP SBLOCCO */
         .popup-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
         .popup-overlay.show { display: flex; }
-        .popup-box { background: white; border-radius: 24px; padding: 40px 32px; max-width: 420px; width: 100%; text-align: center; box-shadow: 0 25px 60px rgba(0,0,0,0.3); animation: fadeIn 0.3s ease; }
+        .popup-box { background: white; border-radius: 24px; padding: 40px 32px; max-width: 420px; width: 100%; text-align: center; box-shadow: 0 25px 60px rgba(0,0,0,0.3); }
         .popup-icon { font-size: 60px; margin-bottom: 16px; }
         .popup-title { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--blu-scuro); margin-bottom: 10px; }
         .popup-sub { font-size: 14px; color: var(--grigio); line-height: 1.7; margin-bottom: 24px; }
         .popup-prezzo { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 900; color: var(--oro); margin-bottom: 6px; }
         .popup-prezzo-note { font-size: 12px; color: var(--grigio); margin-bottom: 24px; }
+        .avviso-ban { background: #FEF3C7; border: 1px solid #F59E0B; border-radius: 12px; padding: 14px 16px; font-size: 12px; color: #92400E; line-height: 1.7; text-align: left; margin-bottom: 20px; }
         .btn-popup { width: 100%; padding: 15px; background: var(--oro); color: var(--blu-scuro); border: none; border-radius: 14px; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; margin-bottom: 10px; }
         .btn-popup:hover { background: var(--oro-chiaro); transform: translateY(-1px); }
         .btn-popup.outline { background: transparent; color: var(--grigio); border: 2px solid #e5e7eb; }
         .btn-popup.outline:hover { border-color: var(--grigio); transform: none; }
-        .avviso-ban { background: #FEF3C7; border: 1px solid #F59E0B; border-radius: 12px; padding: 14px 16px; font-size: 12px; color: #92400E; line-height: 1.7; text-align: left; margin-bottom: 20px; }
-
-        /* LIGHTBOX */
         .lightbox { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 9998; justify-content: center; align-items: center; cursor: pointer; }
         .lightbox.show { display: flex; }
         .lightbox-content { font-size: 100px; }
-
+        /* SKELETON LOADING */
+        .skeleton { background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 8px; }
+        @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
         @media (max-width: 700px) {
             .grid-layout { grid-template-columns: 1fr; }
             .hero-inner { flex-direction: column; align-items: center; text-align: center; }
@@ -151,7 +124,6 @@
 </head>
 <body>
 
-<!-- NAVBAR -->
 <nav class="navbar">
     <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
     <div class="navbar-links">
@@ -161,44 +133,33 @@
     </div>
 </nav>
 
-<!-- HERO PROFILO -->
 <div class="hero-profilo">
     <div class="hero-inner">
         <div class="avatar-wrap">
-            <div class="avatar-emoji">👷</div>
+            <div class="avatar-emoji" id="hero-avatar">👷</div>
             <div class="badge-online"></div>
         </div>
         <div class="hero-info">
-            <div class="hero-categoria">🏗️ Edilizia & Ristrutturazioni</div>
-            <div class="hero-nome">Rossoni Edilizia</div>
+            <div class="hero-categoria" id="hero-categoria">🏗️ Caricamento...</div>
+            <div class="hero-nome" id="hero-nome">Caricamento profilo...</div>
             <div class="rating-hero">
-                <span class="stelle-grandi">★★★★★</span>
-                <span class="rating-num">4.9</span>
-                <span class="rating-count">(47 recensioni)</span>
+                <span class="stelle-grandi" id="hero-stelle">★★★★★</span>
+                <span class="rating-num" id="hero-rating">—</span>
+                <span class="rating-count" id="hero-rec-count">(0 recensioni)</span>
             </div>
-            <div class="hero-chips" style="margin-top:14px">
-                <span class="chip verde">✅ P.IVA verificata</span>
-                <span class="chip verde">📷 Visura camerale</span>
-                <span class="chip verde">📱 Tel. verificato</span>
-                <span class="chip oro">🎬 Video presente</span>
-                <span class="chip">📍 Milano &amp; provincia</span>
-                <span class="chip">⏱️ 15 anni exp.</span>
-            </div>
-            <div class="hero-desc">Impresa edile specializzata in ristrutturazioni complete, tinteggiature, rifacimento bagni e cucine. Lavoriamo in tutta la provincia di Milano con puntualità e cura del dettaglio.</div>
+            <div class="hero-chips" id="hero-chips" style="margin-top:14px"></div>
+            <div class="hero-desc" id="hero-desc">Caricamento descrizione...</div>
         </div>
         <div class="hero-actions">
             <button class="btn-contatta" onclick="mostraPopupSblocco()">🔓 Sblocca contatto</button>
-            <button class="btn-contatta outline" onclick="document.getElementById('tab-rec').click()">⭐ Leggi recensioni</button>
-            <button class="btn-contatta outline" onclick="document.getElementById('tab-video').click()">🎬 Guarda video</button>
+            <button class="btn-contatta outline" onclick="switchTab('rec')">⭐ Leggi recensioni</button>
+            <button class="btn-contatta outline" id="btn-video-hero" onclick="switchTab('video')" style="display:none">🎬 Guarda video</button>
         </div>
     </div>
 </div>
 
-<!-- MAIN -->
 <div class="main-wrap">
     <div class="grid-layout">
-
-        <!-- COLONNA SINISTRA -->
         <div>
             <div class="card">
                 <div class="tabs-nav">
@@ -211,191 +172,95 @@
                 <!-- TAB CHI SIAMO -->
                 <div class="tab-content active" id="content-chi">
                     <div class="stats-row">
-                        <div class="stat-box">
-                            <div class="stat-num">127</div>
-                            <div class="stat-lab">Lavori completati</div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="stat-num">4.9★</div>
-                            <div class="stat-lab">Valutazione media</div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="stat-num">98%</div>
-                            <div class="stat-lab">Clienti soddisfatti</div>
-                        </div>
+                        <div class="stat-box"><div class="stat-num" id="stat-lavori">—</div><div class="stat-lab">Lavori completati</div></div>
+                        <div class="stat-box"><div class="stat-num" id="stat-rating">—</div><div class="stat-lab">Valutazione media</div></div>
+                        <div class="stat-box"><div class="stat-num" id="stat-anni">—</div><div class="stat-lab">Anni esperienza</div></div>
                     </div>
-                    <p style="font-size:14px;color:var(--grigio);line-height:1.8;margin-bottom:18px">
-                        Siamo un'impresa edile con 15 anni di esperienza nel settore delle ristrutturazioni residenziali e commerciali. Il nostro team è composto da professionisti qualificati, costantemente aggiornati sulle ultime normative e tecniche costruttive.
-                    </p>
-                    <p style="font-size:14px;color:var(--grigio);line-height:1.8;margin-bottom:18px">
-                        Operiamo principalmente nella provincia di Milano, garantendo puntualità, trasparenza nei preventivi e qualità esecutiva certificata. Ogni progetto viene seguito personalmente dal titolare, con sopralluogo gratuito e preventivo dettagliato entro 48 ore.
-                    </p>
-                    <p style="font-size:14px;color:var(--grigio);line-height:1.8">
-                        Ci occupiamo di: ristrutturazioni complete, tinteggiatura interna ed esterna, rifacimento bagni, posa pavimenti, isolamento termico, cappotti, controsoffitti e lavori di muratura in genere.
-                    </p>
-                    <div style="margin-top:22px">
-                        <div style="font-size:13px;font-weight:700;color:var(--blu-scuro);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.5px">🛠️ Specializzazioni</div>
-                        <div class="specialita-list">
-                            <span class="spec-tag">Ristrutturazioni complete</span>
-                            <span class="spec-tag">Tinteggiatura</span>
-                            <span class="spec-tag">Rifacimento bagni</span>
-                            <span class="spec-tag">Posa pavimenti</span>
-                            <span class="spec-tag">Cappotto termico</span>
-                            <span class="spec-tag">Controsoffitti</span>
-                            <span class="spec-tag">Cartongesso</span>
-                            <span class="spec-tag">Muratura</span>
-                            <span class="spec-tag">Smaltimento macerie</span>
-                        </div>
+                    <p id="desc-testo" style="font-size:14px;color:var(--grigio);line-height:1.8;margin-bottom:18px">Caricamento...</p>
+                    <div id="sito-web-box" style="display:none;margin-top:15px">
+                        <a id="sito-web-link" href="#" target="_blank" style="color:var(--blu);font-weight:600;font-size:14px;text-decoration:none">🌐 Visita il sito web →</a>
                     </div>
                 </div>
 
                 <!-- TAB LAVORI -->
                 <div class="tab-content" id="content-lavori">
-                    <p style="font-size:13px;color:var(--grigio);margin-bottom:18px;line-height:1.6">Alcune delle nostre realizzazioni recenti. Per vedere altri lavori o ricevere un preventivo personalizzato, contattaci direttamente.</p>
-                    <div class="gallery-grid">
-                        <div class="gallery-item main-photo" onclick="mostraLightbox('🏠')">🏠<br><span style="font-size:11px;color:var(--grigio);margin-top:6px;display:block">Ristrutturazione completa — Milano</span></div>
-                        <div class="gallery-item" onclick="mostraLightbox('🛁')">🛁</div>
-                        <div class="gallery-item" onclick="mostraLightbox('🪣')">🪣</div>
-                        <div class="gallery-item" onclick="mostraLightbox('🧱')">🧱</div>
-                        <div class="gallery-item" onclick="mostraLightbox('🪟')">🪟</div>
-                        <div class="gallery-item" onclick="mostraLightbox('🏗️')">🏗️</div>
+                    <p style="font-size:13px;color:var(--grigio);margin-bottom:18px;line-height:1.6">Alcune delle nostre realizzazioni recenti.</p>
+                    <div class="gallery-grid" id="gallery-grid">
+                        <div class="gallery-item main-photo skeleton" style="font-size:0"></div>
+                        <div class="gallery-item skeleton" style="font-size:0"></div>
+                        <div class="gallery-item skeleton" style="font-size:0"></div>
                     </div>
-                    <p style="font-size:12px;color:var(--grigio);margin-top:16px;text-align:center">📸 6 foto disponibili — Sblocca il contatto per richiedere l'album completo</p>
+                    <p id="gallery-note" style="font-size:12px;color:var(--grigio);margin-top:16px;text-align:center"></p>
                 </div>
 
                 <!-- TAB VIDEO -->
                 <div class="tab-content" id="content-video">
-                    <div class="video-wrap" onclick="mostraPopupSblocco()">
-                        <div class="video-play">▶</div>
-                        <div class="video-title">Presentazione Rossoni Edilizia</div>
-                        <div class="video-sub">🔒 Sblocca il contatto per guardare il video completo</div>
+                    <div id="video-section">
+                        <div class="video-wrap" onclick="mostraPopupSblocco()">
+                            <div class="video-play">▶</div>
+                            <div class="video-title" id="video-title-text">Video di presentazione</div>
+                            <div class="video-sub">🔒 Sblocca il contatto per guardare il video completo</div>
+                        </div>
+                        <div style="background:#FFFBEB;border:1px solid #F59E0B;border-radius:12px;padding:14px 16px;font-size:13px;color:#78350F;margin-top:14px">
+                            🎬 <strong>I professionisti con video ricevono il 60% di richieste in più.</strong>
+                        </div>
                     </div>
-                    <p style="font-size:13px;color:var(--grigio);line-height:1.7;margin-bottom:14px">Nel video di presentazione il titolare illustra la filosofia di lavoro dell'impresa, mostra alcuni dei cantieri più recenti e spiega come viene gestito ogni progetto, dal primo sopralluogo alla consegna finale.</p>
-                    <div style="background:#FFFBEB;border:1px solid #F59E0B;border-radius:12px;padding:14px 16px;font-size:13px;color:#78350F">
-                        🎬 <strong>I professionisti con video ricevono il 60% di richieste in più.</strong> Questo professionista ha investito nella trasparenza verso i clienti.
+                    <div id="no-video-section" style="display:none;text-align:center;padding:40px 20px;color:var(--grigio)">
+                        <div style="font-size:48px;margin-bottom:12px">🎬</div>
+                        <p>Questo professionista non ha ancora caricato un video di presentazione.</p>
                     </div>
                 </div>
 
                 <!-- TAB RECENSIONI -->
                 <div class="tab-content" id="content-rec">
-                    <div style="display:flex;align-items:center;gap:20px;margin-bottom:24px;flex-wrap:wrap">
-                        <div style="text-align:center">
-                            <div style="font-family:'Playfair Display',serif;font-size:56px;font-weight:900;color:var(--blu-scuro);line-height:1">4.9</div>
-                            <div style="color:var(--oro-chiaro);font-size:22px;margin:4px 0">★★★★★</div>
-                            <div style="font-size:12px;color:var(--grigio)">su 47 recensioni</div>
-                        </div>
-                        <div style="flex:1;min-width:180px">
-                            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-size:12px;color:var(--grigio);width:20px">5★</span><div style="flex:1;height:8px;background:#e5e7eb;border-radius:4px"><div style="width:87%;height:100%;background:var(--oro-chiaro);border-radius:4px"></div></div><span style="font-size:12px;color:var(--grigio);width:30px">87%</span></div>
-                            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-size:12px;color:var(--grigio);width:20px">4★</span><div style="flex:1;height:8px;background:#e5e7eb;border-radius:4px"><div style="width:10%;height:100%;background:var(--oro-chiaro);border-radius:4px"></div></div><span style="font-size:12px;color:var(--grigio);width:30px">10%</span></div>
-                            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-size:12px;color:var(--grigio);width:20px">3★</span><div style="flex:1;height:8px;background:#e5e7eb;border-radius:4px"><div style="width:3%;height:100%;background:var(--arancio);border-radius:4px"></div></div><span style="font-size:12px;color:var(--grigio);width:30px">3%</span></div>
-                            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><span style="font-size:12px;color:var(--grigio);width:20px">2★</span><div style="flex:1;height:8px;background:#e5e7eb;border-radius:4px"><div style="width:0%;height:100%;background:var(--rosso);border-radius:4px"></div></div><span style="font-size:12px;color:var(--grigio);width:30px">0%</span></div>
-                            <div style="display:flex;align-items:center;gap:8px"><span style="font-size:12px;color:var(--grigio);width:20px">1★</span><div style="flex:1;height:8px;background:#e5e7eb;border-radius:4px"><div style="width:0%;height:100%;background:var(--rosso);border-radius:4px"></div></div><span style="font-size:12px;color:var(--grigio);width:30px">0%</span></div>
-                        </div>
-                    </div>
-
-                    <div class="rec-card">
-                        <div class="rec-header">
-                            <div><div class="rec-autore">Marco T.</div><div class="rec-stelle">★★★★★</div></div>
-                            <div class="rec-data">28 aprile 2026</div>
-                        </div>
-                        <span class="rec-lavoro">Tinteggiatura appartamento 80 mq</span>
-                        <div class="rec-testo">Lavoro impeccabile, puntualissimi e molto professionali. Hanno finito in anticipo rispetto ai tempi previsti e la pulizia del cantiere era perfetta. Consigliatissimi!</div>
-                    </div>
-                    <div class="rec-card">
-                        <div class="rec-header">
-                            <div><div class="rec-autore">Giulia R.</div><div class="rec-stelle">★★★★★</div></div>
-                            <div class="rec-data">10 aprile 2026</div>
-                        </div>
-                        <span class="rec-lavoro">Ristrutturazione bagno completa</span>
-                        <div class="rec-testo">Abbiamo ristrutturato completamente il bagno. Il risultato è fantastico, hanno rispettato tempi e preventivo alla lettera. Il titolare è sempre disponibile per qualsiasi domanda.</div>
-                    </div>
-                    <div class="rec-card">
-                        <div class="rec-header">
-                            <div><div class="rec-autore">Luca M.</div><div class="rec-stelle">★★★★★</div></div>
-                            <div class="rec-data">02 aprile 2026</div>
-                        </div>
-                        <span class="rec-lavoro">Posa pavimenti + cartongesso</span>
-                        <div class="rec-testo">Terza volta che li ingaggio e non li lascio più. Qualità altissima, prezzi onesti e persone serie. Il cantiere sempre tenuto in ordine. Vera professionalità.</div>
-                    </div>
-                    <div class="rec-card">
-                        <div class="rec-header">
-                            <div><div class="rec-autore">Anna V.</div><div class="rec-stelle">★★★★☆</div></div>
-                            <div class="rec-data">18 marzo 2026</div>
-                        </div>
-                        <span class="rec-lavoro">Cappotto termico esterno</span>
-                        <div class="rec-testo">Ottimo lavoro nel complesso, qualche piccolo ritardo per via del meteo ma ci hanno tenuto aggiornati costantemente. Risultato finale eccellente.</div>
-                    </div>
-                    <div style="text-align:center;margin-top:10px">
-                        <button onclick="mostraPopupSblocco()" style="background:none;border:1px solid var(--blu);color:var(--blu);padding:10px 24px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;">Mostra tutte le 47 recensioni →</button>
+                    <div style="text-align:center;padding:30px;color:var(--grigio)">
+                        <div style="font-size:40px;margin-bottom:10px">⭐</div>
+                        <p>Le recensioni appariranno dopo i primi lavori completati sulla piattaforma.</p>
                     </div>
                 </div>
+            </div>
+        </div>
 
-            </div><!-- fine card tab -->
-        </div><!-- fine colonna sinistra -->
-
-        <!-- SIDEBAR DESTRA -->
+        <!-- SIDEBAR -->
         <div>
             <div class="sidebar-card">
                 <div class="sidebar-title">🔒 Sblocca contatto</div>
-                <div class="badge-verifica">✅ Professionista verificato</div>
-                <div class="badge-verifica">📷 Visura camerale controllata</div>
-                <div style="background:#EFF6FF;border:1px solid #BFDBFE;border-radius:10px;padding:10px 14px;font-size:12px;color:var(--blu);margin-bottom:16px;font-weight:600">
-                    🎬 Video di presentazione disponibile
-                </div>
+                <div class="badge-verifica" id="badge-piva" style="display:none">✅ Professionista verificato</div>
+                <div id="badge-video-sidebar" style="display:none;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:10px;padding:10px 14px;font-size:12px;color:var(--blu);margin-bottom:16px;font-weight:600">🎬 Video di presentazione disponibile</div>
                 <div style="text-align:center;margin-bottom:18px">
-                    <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:var(--oro)">€9,90</div>
+                    <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:var(--oro)" id="prezzo-sblocco">€9,90</div>
                     <div style="font-size:12px;color:var(--grigio)">pagamento unico • accesso immediato</div>
                 </div>
                 <button class="btn-sidebar oro" onclick="mostraPopupSblocco()">🔓 Sblocca ora</button>
                 <button class="btn-sidebar" onclick="window.location.href='cliente.html'">✉️ Invia richiesta gratuita</button>
-                <p style="font-size:11px;color:var(--grigio);text-align:center;line-height:1.6;margin-top:8px">Sbloccando il contatto avrai accesso alla chat privata e al numero di telefono diretto</p>
+                <p style="font-size:11px;color:var(--grigio);text-align:center;line-height:1.6;margin-top:8px">Sbloccando il contatto avrai accesso alla chat privata</p>
             </div>
 
             <div class="sidebar-card">
                 <div class="sidebar-title">📋 Informazioni</div>
                 <div class="info-row">
                     <span class="info-icon">📍</span>
-                    <div><div class="info-label">Sede principale</div><div class="info-val">Milano (MI)</div></div>
+                    <div><div class="info-label">Sede principale</div><div class="info-val" id="info-citta">—</div></div>
                 </div>
                 <div class="info-row">
                     <span class="info-icon">🗺️</span>
-                    <div><div class="info-label">Raggio di operatività</div><div class="info-val">50 km da Milano</div></div>
+                    <div><div class="info-label">Raggio di operatività</div><div class="info-val" id="info-raggio">—</div></div>
                 </div>
                 <div class="info-row">
                     <span class="info-icon">⏱️</span>
-                    <div><div class="info-label">Esperienza</div><div class="info-val">15 anni</div></div>
-                </div>
-                <div class="info-row">
-                    <span class="info-icon">👥</span>
-                    <div><div class="info-label">Dimensione team</div><div class="info-val">5–10 operai</div></div>
-                </div>
-                <div class="info-row">
-                    <span class="info-icon">💼</span>
-                    <div><div class="info-label">P.IVA</div><div class="info-val">02xxxxxxx (verificata ✅)</div></div>
-                </div>
-                <div class="info-row">
-                    <span class="info-icon">⚡</span>
-                    <div><div class="info-label">Tempo risposta medio</div><div class="info-val">Entro 2 ore</div></div>
+                    <div><div class="info-label">Esperienza</div><div class="info-val" id="info-anni">—</div></div>
                 </div>
                 <div class="info-row">
                     <span class="info-icon">📅</span>
-                    <div><div class="info-label">Su piattaforma dal</div><div class="info-val">Gennaio 2025</div></div>
+                    <div><div class="info-label">Su piattaforma dal</div><div class="info-val" id="info-dal">—</div></div>
                 </div>
-            </div>
-
-            <div class="sidebar-card">
-                <div class="sidebar-title">📍 Zone di lavoro</div>
-                <div class="zone-grid">
-                    <span class="zona-tag">Milano</span>
-                    <span class="zona-tag">Sesto S. Giovanni</span>
-                    <span class="zona-tag">Monza</span>
-                    <span class="zona-tag">Cinisello Balsamo</span>
-                    <span class="zona-tag">Cologno Monzese</span>
-                    <span class="zona-tag">Segrate</span>
-                    <span class="zona-tag">Pioltello</span>
-                    <span class="zona-tag">Rho</span>
-                    <span class="zona-tag">Pero</span>
-                    <span class="zona-tag">+ altre zone</span>
+                <div class="info-row" id="info-piva-row" style="display:none">
+                    <span class="info-icon">💼</span>
+                    <div><div class="info-label">P.IVA</div><div class="info-val" id="info-piva">verificata ✅</div></div>
+                </div>
+                <div class="info-row" id="info-sito-row" style="display:none">
+                    <span class="info-icon">🌐</span>
+                    <div><div class="info-label">Sito web</div><div class="info-val"><a id="info-sito-link" href="#" target="_blank" style="color:var(--blu)">Visita →</a></div></div>
                 </div>
             </div>
 
@@ -407,72 +272,223 @@
                     Le <strong>recensioni sono reciproche</strong> e obbligatorie al termine del lavoro.
                 </div>
             </div>
+        </div>
+    </div>
+</div>
 
-        </div><!-- fine sidebar -->
-    </div><!-- fine grid -->
-</div><!-- fine main-wrap -->
-
-<!-- POPUP SBLOCCO CONTATTO -->
+<!-- POPUP SBLOCCO -->
 <div class="popup-overlay" id="popupSblocco">
     <div class="popup-box">
         <div class="popup-icon">🔓</div>
         <div class="popup-title">Sblocca il contatto</div>
-        <div class="popup-sub">Stai per sbloccare il contatto di <strong>Rossoni Edilizia</strong>. Avrai accesso immediato alla chat privata e al numero di telefono diretto.</div>
-        <div class="avviso-ban">
-            ⚠️ <strong>Attenzione:</strong> se il professionista non si presenta al sopralluogo per 3 volte consecutive senza giustificazione, viene <strong>bannato automaticamente</strong> dalla piattaforma.
-        </div>
-        <div class="popup-prezzo">€9,90</div>
+        <div class="popup-sub">Stai per sbloccare il contatto di <strong id="popup-nome-pro">questo professionista</strong>. Avrai accesso immediato alla chat privata.</div>
+        <div class="avviso-ban">⚠️ <strong>Attenzione:</strong> se il professionista non si presenta al sopralluogo per 3 volte consecutive senza giustificazione, viene <strong>bannato automaticamente</strong>.</div>
+        <div class="popup-prezzo" id="popup-prezzo">€9,90</div>
         <div class="popup-prezzo-note">pagamento unico • nessun abbonamento richiesto per il cliente</div>
         <button class="btn-popup" onclick="window.location.href='pagamento.html?tipo=singolo'">💳 Procedi al pagamento</button>
         <button class="btn-popup outline" onclick="chiudiPopup()">Annulla</button>
     </div>
 </div>
 
-<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" onclick="chiudiLightbox()">
     <div class="lightbox-content" id="lightbox-content">🏠</div>
 </div>
 
 <script>
+    const EMOJI_CATEGORIE = {
+        edilizia:'🏗️', impianti:'⚡', automotive:'🚗', legale:'⚖️',
+        salute:'🩺', estetica:'💅', giardinieri:'🌿', traslochi:'📦',
+        digitale:'💻', eventi:'🎉', pulizie:'🧹', badanti:'🤝',
+        babysitter:'👶', dogsitter:'🐾', cuochi:'👨‍🍳', tuttofare:'🔨',
+        istruzione:'📚', escort:'🔞'
+    };
+    const NOME_CATEGORIE = {
+        edilizia:'Edilizia & Costruzioni', impianti:'Impianti', automotive:'Automotive',
+        legale:'Legale & Finanza', salute:'Salute & Benessere', estetica:'Estetica & Persona',
+        giardinieri:'Giardinieri', traslochi:'Traslochi', digitale:'Digitale & Tech',
+        eventi:'Organizzatori eventi', pulizie:'Pulizie domestiche', badanti:'Badanti & Assistenti',
+        babysitter:'Baby sitter', dogsitter:'Dog sitter', cuochi:'Cuochi a domicilio',
+        tuttofare:'Tuttofare', istruzione:'Istruzione & Formazione', escort:'Escort +18'
+    };
+
     function switchTab(tab) {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
         document.getElementById('tab-' + tab).classList.add('active');
         document.getElementById('content-' + tab).classList.add('active');
     }
-
     function mostraPopupSblocco() {
         document.getElementById('popupSblocco').classList.add('show');
         document.body.style.overflow = 'hidden';
     }
-
     function chiudiPopup() {
         document.getElementById('popupSblocco').classList.remove('show');
         document.body.style.overflow = '';
     }
-
     function mostraLightbox(emoji) {
         document.getElementById('lightbox-content').textContent = emoji;
         document.getElementById('lightbox').classList.add('show');
         document.body.style.overflow = 'hidden';
     }
-
     function chiudiLightbox() {
         document.getElementById('lightbox').classList.remove('show');
         document.body.style.overflow = '';
     }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') { chiudiPopup(); chiudiLightbox(); } });
 
-    // Chiudi popup con ESC
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') { chiudiPopup(); chiudiLightbox(); }
-    });
-
-    // Gestione parametri URL: ?pro=nome-pro (futuro backend)
-    window.addEventListener('DOMContentLoaded', function() {
+    window.addEventListener('DOMContentLoaded', () => {
         const params = new URLSearchParams(window.location.search);
         const tab = params.get('tab');
         if (tab && ['chi','lavori','video','rec'].includes(tab)) switchTab(tab);
     });
+</script>
+
+<script type="module">
+    import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
+    import { getFirestore, doc, getDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCQHoCYYfdmkXnV2CTGBSq3gpE986QOq2o",
+        authDomain: "rossoni-f069a.firebaseapp.com",
+        projectId: "rossoni-f069a",
+        storageBucket: "rossoni-f069a.firebasestorage.app",
+        messagingSenderId: "708686815315",
+        appId: "1:708686815315:web:0810734346e679e7c066a6"
+    };
+    const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const EMOJI_CATEGORIE = {
+        edilizia:'🏗️', impianti:'⚡', automotive:'🚗', legale:'⚖️',
+        salute:'🩺', estetica:'💅', giardinieri:'🌿', traslochi:'📦',
+        digitale:'💻', eventi:'🎉', pulizie:'🧹', badanti:'🤝',
+        babysitter:'👶', dogsitter:'🐾', cuochi:'👨‍🍳', tuttofare:'🔨',
+        istruzione:'📚', escort:'🔞'
+    };
+    const NOME_CATEGORIE = {
+        edilizia:'Edilizia & Costruzioni', impianti:'Impianti', automotive:'Automotive',
+        legale:'Legale & Finanza', salute:'Salute & Benessere', estetica:'Estetica & Persona',
+        giardinieri:'Giardinieri', traslochi:'Traslochi', digitale:'Digitale & Tech',
+        eventi:'Organizzatori eventi', pulizie:'Pulizie domestiche', badanti:'Badanti & Assistenti',
+        babysitter:'Baby sitter', dogsitter:'Dog sitter', cuochi:'Cuochi a domicilio',
+        tuttofare:'Tuttofare', istruzione:'Istruzione & Formazione', escort:'Escort +18'
+    };
+
+    async function caricaProfilo() {
+        const params = new URLSearchParams(window.location.search);
+        let uid = params.get('uid');
+
+        // Se non c'è UID nell'URL, prende il primo professionista disponibile
+        if (!uid) {
+            const q = query(collection(db, "utenti"), where("ruolo", "==", "professionista"));
+            const snap = await getDocs(q);
+            if (!snap.empty) uid = snap.docs[0].id;
+        }
+
+        if (!uid) {
+            document.getElementById('hero-nome').textContent = 'Profilo non trovato';
+            document.getElementById('hero-desc').textContent = 'Nessun professionista trovato.';
+            return;
+        }
+
+        const snap = await getDoc(doc(db, "utenti", uid));
+        if (!snap.exists()) {
+            document.getElementById('hero-nome').textContent = 'Profilo non trovato';
+            return;
+        }
+
+        const d = snap.data();
+        const nome = d.ragioneSociale || d.nome || 'Professionista';
+        const cat = d.categoria || '';
+        const emoji = EMOJI_CATEGORIE[cat] || '💼';
+        const nomecat = NOME_CATEGORIE[cat] || cat;
+        const desc = d.descrizione || 'Nessuna descrizione disponibile.';
+        const anni = d.anni || '0';
+        const citta = d.citta || '—';
+        const raggio = d.raggio || '—';
+        const piva = d.piva || '';
+        const sito = d.sito || '';
+        const rating = d.rating || 0;
+        const recensioni = d.recensioni || 0;
+        const lavori = d.lavori || 0;
+        const creato = d.creato ? new Date(d.creato.seconds * 1000) : null;
+
+        // Hero
+        document.getElementById('hero-avatar').textContent = emoji;
+        document.getElementById('hero-nome').textContent = nome;
+        document.getElementById('hero-categoria').textContent = emoji + ' ' + nomecat;
+        document.getElementById('hero-desc').textContent = desc;
+        document.getElementById('hero-rating').textContent = rating > 0 ? rating.toFixed(1) : 'Nuovo';
+        document.getElementById('hero-rec-count').textContent = '(' + recensioni + ' recensioni)';
+
+        // Chips hero
+        const chipsEl = document.getElementById('hero-chips');
+        let chipsHTML = '';
+        if (piva) chipsHTML += '<span class="chip verde">✅ P.IVA verificata</span>';
+        chipsHTML += '<span class="chip">📍 ' + citta + '</span>';
+        if (anni && anni !== '0') chipsHTML += '<span class="chip">⏱️ ' + anni + ' anni exp.</span>';
+        if (sito) chipsHTML += '<span class="chip oro">🌐 Sito web</span>';
+        chipsEl.innerHTML = chipsHTML;
+
+        // Popup nome
+        document.getElementById('popup-nome-pro').textContent = nome;
+
+        // Tab Chi siamo
+        document.getElementById('desc-testo').textContent = desc;
+        document.getElementById('stat-lavori').textContent = lavori || '0';
+        document.getElementById('stat-rating').textContent = rating > 0 ? rating.toFixed(1) + '★' : 'Nuovo';
+        document.getElementById('stat-anni').textContent = anni && anni !== '0' ? anni : '—';
+
+        if (sito) {
+            document.getElementById('sito-web-box').style.display = 'block';
+            document.getElementById('sito-web-link').href = sito.startsWith('http') ? sito : 'https://' + sito;
+        }
+
+        // Sidebar info
+        document.getElementById('info-citta').textContent = citta;
+        document.getElementById('info-raggio').textContent = raggio + ' km da ' + citta;
+        document.getElementById('info-anni').textContent = anni && anni !== '0' ? anni + ' anni' : 'Non specificato';
+        document.getElementById('info-dal').textContent = creato ? creato.toLocaleDateString('it-IT', { month: 'long', year: 'numeric' }) : '—';
+
+        if (piva) {
+            document.getElementById('badge-piva').style.display = 'flex';
+            document.getElementById('info-piva-row').style.display = 'flex';
+            document.getElementById('info-piva').textContent = piva.substring(0,4) + '******* ✅';
+        }
+        if (sito) {
+            document.getElementById('info-sito-row').style.display = 'flex';
+            const sitoLink = sito.startsWith('http') ? sito : 'https://' + sito;
+            document.getElementById('info-sito-link').href = sitoLink;
+        }
+
+        // Video
+        if (sito || d.video) {
+            document.getElementById('badge-video-sidebar').style.display = 'block';
+            document.getElementById('btn-video-hero').style.display = 'block';
+            document.getElementById('video-title-text').textContent = 'Video di presentazione — ' + nome;
+        } else {
+            document.getElementById('video-section').style.display = 'none';
+            document.getElementById('no-video-section').style.display = 'block';
+        }
+
+        // Gallery
+        const emojiGallery = ['🏠','🛁','🪣','🧱','🪟','🏗️'];
+        const galleryGrid = document.getElementById('gallery-grid');
+        galleryGrid.innerHTML = '';
+        emojiGallery.forEach((em, i) => {
+            const div = document.createElement('div');
+            div.className = 'gallery-item' + (i === 0 ? ' main-photo' : '');
+            div.textContent = em;
+            div.onclick = () => window.mostraLightbox(em);
+            galleryGrid.appendChild(div);
+        });
+        document.getElementById('gallery-note').textContent = '📸 Foto disponibili — Sblocca il contatto per richiedere l\'album completo';
+
+        // Titolo pagina
+        document.title = nome + ' — Professionisti';
+    }
+
+    caricaProfilo();
 </script>
 </body>
 </html>
