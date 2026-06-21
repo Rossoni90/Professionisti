@@ -469,6 +469,138 @@
             alert('Recensione inviata! Grazie per il tuo feedback.');
         }
     </script>
+<script type="module" src="firebase-auth.js"></script>
+<script type="module">
+window.goStep3 = async function() {
+  const citta = document.getElementById('req-citta').value;
+  const desc = document.getElementById('req-descrizione').value;
+  const quando = document.getElementById('req-quando').value;
+  if (!categoriaSelezionata) { alert('Seleziona una categoria!'); return; }
+  if (!citta || !desc || !quando) { alert('Compila tutti i campi!'); return; }
+
+  const nome = document.getElementById('reg-nome').value;
+  const email = document.getElementById('reg-email').value;
+  const pass = document.getElementById('reg-password').value;
+
+  const btn = document.querySelector('#step2 .btn-main');
+  btn.textContent = 'Registrazione in corso...';
+  btn.disabled = true;
+
+  const ris = await window.registraCliente(nome, email, pass, categoriaSelezionata, citta, desc, quando);
+  if (ris.successo) {
+    goToStep(3);
+  } else {
+    alert(ris.errore);
+    btn.textContent = 'Invia Richiesta →';
+    btn.disabled = false;
+  }
+};
+
+window.eseguiLogin = async function() {
+  const email = document.getElementById('login-email').value;
+  const pass = document.getElementById('login-password').value;
+  if (!email || !pass) { alert('Inserisci email e password!'); return; }
+
+  const btn = document.querySelector('#tab-accedi .btn-main');
+  btn.textContent = 'Accesso in corso...';
+  btn.disabled = true;
+
+  const ris = await window.loginUtente(email, pass);
+  if (!ris.successo) {
+    alert(ris.errore);
+    btn.textContent = '🔑 Accedi';
+    btn.disabled = false;
+  }
+};
+</script>
+<script type="module" src="firebase-auth.js"></script>
+<script type="module">
+window.goStep3 = async function() {
+  const citta = document.getElementById('req-citta').value;
+  const desc = document.getElementById('req-descrizione').value;
+  const quando = document.getElementById('req-quando').value;
+  if (!categoriaSelezionata) { alert('Seleziona una categoria!'); return; }
+  if (!citta || !desc || !quando) { alert('Compila tutti i campi!'); return; }
+
+  const nome = document.getElementById('reg-nome').value;
+  const email = document.getElementById('reg-email').value;
+  const pass = document.getElementById('reg-password').value;
+
+  const btn = document.querySelector('#step2 .btn-main');
+  btn.textContent = 'Registrazione in corso...';
+  btn.disabled = true;
+
+  const ris = await window.registraCliente(nome, email, pass, categoriaSelezionata, citta, desc, quando);
+  if (ris.successo) {
+    goToStep(3);
+  } else {
+    alert(ris.errore);
+    btn.textContent = 'Invia Richiesta →';
+    btn.disabled = false;
+  }
+};
+
+window.eseguiLogin = async function() {
+  const email = document.getElementById('login-email').value;
+  const pass = document.getElementById('login-password').value;
+  if (!email || !pass) { alert('Inserisci email e password!'); return; }
+
+  const btn = document.querySelector('#tab-accedi .btn-main');
+  btn.textContent = 'Accesso in corso...';
+  btn.disabled = true;
+
+  const ris = await window.loginUtente(email, pass);
+  if (!ris.successo) {
+    alert(ris.errore);
+    btn.textContent = '🔑 Accedi';
+    btn.disabled = false;
+  }
+};
+<script type="module" src="firebase-auth.js"></script>
+<script type="module">
+window.goStep3 = async function() {
+  const citta = document.getElementById('req-citta').value;
+  const desc = document.getElementById('req-descrizione').value;
+  const quando = document.getElementById('req-quando').value;
+  if (!categoriaSelezionata) { alert('Seleziona una categoria!'); return; }
+  if (!citta || !desc || !quando) { alert('Compila tutti i campi!'); return; }
+
+  const nome = document.getElementById('reg-nome').value;
+  const email = document.getElementById('reg-email').value;
+  const pass = document.getElementById('reg-password').value;
+
+  const btn = document.querySelector('#step2 .btn-main');
+  btn.textContent = 'Registrazione in corso...';
+  btn.disabled = true;
+
+  const ris = await window.registraCliente(nome, email, pass, categoriaSelezionata, citta, desc, quando);
+  if (ris.successo) {
+    goToStep(3);
+  } else {
+    alert(ris.errore);
+    btn.textContent = 'Invia Richiesta →';
+    btn.disabled = false;
+  }
+};
+
+window.eseguiLogin = async function() {
+  const email = document.getElementById('login-email').value;
+  const pass = document.getElementById('login-password').value;
+  if (!email || !pass) { alert('Inserisci email e password!'); return; }
+
+  const btn = document.querySelector('#tab-accedi .btn-main');
+  btn.textContent = 'Accesso in corso...';
+  btn.disabled = true;
+
+  const ris = await window.loginUtente(email, pass);
+  if (!ris.successo) {
+    alert(ris.errore);
+    btn.textContent = '🔑 Accedi';
+    btn.disabled = false;
+  }
+};
+</script>
+
 
 </body>
 </html>
