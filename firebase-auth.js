@@ -142,7 +142,7 @@ function tradErrore(code) {
     'auth/wrong-password': '❌ Password errata.',
     'auth/user-not-found': '❌ Nessun account trovato con questa email.',
     'auth/too-many-requests': '❌ Troppi tentativi. Riprova tra qualche minuto.',
-    'auth/network-request-failed': '❌ Errore di rete. Controlla la connessione.'
+    'auth/network-request-failed': '❌ Errore di rete. Controlla la connessione.',
     'auth/invalid-credential': '❌ Email o password errata. Riprova.'
   };
   return mappa[code] || '❌ Errore: ' + code;
