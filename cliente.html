@@ -428,12 +428,15 @@
         }
 
         function goStep3() {
-            const citta = document.getElementById('req-citta').value;
-            const desc = document.getElementById('req-descrizione').value;
-            const quando = document.getElementById('req-quando').value;
-            if (!categoriaSelezionata) { alert('Seleziona una categoria!'); return; }
-            if (!citta || !desc || !quando) { alert('Compila tutti i campi!'); return; }
-            goToStep(3);
+    if (window._goStep3Running) return;
+    window._goStep3Running = true;
+    if (window.goStep3Firebase) {
+        window.goStep3Firebase().finally(() => { window._goStep3Running = false; });
+    } else {
+        window._goStep3Running = false;
+    }
+}
+
         }
 
         function goToStep(n) {
