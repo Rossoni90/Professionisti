@@ -1,20 +1,14 @@
-// ============================================================
-// FIREBASE AUTH — Professionisti Platform
-// Versione: 1.0 — Si aggiunge senza toccare il codice esistente
-// ============================================================
-
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js";
 import { getFirestore, doc, setDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js";
 
-// CONFIG FIREBASE
 const firebaseConfig = {
   apiKey: "AIzaSyCQHoCYYfdmkXnV2CTGBSq3gpE986QOq2o",
   authDomain: "rossoni-f069a.firebaseapp.com",
   projectId: "rossoni-f069a",
   storageBucket: "rossoni-f069a.firebasestorage.app",
   messagingSenderId: "708686815315",
-  appId: "1:708686815315:web:0810734346e679e7c0666a6",
+  appId: "1:708686815315:web:0810734346e679e7c066a6",
   measurementId: "G-WY79H8S00F"
 };
 
@@ -22,14 +16,8 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// ============================================================
-// PAGINA CORRENTE
-// ============================================================
 const paginaCorrente = window.location.pathname.split('/').pop() || 'index.html';
 
-// ============================================================
-// REGISTRAZIONE CLIENTE (cliente.html — goStep3)
-// ============================================================
 window.registraCliente = async function(nome, email, password, categoria, citta, descrizione, quando) {
   try {
     const cred = await createUserWithEmailAndPassword(auth, email, password);
@@ -64,9 +52,6 @@ window.registraCliente = async function(nome, email, password, categoria, citta,
   }
 };
 
-// ============================================================
-// LOGIN CLIENTE/PROFESSIONISTA (cliente.html — eseguiLogin)
-// ============================================================
 window.loginUtente = async function(email, password) {
   try {
     const cred = await signInWithEmailAndPassword(auth, email, password);
@@ -87,9 +72,6 @@ window.loginUtente = async function(email, password) {
   }
 };
 
-// ============================================================
-// REGISTRAZIONE PROFESSIONISTA (professionista.html)
-// ============================================================
 window.registraProfessionista = async function(datiForm) {
   try {
     const cred = await createUserWithEmailAndPassword(auth, datiForm.email, datiForm.password);
@@ -123,21 +105,13 @@ window.registraProfessionista = async function(datiForm) {
   }
 };
 
-// ============================================================
-// LOGOUT
-// ============================================================
 window.eseguiLogout = async function() {
   await signOut(auth);
   localStorage.clear();
   window.location.href = 'index.html';
 };
 
-// ============================================================
-// PROTEZIONE PAGINE RISERVATE
-// ============================================================
-const pagineCliente = ['dashboard-cliente.html'];
-const paginePro = ['dashboard-pro.html'];
-const pagineAuth = [...pagineCliente, ...paginePro, 'chat.html', 'profilo-pro.html'];
+const pagineAuth = ['dashboard-cliente.html', 'dashboard-pro.html', 'chat.html', 'profilo-pro.html'];
 
 onAuthStateChanged(auth, async (user) => {
   if (!user && pagineAuth.includes(paginaCorrente)) {
@@ -148,10 +122,8 @@ onAuthStateChanged(auth, async (user) => {
     const snap = await getDoc(doc(db, "utenti", user.uid));
     if (snap.exists()) {
       const dati = snap.data();
-      // Aggiorna il nome nella navbar se presente
       const elNome = document.querySelector('.navbar-nome');
       if (elNome) elNome.textContent = dati.nome || dati.ragioneSociale || '';
-      // Protezione pagine per ruolo
       if (paginaCorrente === 'dashboard-cliente.html' && dati.ruolo !== 'cliente') {
         window.location.href = 'dashboard-pro.html';
       }
@@ -162,9 +134,6 @@ onAuthStateChanged(auth, async (user) => {
   }
 });
 
-// ============================================================
-// TRADUCI ERRORI FIREBASE IN ITALIANO
-// ============================================================
 function tradErrore(code) {
   const mappa = {
     'auth/email-already-in-use': '❌ Email già registrata. Prova ad accedere.',
@@ -178,5 +147,4 @@ function tradErrore(code) {
   return mappa[code] || '❌ Errore: ' + code;
 }
 
-console.log('✅ Firebase Auth caricato — Professionisti Platform');
-
+console.log('Firebase Auth caricato correttamente');
