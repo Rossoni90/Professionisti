@@ -8,21 +8,12 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --blu: #1B3A6B;
-            --blu-scuro: #0F2347;
-            --blu-chiaro: #2952A3;
-            --oro: #B8972A;
-            --oro-chiaro: #D4AF37;
-            --bianco: #FFFFFF;
-            --grigio-chiaro: #F5F7FA;
-            --grigio: #6B7280;
-            --testo: #1A1A2E;
-            --verde: #10B981;
-            --rosso: #EF4444;
-            --arancio: #F59E0B;
+            --blu: #1B3A6B; --blu-scuro: #0F2347; --blu-chiaro: #2952A3;
+            --oro: #B8972A; --oro-chiaro: #D4AF37; --bianco: #FFFFFF;
+            --grigio-chiaro: #F5F7FA; --grigio: #6B7280; --testo: #1A1A2E;
+            --verde: #10B981; --rosso: #EF4444; --arancio: #F59E0B;
         }
         body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color: var(--testo); min-height: 100vh; }
-
         .navbar { background: var(--blu-scuro); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 15px rgba(0,0,0,0.3); }
         .logo { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 900; color: white; text-decoration: none; letter-spacing: 1px; }
         .logo span { color: var(--oro); }
@@ -31,7 +22,6 @@
         .btn-login:hover { border-color: var(--oro); color: var(--oro); }
         .btn-cliente { background: var(--oro); color: white; border: none; padding: 9px 22px; border-radius: 25px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; text-decoration: none; }
         .btn-cliente:hover { background: var(--oro-chiaro); transform: translateY(-1px); }
-
         .page-hero { background: linear-gradient(135deg, var(--blu-scuro) 0%, var(--blu) 50%, var(--blu-chiaro) 100%); padding: 60px 30px 50px; text-align: center; position: relative; overflow: hidden; }
         .page-hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(184,151,42,0.1) 0%, transparent 60%); pointer-events: none; }
         .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(184,151,42,0.2); border: 1px solid rgba(184,151,42,0.4); color: var(--oro-chiaro); font-size: 13px; font-weight: 600; padding: 6px 18px; border-radius: 20px; margin-bottom: 20px; }
@@ -42,39 +32,31 @@
         .hero-stat { text-align: center; }
         .hero-stat-num { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; color: var(--oro); }
         .hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 3px; }
-
         .container { max-width: 750px; margin: 0 auto; padding: 40px 20px 60px; }
-
         .tabs { display: flex; gap: 0; background: white; border-radius: 16px 16px 0 0; overflow: hidden; border: 1px solid #e5e7eb; border-bottom: none; }
         .tab { flex: 1; padding: 16px; border: none; background: transparent; cursor: pointer; font-size: 15px; font-weight: 600; color: var(--grigio); transition: 0.3s; font-family: 'Inter', sans-serif; }
         .tab.active { background: white; color: var(--blu); border-bottom: 3px solid var(--oro); }
         .tab:hover:not(.active) { background: var(--grigio-chiaro); }
-
         .card { background: white; border-radius: 0 0 20px 20px; padding: 35px 40px; border: 1px solid #e5e7eb; border-top: none; box-shadow: 0 10px 40px rgba(0,0,0,0.06); }
-
         .steps-indicator { display: flex; align-items: center; justify-content: center; margin-bottom: 35px; gap: 0; }
         .step-dot { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; background: #e5e7eb; color: var(--grigio); transition: 0.4s; flex-shrink: 0; }
         .step-dot.active { background: var(--blu); color: white; box-shadow: 0 4px 12px rgba(27,58,107,0.3); }
         .step-dot.done { background: var(--verde); color: white; }
         .step-line { height: 3px; flex: 1; background: #e5e7eb; transition: 0.4s; max-width: 80px; }
         .step-line.done { background: var(--verde); }
-
         .step-content { display: none; }
         .step-content.active { display: block; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--testo); margin-bottom: 8px; }
         .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 13px 18px; border: 1.5px solid #e5e7eb; border-radius: 12px; font-size: 15px; font-family: 'Inter', sans-serif; transition: 0.3s; background: white; color: var(--testo); }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--blu); outline: none; box-shadow: 0 0 0 3px rgba(27,58,107,0.08); }
         .form-group textarea { min-height: 100px; resize: vertical; }
-
         .otp-group { display: flex; gap: 10px; }
         .otp-group input { flex: 1; }
         .btn-otp { background: var(--blu); color: white; border: none; padding: 13px 20px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; white-space: nowrap; flex-shrink: 0; }
         .btn-otp:hover { background: var(--blu-chiaro); }
         .btn-otp:disabled { background: var(--grigio); cursor: not-allowed; }
-
         .otp-verify { display: none; margin-top: 15px; }
         .otp-verify.show { display: block; }
         .otp-boxes { display: flex; gap: 10px; justify-content: center; margin: 15px 0; }
@@ -83,9 +65,7 @@
         .otp-box:focus { border-color: var(--oro); outline: none; background: #FFFBEB; }
         .otp-timer { text-align: center; font-size: 13px; color: var(--grigio); }
         .otp-timer span { color: var(--blu); cursor: pointer; font-weight: 600; }
-
         #piva-result { margin-top: 10px; }
-
         .categorie-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin: 15px 0 20px; }
         .categoria-btn { padding: 14px 12px; border: 2px solid #e5e7eb; border-radius: 14px; background: white; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--grigio); transition: 0.3s; text-align: center; font-family: 'Inter', sans-serif; display: flex; flex-direction: column; align-items: center; gap: 6px; }
         .categoria-btn:hover { border-color: var(--blu); color: var(--blu); background: #EFF6FF; }
@@ -94,7 +74,6 @@
         .categoria-btn.escort-btn { border-color: #FDA4AF; color: #BE185D; }
         .categoria-btn.escort-btn:hover { border-color: #F43F5E; background: #FFF1F2; color: #F43F5E; }
         .categoria-btn.escort-btn.selected { border-color: #F43F5E; background: #FFF1F2; color: #F43F5E; }
-
         .pricing-box { background: var(--grigio-chiaro); border-radius: 16px; padding: 22px; margin: 20px 0; border: 1px solid #e5e7eb; }
         .pricing-box h3 { font-size: 15px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
         .pricing-options { display: flex; gap: 12px; flex-wrap: wrap; }
@@ -107,13 +86,11 @@
         .pricing-card.selected .prezzo { color: var(--oro); }
         .pricing-card .unita { font-size: 12px; color: var(--grigio); }
         .pricing-card .risparmio { font-size: 11px; color: var(--verde); font-weight: 600; margin-top: 6px; }
-
         .sblocco-info { background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 14px; padding: 18px 20px; font-size: 14px; color: var(--blu-scuro); line-height: 1.8; margin: 15px 0; }
         .sblocco-info strong { display: block; margin-bottom: 8px; font-size: 15px; }
         .sblocco-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid rgba(27,58,107,0.08); font-size: 13px; }
         .sblocco-row:last-child { border-bottom: none; }
         .sblocco-prezzo { font-weight: 700; color: var(--oro); font-size: 15px; }
-
         .avviso-blu { background: #EFF6FF; border: 1px solid #BFDBFE; border-radius: 12px; padding: 15px 18px; font-size: 13px; color: #1E40AF; line-height: 1.7; margin-bottom: 20px; }
         .avviso-blu strong { display: block; margin-bottom: 5px; }
         .avviso-oro { background: #FFFBEB; border: 1px solid #FDE68A; border-radius: 12px; padding: 15px 18px; font-size: 13px; color: #78350F; line-height: 1.7; margin-bottom: 20px; }
@@ -122,35 +99,29 @@
         .avviso-rosso strong { display: block; margin-bottom: 5px; }
         .avviso-verde { background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 12px; padding: 15px 18px; font-size: 13px; color: #065F46; line-height: 1.7; margin-bottom: 20px; }
         .avviso-verde strong { display: block; margin-bottom: 5px; }
-
         .upload-area { border: 2px dashed #e5e7eb; border-radius: 14px; padding: 30px 20px; text-align: center; cursor: pointer; transition: 0.3s; margin-bottom: 15px; }
         .upload-area:hover { border-color: var(--blu); background: #EFF6FF; }
         .upload-area .upload-icon { font-size: 36px; margin-bottom: 10px; }
         .upload-area p { font-size: 14px; color: var(--grigio); }
         .upload-area strong { color: var(--blu); }
-
         .btn-main { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--blu) 0%, var(--blu-chiaro) 100%); color: white; border: none; border-radius: 14px; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; margin-top: 10px; letter-spacing: 0.3px; box-shadow: 0 4px 15px rgba(27,58,107,0.3); }
         .btn-main:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(27,58,107,0.35); }
-        .btn-main:active { transform: translateY(0); }
+        .btn-main:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
         .btn-main.oro { background: linear-gradient(135deg, var(--oro) 0%, var(--oro-chiaro) 100%); box-shadow: 0 4px 15px rgba(184,151,42,0.3); }
         .btn-main.oro:hover { box-shadow: 0 8px 25px rgba(184,151,42,0.4); }
         .btn-back { background: transparent; color: var(--grigio); border: 1.5px solid #e5e7eb; padding: 12px; border-radius: 12px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; width: 100%; margin-top: 10px; }
         .btn-back:hover { border-color: var(--grigio); color: var(--testo); }
-
         .step-title { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--blu-scuro); margin-bottom: 6px; font-weight: 700; }
         .step-subtitle { font-size: 14px; color: var(--grigio); margin-bottom: 25px; line-height: 1.6; }
-
         .foto-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 15px 0; }
         .foto-slot { aspect-ratio: 1; border: 2px dashed #e5e7eb; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; transition: 0.3s; background: var(--grigio-chiaro); }
         .foto-slot:hover { border-color: var(--oro); background: #FFFBEB; }
         .foto-slot.loaded { border-color: var(--verde); background: #ECFDF5; }
-
         .raggio-container { margin: 10px 0 20px; }
         .raggio-value { text-align: center; font-family: 'Playfair Display', serif; font-size: 32px; font-weight: 900; color: var(--blu); margin-bottom: 10px; }
         .raggio-value span { font-size: 16px; color: var(--grigio); }
         input[type="range"] { width: 100%; height: 6px; border-radius: 3px; background: linear-gradient(90deg, var(--blu) 0%, #e5e7eb 0%); outline: none; cursor: pointer; }
         input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--blu); cursor: pointer; box-shadow: 0 2px 8px rgba(27,58,107,0.3); }
-
         .success-screen { text-align: center; padding: 20px 0; }
         .success-icon { font-size: 72px; margin-bottom: 20px; animation: pulse 1s ease; }
         @keyframes pulse { 0% { transform: scale(0); } 70% { transform: scale(1.1); } 100% { transform: scale(1); } }
@@ -159,7 +130,6 @@
         .success-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 30px; text-align: left; }
         .highlight-item { background: var(--grigio-chiaro); border-radius: 12px; padding: 15px; font-size: 13px; color: var(--testo); line-height: 1.5; }
         .highlight-item strong { display: block; color: var(--blu-scuro); margin-bottom: 4px; font-size: 14px; }
-
         .adult-popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
         .adult-popup.show { display: flex; }
         .adult-box { background: white; border-radius: 25px; padding: 40px 30px; max-width: 400px; width: 100%; text-align: center; }
@@ -170,17 +140,13 @@
         .btn-adult-no { flex: 1; background: var(--grigio-chiaro); color: var(--grigio); border: none; padding: 14px; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s; }
         .btn-adult-si:hover { background: #DC2626; }
         .btn-adult-no:hover { background: #e5e7eb; color: var(--testo); }
-
         .link-back { display: block; text-align: center; color: var(--grigio); font-size: 14px; text-decoration: none; margin-top: 20px; padding: 10px; transition: 0.2s; }
         .link-back:hover { color: var(--blu); }
-
         .divider { height: 1px; background: #e5e7eb; margin: 25px 0; }
-
         .checkbox-group { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 15px; cursor: pointer; }
         .checkbox-group input[type="checkbox"] { width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px; accent-color: var(--blu); cursor: pointer; }
         .checkbox-group span { font-size: 13px; color: var(--grigio); line-height: 1.6; }
         .checkbox-group span a { color: var(--blu); text-decoration: none; font-weight: 600; }
-
         @media (max-width: 600px) {
             .card { padding: 25px 20px; }
             .categorie-grid { grid-template-columns: 1fr 1fr; }
@@ -197,7 +163,6 @@
 </head>
 <body>
 
-<!-- NAVBAR -->
 <nav class="navbar">
     <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
     <div class="navbar-links">
@@ -206,7 +171,6 @@
     </div>
 </nav>
 
-<!-- HERO -->
 <div class="page-hero">
     <div class="hero-badge">💼 Area Professionisti</div>
     <h1>Trova nuovi <span>clienti</span><br>ogni giorno</h1>
@@ -219,7 +183,6 @@
     </div>
 </div>
 
-<!-- CONTENUTO -->
 <div class="container">
     <div class="tabs">
         <button class="tab active" id="tab-reg-btn" onclick="switchTab('registrati')">📝 Registrati</button>
@@ -228,9 +191,8 @@
 
     <div class="card">
 
-        <!-- ==================== TAB REGISTRAZIONE ==================== -->
+        <!-- TAB REGISTRAZIONE -->
         <div id="tab-registrati">
-
             <div class="steps-indicator">
                 <div class="step-dot active" id="dot1">1</div>
                 <div class="step-line" id="line12"></div>
@@ -249,7 +211,7 @@
                 <div class="step-subtitle">Crea il tuo account professionale. Tutti i professionisti devono verificare il numero di telefono.</div>
                 <div class="avviso-blu">
                     <strong>ℹ️ Come funziona la registrazione</strong>
-                    La registrazione è in 5 step. Creerai il profilo, sceglierai la categoria, caricherai i documenti (dove richiesto), sceglierai il piano e inizierai a ricevere richieste.
+                    La registrazione è in 5 step. Creerai il profilo, sceglierai la categoria, caricherai i documenti, sceglierai il piano e inizierai a ricevere richieste.
                 </div>
                 <div class="form-group">
                     <label>Nome e Cognome *</label>
@@ -280,7 +242,7 @@
                 </div>
                 <div class="form-group" style="margin-top:18px">
                     <label>Password *</label>
-                    <input type="password" id="reg-password" placeholder="Minimo 8 caratteri">
+                    <input type="password" id="reg-password" placeholder="Minimo 6 caratteri">
                 </div>
                 <div class="form-group">
                     <label>Conferma Password *</label>
@@ -331,7 +293,7 @@
                 <div id="box-standard" style="display:none">
                     <div class="avviso-oro">
                         <strong>📋 Verifica richiesta per questa categoria</strong>
-                        Per registrarti come professionista in questa categoria devi fornire:<br>
+                        Per registrarti devi fornire:<br>
                         ✅ Partita IVA valida (verifica automatica)<br>
                         ✅ Visura camerale aggiornata (verifica entro 24h)<br>
                         ✅ Documento d'identità valido
@@ -371,8 +333,8 @@
                 <div id="box-semplificata" style="display:none">
                     <div class="avviso-verde">
                         <strong>✅ Registrazione semplificata</strong>
-                        Per questa categoria non è richiesta Partita IVA o Visura camerale.<br>
-                        Devi caricare solo un documento d'identità valido per la verifica.
+                        Per questa categoria non è richiesta Partita IVA.<br>
+                        Devi caricare solo un documento d'identità valido.
                     </div>
                     <div class="form-group">
                         <label>Carica Documento d'Identità *</label>
@@ -388,7 +350,6 @@
                 <div id="box-escort" style="display:none">
                     <div class="avviso-rosso">
                         <strong>🔞 Sezione riservata a maggiorenni</strong>
-                        Questa sezione è accessibile solo a persone maggiorenni (+18 anni).<br>
                         Non è richiesta Partita IVA, ma è obbligatorio caricare un documento d'identità valido per confermare la maggiore età.<br>
                         <strong>La piattaforma verifica manualmente ogni registrazione in questa categoria.</strong>
                     </div>
@@ -403,7 +364,7 @@
                     </div>
                 </div>
 
-                <button class="btn-main" onclick="goStep(2,3)" id="btn-step2-avanti" style="margin-top:10px">Continua — Profilo →</button>
+                <button class="btn-main" onclick="goStep(2,3)" style="margin-top:10px">Continua — Profilo →</button>
                 <button class="btn-back" onclick="goStep(2,1)">← Indietro</button>
             </div>
 
@@ -469,9 +430,9 @@
                 <div id="sblocco-container"></div>
                 <div class="avviso-blu" style="margin-top:15px">
                     <strong>ℹ️ Come funziona lo sblocco contatti</strong>
-                    Quando un cliente pubblica una richiesta nella tua zona e categoria, la vedi anonimizzata (solo descrizione lavoro e città). Se ti interessa, paghi lo sblocco per accedere alla chat privata e concordare sopralluogo e preventivo.
+                    Quando un cliente pubblica una richiesta nella tua zona e categoria, la vedi anonimizzata. Se ti interessa, paghi lo sblocco per accedere alla chat privata e concordare sopralluogo e preventivo.
                 </div>
-                <button class="btn-main oro" onclick="goStep(4,5)" id="btn-continua-piano">Attiva abbonamento e vai avanti →</button>
+                <button class="btn-main oro" onclick="completaRegistrazione()" id="btn-continua-piano">Completa registrazione →</button>
                 <button class="btn-back" onclick="goStep(4,3)">← Indietro</button>
             </div>
 
@@ -482,7 +443,7 @@
                     <div class="success-title">Registrazione inviata!</div>
                     <div class="success-sub">Il tuo profilo è stato inviato per la verifica. Riceverai una conferma entro 24 ore via email e SMS.</div>
                     <div class="success-highlights">
-                        <div class="highlight-item"><strong>📧 Email inviata</strong>Controlla la tua casella email per il riepilogo della registrazione</div>
+                        <div class="highlight-item"><strong>📧 Email inviata</strong>Controlla la tua casella email per il riepilogo</div>
                         <div class="highlight-item"><strong>🔍 Verifica in corso</strong>Il nostro team verificherà i tuoi documenti entro 24h</div>
                         <div class="highlight-item"><strong>✅ Attivazione profilo</strong>Una volta verificato, il tuo profilo sarà visibile ai clienti</div>
                         <div class="highlight-item"><strong>📲 Notifiche attive</strong>Riceverai un SMS ogni volta che arriva una richiesta nella tua zona</div>
@@ -491,11 +452,9 @@
                     <a href="index.html" class="link-back">← Torna alla homepage</a>
                 </div>
             </div>
-
         </div>
-        <!-- Fine tab registrati -->
 
-        <!-- ==================== TAB ACCEDI ==================== -->
+        <!-- TAB ACCEDI -->
         <div id="tab-accedi" style="display:none">
             <div class="step-title" style="margin-bottom:6px">Bentornato 👋</div>
             <div class="step-subtitle">Accedi alla tua area professionista.</div>
@@ -507,7 +466,7 @@
                 <label>Password</label>
                 <input type="password" id="login-password" placeholder="La tua password">
             </div>
-            <button class="btn-main" onclick="eseguiLoginPro()">🔑 Accedi</button>
+            <button class="btn-main" id="btn-login" onclick="eseguiLoginPro()">🔑 Accedi</button>
             <a href="#" class="link-back" style="color:var(--blu);font-weight:600">Hai dimenticato la password?</a>
             <div class="divider"></div>
             <p style="text-align:center;font-size:14px;color:var(--grigio)">
@@ -542,6 +501,7 @@
     let otpInviato = false;
     let fotoCaricate = 0;
     let pendingEscort = false;
+    let fotoSlotCorrente = 0;
 
     const PREZZI = {
         babysitter:  { mensile: 10,  annuale: null, contatto: 8,  tipo: 'semplificata' },
@@ -564,7 +524,6 @@
         eventi:      { mensile: 99,  annuale: 888,  contatto: 9,  tipo: 'standard' },
     };
 
-    // LEGGI URL PARAMS
     window.addEventListener('DOMContentLoaded', function() {
         const params = new URLSearchParams(window.location.search);
         if (params.get('tab') === 'accedi') switchTab('accedi');
@@ -611,8 +570,8 @@
                 const pass2 = document.getElementById('reg-password2').value;
                 const check = document.getElementById('check-regole').checked;
                 if (!nome) { alert('Inserisci il tuo nome e cognome!'); return; }
-                if (!email || !email.includes('@')) { alert('Inserisci un\'email valida!'); return; }
-                if (!pass || pass.length < 8) { alert('La password deve essere di almeno 8 caratteri!'); return; }
+                if (!email || !email.includes('@')) { alert("Inserisci un'email valida!"); return; }
+                if (!pass || pass.length < 6) { alert('La password deve essere di almeno 6 caratteri!'); return; }
                 if (pass !== pass2) { alert('Le password non coincidono!'); return; }
                 if (!check) { alert('Devi accettare i Termini di Servizio per continuare!'); return; }
             }
@@ -625,6 +584,7 @@
                 const citta = document.getElementById('citta').value.trim();
                 if (!desc) { alert('Inserisci una descrizione professionale!'); return; }
                 if (!citta) { alert('Inserisci la tua città!'); return; }
+                if (fotoCaricate < 2) { alert('Carica almeno 2 foto del tuo lavoro!'); return; }
             }
         }
         document.getElementById('step' + from).classList.remove('active');
@@ -696,7 +656,7 @@
                     📍 <strong>Indirizzo:</strong> ${data.address || 'Non disponibile'}
                 </div>`;
                 pivaVerificata = true;
-                if (document.getElementById('ragione-sociale').value === '') {
+                if (!document.getElementById('ragione-sociale').value) {
                     document.getElementById('ragione-sociale').value = data.name || '';
                 }
             } else {
@@ -716,7 +676,6 @@
         }
     }
 
-    let fotoSlotCorrente = 0;
     function uploadFoto(index) {
         fotoSlotCorrente = index;
         document.getElementById('upload-foto-input').click();
@@ -744,7 +703,6 @@
         if (!p) return;
         const container = document.getElementById('pricing-container');
         const sbloccoContainer = document.getElementById('sblocco-container');
-
         let html = '<div class="pricing-box"><h3>📦 Abbonamento pagina profilo</h3><p style="font-size:13px;color:var(--grigio);margin-bottom:15px">Abbonati per attivare il tuo profilo pubblico e ricevere richieste.</p><div class="pricing-options">';
         html += `<div class="pricing-card ${pianoSelezionato === 'mensile' ? 'selected' : ''}" onclick="selezionaPiano('mensile', this)">
             <div class="periodo">Mensile</div>
@@ -765,13 +723,12 @@
         }
         html += '</div></div>';
         container.innerHTML = html;
-
         let sbloccoHtml = '<div class="sblocco-info"><strong>🔓 Costo sblocco contatti</strong>';
         if (p.sbloccoCat === 'edilizia') {
             sbloccoHtml += `
             <div class="sblocco-row"><span>🟢 Piccoli lavori (tinteggiatura, cartongesso, piastrelle...)</span><span class="sblocco-prezzo">€9,90</span></div>
-            <div class="sblocco-row"><span>🟡 Medi lavori (ristrutturazione bagno, posa pavimenti, impermeabilizzazioni...)</span><span class="sblocco-prezzo">€19,90</span></div>
-            <div class="sblocco-row"><span>🔴 Grandi lavori (ristrutturazione completa, cappotto, costruzioni...)</span><span class="sblocco-prezzo">€29,90</span></div>`;
+            <div class="sblocco-row"><span>🟡 Medi lavori (ristrutturazione bagno, posa pavimenti...)</span><span class="sblocco-prezzo">€19,90</span></div>
+            <div class="sblocco-row"><span>🔴 Grandi lavori (ristrutturazione completa, costruzioni...)</span><span class="sblocco-prezzo">€29,90</span></div>`;
         } else if (p.contatto) {
             sbloccoHtml += `<div class="sblocco-row"><span>Singolo contatto</span><span class="sblocco-prezzo">€${p.contatto},00</span></div>`;
         }
@@ -785,12 +742,67 @@
         el.classList.add('selected');
     }
 
+    // Chiamata a Firebase al completamento
+    async function completaRegistrazione() {
+        const btn = document.getElementById('btn-continua-piano');
+        btn.textContent = 'Registrazione in corso...';
+        btn.disabled = true;
+
+        const datiForm = {
+            nome: document.getElementById('reg-nome').value.trim(),
+            email: document.getElementById('reg-email').value.trim(),
+            password: document.getElementById('reg-password').value,
+            telefono: document.getElementById('reg-telefono').value.trim(),
+            ragioneSociale: document.getElementById('ragione-sociale') ? document.getElementById('ragione-sociale').value.trim() : document.getElementById('reg-nome').value.trim(),
+            categoria: categoriaSelezionata,
+            citta: document.getElementById('citta').value.trim(),
+            raggio: document.getElementById('raggio-slider').value,
+            descrizione: document.getElementById('descrizione').value.trim(),
+            anni: document.getElementById('anni-esperienza').value || '0',
+            piano: pianoSelezionato,
+            piva: document.getElementById('piva') ? document.getElementById('piva').value.trim() : '',
+            sito: document.getElementById('sito-web').value.trim()
+        };
+
+        if (window.registraProfessionista) {
+            const ris = await window.registraProfessionista(datiForm);
+            if (ris.successo) {
+                goStep(4, 5);
+            } else {
+                alert(ris.errore);
+                btn.textContent = 'Completa registrazione →';
+                btn.disabled = false;
+            }
+        } else {
+            alert('Errore: Firebase non caricato. Ricarica la pagina.');
+            btn.textContent = 'Completa registrazione →';
+            btn.disabled = false;
+        }
+    }
+
     function eseguiLoginPro() {
-        const email = document.getElementById('login-email').value;
+        if (window.eseguiLoginProAsync) {
+            window.eseguiLoginProAsync();
+        }
+    }
+</script>
+
+<script type="module" src="firebase-auth.js"></script>
+<script type="module">
+    window.eseguiLoginProAsync = async function() {
+        const email = document.getElementById('login-email').value.trim();
         const pass = document.getElementById('login-password').value;
         if (!email || !pass) { alert('Inserisci email e password!'); return; }
-        window.location.href = 'dashboard-pro.html';
-    }
+        const btn = document.getElementById('btn-login');
+        btn.textContent = 'Accesso in corso...';
+        btn.disabled = true;
+        const ris = await window.loginUtente(email, pass);
+        if (!ris.successo) {
+            alert(ris.errore);
+            btn.textContent = '🔑 Accedi';
+            btn.disabled = false;
+        }
+    };
 </script>
 
 </body>
