@@ -14,22 +14,12 @@
   --verde: #10B981; --rosso: #EF4444; --arancio: #F59E0B;
 }
 body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color: var(--testo); min-height: 100vh; }
-.navbar {
-  background: var(--blu-scuro); padding: 14px 25px;
-  display: flex; justify-content: space-between; align-items: center;
-  position: sticky; top: 0; z-index: 100;
-  box-shadow: 0 2px 15px rgba(0,0,0,0.25);
-}
+.navbar { background: var(--blu-scuro); padding: 14px 25px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 15px rgba(0,0,0,0.25); }
 .logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: white; text-decoration: none; }
 .logo span { color: var(--oro); }
 .navbar-right { display: flex; align-items: center; gap: 15px; }
 .notifica-badge { position: relative; cursor: pointer; font-size: 20px; }
-.notifica-badge .badge {
-  position: absolute; top: -8px; right: -8px;
-  background: var(--rosso); color: white; font-size: 10px; font-weight: 700;
-  width: 18px; height: 18px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-}
+.notifica-badge .badge { position: absolute; top: -8px; right: -8px; background: var(--rosso); color: white; font-size: 10px; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 .avatar { width: 38px; height: 38px; background: var(--oro); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; font-size: 16px; }
 .navbar-nome { color: white; font-size: 14px; font-weight: 600; }
 .abbonamento-badge { background: var(--verde); color: white; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
@@ -313,6 +303,13 @@ function tempoFa(seconds) {
   return `${Math.floor(diff/86400)} giorni fa`;
 }
 
+// Legge il timestamp da qualsiasi campo disponibile
+function getTS(r) {
+  if (r.timestamp && r.timestamp.seconds) return r.timestamp.seconds;
+  if (r.creato && r.creato.seconds) return r.creato.seconds;
+  return 0;
+}
+
 window.setStella = (n) => {
   stelleSelezionate = n;
   document.querySelectorAll('.stella').forEach((s,i) => s.classList.toggle('attiva', i < n));
@@ -408,21 +405,22 @@ onAuthStateChanged(auth, async (user) => {
 
   const categoriePro = Array.isArray(dati.categorie) ? dati.categorie : (dati.categoria ? [dati.categoria] : []);
 
-  // ── RICHIESTE: due query separate per 'attesa' e 'aperta' ──
-  // (Firestore non supporta OR su stesso campo senza indice)
+  // ── RICHIESTE: cerca tutti gli stati possibili in parallelo ──
   try {
-    const [snapAttesa, snapAperta] = await Promise.all([
-      getDocs(query(collection(db, 'richieste'), where('stato', '==', 'attesa'), limit(30))),
-      getDocs(query(collection(db, 'richieste'), where('stato', '==', 'aperta'), limit(30)))
+    const [s1, s2, s3, s4] = await Promise.all([
+      getDocs(query(collection(db,'richieste'), where('stato','==','attiva'), limit(30))),
+      getDocs(query(collection(db,'richieste'), where('stato','==','aperta'), limit(30))),
+      getDocs(query(collection(db,'richieste'), where('stato','==','attesa'), limit(30))),
+      getDocs(query(collection(db,'richieste'), where('stato','==','pubblicata'), limit(30)))
     ]);
 
-    // Unisci i risultati eliminando duplicati per ID
+    // Unisci eliminando duplicati
     const docsMap = new Map();
-    [...snapAttesa.docs, ...snapAperta.docs].forEach(d => docsMap.set(d.id, d));
+    [...s1.docs, ...s2.docs, ...s3.docs, ...s4.docs].forEach(d => docsMap.set(d.id, d));
     let docs = Array.from(docsMap.values());
 
-    // Ordina per timestamp discendente lato client
-    docs.sort((a, b) => (b.data().timestamp?.seconds ?? 0) - (a.data().timestamp?.seconds ?? 0));
+    // Ordina per timestamp/creato desc
+    docs.sort((a,b) => getTS(b.data()) - getTS(a.data()));
 
     // Filtra per categoria se impostate
     if (categoriePro.length > 0) {
@@ -445,12 +443,13 @@ onAuthStateChanged(auth, async (user) => {
       container.innerHTML = '';
       docs.forEach(docSnap => {
         const r = docSnap.data();
-        const tempo = r.timestamp ? tempoFa(r.timestamp.seconds) : 'poco fa';
+        const ts = getTS(r);
+        const tempo = ts ? tempoFa(ts) : 'poco fa';
         const chipUrgenza = r.urgente ? '<span class="chip rosso">🔴 Urgente</span>' : '<span class="chip verde">⏳ Tempi flessibili</span>';
         const mqChip = r.mq ? `<span class="chip">📐 ${r.mq} mq</span>` : '';
         const quandoChip = r.quando ? `<span class="chip">🗓️ ${r.quando}</span>` : '';
         const giaSbloccato = (r.sbloccatiDa || []).includes(currentUID);
-        const catLabel = (r.categoria || 'Richiesta').replace(/'/g, "\\'");
+        const catLabel = (r.categoria || 'Richiesta').replace(/'/g,"\\'");
         const btnHtml = giaSbloccato
           ? `<button class="btn-sblocca sbloccato" onclick="window.location.href='chat.html?richiesta=${docSnap.id}'">💬 Vai alla chat</button>`
           : `<button class="btn-sblocca" onclick="apriPopupSblocco('${catLabel}','${docSnap.id}')">🔓 Sblocca contatto</button>`;
@@ -485,7 +484,7 @@ onAuthStateChanged(auth, async (user) => {
     if (snapSop.empty) {
       sopCont.innerHTML = '<div class="vuoto-msg">📅 Nessun sopralluogo programmato.</div>';
     } else {
-      const sorted = snapSop.docs.sort((a,b) => (a.data().data?.seconds??0) - (b.data().data?.seconds??0));
+      const sorted = snapSop.docs.sort((a,b) => (a.data().data?.seconds??0)-(b.data().data?.seconds??0));
       const s = sorted[0].data();
       const dataSop = s.data ? new Date(s.data.seconds*1000).toLocaleString('it-IT',{weekday:'long',day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '—';
       sopCont.innerHTML = `<div class="sopralluogo-card"><div class="sopralluogo-stato confermato">✅ Confermato</div><div class="sopralluogo-data">${dataSop}</div><div class="sopralluogo-info"><strong>Cliente:</strong> ${s.clienteNome||'—'}<br><strong>Lavoro:</strong> ${s.lavoro||'—'}<br><strong>Indirizzo:</strong> ${s.indirizzo||'—'}</div></div>`;
@@ -501,7 +500,7 @@ onAuthStateChanged(auth, async (user) => {
     if (snapLav.empty) {
       lavCont.innerHTML = '<div class="vuoto-msg">✅ Nessun lavoro completato ancora.</div>';
     } else {
-      const sorted = snapLav.docs.sort((a,b) => (b.data().data?.seconds??0) - (a.data().data?.seconds??0));
+      const sorted = snapLav.docs.sort((a,b) => (b.data().data?.seconds??0)-(a.data().data?.seconds??0));
       const l = sorted[0].data();
       const dataLav = l.data ? new Date(l.data.seconds*1000).toLocaleDateString('it-IT',{day:'numeric',month:'long',year:'numeric'}) : '—';
       lavCont.innerHTML = `<div class="sopralluogo-card" style="border-left-color:var(--oro)"><div class="sopralluogo-stato confermato" style="background:#FFFBEB;color:var(--oro)">✅ Completato</div><div class="sopralluogo-data">${dataLav}</div><div class="sopralluogo-info"><strong>Cliente:</strong> ${l.clienteNome||'—'}<br><strong>Lavoro:</strong> ${l.lavoro||'—'}</div></div>`;
@@ -520,7 +519,7 @@ onAuthStateChanged(auth, async (user) => {
       recCont.innerHTML = '';
       snapRec.docs.forEach(d => {
         const rec = d.data();
-        const stelle = '★'.repeat(rec.stelle||0) + '☆'.repeat(5-(rec.stelle||0));
+        const stelle = '★'.repeat(rec.stelle||0)+'☆'.repeat(5-(rec.stelle||0));
         const data = rec.timestamp ? new Date(rec.timestamp.seconds*1000).toLocaleDateString('it-IT') : '—';
         recCont.innerHTML += `<div class="recensione-card"><div class="rec-header"><div class="rec-nome">${rec.daNome||'Cliente'}</div><div class="rec-stelle">${stelle}</div></div><div class="rec-testo">${rec.testo||'—'}</div><div class="rec-data">${data}</div></div>`;
       });
