@@ -156,7 +156,6 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
         <h1 id="saluto-nome">Caricamento...</h1>
         <p id="sottotitolo">—</p>
       </div>
-      <!-- ✅ MODIFICA: ora va su nuova-richiesta.html -->
       <button class="btn-nuova" onclick="window.location.href='nuova-richiesta.html'">➕ Nuova richiesta</button>
     </div>
 
@@ -185,8 +184,8 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
       </div>
     </div>
 
-    <div class="sez-title">💬 Offerte ricevute <span class="count-badge oro" id="count-offerte">0 nuove</span></div>
-    <div id="offerte-container"><div class="loading-spinner">⏳ Caricamento offerte...</div></div>
+    <div class="sez-title">💬 Professionisti che ti hanno contattato <span class="count-badge oro" id="count-offerte">0</span></div>
+    <div id="offerte-container"><div class="loading-spinner">⏳ Caricamento...</div></div>
 
     <div class="sez-title" style="margin-top:8px">📋 Le mie richieste attive <span class="count-badge" id="count-richieste">0</span></div>
     <div id="richieste-container"><div class="loading-spinner">⏳ Caricamento richieste...</div></div>
@@ -265,23 +264,38 @@ function tempoFa(secondi) {
 onAuthStateChanged(auth, async (user) => {
   if (!user) { window.location.href = 'cliente.html?tab=accedi'; return; }
   currentUID = user.uid;
+
   const utenteSnap = await getDoc(doc(db, 'utenti', user.uid));
   if (!utenteSnap.exists()) { window.location.href = 'cliente.html?tab=accedi'; return; }
   const dati = utenteSnap.data();
   if (dati.ruolo === 'professionista') { window.location.href = 'dashboard-pro.html'; return; }
+
   const nome = dati.nome || 'Cliente';
   document.getElementById('navbar-nome').textContent = nome;
   document.getElementById('navbar-avatar').textContent = nome.charAt(0).toUpperCase();
   document.getElementById('saluto-nome').innerHTML = `Ciao, <span style="color:var(--oro)">${nome}</span> 👋`;
+  document.getElementById('stat-completati').textContent = dati.lavoriCompletati ?? 0;
 
-  let nRichieste = 0, nOfferte = 0;
+  // ── RICHIESTE ATTIVE ──────────────────────────────────────────────
+  let nRichieste = 0;
   try {
-    const qRich = query(collection(db,'richieste'), where('clienteUID','==',user.uid), orderBy('timestamp','desc'));
+    // Senza orderBy per evitare errori di indice mancante
+    const qRich = query(collection(db, 'richieste'), where('clienteUID', '==', user.uid));
     const snapRich = await getDocs(qRich);
-    const richiesteAttive = snapRich.docs.filter(d => d.data().stato !== 'completata');
+    const richiesteAttive = snapRich.docs.filter(d => {
+      const s = d.data().stato;
+      return s !== 'completata' && s !== 'chiusa';
+    });
+    // Ordina lato client per data decrescente
+    richiesteAttive.sort((a, b) => {
+      const ta = a.data().timestamp?.seconds ?? 0;
+      const tb = b.data().timestamp?.seconds ?? 0;
+      return tb - ta;
+    });
     nRichieste = richiesteAttive.length;
     document.getElementById('stat-richieste').textContent = nRichieste;
     document.getElementById('count-richieste').textContent = nRichieste;
+
     const richCont = document.getElementById('richieste-container');
     if (!richiesteAttive.length) {
       richCont.innerHTML = '<div class="vuoto-msg">📭 Nessuna richiesta attiva. <a href="nuova-richiesta.html" style="color:var(--blu);font-weight:600">Crea la prima!</a></div>';
@@ -289,77 +303,185 @@ onAuthStateChanged(auth, async (user) => {
       richCont.innerHTML = '';
       for (const docSnap of richiesteAttive) {
         const r = docSnap.data();
-        const data = r.timestamp ? tempoFa(r.timestamp.seconds) : '—';
+        const dataStr = r.timestamp ? tempoFa(r.timestamp.seconds) : '—';
+        // Conta le chat attive per questa richiesta (= professionisti che hanno sbloccato)
         let nOff = 0;
-        try { const qOff = query(collection(db,'offerte'), where('richiestaID','==',docSnap.id)); const snapOff = await getDocs(qOff); nOff = snapOff.size; nOfferte += nOff; } catch(e) {}
-        const perc = Math.min(Math.round((nOff/5)*100),100);
-        richCont.innerHTML += `<div class="richiesta-card"><div class="richiesta-header"><div class="richiesta-title">🏗️ ${r.categoria||'Richiesta'} — ${r.citta||''}</div><span class="richiesta-data">${data}</span></div><div class="progress-bar"><div class="progress-fill" style="width:${perc}%"></div></div><div class="progress-label"><span>${nOff}/5 professionisti</span><span style="color:var(--blu);font-weight:600">${perc>0?perc+'%':'In attesa...'}</span></div></div>`;
+        try {
+          const qChat = query(collection(db, 'chat'), where('richiestaID', '==', docSnap.id));
+          const snapChat = await getDocs(qChat);
+          nOff = snapChat.size;
+        } catch(e) {}
+        const perc = Math.min(Math.round((nOff / 5) * 100), 100);
+        richCont.innerHTML += `
+          <div class="richiesta-card">
+            <div class="richiesta-header">
+              <div class="richiesta-title">🏗️ ${r.categoria || 'Richiesta'} — ${r.citta || ''}</div>
+              <span class="richiesta-data">${dataStr}</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width:${perc}%"></div></div>
+            <div class="progress-label">
+              <span>${nOff}/5 professionisti</span>
+              <span style="color:var(--blu);font-weight:600">${nOff > 0 ? perc + '%' : 'In attesa...'}</span>
+            </div>
+          </div>`;
       }
     }
-    document.getElementById('stat-offerte').textContent = nOfferte;
-    document.getElementById('count-offerte').textContent = nOfferte + ' nuove';
-    document.getElementById('notifica-count').textContent = nOfferte;
-    document.getElementById('sidebar-chat-badge').textContent = nOfferte;
-    document.getElementById('sottotitolo').textContent = nOfferte > 0 ? `Hai ${nOfferte} nuove offerte!` : `Hai ${nRichieste} richieste attive.`;
-  } catch(e) { document.getElementById('richieste-container').innerHTML = '<div class="vuoto-msg">⚠️ Errore caricamento.</div>'; }
+  } catch(e) {
+    console.error('Errore richieste:', e);
+    document.getElementById('richieste-container').innerHTML = '<div class="vuoto-msg">⚠️ Errore caricamento richieste.</div>';
+    document.getElementById('stat-richieste').textContent = '0';
+  }
 
-  document.getElementById('stat-completati').textContent = dati.lavoriCompletati ?? 0;
-
+  // ── CHAT / OFFERTE RICEVUTE (professionisti che hanno sbloccato) ──
+  let nChat = 0;
   try {
-    const qOff = query(collection(db,'offerte'), where('clienteUID','==',user.uid), where('letta','==',false), orderBy('timestamp','desc'), limit(10));
-    const snapOff = await getDocs(qOff);
+    const qChat = query(collection(db, 'chat'), where('clienteUID', '==', user.uid));
+    const snapChat = await getDocs(qChat);
+    nChat = snapChat.size;
+    document.getElementById('stat-offerte').textContent = nChat;
+    document.getElementById('count-offerte').textContent = nChat;
+    document.getElementById('notifica-count').textContent = nChat;
+    document.getElementById('sidebar-chat-badge').textContent = nChat;
+    document.getElementById('sottotitolo').textContent = nChat > 0
+      ? `Hai ${nChat} professionisti che ti hanno contattato!`
+      : `Hai ${nRichieste} richieste attive.`;
+
     const offCont = document.getElementById('offerte-container');
-    if (snapOff.empty) { offCont.innerHTML = '<div class="vuoto-msg">📭 Nessuna offerta ricevuta ancora.</div>'; }
-    else {
+    if (snapChat.empty) {
+      offCont.innerHTML = '<div class="vuoto-msg">📭 Nessun professionista ti ha ancora contattato.</div>';
+    } else {
       offCont.innerHTML = '';
-      for (const docSnap of snapOff.docs) {
-        const o = docSnap.data();
-        const tempo = o.timestamp ? tempoFa(o.timestamp.seconds) : 'poco fa';
-        const inizialeP = (o.proNome||'P').charAt(0).toUpperCase();
-        const stelle = o.proRating ? `${'★'.repeat(Math.round(o.proRating))}${'☆'.repeat(5-Math.round(o.proRating))} ${o.proRating}` : '';
-        offCont.innerHTML += `<div class="offerta-card nuova"><div class="nuovo-tag">🆕 NUOVA</div><div class="offerta-header"><div class="pro-info"><div class="pro-avatar">${inizialeP}</div><div><div class="pro-nome">${o.proNome||'Professionista'}</div><div class="pro-cat">🏗️ ${o.categoria||'—'}</div><div class="pro-stelle">${stelle}</div></div></div><span class="offerta-tempo">${tempo}</span></div><div class="offerta-msg">"${o.messaggio||'—'}"</div><div class="chips-row">${o.pivaVerificata?'<span class="chip verde">✅ Verificato</span>':''}${o.anni?`<span class="chip">🏆 ${o.anni} anni</span>`:''}</div><div class="offerta-footer"><button class="btn-profilo" onclick="window.location.href='profilo-pro.html?uid=${o.proUID}'">👤 Profilo</button><button class="btn-chat" onclick="window.location.href='chat.html'">💬 Chat</button></div></div>`;
+      // Ordina per data decrescente lato client
+      const chatDocs = snapChat.docs.sort((a, b) => {
+        const ta = a.data().ultimoTimestamp?.seconds ?? a.data().creatoIl?.seconds ?? 0;
+        const tb = b.data().ultimoTimestamp?.seconds ?? b.data().creatoIl?.seconds ?? 0;
+        return tb - ta;
+      });
+      for (const chatDoc of chatDocs) {
+        const c = chatDoc.data();
+        const chatId = chatDoc.id;
+        const proNome = c.professionistaNome || c.proNome || 'Professionista';
+        const iniziale = proNome.charAt(0).toUpperCase();
+        const categoria = c.richiestaCategoria || '—';
+        const tempoStr = c.ultimoTimestamp ? tempoFa(c.ultimoTimestamp.seconds) : (c.creatoIl ? tempoFa(c.creatoIl.seconds) : 'poco fa');
+        const ultimoMsg = c.ultimoTesto || c.ultimoMessaggio || '🔓 Contatto sbloccato';
+        offCont.innerHTML += `
+          <div class="offerta-card nuova">
+            <div class="nuovo-tag">💬 IN CHAT</div>
+            <div class="offerta-header">
+              <div class="pro-info">
+                <div class="pro-avatar">${iniziale}</div>
+                <div>
+                  <div class="pro-nome">${proNome}</div>
+                  <div class="pro-cat">🏗️ ${categoria}</div>
+                </div>
+              </div>
+              <span class="offerta-tempo">${tempoStr}</span>
+            </div>
+            <div class="offerta-msg">"${ultimoMsg}"</div>
+            <div class="offerta-footer">
+              <button class="btn-chat" onclick="window.location.href='chat.html?chat=${chatId}'">💬 Apri chat</button>
+            </div>
+          </div>`;
       }
     }
-  } catch(e) { document.getElementById('offerte-container').innerHTML = '<div class="vuoto-msg">⚠️ Errore.</div>'; }
+  } catch(e) {
+    console.error('Errore chat:', e);
+    document.getElementById('offerte-container').innerHTML = '<div class="vuoto-msg">⚠️ Errore caricamento.</div>';
+    document.getElementById('stat-offerte').textContent = '0';
+  }
 
+  // ── PROSSIMO SOPRALLUOGO ─────────────────────────────────────────
   try {
-    const qSop = query(collection(db,'sopralluoghi'), where('clienteUID','==',user.uid), where('stato','==','confermato'), orderBy('data','asc'), limit(1));
+    const qSop = query(collection(db, 'sopralluoghi'), where('clienteUID', '==', user.uid), where('stato', '==', 'confermato'));
     const snapSop = await getDocs(qSop);
     const sopCont = document.getElementById('sopralluogo-container');
     document.getElementById('stat-sopralluoghi').textContent = snapSop.size;
-    if (snapSop.empty) { sopCont.innerHTML = '<div class="vuoto-msg">📅 Nessun sopralluogo programmato.</div>'; }
-    else {
-      const s = snapSop.docs[0].data();
-      const dataSop = s.data ? new Date(s.data.seconds*1000).toLocaleString('it-IT',{weekday:'long',day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '—';
-      sopCont.innerHTML = `<div class="sopralluogo-card"><div class="sopralluogo-stato confermato">✅ Confermato</div><div class="sopralluogo-data">${dataSop}</div><div class="sopralluogo-info"><strong>Professionista:</strong> ${s.proNome||'—'}<br><strong>Lavoro:</strong> ${s.lavoro||'—'}<br>⚠️ Se non sei presente ricevi una segnalazione.</div><div class="sopralluogo-actions"><button class="btn-chat-small" onclick="window.location.href='chat.html'">💬 Chat</button><button class="btn-profilo-small" onclick="window.location.href='profilo-pro.html?uid=${s.proUID}'">👤 Profilo</button></div></div>`;
+    if (snapSop.empty) {
+      sopCont.innerHTML = '<div class="vuoto-msg">📅 Nessun sopralluogo programmato.</div>';
+    } else {
+      // Prende il più vicino
+      const sorted = snapSop.docs.sort((a, b) => (a.data().data?.seconds ?? 0) - (b.data().data?.seconds ?? 0));
+      const s = sorted[0].data();
+      const dataSop = s.data ? new Date(s.data.seconds * 1000).toLocaleString('it-IT', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '—';
+      const proNomeSop = s.professionistaNome || s.proNome || '—';
+      const proUIDSop = s.professionistaUID || s.proUID || '';
+      const chatIdSop = s.chatID || '';
+      sopCont.innerHTML = `
+        <div class="sopralluogo-card">
+          <div class="sopralluogo-stato confermato">✅ Confermato</div>
+          <div class="sopralluogo-data">${dataSop}</div>
+          <div class="sopralluogo-info">
+            <strong>Professionista:</strong> ${proNomeSop}<br>
+            <strong>Lavoro:</strong> ${s.lavoro || s.richiestaDescrizione || '—'}<br>
+            ⚠️ Se non sei presente ricevi una segnalazione.
+          </div>
+          <div class="sopralluogo-actions">
+            <button class="btn-chat-small" onclick="window.location.href='chat.html${chatIdSop ? '?chat=' + chatIdSop : ''}'">💬 Chat</button>
+          </div>
+        </div>`;
     }
-  } catch(e) { document.getElementById('sopralluogo-container').innerHTML = '<div class="vuoto-msg">📅 Nessun sopralluogo.</div>'; document.getElementById('stat-sopralluoghi').textContent='0'; }
+  } catch(e) {
+    console.error('Errore sopralluoghi:', e);
+    document.getElementById('sopralluogo-container').innerHTML = '<div class="vuoto-msg">📅 Nessun sopralluogo.</div>';
+    document.getElementById('stat-sopralluoghi').textContent = '0';
+  }
 
+  // ── RECENSIONE PENDENTE ──────────────────────────────────────────
   try {
-    const qLav = query(collection(db,'sopralluoghi'), where('clienteUID','==',user.uid), where('stato','==','completato'), where('recensioneCliente','==',false), orderBy('data','desc'), limit(1));
+    const qLav = query(collection(db, 'sopralluoghi'), where('clienteUID', '==', user.uid), where('stato', '==', 'completato'), where('recensioneCliente', '==', false));
     const snapLav = await getDocs(qLav);
     const recPendCont = document.getElementById('recensione-pendente-container');
-    if (snapLav.empty) { recPendCont.innerHTML = '<div class="vuoto-msg">✅ Nessuna recensione in sospeso.</div>'; }
-    else {
+    if (snapLav.empty) {
+      recPendCont.innerHTML = '<div class="vuoto-msg">✅ Nessuna recensione in sospeso.</div>';
+    } else {
       const l = snapLav.docs[0].data();
-      const dataLav = l.data ? new Date(l.data.seconds*1000).toLocaleDateString('it-IT',{day:'numeric',month:'long',year:'numeric'}) : '—';
-      recPendCont.innerHTML = `<div class="sopralluogo-card" style="border-left-color:var(--arancio)"><div class="sopralluogo-stato" style="background:#FEF3C7;color:var(--arancio)">⭐ In attesa recensione</div><div class="sopralluogo-data" style="font-size:16px">${dataLav}</div><div class="sopralluogo-info"><strong>Professionista:</strong> ${l.proNome||'—'}<br>La recensione è <strong>obbligatoria</strong>.</div><button style="margin-top:12px;width:100%;padding:10px;background:var(--arancio);color:white;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif" onclick="apriRecensione('${l.proUID}','${(l.proNome||'').replace(/'/g,"\\'")}')">⭐ Lascia recensione</button></div>`;
+      const dataLav = l.data ? new Date(l.data.seconds * 1000).toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' }) : '—';
+      const proNomeRec = l.professionistaNome || l.proNome || '—';
+      const proUIDRec = l.professionistaUID || l.proUID || '';
+      recPendCont.innerHTML = `
+        <div class="sopralluogo-card" style="border-left-color:var(--arancio)">
+          <div class="sopralluogo-stato" style="background:#FEF3C7;color:var(--arancio)">⭐ In attesa recensione</div>
+          <div class="sopralluogo-data" style="font-size:16px">${dataLav}</div>
+          <div class="sopralluogo-info">
+            <strong>Professionista:</strong> ${proNomeRec}<br>
+            La recensione è <strong>obbligatoria</strong>.
+          </div>
+          <button style="margin-top:12px;width:100%;padding:10px;background:var(--arancio);color:white;border:none;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Inter',sans-serif"
+            onclick="apriRecensione('${proUIDRec}','${proNomeRec.replace(/'/g,"\\'")}')">⭐ Lascia recensione</button>
+        </div>`;
     }
-  } catch(e) { document.getElementById('recensione-pendente-container').innerHTML = '<div class="vuoto-msg">✅ Nessuna recensione.</div>'; }
+  } catch(e) {
+    console.error('Errore recensioni pendenti:', e);
+    document.getElementById('recensione-pendente-container').innerHTML = '<div class="vuoto-msg">✅ Nessuna recensione.</div>';
+  }
 
+  // ── ULTIME RECENSIONI RICEVUTE ───────────────────────────────────
   try {
-    const qRec = query(collection(db,'recensioni'), where('aUID','==',user.uid), where('tipo','==','pro-a-cliente'), orderBy('timestamp','desc'), limit(3));
+    const qRec = query(collection(db, 'recensioni'), where('aUID', '==', user.uid), where('tipo', '==', 'pro-a-cliente'));
     const snapRec = await getDocs(qRec);
     const recCont = document.getElementById('recensioni-container');
-    if (snapRec.empty) { recCont.innerHTML = '<div class="vuoto-msg">⭐ Nessuna recensione ricevuta ancora.</div>'; }
-    else {
+    if (snapRec.empty) {
+      recCont.innerHTML = '<div class="vuoto-msg">⭐ Nessuna recensione ricevuta ancora.</div>';
+    } else {
+      const sorted = snapRec.docs.sort((a, b) => (b.data().timestamp?.seconds ?? 0) - (a.data().timestamp?.seconds ?? 0)).slice(0, 3);
       recCont.innerHTML = '';
-      snapRec.forEach(docSnap => {
+      sorted.forEach(docSnap => {
         const r = docSnap.data();
-        recCont.innerHTML += `<div class="rec-card"><div class="rec-header"><span class="rec-nome">${r.daNome||'Professionista'}</span><span class="rec-stelle">${'★'.repeat(r.stelle||0)}</span></div><div class="rec-testo">${r.testo||''}</div></div>`;
+        recCont.innerHTML += `
+          <div class="rec-card">
+            <div class="rec-header">
+              <span class="rec-nome">${r.daNome || 'Professionista'}</span>
+              <span class="rec-stelle">${'★'.repeat(r.stelle || 0)}</span>
+            </div>
+            <div class="rec-testo">${r.testo || ''}</div>
+          </div>`;
       });
     }
-  } catch(e) { document.getElementById('recensioni-container').innerHTML = '<div class="vuoto-msg">⭐ Nessuna recensione.</div>'; }
+  } catch(e) {
+    console.error('Errore recensioni:', e);
+    document.getElementById('recensioni-container').innerHTML = '<div class="vuoto-msg">⭐ Nessuna recensione.</div>';
+  }
 });
 </script>
 </body>
