@@ -14,18 +14,8 @@
   --verde: #10B981; --rosso: #EF4444; --arancio: #F59E0B;
 }
 body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color: var(--testo); min-height: 100vh; }
-
-/* ===== LOGIN SCREEN ===== */
-.login-screen {
-  display: flex; align-items: center; justify-content: center;
-  min-height: 100vh; background: linear-gradient(135deg, var(--blu-scuro), var(--blu));
-  padding: 20px;
-}
-.login-box {
-  background: white; border-radius: 24px; padding: 50px 40px;
-  max-width: 420px; width: 100%; text-align: center;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.3);
-}
+.login-screen { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: linear-gradient(135deg, var(--blu-scuro), var(--blu)); padding: 20px; }
+.login-box { background: white; border-radius: 24px; padding: 50px 40px; max-width: 420px; width: 100%; text-align: center; box-shadow: 0 30px 80px rgba(0,0,0,0.3); }
 .login-logo { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900; color: var(--blu-scuro); margin-bottom: 8px; }
 .login-logo span { color: var(--oro); }
 .login-badge { display: inline-block; background: var(--oro); color: var(--blu-scuro); font-size: 11px; font-weight: 700; padding: 4px 14px; border-radius: 20px; letter-spacing: 1px; margin-bottom: 30px; }
@@ -33,20 +23,11 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 .login-subtitle { font-size: 14px; color: var(--grigio); margin-bottom: 30px; }
 .login-input-group { margin-bottom: 16px; text-align: left; }
 .login-input-group label { font-size: 13px; font-weight: 600; color: var(--blu-scuro); margin-bottom: 6px; display: block; }
-.login-input {
-  width: 100%; padding: 14px 16px; border: 1.5px solid #e5e7eb; border-radius: 12px;
-  font-size: 15px; font-family: 'Inter', sans-serif; outline: none; transition: 0.3s;
-}
+.login-input { width: 100%; padding: 14px 16px; border: 1.5px solid #e5e7eb; border-radius: 12px; font-size: 15px; font-family: 'Inter', sans-serif; outline: none; transition: 0.3s; }
 .login-input:focus { border-color: var(--blu); box-shadow: 0 0 0 3px rgba(27,58,107,0.1); }
-.btn-login {
-  width: 100%; padding: 15px; background: linear-gradient(135deg, var(--blu), var(--blu-chiaro));
-  color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 700;
-  cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; margin-top: 8px;
-}
+.btn-login { width: 100%; padding: 15px; background: linear-gradient(135deg, var(--blu), var(--blu-chiaro)); color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; margin-top: 8px; }
 .btn-login:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(27,58,107,0.4); }
 .login-errore { background: #FEF2F2; color: var(--rosso); padding: 12px 16px; border-radius: 10px; font-size: 14px; margin-top: 16px; display: none; }
-
-/* ===== ADMIN DASHBOARD ===== */
 .admin-screen { display: none; }
 .navbar { background: var(--blu-scuro); padding: 14px 30px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 15px rgba(0,0,0,0.25); }
 .logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: white; text-decoration: none; }
@@ -169,7 +150,7 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 </head>
 <body>
 
-<!-- ===== SCHERMATA LOGIN ===== -->
+<!-- LOGIN -->
 <div class="login-screen" id="loginScreen">
   <div class="login-box">
     <div class="login-logo">PROFES<span>SIONISTI</span></div>
@@ -189,9 +170,8 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
   </div>
 </div>
 
-<!-- ===== DASHBOARD ADMIN ===== -->
+<!-- DASHBOARD ADMIN -->
 <div class="admin-screen" id="adminScreen">
-
 <nav class="navbar">
   <div class="navbar-left">
     <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
@@ -208,31 +188,14 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 <div class="dashboard-layout">
   <aside class="sidebar">
     <ul class="sidebar-menu">
-      <li class="sidebar-item active" onclick="mostraSezione('richieste', this)">
-        <span class="icon">📋</span> Richieste
-        <span class="sidebar-badge" id="badge-richieste">0</span>
-      </li>
-      <li class="sidebar-item" onclick="mostraSezione('utenti', this)">
-        <span class="icon">👥</span> Utenti
-      </li>
-      <li class="sidebar-item" onclick="mostraSezione('professionisti', this)">
-        <span class="icon">✅</span> Approva Pro
-        <span class="sidebar-badge" id="badge-pro">0</span>
-      </li>
-      <li class="sidebar-item" onclick="mostraSezione('segnalazioni', this)">
-        <span class="icon">🚨</span> Segnalazioni
-        <span class="sidebar-badge" id="badge-segn">0</span>
-      </li>
-      <li class="sidebar-item" onclick="mostraSezione('statistiche', this)">
-        <span class="icon">📊</span> Statistiche
-      </li>
-      <li class="sidebar-item" onclick="mostraSezione('log', this)">
-        <span class="icon">📝</span> Log attività
-      </li>
+      <li class="sidebar-item active" onclick="mostraSezione('richieste', this)"><span class="icon">📋</span> Richieste <span class="sidebar-badge" id="badge-richieste">0</span></li>
+      <li class="sidebar-item" onclick="mostraSezione('utenti', this)"><span class="icon">👥</span> Utenti</li>
+      <li class="sidebar-item" onclick="mostraSezione('professionisti', this)"><span class="icon">✅</span> Approva Pro <span class="sidebar-badge" id="badge-pro">0</span></li>
+      <li class="sidebar-item" onclick="mostraSezione('segnalazioni', this)"><span class="icon">🚨</span> Segnalazioni <span class="sidebar-badge" id="badge-segn">0</span></li>
+      <li class="sidebar-item" onclick="mostraSezione('statistiche', this)"><span class="icon">📊</span> Statistiche</li>
+      <li class="sidebar-item" onclick="mostraSezione('log', this)"><span class="icon">📝</span> Log attività</li>
       <div class="sidebar-divider"></div>
-      <li class="sidebar-item" onclick="eseguiLogout()">
-        <span class="icon">🚪</span> Esci
-      </li>
+      <li class="sidebar-item" onclick="eseguiLogout()"><span class="icon">🚪</span> Esci</li>
     </ul>
   </aside>
 
@@ -245,40 +208,15 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
         <p>Le richieste arrivano prima a te — decidi cosa tenere e cosa pubblicare</p>
       </div>
       <div class="stats-row">
-        <div class="stat-card oro">
-          <div class="stat-card-icon">⏳</div>
-          <div class="stat-card-numero" id="stat-attesa">0</div>
-          <div class="stat-card-label">In attesa</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card-icon">💼</div>
-          <div class="stat-card-numero" id="stat-tenute">0</div>
-          <div class="stat-card-label">Tenute per me</div>
-        </div>
-        <div class="stat-card verde">
-          <div class="stat-card-icon">✅</div>
-          <div class="stat-card-numero" id="stat-pubblicate">0</div>
-          <div class="stat-card-label">Pubblicate</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card-icon">📊</div>
-          <div class="stat-card-numero" id="stat-totale">0</div>
-          <div class="stat-card-label">Totale gestite</div>
-        </div>
+        <div class="stat-card oro"><div class="stat-card-icon">⏳</div><div class="stat-card-numero" id="stat-attesa">0</div><div class="stat-card-label">In attesa</div></div>
+        <div class="stat-card"><div class="stat-card-icon">💼</div><div class="stat-card-numero" id="stat-tenute">0</div><div class="stat-card-label">Tenute per me</div></div>
+        <div class="stat-card verde"><div class="stat-card-icon">✅</div><div class="stat-card-numero" id="stat-pubblicate">0</div><div class="stat-card-label">Pubblicate</div></div>
+        <div class="stat-card"><div class="stat-card-icon">📊</div><div class="stat-card-numero" id="stat-totale">0</div><div class="stat-card-label">Totale gestite</div></div>
       </div>
       <div class="zone-banner">
-        <div class="zona-card lombardia">
-          <div class="zona-title">🔵 Lombardia</div>
-          <div class="zona-desc">Tutte le richieste delle tue categorie arrivano prima a te.</div>
-        </div>
-        <div class="zona-card emilia">
-          <div class="zona-title">🟡 Emilia Romagna</div>
-          <div class="zona-desc">Solo richieste oltre <strong>200mq</strong> arrivano prima a te.</div>
-        </div>
-        <div class="zona-card">
-          <div class="zona-title">📋 Categorie</div>
-          <div class="zona-desc">Tinteggiatura • Decorazioni • Ristrutturazioni • Bagno • Resine • Microcemento • SPC • Laminato • Impermeabilizzazioni • Cappotti • Cartongesso</div>
-        </div>
+        <div class="zona-card lombardia"><div class="zona-title">🔵 Lombardia</div><div class="zona-desc">Tutte le richieste delle tue categorie arrivano prima a te.</div></div>
+        <div class="zona-card emilia"><div class="zona-title">🟡 Emilia Romagna</div><div class="zona-desc">Solo richieste oltre <strong>200mq</strong> arrivano prima a te.</div></div>
+        <div class="zona-card"><div class="zona-title">📋 Categorie</div><div class="zona-desc">Tinteggiatura • Decorazioni • Ristrutturazioni • Bagno • Resine • Microcemento • SPC • Laminato • Impermeabilizzazioni • Cappotti • Cartongesso</div></div>
       </div>
       <div class="filtri-bar">
         <button class="filtro-btn active" onclick="filtraRichieste('tutte', this)">Tutte</button>
@@ -286,10 +224,7 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
         <button class="filtro-btn" onclick="filtraRichieste('emilia', this)">🟡 Emilia R.</button>
         <button class="filtro-btn" onclick="filtraRichieste('attesa', this)">⏳ In attesa</button>
       </div>
-      <div class="sezione-title">
-        ⏳ In attesa di decisione
-        <span class="count-badge oro" id="badge-attesa">0</span>
-      </div>
+      <div class="sezione-title">⏳ In attesa di decisione <span class="count-badge oro" id="badge-attesa">0 nuove</span></div>
       <div id="lista-richieste"><div class="loading">⏳ Caricamento richieste...</div></div>
     </div>
 
@@ -301,26 +236,14 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
       </div>
       <input type="text" class="ricerca-input" placeholder="🔍 Cerca per nome o email..." oninput="cercaUtenti(this.value)">
       <div class="stats-row">
-        <div class="stat-card">
-          <div class="stat-card-icon">👤</div>
-          <div class="stat-card-numero" id="stat-clienti">0</div>
-          <div class="stat-card-label">Clienti</div>
-        </div>
-        <div class="stat-card oro">
-          <div class="stat-card-icon">🔧</div>
-          <div class="stat-card-numero" id="stat-pro">0</div>
-          <div class="stat-card-label">Professionisti</div>
-        </div>
-        <div class="stat-card rosso">
-          <div class="stat-card-icon">🚫</div>
-          <div class="stat-card-numero" id="stat-bannati">0</div>
-          <div class="stat-card-label">Bannati</div>
-        </div>
+        <div class="stat-card"><div class="stat-card-icon">👤</div><div class="stat-card-numero" id="stat-clienti">0</div><div class="stat-card-label">Clienti</div></div>
+        <div class="stat-card oro"><div class="stat-card-icon">🔧</div><div class="stat-card-numero" id="stat-pro">0</div><div class="stat-card-label">Professionisti</div></div>
+        <div class="stat-card rosso"><div class="stat-card-icon">🚫</div><div class="stat-card-numero" id="stat-bannati">0</div><div class="stat-card-label">Bannati</div></div>
       </div>
       <div id="lista-utenti"><div class="loading">⏳ Caricamento utenti...</div></div>
     </div>
 
-    <!-- APPROVA PROFESSIONISTI -->
+    <!-- APPROVA PRO -->
     <div class="sezione-admin" id="sezione-professionisti">
       <div class="page-header">
         <h1>✅ Approva <span style="color:var(--oro)">Professionisti</span></h1>
@@ -363,7 +286,7 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 
   </main>
 </div>
-</div><!-- fine admin-screen -->
+</div>
 
 <!-- POPUP TIENI -->
 <div class="popup-overlay" id="popupTieni">
@@ -407,7 +330,7 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 <script type="module">
 import { initializeApp, getApps } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js';
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js';
-import { getFirestore, collection, doc, getDoc, getDocs, updateDoc, deleteDoc, query, orderBy, limit, onSnapshot, serverTimestamp, addDoc } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js';
+import { getFirestore, collection, doc, getDoc, getDocs, updateDoc, deleteDoc, query, orderBy, limit, onSnapshot, serverTimestamp, addDoc, where } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCQHoCYYfdmkXnV2CTGBSq3gpE986QOq2o",
@@ -421,7 +344,6 @@ const firebaseConfig = {
 const ADMIN_EMAIL = "rossoninedo@libero.it";
 const TELEGRAM_TOKEN = "8762052936:AAEnoDRjM0bBYPmyy1r57ZZH0FdJ0FW-L0";
 const TELEGRAM_CHAT_ID = "5710972025";
-const TUE_CATEGORIE = ['tinteggiatura','decorazioni','ristrutturazione','bagno','resina','microcemento','spc','laminato','impermeabilizzazione','cappotto','cartongesso','isolamento'];
 
 const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -430,7 +352,6 @@ const db = getFirestore(app);
 let tutteRichieste = [];
 let tuttiUtenti = [];
 let richiestaCorrenteId = null;
-let cardCorrente = null;
 let utenteCorrenteId = null;
 
 // ===== LOGIN =====
@@ -439,29 +360,14 @@ window.eseguiLoginAdmin = async function() {
   const password = document.getElementById('adminPassword').value;
   const errDiv = document.getElementById('loginErrore');
   errDiv.style.display = 'none';
-
-  if (!email || !password) {
-    errDiv.textContent = '⚠️ Inserisci email e password.';
-    errDiv.style.display = 'block';
-    return;
-  }
-
+  if (!email || !password) { errDiv.textContent = '⚠️ Inserisci email e password.'; errDiv.style.display = 'block'; return; }
   try {
     const cred = await signInWithEmailAndPassword(auth, email, password);
-    if (cred.user.email !== ADMIN_EMAIL) {
-      await signOut(auth);
-      errDiv.textContent = '⛔ Accesso riservato all\'amministratore.';
-      errDiv.style.display = 'block';
-      return;
-    }
+    if (cred.user.email !== ADMIN_EMAIL) { await signOut(auth); errDiv.textContent = '⛔ Accesso riservato all\'amministratore.'; errDiv.style.display = 'block'; return; }
     mostraDashboard();
-  } catch(e) {
-    errDiv.textContent = '⛔ Email o password errati.';
-    errDiv.style.display = 'block';
-  }
+  } catch(e) { errDiv.textContent = '⛔ Email o password errati.'; errDiv.style.display = 'block'; }
 };
 
-// Premi Invio nel campo password
 document.addEventListener('DOMContentLoaded', () => {
   const pwd = document.getElementById('adminPassword');
   if (pwd) pwd.addEventListener('keydown', e => { if (e.key === 'Enter') eseguiLoginAdmin(); });
@@ -475,14 +381,10 @@ function mostraDashboard() {
   caricaRichieste();
 }
 
-// Controlla se già loggato
 onAuthStateChanged(auth, (user) => {
-  if (user && user.email === ADMIN_EMAIL) {
-    mostraDashboard();
-  }
+  if (user && user.email === ADMIN_EMAIL) mostraDashboard();
 });
 
-// ===== LOGOUT =====
 window.eseguiLogout = async function() {
   await signOut(auth);
   localStorage.clear();
@@ -498,7 +400,7 @@ async function inviaNotificaTelegram(msg) {
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: msg, parse_mode: 'HTML' })
     });
-  } catch(e) { console.log('Telegram:', e); }
+  } catch(e) { console.log('Telegram error:', e); }
 }
 
 // ===== NAVIGAZIONE =====
@@ -526,11 +428,11 @@ window.filtraRichieste = function(tipo, btn) {
   });
 };
 
-// ===== RICHIESTE =====
+// ===== HELPERS =====
 function getRegione(citta) {
   const c = (citta||'').toLowerCase();
-  if (['milano','bergamo','brescia','monza','como','varese','lecco','lodi','cremona','mantova','pavia','sondrio','lombar'].some(x => c.includes(x))) return 'lombardia';
-  if (['bologna','modena','parma','reggio','ferrara','ravenna','forl','rimini','piacenza','emilia'].some(x => c.includes(x))) return 'emilia';
+  if (['milano','bergamo','brescia','monza','como','varese','lecco','lodi','cremona','mantova','pavia','sondrio'].some(x => c.includes(x))) return 'lombardia';
+  if (['bologna','modena','parma','reggio','ferrara','ravenna','forli','rimini','piacenza'].some(x => c.includes(x))) return 'emilia';
   return 'altra';
 }
 
@@ -542,29 +444,40 @@ function tempoFa(seconds) {
   return Math.floor(diff/86400) + ' giorni fa';
 }
 
+// ===== RICHIESTE =====
 function caricaRichieste() {
-  const q = query(collection(db, 'richieste'), orderBy('timestamp', 'desc'), limit(50));
+  const q = query(collection(db, 'richieste'), orderBy('timestamp', 'desc'), limit(100));
   onSnapshot(q, (snap) => {
     tutteRichieste = [];
     let attesa = 0, tenute = 0, pubblicate = 0;
+
     snap.forEach(d => {
       const dati = { id: d.id, ...d.data() };
       tutteRichieste.push(dati);
       if (dati.statoAdmin === 'tenuta') tenute++;
       else if (dati.statoAdmin === 'pubblicata') pubblicate++;
       else attesa++;
-      // Notifica Telegram per nuove richieste di interesse
-      if (!dati.statoAdmin && !dati._notificato) {
-        const cat = (dati.categoria||'').toLowerCase();
-        const mq = parseInt(dati.mq||0);
+
+      // ✅ Notifica Telegram per TUTTE le nuove richieste
+      if (!dati._notificato) {
         const reg = getRegione(dati.citta||'');
-        const catOk = TUE_CATEGORIE.some(c => cat.includes(c));
-        if (catOk && (reg === 'lombardia' || (reg === 'emilia' && mq >= 200))) {
-          inviaNotificaTelegram(`🔔 <b>NUOVA RICHIESTA</b>\n📂 ${dati.categoria||'?'}\n📍 ${dati.citta||'?'}\n📐 ${dati.mq||'?'}mq\n📝 ${(dati.descrizione||'').substring(0,100)}...\n\n👉 Vai su admin.html per decidere`);
-          updateDoc(doc(db, 'richieste', d.id), { _notificato: true });
-        }
+        const regioneLabel = reg === 'lombardia' ? '🔵 Lombardia' : reg === 'emilia' ? '🟡 Emilia Romagna' : '🟢 Altra zona';
+        const urgente = dati.urgente ? '🔴 URGENTE\n' : '';
+        const mqTxt = dati.mq ? `📐 ${dati.mq}mq\n` : '';
+        const budgetTxt = dati.budget ? `💰 ${dati.budget}\n` : '';
+        const quandoTxt = dati.quando ? `⏰ ${dati.quando}\n` : '';
+        const msg = `🔔 <b>NUOVA RICHIESTA</b>\n${urgente}` +
+          `📂 <b>${dati.categoria||'?'}</b>\n` +
+          `📍 ${dati.citta||'?'} — ${regioneLabel}\n` +
+          mqTxt + budgetTxt + quandoTxt +
+          `📝 ${(dati.descrizione||'').substring(0,120)}\n\n` +
+          `👤 Cliente: ${dati.clienteNome||'?'}\n` +
+          `👉 <a href="https://professionisti-chi.vercel.app/admin.html">Apri Admin Panel</a>`;
+        inviaNotificaTelegram(msg);
+        updateDoc(doc(db, 'richieste', d.id), { _notificato: true });
       }
     });
+
     document.getElementById('stat-attesa').textContent = attesa;
     document.getElementById('stat-tenute').textContent = tenute;
     document.getElementById('stat-pubblicate').textContent = pubblicate;
@@ -576,246 +489,254 @@ function caricaRichieste() {
 }
 
 function renderRichieste(lista) {
-  const el = document.getElementById('lista-richieste');
-  const attesa = lista.filter(r => !r.statoAdmin || r.statoAdmin === 'attesa');
-  if (attesa.length === 0) {
-    el.innerHTML = '<div class="empty-state"><div class="icon">📭</div><p>Nessuna richiesta in attesa di decisione</p></div>';
-    return;
-  }
-  el.innerHTML = attesa.map(r => {
-    const regione = getRegione(r.citta||'');
-    const tempo = r.timestamp ? tempoFa(r.timestamp.seconds) : 'poco fa';
-    const cat = (r.categoria||'Non specificata').replace(/'/g,"\\'");
-    const cit = (r.citta||'Città non specificata').replace(/'/g,"\\'");
-    return `
-    <div class="richiesta-admin-card ${regione}" data-stato="attesa" data-id="${r.id}">
-      <span class="regione-badge ${regione}">${regione==='lombardia'?'🔵 LOMBARDIA':regione==='emilia'?'🟡 EMILIA ROMAGNA':'🟢 ALTRA ZONA'}</span>
+  const cont = document.getElementById('lista-richieste');
+  if (!lista.length) { cont.innerHTML = '<div class="empty-state"><div class="icon">📭</div><p>Nessuna richiesta ancora.</p></div>'; return; }
+  cont.innerHTML = lista.map(r => {
+    const reg = getRegione(r.citta||'');
+    const regLabel = reg === 'lombardia' ? '🔵 LOMBARDIA' : reg === 'emilia' ? '🟡 EMILIA ROMAGNA' : '🟢 ALTRA ZONA';
+    const tempo = r.timestamp ? tempoFa(r.timestamp.seconds) : '—';
+    const chips = [
+      r.mq ? `<span class="dettaglio-chip">📐 ${r.mq}mq</span>` : '',
+      r.budget ? `<span class="dettaglio-chip grande">💰 ${r.budget}</span>` : '',
+      r.quando ? `<span class="dettaglio-chip">⏰ ${r.quando}</span>` : '',
+      r.urgente ? '<span class="dettaglio-chip" style="background:#FEF2F2;color:var(--rosso)">🔴 URGENTE</span>' : ''
+    ].join('');
+    const statoLabel = r.statoAdmin === 'tenuta' ? '<span style="color:var(--blu);font-size:12px;font-weight:700">💼 Tenuta</span>' :
+                       r.statoAdmin === 'pubblicata' ? '<span style="color:var(--verde);font-size:12px;font-weight:700">✅ Pubblicata</span>' : '';
+    return `<div class="richiesta-admin-card ${reg}" data-stato="${r.statoAdmin||'attesa'}">
+      <span class="regione-badge ${reg}">${regLabel}</span>
       <div class="richiesta-admin-header">
-        <span class="richiesta-categoria">🏗️ ${r.categoria||'Non specificata'}</span>
+        <span class="richiesta-categoria">🏷️ ${r.categoria||'?'}</span>
         <span class="richiesta-tempo">Arrivata ${tempo}</span>
       </div>
-      <div class="richiesta-luogo">📍 ${r.citta||'Città non specificata'}</div>
-      <div class="richiesta-descrizione">${r.descrizione||'Nessuna descrizione'}</div>
-      <div class="richiesta-dettagli">
-        ${r.mq?`<span class="dettaglio-chip grande">📐 ${r.mq}mq</span>`:''}
-        ${r.urgente?'<span class="dettaglio-chip">🔴 Urgente</span>':''}
-        ${r.budget?`<span class="dettaglio-chip">💰 ${r.budget}</span>`:''}
-      </div>
-      <div class="richiesta-admin-footer">
-        <button class="btn-tieni" onclick="apriPopupAzione('tieni','${r.id}','${cat} — ${cit}',this)">💼 Tengo per me</button>
-        <button class="btn-pubblica" onclick="apriPopupAzione('pubblica','${r.id}','${cat} — ${cit}',this)">✅ Pubblica</button>
-        <button class="btn-elimina" onclick="eliminaRichiesta('${r.id}',this)">🗑️ Elimina</button>
+      <div class="richiesta-luogo">📍 ${r.citta||'?'}</div>
+      <div class="richiesta-descrizione">${r.descrizione||'—'}</div>
+      <div class="richiesta-dettagli">${chips}</div>
+      ${statoLabel}
+      <div class="richiesta-admin-footer" style="margin-top:12px">
+        <button class="btn-tieni" onclick="apriPopupTieni('${r.id}')">💼 Tengo per me</button>
+        <button class="btn-pubblica" onclick="apriPopupPubblica('${r.id}')">✅ Pubblica</button>
+        <button class="btn-elimina" onclick="eliminaRichiesta('${r.id}')">🗑️ Elimina</button>
       </div>
     </div>`;
   }).join('');
 }
 
-window.apriPopupAzione = function(tipo, id, nome, btn) {
+// ===== AZIONI RICHIESTE =====
+window.apriPopupTieni = function(id) {
   richiestaCorrenteId = id;
-  cardCorrente = btn ? btn.closest('.richiesta-admin-card') : null;
-  if (tipo === 'tieni') {
-    document.getElementById('popup-tieni-text').textContent = `Stai per tenere per te: "${nome}".`;
-    document.getElementById('popupTieni').classList.add('show');
-  } else {
-    document.getElementById('popup-pubblica-text').textContent = `Stai per pubblicare: "${nome}".`;
-    document.getElementById('popupPubblica').classList.add('show');
-  }
+  const r = tutteRichieste.find(x => x.id === id);
+  if (r) document.getElementById('popup-tieni-text').textContent = `Vuoi tenere la richiesta di ${r.clienteNome||'?'} (${r.categoria||'?'} - ${r.citta||'?'}) per la tua impresa?`;
+  document.getElementById('popupTieni').classList.add('show');
+};
+
+window.apriPopupPubblica = function(id) {
+  richiestaCorrenteId = id;
+  const r = tutteRichieste.find(x => x.id === id);
+  if (r) document.getElementById('popup-pubblica-text').textContent = `Vuoi pubblicare la richiesta di ${r.clienteNome||'?'} (${r.categoria||'?'} - ${r.citta||'?'}) sulla piattaforma?`;
+  document.getElementById('popupPubblica').classList.add('show');
 };
 
 window.chiudiPopup = function(id) { document.getElementById(id).classList.remove('show'); };
 
 window.confermaAzione = async function(tipo) {
-  chiudiPopup(tipo==='tieni'?'popupTieni':'popupPubblica');
   if (!richiestaCorrenteId) return;
-  await updateDoc(doc(db,'richieste',richiestaCorrenteId), {
-    statoAdmin: tipo==='tieni'?'tenuta':'pubblicata',
-    stato: tipo==='pubblica'?'aperta':'riservata'
-  });
-  await addDoc(collection(db,'adminLog'), {
-    azione: tipo==='tieni'?'Richiesta tenuta per Rossoni':'Richiesta pubblicata',
-    richiestaId: richiestaCorrenteId,
-    timestamp: serverTimestamp()
-  });
-  if (cardCorrente) { cardCorrente.style.opacity='0'; cardCorrente.style.transition='0.3s'; setTimeout(()=>cardCorrente.remove(),300); }
-  alert(tipo==='tieni'?'✅ Richiesta assegnata a Rossoni Edilizia!':'✅ Richiesta pubblicata!');
+  const stato = tipo === 'tieni' ? 'tenuta' : 'pubblicata';
+  try {
+    await updateDoc(doc(db, 'richieste', richiestaCorrenteId), { statoAdmin: stato });
+    await addDoc(collection(db, 'log'), { azione: tipo === 'tieni' ? 'Richiesta tenuta' : 'Richiesta pubblicata', richiestaId: richiestaCorrenteId, timestamp: serverTimestamp() });
+    chiudiPopup(tipo === 'tieni' ? 'popupTieni' : 'popupPubblica');
+    const msgTelegram = tipo === 'tieni' ? `💼 Richiesta <b>tenuta per te</b>` : `✅ Richiesta <b>pubblicata</b> sulla piattaforma`;
+    inviaNotificaTelegram(msgTelegram + `\n🆔 ID: ${richiestaCorrenteId}`);
+  } catch(e) { alert('Errore: ' + e.message); }
 };
 
-window.eliminaRichiesta = async function(id, btn) {
-  if (!confirm('Eliminare questa richiesta?')) return;
-  await deleteDoc(doc(db,'richieste',id));
-  const card = btn.closest('.richiesta-admin-card');
-  card.style.opacity='0'; card.style.transition='0.3s'; setTimeout(()=>card.remove(),300);
+window.eliminaRichiesta = async function(id) {
+  if (!confirm('Sei sicuro di voler eliminare questa richiesta?')) return;
+  try {
+    await deleteDoc(doc(db, 'richieste', id));
+    await addDoc(collection(db, 'log'), { azione: 'Richiesta eliminata', richiestaId: id, timestamp: serverTimestamp() });
+    inviaNotificaTelegram(`🗑️ Richiesta <b>eliminata</b>\n🆔 ID: ${id}`);
+  } catch(e) { alert('Errore: ' + e.message); }
 };
 
 // ===== UTENTI =====
 async function caricaUtenti() {
-  document.getElementById('lista-utenti').innerHTML = '<div class="loading">⏳ Caricamento...</div>';
-  const snap = await getDocs(collection(db,'utenti'));
-  tuttiUtenti = [];
-  let clienti=0, pro=0, bannati=0;
-  snap.forEach(d => {
-    const dati = {id:d.id,...d.data()};
-    tuttiUtenti.push(dati);
-    if (dati.ruolo==='cliente') clienti++;
-    if (dati.ruolo==='professionista') pro++;
-    if (dati.bannato) bannati++;
-  });
-  document.getElementById('stat-clienti').textContent = clienti;
-  document.getElementById('stat-pro').textContent = pro;
-  document.getElementById('stat-bannati').textContent = bannati;
-  renderUtenti(tuttiUtenti);
+  const cont = document.getElementById('lista-utenti');
+  cont.innerHTML = '<div class="loading">⏳ Caricamento...</div>';
+  try {
+    const snap = await getDocs(collection(db, 'utenti'));
+    tuttiUtenti = [];
+    let clienti = 0, pro = 0, bannati = 0;
+    snap.forEach(d => { tuttiUtenti.push({ id: d.id, ...d.data() }); });
+    tuttiUtenti.forEach(u => {
+      if (u.bannato) bannati++;
+      else if (u.ruolo === 'professionista') pro++;
+      else clienti++;
+    });
+    document.getElementById('stat-clienti').textContent = clienti;
+    document.getElementById('stat-pro').textContent = pro;
+    document.getElementById('stat-bannati').textContent = bannati;
+    renderUtenti(tuttiUtenti);
+  } catch(e) { cont.innerHTML = '<div class="empty-state"><p>⚠️ Errore caricamento.</p></div>'; }
 }
 
 function renderUtenti(lista) {
-  const el = document.getElementById('lista-utenti');
-  if (!lista.length) { el.innerHTML='<div class="empty-state"><div class="icon">👥</div><p>Nessun utente trovato</p></div>'; return; }
-  el.innerHTML = lista.map(u => `
-  <div class="utente-card">
-    <div class="utente-avatar ${u.ruolo==='professionista'?'oro':''}">${(u.nome||'U')[0].toUpperCase()}</div>
-    <div class="utente-info">
-      <div class="utente-nome">${u.nome||'Nome non disponibile'} ${u.bannato?'<span class="utente-badge bannato">🚫 Bannato</span>':''}</div>
-      <div class="utente-dettagli">${u.email||''} · <span class="utente-badge ${u.ruolo}">${u.ruolo==='professionista'?'🔧 Professionista':'👤 Cliente'}</span></div>
-    </div>
-    <div class="utente-azioni">
-      ${u.bannato
-        ? `<button class="btn-unban" onclick="unbanUtente('${u.id}')">✅ Sbanna</button>`
-        : `<button class="btn-ban" onclick="apriBan('${u.id}','${(u.nome||'').replace(/'/g,"\\'")}')">🚫 Banna</button>`}
-    </div>
-  </div>`).join('');
+  const cont = document.getElementById('lista-utenti');
+  if (!lista.length) { cont.innerHTML = '<div class="empty-state"><div class="icon">👥</div><p>Nessun utente trovato.</p></div>'; return; }
+  cont.innerHTML = lista.map(u => {
+    const iniziale = (u.nome||u.ragioneSociale||'?').charAt(0).toUpperCase();
+    const nome = u.nome || u.ragioneSociale || 'Sconosciuto';
+    const badge = u.bannato ? 'bannato' : u.ruolo === 'professionista' ? 'pro' : 'cliente';
+    const badgeLabel = u.bannato ? '🚫 Bannato' : u.ruolo === 'professionista' ? '🔧 Pro' : '👤 Cliente';
+    const btnBan = u.bannato
+      ? `<button class="btn-unban" onclick="toggleBan('${u.id}', false)">✅ Sbanna</button>`
+      : `<button class="btn-ban" onclick="apriPopupBan('${u.id}', '${nome.replace(/'/g,"\\'")}')">🚫 Banna</button>`;
+    return `<div class="utente-card">
+      <div class="utente-avatar ${u.ruolo === 'professionista' ? 'oro' : ''}">${iniziale}</div>
+      <div class="utente-info">
+        <div class="utente-nome">${nome} <span class="utente-badge ${badge}">${badgeLabel}</span></div>
+        <div class="utente-dettagli">${u.email||'—'} • ${u.telefono||'—'}</div>
+      </div>
+      <div class="utente-azioni">${btnBan}</div>
+    </div>`;
+  }).join('');
 }
 
 window.cercaUtenti = function(val) {
   const v = val.toLowerCase();
-  const filtrati = tuttiUtenti.filter(u =>
-    (u.nome||'').toLowerCase().includes(v) || (u.email||'').toLowerCase().includes(v)
-  );
-  renderUtenti(filtrati);
+  renderUtenti(tuttiUtenti.filter(u => (u.nome||u.ragioneSociale||'').toLowerCase().includes(v) || (u.email||'').toLowerCase().includes(v)));
 };
 
-window.apriBan = function(id, nome) {
+window.apriPopupBan = function(id, nome) {
   utenteCorrenteId = id;
-  document.getElementById('popup-ban-text').textContent = `Sei sicuro di voler bannare "${nome}"?`;
+  document.getElementById('popup-ban-text').textContent = `Sei sicuro di voler bannare ${nome}? L'utente non potrà più accedere alla piattaforma.`;
   document.getElementById('popupBan').classList.add('show');
 };
 
 window.confermaBan = async function() {
-  chiudiPopup('popupBan');
   if (!utenteCorrenteId) return;
-  await updateDoc(doc(db,'utenti',utenteCorrenteId), { bannato: true });
-  await addDoc(collection(db,'adminLog'), { azione:`Utente bannato: ${utenteCorrenteId}`, timestamp: serverTimestamp() });
-  caricaUtenti();
-  alert('🚫 Utente bannato!');
+  try {
+    await updateDoc(doc(db, 'utenti', utenteCorrenteId), { bannato: true });
+    await addDoc(collection(db, 'log'), { azione: 'Utente bannato', utenteId: utenteCorrenteId, timestamp: serverTimestamp() });
+    inviaNotificaTelegram(`🚫 Utente <b>bannato</b>\n🆔 ID: ${utenteCorrenteId}`);
+    chiudiPopup('popupBan');
+    caricaUtenti();
+  } catch(e) { alert('Errore: ' + e.message); }
 };
 
-window.unbanUtente = async function(id) {
-  if (!confirm('Sbannare questo utente?')) return;
-  await updateDoc(doc(db,'utenti',id), { bannato: false });
-  caricaUtenti();
-  alert('✅ Utente sbannato!');
+window.toggleBan = async function(id, banna) {
+  try {
+    await updateDoc(doc(db, 'utenti', id), { bannato: banna });
+    await addDoc(collection(db, 'log'), { azione: banna ? 'Utente bannato' : 'Utente sbannato', utenteId: id, timestamp: serverTimestamp() });
+    inviaNotificaTelegram(banna ? `🚫 Utente bannato\n🆔 ${id}` : `✅ Utente sbannato\n🆔 ${id}`);
+    caricaUtenti();
+  } catch(e) { alert('Errore: ' + e.message); }
 };
 
 // ===== PROFESSIONISTI =====
 async function caricaProfessionisti() {
-  document.getElementById('lista-professionisti').innerHTML = '<div class="loading">⏳ Caricamento...</div>';
-  const snap = await getDocs(collection(db,'utenti'));
-  const inAttesa = [];
-  snap.forEach(d => { const dati={id:d.id,...d.data()}; if (dati.ruolo==='professionista' && !dati.verificato) inAttesa.push(dati); });
-  document.getElementById('badge-pro').textContent = inAttesa.length;
-  const el = document.getElementById('lista-professionisti');
-  if (!inAttesa.length) { el.innerHTML='<div class="empty-state"><div class="icon">✅</div><p>Nessun professionista in attesa di approvazione</p></div>'; return; }
-  el.innerHTML = inAttesa.map(u => `
-  <div class="utente-card">
-    <div class="utente-avatar oro">${(u.nome||'P')[0].toUpperCase()}</div>
-    <div class="utente-info">
-      <div class="utente-nome">${u.nome||'Nome non disponibile'}</div>
-      <div class="utente-dettagli">${u.email||''} · ${u.categoria||''} · ${u.citta||''}</div>
-    </div>
-    <div class="utente-azioni">
-      <button class="btn-approva" onclick="approvaPro('${u.id}','${(u.nome||'').replace(/'/g,"\\'")}')">✅ Approva</button>
-      <button class="btn-rifiuta" onclick="rifiutaPro('${u.id}')">❌ Rifiuta</button>
-    </div>
-  </div>`).join('');
+  const cont = document.getElementById('lista-professionisti');
+  cont.innerHTML = '<div class="loading">⏳ Caricamento...</div>';
+  try {
+    const snap = await getDocs(query(collection(db, 'utenti'), where('ruolo', '==', 'professionista')));
+    const lista = [];
+    snap.forEach(d => lista.push({ id: d.id, ...d.data() }));
+    document.getElementById('badge-pro').textContent = lista.filter(p => !p.approvato).length;
+    if (!lista.length) { cont.innerHTML = '<div class="empty-state"><div class="icon">✅</div><p>Nessun professionista registrato.</p></div>'; return; }
+    cont.innerHTML = lista.map(p => {
+      const nome = p.ragioneSociale || p.nome || 'Sconosciuto';
+      const iniziale = nome.charAt(0).toUpperCase();
+      const statoBtn = p.approvato
+        ? `<span style="color:var(--verde);font-size:13px;font-weight:700">✅ Approvato</span>`
+        : `<button class="btn-approva" onclick="approvaPro('${p.id}')">✅ Approva</button><button class="btn-rifiuta" onclick="rifiutaPro('${p.id}')">❌ Rifiuta</button>`;
+      return `<div class="utente-card">
+        <div class="utente-avatar oro">${iniziale}</div>
+        <div class="utente-info">
+          <div class="utente-nome">${nome} <span class="utente-badge pro">🔧 Pro</span></div>
+          <div class="utente-dettagli">${p.email||'—'} • ${p.categoria||'—'} • ${p.citta||'—'}</div>
+          ${p.piva ? `<div class="utente-dettagli">P.IVA: ${p.piva}</div>` : ''}
+        </div>
+        <div class="utente-azioni">${statoBtn}</div>
+      </div>`;
+    }).join('');
+  } catch(e) { cont.innerHTML = '<div class="empty-state"><p>⚠️ Errore caricamento.</p></div>'; }
 }
 
-window.approvaPro = async function(id, nome) {
-  if (!confirm(`Approvare ${nome}?`)) return;
-  await updateDoc(doc(db,'utenti',id), { verificato: true });
-  await addDoc(collection(db,'adminLog'), { azione:`Professionista approvato: ${nome}`, timestamp: serverTimestamp() });
-  caricaProfessionisti();
-  alert('✅ Professionista approvato!');
+window.approvaPro = async function(id) {
+  try {
+    await updateDoc(doc(db, 'utenti', id), { approvato: true });
+    await addDoc(collection(db, 'log'), { azione: 'Professionista approvato', utenteId: id, timestamp: serverTimestamp() });
+    inviaNotificaTelegram(`✅ Professionista <b>approvato</b>\n🆔 ${id}`);
+    caricaProfessionisti();
+  } catch(e) { alert('Errore: ' + e.message); }
 };
 
 window.rifiutaPro = async function(id) {
-  if (!confirm('Rifiutare questo professionista?')) return;
-  await updateDoc(doc(db,'utenti',id), { verificato: false, rifiutato: true });
-  caricaProfessionisti();
-  alert('❌ Professionista rifiutato.');
+  if (!confirm('Vuoi rifiutare questo professionista?')) return;
+  try {
+    await updateDoc(doc(db, 'utenti', id), { approvato: false, rifiutato: true });
+    await addDoc(collection(db, 'log'), { azione: 'Professionista rifiutato', utenteId: id, timestamp: serverTimestamp() });
+    caricaProfessionisti();
+  } catch(e) { alert('Errore: ' + e.message); }
 };
 
 // ===== SEGNALAZIONI =====
 async function caricaSegnalazioni() {
-  document.getElementById('lista-segnalazioni').innerHTML = '<div class="loading">⏳ Caricamento...</div>';
-  const snap = await getDocs(collection(db,'segnalazioni'));
-  const lista = [];
-  snap.forEach(d => lista.push({id:d.id,...d.data()}));
-  document.getElementById('badge-segn').textContent = lista.length;
-  const el = document.getElementById('lista-segnalazioni');
-  if (!lista.length) { el.innerHTML='<div class="empty-state"><div class="icon">🚨</div><p>Nessuna segnalazione attiva</p></div>'; return; }
-  el.innerHTML = lista.map(s => `
-  <div class="segnalazione-card">
-    <span class="segnalazione-tipo">🚨 ${s.tipo||'Segnalazione'}</span>
-    <div class="segnalazione-testo">${s.testo||s.motivo||'Nessun dettaglio'}</div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap;">
-      <button class="btn-ban" onclick="banDaSegnalazione('${s.segnalatoUID||''}','${s.id}')">🚫 Banna utente</button>
-      <button class="btn-elimina" onclick="archiviaSegnalazione('${s.id}')">📁 Archivia</button>
-    </div>
-  </div>`).join('');
+  const cont = document.getElementById('lista-segnalazioni');
+  cont.innerHTML = '<div class="loading">⏳ Caricamento...</div>';
+  try {
+    const snap = await getDocs(query(collection(db, 'segnalazioni'), orderBy('timestamp', 'desc'), limit(50)));
+    document.getElementById('badge-segn').textContent = snap.size;
+    if (snap.empty) { cont.innerHTML = '<div class="empty-state"><div class="icon">✅</div><p>Nessuna segnalazione.</p></div>'; return; }
+    cont.innerHTML = '';
+    snap.forEach(d => {
+      const s = d.data();
+      const tempo = s.timestamp ? tempoFa(s.timestamp.seconds) : '—';
+      cont.innerHTML += `<div class="segnalazione-card">
+        <span class="segnalazione-tipo">🚨 ${s.tipo||'Segnalazione'}</span>
+        <div class="segnalazione-testo">${s.testo||'—'}</div>
+        <div style="font-size:12px;color:var(--grigio)">${tempo} • Da: ${s.daUID||'?'}</div>
+        <div style="margin-top:12px;display:flex;gap:8px">
+          <button class="btn-ban" onclick="toggleBan('${s.utenteId||''}', true)">🚫 Banna utente</button>
+        </div>
+      </div>`;
+    });
+  } catch(e) { cont.innerHTML = '<div class="empty-state"><p>⚠️ Errore.</p></div>'; }
 }
-
-window.banDaSegnalazione = async function(uid, segnId) {
-  if (!uid) { alert('UID utente non disponibile'); return; }
-  if (!confirm('Bannare questo utente?')) return;
-  await updateDoc(doc(db,'utenti',uid), { bannato: true });
-  await deleteDoc(doc(db,'segnalazioni',segnId));
-  caricaSegnalazioni();
-  alert('🚫 Utente bannato!');
-};
-
-window.archiviaSegnalazione = async function(id) {
-  if (!confirm('Archiviare questa segnalazione?')) return;
-  await deleteDoc(doc(db,'segnalazioni',id));
-  caricaSegnalazioni();
-};
 
 // ===== STATISTICHE =====
 async function caricaStatistiche() {
-  const [utenti, richieste, chat, recensioni] = await Promise.all([
-    getDocs(collection(db,'utenti')),
-    getDocs(collection(db,'richieste')),
-    getDocs(collection(db,'chat')),
-    getDocs(collection(db,'recensioni'))
-  ]);
-  document.getElementById('stat-tot-utenti').textContent = utenti.size;
-  document.getElementById('stat-tot-richieste').textContent = richieste.size;
-  document.getElementById('stat-tot-chat').textContent = chat.size;
-  document.getElementById('stat-tot-rec').textContent = recensioni.size;
+  try {
+    const [utenti, richieste, chat, recensioni] = await Promise.all([
+      getDocs(collection(db, 'utenti')),
+      getDocs(collection(db, 'richieste')),
+      getDocs(collection(db, 'chat')),
+      getDocs(collection(db, 'recensioni'))
+    ]);
+    document.getElementById('stat-tot-utenti').textContent = utenti.size;
+    document.getElementById('stat-tot-richieste').textContent = richieste.size;
+    document.getElementById('stat-tot-chat').textContent = chat.size;
+    document.getElementById('stat-tot-rec').textContent = recensioni.size;
+  } catch(e) { console.log('Statistiche:', e); }
 }
 
 // ===== LOG =====
 async function caricaLog() {
-  document.getElementById('lista-log').innerHTML = '<div class="loading">⏳ Caricamento...</div>';
-  const q = query(collection(db,'adminLog'), orderBy('timestamp','desc'), limit(30));
-  const snap = await getDocs(q);
-  const el = document.getElementById('lista-log');
-  if (!snap.size) { el.innerHTML='<div class="empty-state"><div class="icon">📝</div><p>Nessuna attività registrata</p></div>'; return; }
-  el.innerHTML = [...snap.docs].map(d => {
-    const dati = d.data();
-    const tempo = dati.timestamp ? tempoFa(dati.timestamp.seconds) : '';
-    return `<div class="log-item"><span class="log-icon">📌</span><span class="log-testo">${dati.azione||'Azione sconosciuta'}</span><span class="log-tempo">${tempo}</span></div>`;
-  }).join('');
+  const cont = document.getElementById('lista-log');
+  cont.innerHTML = '<div class="loading">⏳ Caricamento...</div>';
+  try {
+    const snap = await getDocs(query(collection(db, 'log'), orderBy('timestamp', 'desc'), limit(50)));
+    if (snap.empty) { cont.innerHTML = '<div class="empty-state"><div class="icon">📝</div><p>Nessuna attività registrata.</p></div>'; return; }
+    cont.innerHTML = '';
+    snap.forEach(d => {
+      const l = d.data();
+      const tempo = l.timestamp ? tempoFa(l.timestamp.seconds) : '—';
+      const icon = l.azione?.includes('bannato') ? '🚫' : l.azione?.includes('pubblicata') ? '✅' : l.azione?.includes('eliminata') ? '🗑️' : l.azione?.includes('approvato') ? '✅' : '📝';
+      cont.innerHTML += `<div class="log-item"><span class="log-icon">${icon}</span><span class="log-testo">${l.azione||'—'}</span><span class="log-tempo">${tempo}</span></div>`;
+    });
+  } catch(e) { cont.innerHTML = '<div class="empty-state"><p>⚠️ Errore.</p></div>'; }
 }
-
-document.addEventListener('keydown', e => { if (e.key==='Escape') document.querySelectorAll('.popup-overlay').forEach(p=>p.classList.remove('show')); });
 </script>
 </body>
 </html>
