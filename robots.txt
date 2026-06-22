@@ -1,1 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard-cliente.html
+Disallow: /dashboard-pro.html
+Disallow: /chat.html
+
+Sitemap: https://professionisti-chi.vercel.app/sitemap.xml
 
