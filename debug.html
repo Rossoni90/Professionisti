@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="it">
+<head><meta charset="UTF-8"><title>Debug</title>
+<style>body{font-family:monospace;padding:20px;background:#1a1a1a;color:#00ff00;}
+.err{color:#ff4444;} .ok{color:#00ff00;} .info{color:#ffff00;} pre{background:#000;padding:15px;border-radius:8px;overflow-x:auto;}</style>
+</head>
+<body>
+<h2>🔍 Debug Firestore</h2>
+<pre id="log">Avvio...</pre>
+
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js';
+import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js';
+import { getFirestore, collection, getDocs, query, limit } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js';
+
+const cfg = {
+  apiKey: "AIzaSyCQHoCYYfdmkXnV2CTGBSq3gpE986QOq2o",
+  authDomain: "rossoni-f069a.firebaseapp.com",
+  projectId: "rossoni-f069a",
+  storageBucket: "rossoni-f069a.firebasestorage.app",
+  messagingSenderId: "708686815315",
+  appId: "1:708686815315:web:0810734346e679e7c066a6"
+};
+
+const app = initializeApp(cfg);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const log = document.getElementById('log');
+
+function w(msg, cls='') {
+  log.innerHTML += `<span class="${cls}">${msg}</span>\n`;
+}
+
+w('✅ Firebase inizializzato', 'ok');
+
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    w('❌ NON SEI LOGGATO — apri prima dashboard-pro.html e poi torna qui', 'err');
+    return;
+  }
+  w('✅ Utente loggato: ' + user.uid, 'ok');
+  w('📧 Email: ' + user.email, 'info');
+
+  try {
+    w('\n⏳ Leggo collezione richieste...', 'info');
+    const snap = await getDocs(query(collection(db, 'richieste'), limit(20)));
+    w('📦 Documenti trovati: ' + snap.size, snap.size > 0 ? 'ok' : 'err');
+
+    if (snap.size === 0) {
+      w('❌ La collezione è VUOTA o le regole bloccano la lettura!', 'err');
+    }
+
+    snap.docs.forEach((d, i) => {
+      const r = d.data();
+      w(`\n--- Richiesta ${i+1} ---`, 'info');
+      w('ID: ' + d.id);
+      w('stato: "' + r.stato + '"');
+      w('categoria: "' + r.categoria + '"');
+      w('citta: "' + r.citta + '"');
+      w('clienteUID: "' + (r.clienteUID || r.clienteId || 'MANCANTE') + '"');
+      w('timestamp: ' + (r.timestamp ? 'presente' : (r.creato ? 'campo=creato' : 'MANCANTE')));
+    });
+
+  } catch(e) {
+    w('\n❌ ERRORE LETTURA: ' + e.message, 'err');
+    w('Codice errore: ' + e.code, 'err');
+  }
+});
+</script>
+</body>
+</html>
