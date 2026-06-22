@@ -31,7 +31,6 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 .sidebar-item.active { background: #EFF6FF; color: var(--blu); border-left-color: var(--blu); font-weight: 600; }
 .sidebar-item .icon { font-size: 18px; }
 .sidebar-divider { height: 1px; background: #e5e7eb; margin: 15px 25px; }
-.sidebar-label { font-size: 11px; font-weight: 700; color: #9CA3AF; text-transform: uppercase; letter-spacing: 1px; padding: 5px 25px; margin-top: 10px; }
 .sidebar-badge { background: var(--rosso); color: white; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 10px; margin-left: auto; }
 .main-content { flex: 1; padding: 30px; overflow-y: auto; }
 .page-header { margin-bottom: 25px; }
@@ -393,14 +392,10 @@ const firebaseConfig = {
   appId: "1:708686815315:web:0810734346e679e7c066a6"
 };
 
-const ADMIN_EMAIL = "rossoni_edilizia@outlook.it";
+const ADMIN_EMAIL = "rossoninedo@libero.it";
 const TELEGRAM_TOKEN = "8762052936:AAEnoDRjM0bBYPmyy1r57ZZH0FdJ0FW-L0";
 const TELEGRAM_CHAT_ID = "5710972025";
 
-const TUE_ZONE = {
-  lombardia: { attivo: true, soglia: 0 },
-  emilia: { attivo: true, soglia: 200 }
-};
 const TUE_CATEGORIE = ['tinteggiatura','decorazioni','ristrutturazione','bagno','resina','microcemento','spc','laminato','impermeabilizzazione','cappotto','cartongesso','isolamento'];
 
 const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
@@ -413,18 +408,12 @@ let richiestaCorrenteId = null;
 let cardCorrente = null;
 let utenteCorrenteId = null;
 
-// ── TELEGRAM ──
 async function inviaNotificaTelegram(messaggio) {
   try {
-    const url = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
-    await fetch(url, {
+    await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        chat_id: TELEGRAM_CHAT_ID,
-        text: messaggio,
-        parse_mode: 'HTML'
-      })
+      body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: messaggio, parse_mode: 'HTML' })
     });
   } catch(e) { console.log('Telegram error:', e); }
 }
@@ -432,29 +421,22 @@ async function inviaNotificaTelegram(messaggio) {
 function richiestaDiInteresse(dati) {
   const cat = (dati.categoria || '').toLowerCase();
   const citta = (dati.citta || '').toLowerCase();
-  const regione = (dati.regione || '').toLowerCase();
   const mq = parseInt(dati.mq || dati.superficie || 0);
   const catOk = TUE_CATEGORIE.some(c => cat.includes(c));
   if (!catOk) return false;
-  if (citta.includes('lombar') || regione.includes('lombar') ||
-      ['milano','bergamo','brescia','monza','como','varese','lecco','lodi','cremona','mantova','pavia','sondrio'].some(c => citta.includes(c))) {
-    return true;
-  }
-  if (citta.includes('emilia') || regione.includes('emilia') ||
-      ['bologna','modena','parma','reggio','ferrara','ravenna','forlì','rimini','piacenza'].some(c => citta.includes(c))) {
-    return mq >= 200;
-  }
+  const citteLombardia = ['milano','bergamo','brescia','monza','como','varese','lecco','lodi','cremona','mantova','pavia','sondrio','lombar'];
+  const citteEmilia = ['bologna','modena','parma','reggio','ferrara','ravenna','forlì','rimini','piacenza','emilia'];
+  if (citteLombardia.some(c => citta.includes(c))) return true;
+  if (citteEmilia.some(c => citta.includes(c))) return mq >= 200;
   return false;
 }
 
-// ── LOGOUT ──
 window.eseguiLogout = async function() {
   await signOut(auth);
   localStorage.clear();
   window.location.href = 'index.html';
 };
 
-// ── NAVIGAZIONE ──
 window.mostraSezione = function(nome, el) {
   document.querySelectorAll('.sezione-admin').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
@@ -467,12 +449,10 @@ window.mostraSezione = function(nome, el) {
   if (nome === 'log') caricaLog();
 };
 
-// ── FILTRI RICHIESTE ──
 window.filtraRichieste = function(tipo, btn) {
   document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
-  const cards = document.querySelectorAll('.richiesta-admin-card');
-  cards.forEach(card => {
+  document.querySelectorAll('.richiesta-admin-card').forEach(card => {
     if (tipo === 'tutte') { card.style.display = ''; return; }
     if (tipo === 'lombardia') { card.style.display = card.classList.contains('lombardia') ? '' : 'none'; return; }
     if (tipo === 'emilia') { card.style.display = card.classList.contains('emilia') ? '' : 'none'; return; }
@@ -480,7 +460,6 @@ window.filtraRichieste = function(tipo, btn) {
   });
 };
 
-// ── CARICA RICHIESTE ──
 function caricaRichieste() {
   const q = query(collection(db, 'richieste'), orderBy('timestamp', 'desc'), limit(50));
   onSnapshot(q, (snap) => {
@@ -503,6 +482,13 @@ function caricaRichieste() {
   });
 }
 
+function getRegione(citta) {
+  const c = (citta || '').toLowerCase();
+  if (['milano','bergamo','brescia','monza','como','varese','lecco','lodi','cremona','mantova','pavia','sondrio','lombar'].some(x => c.includes(x))) return 'lombardia';
+  if (['bologna','modena','parma','reggio','ferrara','ravenna','forlì','rimini','piacenza','emilia'].some(x => c.includes(x))) return 'emilia';
+  return 'altra';
+}
+
 function renderRichieste(lista) {
   const el = document.getElementById('lista-richieste');
   const attesa = lista.filter(r => !r.statoAdmin || r.statoAdmin === 'attesa');
@@ -513,6 +499,9 @@ function renderRichieste(lista) {
   el.innerHTML = attesa.map(r => {
     const regione = getRegione(r.citta || '');
     const tempo = r.timestamp ? tempoFa(r.timestamp.seconds) : 'poco fa';
+    const cat = (r.categoria || 'Non specificata').replace(/'/g, "\\'");
+    const cit = (r.citta || 'Città non specificata').replace(/'/g, "\\'");
+    const desc = (r.descrizione || 'Nessuna descrizione').replace(/'/g, "\\'");
     return `
     <div class="richiesta-admin-card ${regione}" data-stato="attesa" data-id="${r.id}">
       <span class="regione-badge ${regione}">${regione === 'lombardia' ? '🔵 LOMBARDIA' : regione === 'emilia' ? '🟡 EMILIA ROMAGNA' : '🟢 ALTRA ZONA'}</span>
@@ -528,30 +517,22 @@ function renderRichieste(lista) {
         ${r.budget ? `<span class="dettaglio-chip">💰 ${r.budget}</span>` : ''}
       </div>
       <div class="richiesta-admin-footer">
-        <button class="btn-tieni" onclick="apriPopupAzione('tieni', '${r.id}', '${(r.categoria||'').replace(/'/g,"\\'")} — ${(r.citta||'').replace(/'/g,"\\'")}', this)">💼 Tengo per me</button>
-        <button class="btn-pubblica" onclick="apriPopupAzione('pubblica', '${r.id}', '${(r.categoria||'').replace(/'/g,"\\'")} — ${(r.citta||'').replace(/'/g,"\\'")}', this)">✅ Pubblica</button>
-        <button class="btn-elimina" onclick="eliminaRichiesta('${r.id}', this)">🗑️ Elimina</button>
+        <button class="btn-tieni" onclick="apriPopupAzione('tieni','${r.id}','${cat} — ${cit}',this)">💼 Tengo per me</button>
+        <button class="btn-pubblica" onclick="apriPopupAzione('pubblica','${r.id}','${cat} — ${cit}',this)">✅ Pubblica</button>
+        <button class="btn-elimina" onclick="eliminaRichiesta('${r.id}',this)">🗑️ Elimina</button>
       </div>
     </div>`;
   }).join('');
 }
 
-function getRegione(citta) {
-  const c = citta.toLowerCase();
-  if (['milano','bergamo','brescia','monza','como','varese','lecco','lodi','cremona','mantova','pavia','sondrio','lombar'].some(x => c.includes(x))) return 'lombardia';
-  if (['bologna','modena','parma','reggio','ferrara','ravenna','forlì','rimini','piacenza','emilia'].some(x => c.includes(x))) return 'emilia';
-  return 'altra';
-}
-
-// ── POPUP AZIONI ──
 window.apriPopupAzione = function(tipo, id, nome, btn) {
   richiestaCorrenteId = id;
   cardCorrente = btn ? btn.closest('.richiesta-admin-card') : null;
   if (tipo === 'tieni') {
-    document.getElementById('popup-tieni-text').textContent = `Stai per tenere per te: "${nome}". Non sarà visibile agli altri professionisti.`;
+    document.getElementById('popup-tieni-text').textContent = `Stai per tenere per te: "${nome}".`;
     document.getElementById('popupTieni').classList.add('show');
   } else {
-    document.getElementById('popup-pubblica-text').textContent = `Stai per pubblicare: "${nome}". Sarà visibile a tutti i professionisti della zona.`;
+    document.getElementById('popup-pubblica-text').textContent = `Stai per pubblicare: "${nome}".`;
     document.getElementById('popupPubblica').classList.add('show');
   }
 };
@@ -568,7 +549,7 @@ window.confermaAzione = async function(tipo) {
     stato: tipo === 'pubblica' ? 'aperta' : 'riservata'
   });
   await addDoc(collection(db, 'adminLog'), {
-    azione: tipo === 'tieni' ? 'Richiesta tenuta' : 'Richiesta pubblicata',
+    azione: tipo === 'tieni' ? 'Richiesta tenuta per Rossoni' : 'Richiesta pubblicata',
     richiestaId: richiestaCorrenteId,
     timestamp: serverTimestamp()
   });
@@ -577,7 +558,7 @@ window.confermaAzione = async function(tipo) {
     cardCorrente.style.transition = '0.3s';
     setTimeout(() => cardCorrente.remove(), 300);
   }
-  alert(tipo === 'tieni' ? '✅ Richiesta assegnata a Rossoni Edilizia!' : '✅ Richiesta pubblicata sulla piattaforma!');
+  alert(tipo === 'tieni' ? '✅ Richiesta assegnata a Rossoni Edilizia!' : '✅ Richiesta pubblicata!');
 };
 
 window.eliminaRichiesta = async function(id, btn) {
@@ -588,7 +569,6 @@ window.eliminaRichiesta = async function(id, btn) {
   setTimeout(() => card.remove(), 300);
 };
 
-// ── CARICA UTENTI ──
 async function caricaUtenti() {
   document.getElementById('lista-utenti').innerHTML = '<div class="loading">⏳ Caricamento...</div>';
   const snap = await getDocs(collection(db, 'utenti'));
@@ -618,7 +598,7 @@ function renderUtenti(lista) {
     <div class="utente-card">
       <div class="utente-avatar ${u.ruolo === 'professionista' ? 'oro' : ''}">${iniziale}</div>
       <div class="utente-info">
-        <div class="utente-nome">${nome} 
+        <div class="utente-nome">${nome}
           <span class="utente-badge ${u.ruolo === 'professionista' ? 'pro' : 'cliente'}">${u.ruolo === 'professionista' ? '🔧 Pro' : '👤 Cliente'}</span>
           ${bannato ? '<span class="utente-badge bannato">🚫 Bannato</span>' : ''}
           ${u.verificato ? '<span class="utente-badge verificato">✅ Verificato</span>' : ''}
@@ -628,7 +608,7 @@ function renderUtenti(lista) {
       <div class="utente-azioni">
         ${bannato
           ? `<button class="btn-unban" onclick="sbannaUtente('${u.id}')">✅ Sbanna</button>`
-          : `<button class="btn-ban" onclick="apriPopupBan('${u.id}', '${nome.replace(/'/g,"\\'")}')">🚫 Banna</button>`
+          : `<button class="btn-ban" onclick="apriPopupBan('${u.id}','${nome.replace(/'/g,"\\'")}')">🚫 Banna</button>`
         }
       </div>
     </div>`;
@@ -646,7 +626,7 @@ window.cercaUtenti = function(testo) {
 
 window.apriPopupBan = function(id, nome) {
   utenteCorrenteId = id;
-  document.getElementById('popup-ban-text').textContent = `Sei sicuro di voler bannare "${nome}"? Non potrà più accedere alla piattaforma.`;
+  document.getElementById('popup-ban-text').textContent = `Sei sicuro di voler bannare "${nome}"?`;
   document.getElementById('popupBan').classList.add('show');
 };
 
@@ -667,19 +647,19 @@ window.sbannaUtente = async function(id) {
   alert('✅ Utente sbannato!');
 };
 
-// ── CARICA PROFESSIONISTI DA APPROVARE ──
 async function caricaProfessionisti() {
   document.getElementById('lista-professionisti').innerHTML = '<div class="loading">⏳ Caricamento...</div>';
   const q = query(collection(db, 'utenti'), where('ruolo', '==', 'professionista'), where('verificato', '==', false));
   const snap = await getDocs(q);
   document.getElementById('badge-pro').textContent = snap.size;
   if (snap.empty) {
-    document.getElementById('lista-professionisti').innerHTML = '<div class="empty-state"><div class="icon">✅</div><p>Nessun professionista in attesa di approvazione</p></div>';
+    document.getElementById('lista-professionisti').innerHTML = '<div class="empty-state"><div class="icon">✅</div><p>Nessun professionista in attesa</p></div>';
     return;
   }
   let html = '';
   snap.forEach(d => {
     const u = { id: d.id, ...d.data() };
+    const nome = (u.ragioneSociale || 'Sconosciuto').replace(/'/g, "\\'");
     html += `
     <div class="utente-card">
       <div class="utente-avatar oro">${(u.ragioneSociale || 'P').charAt(0)}</div>
@@ -688,7 +668,7 @@ async function caricaProfessionisti() {
         <div class="utente-dettagli">${u.email || ''} • ${u.categoria || ''} • ${u.citta || ''} • P.IVA: ${u.piva || 'N/D'}</div>
       </div>
       <div class="utente-azioni">
-        <button class="btn-approva" onclick="approvaPro('${u.id}', '${(u.ragioneSociale||'').replace(/'/g,"\\'")}')">✅ Approva</button>
+        <button class="btn-approva" onclick="approvaPro('${u.id}','${nome}')">✅ Approva</button>
         <button class="btn-rifiuta" onclick="rifiutaPro('${u.id}')">❌ Rifiuta</button>
       </div>
     </div>`;
@@ -707,41 +687,43 @@ window.rifiutaPro = async function(id) {
   if (!confirm('Rifiutare questo professionista?')) return;
   await updateDoc(doc(db, 'utenti', id), { bannato: true, motivoBan: 'Documenti non validi' });
   caricaProfessionisti();
-  alert('❌ Professionista rifiutato.');
 };
 
-// ── CARICA SEGNALAZIONI ──
 async function caricaSegnalazioni() {
   document.getElementById('lista-segnalazioni').innerHTML = '<div class="loading">⏳ Caricamento...</div>';
-  const q = query(collection(db, 'segnalazioni'), where('stato', '==', 'aperta'), orderBy('timestamp', 'desc'));
-  const snap = await getDocs(q);
-  document.getElementById('badge-segn').textContent = snap.size;
-  if (snap.empty) {
-    document.getElementById('lista-segnalazioni').innerHTML = '<div class="empty-state"><div class="icon">✅</div><p>Nessuna segnalazione aperta</p></div>';
-    return;
+  try {
+    const q = query(collection(db, 'segnalazioni'), orderBy('timestamp', 'desc'));
+    const snap = await getDocs(q);
+    document.getElementById('badge-segn').textContent = snap.size;
+    if (snap.empty) {
+      document.getElementById('lista-segnalazioni').innerHTML = '<div class="empty-state"><div class="icon">✅</div><p>Nessuna segnalazione</p></div>';
+      return;
+    }
+    let html = '';
+    snap.forEach(d => {
+      const s = { id: d.id, ...d.data() };
+      html += `
+      <div class="segnalazione-card">
+        <span class="segnalazione-tipo">🚨 ${s.tipo || 'Segnalazione'}</span>
+        <div class="segnalazione-testo">${s.descrizione || 'Nessuna descrizione'}</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn-ban" onclick="banDaSegnalazione('${s.id}','${s.aUID || ''}')">🚫 Banna utente</button>
+          <button class="btn-unban" onclick="archiviaSegnalazione('${s.id}')">✅ Archivia</button>
+        </div>
+      </div>`;
+    });
+    document.getElementById('lista-segnalazioni').innerHTML = html;
+  } catch(e) {
+    document.getElementById('lista-segnalazioni').innerHTML = '<div class="empty-state"><div class="icon">✅</div><p>Nessuna segnalazione</p></div>';
   }
-  let html = '';
-  snap.forEach(d => {
-    const s = { id: d.id, ...d.data() };
-    html += `
-    <div class="segnalazione-card">
-      <span class="segnalazione-tipo">🚨 ${s.tipo || 'Segnalazione'}</span>
-      <div class="segnalazione-testo">${s.descrizione || 'Nessuna descrizione'}</div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <button class="btn-ban" onclick="banDaSegnalazione('${s.id}', '${s.aUID}')">🚫 Banna utente</button>
-        <button class="btn-unban" onclick="archiviaSegnalazione('${s.id}')">✅ Archivia</button>
-      </div>
-    </div>`;
-  });
-  document.getElementById('lista-segnalazioni').innerHTML = html;
 }
 
 window.banDaSegnalazione = async function(segnalazioneId, utenteId) {
-  if (!confirm('Bannare questo utente?')) return;
+  if (!utenteId || !confirm('Bannare questo utente?')) return;
   await updateDoc(doc(db, 'utenti', utenteId), { bannato: true });
   await updateDoc(doc(db, 'segnalazioni', segnalazioneId), { stato: 'chiusa', banApplicato: true });
   caricaSegnalazioni();
-  alert('✅ Utente bannato e segnalazione chiusa!');
+  alert('✅ Utente bannato!');
 };
 
 window.archiviaSegnalazione = async function(id) {
@@ -749,7 +731,6 @@ window.archiviaSegnalazione = async function(id) {
   caricaSegnalazioni();
 };
 
-// ── STATISTICHE ──
 async function caricaStatistiche() {
   const [utenti, richieste, chat, recensioni] = await Promise.all([
     getDocs(collection(db, 'utenti')),
@@ -763,22 +744,27 @@ async function caricaStatistiche() {
   document.getElementById('stat-tot-rec').textContent = recensioni.size;
 }
 
-// ── LOG ──
 async function caricaLog() {
   document.getElementById('lista-log').innerHTML = '<div class="loading">⏳ Caricamento...</div>';
-  const q = query(collection(db, 'adminLog'), orderBy('timestamp', 'desc'), limit(30));
-  const snap = await getDocs(q);
-  if (snap.empty) { document.getElementById('lista-log').innerHTML = '<div class="empty-state"><div class="icon">📝</div><p>Nessuna attività registrata</p></div>'; return; }
-  let html = '';
-  snap.forEach(d => {
-    const l = d.data();
-    const tempo = l.timestamp ? tempoFa(l.timestamp.seconds) : '';
-    html += `<div class="log-item"><span class="log-icon">📌</span><span class="log-testo">${l.azione}</span><span class="log-tempo">${tempo}</span></div>`;
-  });
-  document.getElementById('lista-log').innerHTML = html;
+  try {
+    const q = query(collection(db, 'adminLog'), orderBy('timestamp', 'desc'), limit(30));
+    const snap = await getDocs(q);
+    if (snap.empty) {
+      document.getElementById('lista-log').innerHTML = '<div class="empty-state"><div class="icon">📝</div><p>Nessuna attività</p></div>';
+      return;
+    }
+    let html = '';
+    snap.forEach(d => {
+      const l = d.data();
+      const tempo = l.timestamp ? tempoFa(l.timestamp.seconds) : '';
+      html += `<div class="log-item"><span class="log-icon">📌</span><span class="log-testo">${l.azione}</span><span class="log-tempo">${tempo}</span></div>`;
+    });
+    document.getElementById('lista-log').innerHTML = html;
+  } catch(e) {
+    document.getElementById('lista-log').innerHTML = '<div class="empty-state"><div class="icon">📝</div><p>Nessuna attività</p></div>';
+  }
 }
 
-// ── UTILITY ──
 function tempoFa(seconds) {
   const diff = Math.floor(Date.now() / 1000) - seconds;
   if (diff < 60) return 'poco fa';
@@ -787,27 +773,20 @@ function tempoFa(seconds) {
   return Math.floor(diff/86400) + ' giorni fa';
 }
 
-// ── AUTH ──
 onAuthStateChanged(auth, async (user) => {
   if (!user) { window.location.href = 'cliente.html?tab=accedi'; return; }
-  const snap = await getDoc(doc(db, 'utenti', user.uid));
-  if (!snap.exists()) { window.location.href = 'index.html'; return; }
-  const dati = snap.data();
   if (user.email !== ADMIN_EMAIL) {
     alert('⛔ Accesso negato. Area riservata all\'amministratore.');
-    window.location.href = dati.ruolo === 'professionista' ? 'dashboard-pro.html' : 'dashboard-cliente.html';
+    window.location.href = 'index.html';
     return;
   }
   caricaRichieste();
-
-  // Ascolta nuove richieste e invia notifica Telegram
-  const q = query(collection(db, 'richieste'), where('statoAdmin', '==', null), orderBy('timestamp', 'desc'), limit(1));
   onSnapshot(collection(db, 'richieste'), (snap) => {
     snap.docChanges().forEach(change => {
       if (change.type === 'added') {
         const r = change.doc.data();
         if (richiestaDiInteresse(r)) {
-          const msg = `🔔 <b>NUOVA RICHIESTA DI INTERESSE!</b>\n\n📍 <b>${r.citta || 'N/D'}</b>\n🏗️ ${r.categoria || 'N/D'}\n📐 ${r.mq ? r.mq + 'mq' : 'N/D'}\n💰 ${r.budget || 'N/D'}\n${r.urgente ? '🔴 URGENTE' : ''}\n\n📝 ${(r.descrizione || '').substring(0, 200)}\n\n👉 Vai su admin.html per gestirla!`;
+          const msg = `🔔 <b>NUOVA RICHIESTA!</b>\n\n📍 <b>${r.citta || 'N/D'}</b>\n🏗️ ${r.categoria || 'N/D'}\n📐 ${r.mq ? r.mq + 'mq' : 'N/D'}\n💰 ${r.budget || 'N/D'}\n${r.urgente ? '🔴 URGENTE' : ''}\n\n📝 ${(r.descrizione || '').substring(0,200)}\n\n👉 Vai su admin.html!`;
           inviaNotificaTelegram(msg);
         }
       }
@@ -816,9 +795,7 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    ['popupTieni','popupPubblica','popupBan'].forEach(chiudiPopup);
-  }
+  if (e.key === 'Escape') ['popupTieni','popupPubblica','popupBan'].forEach(id => chiudiPopup(id));
 });
 </script>
 </body>
