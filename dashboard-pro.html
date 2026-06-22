@@ -176,7 +176,7 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
         <span>Ogni credito sblocca il contatto di un cliente interessato</span>
       </div>
       <div class="crediti-num" id="crediti-num">0 <span>crediti</span></div>
-      <button class="btn-ricarica" onclick="alert('Ricarica crediti in arrivo!')">+ Ricarica crediti</button>
+      <button class="btn-ricarica" onclick="window.location.href='pagamento.html'">+ Ricarica crediti</button>
     </div>
 
     <div class="stats-row">
@@ -399,28 +399,18 @@ onAuthStateChanged(auth, async (user) => {
   document.getElementById('stat-completati').textContent = dati.lavoriCompletati ?? 0;
   document.getElementById('stat-rating').textContent = dati.ratingMedio ? dati.ratingMedio.toFixed(1) : '—';
 
-  const categoriePro = Array.isArray(dati.categorie) ? dati.categorie : (dati.categoria ? [dati.categoria] : []);
-
-  // ── RICHIESTE: carica TUTTE senza filtro stato ──
+  // ── RICHIESTE: carica TUTTE, nessun filtro categorie ──
   try {
     const snapTutte = await getDocs(query(collection(db, 'richieste'), limit(50)));
 
-    // Escludi solo completate/eliminate/rifiutate
     let docs = snapTutte.docs.filter(d => {
       const stato = (d.data().stato || '').toLowerCase().trim();
       return stato !== 'completata' && stato !== 'eliminata' && stato !== 'rifiutata' && stato !== 'chiusa';
     });
 
-    // Ordina per timestamp desc
     docs.sort((a,b) => getTS(b.data()) - getTS(a.data()));
 
-    // Filtra per categoria solo se il professionista ne ha impostate
-    if (categoriePro.length > 0) {
-      docs = docs.filter(d => {
-        const cat = (d.data().categoria || '').toLowerCase();
-        return categoriePro.some(c => cat.includes(c.toLowerCase()));
-      });
-    }
+    // *** NESSUN FILTRO CATEGORIE — tutte le richieste visibili ***
 
     const n = docs.length;
     document.getElementById('stat-richieste').textContent = n;
@@ -429,7 +419,7 @@ onAuthStateChanged(auth, async (user) => {
     document.getElementById('sidebar-notifica').textContent = n;
 
     const container = document.getElementById('richieste-container');
-    if (docs.length === 0) {
+    if (n === 0) {
       container.innerHTML = '<div class="vuoto-msg">📭 Nessuna richiesta disponibile al momento.</div>';
     } else {
       container.innerHTML = '';
@@ -441,7 +431,7 @@ onAuthStateChanged(auth, async (user) => {
         const mqChip = r.mq ? `<span class="chip">📐 ${r.mq} mq</span>` : '';
         const quandoChip = r.quando ? `<span class="chip">🗓️ ${r.quando}</span>` : '';
         const giaSbloccato = (r.sbloccatiDa || []).includes(currentUID);
-        const catLabel = (r.categoria || 'Richiesta').replace(/'/g,"\\'");
+        const catLabel = (r.categoria || 'Richiesta').replace(/'/g, "\\'");
         const btnHtml = giaSbloccato
           ? `<button class="btn-sblocca sbloccato" onclick="window.location.href='chat.html?richiesta=${docSnap.id}'">💬 Vai alla chat</button>`
           : `<button class="btn-sblocca" onclick="apriPopupSblocco('${catLabel}','${docSnap.id}')">🔓 Sblocca contatto</button>`;
@@ -513,7 +503,7 @@ onAuthStateChanged(auth, async (user) => {
         const rec = d.data();
         const stelle = '★'.repeat(rec.stelle||0)+'☆'.repeat(5-(rec.stelle||0));
         const data = rec.timestamp ? new Date(rec.timestamp.seconds*1000).toLocaleDateString('it-IT') : '—';
-        recCont.innerHTML += `<div class="recensione-card"><div class="rec-header"><div class="rec-nome">${rec.daNome||'Cliente'}</div><div class="rec-stelle">${stelle}</div></div><div class="rec-testo">${rec.testo||'—'}</div><div class="rec-data">${data}</div></div>`;
+        recCont.innerHTML += `<div class="recensione-card"><div class="rec-header"><div class="rec-nome">${rec.daNome||'Cliente'}</div><div class="rec-stelle">${stelle}</div></div><div class="rec-testo">${rec.testo||'Nessun commento.'}</div><div class="rec-data">${data}</div></div>`;
       });
     }
   } catch(e) {
