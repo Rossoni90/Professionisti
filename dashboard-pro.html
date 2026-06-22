@@ -46,14 +46,12 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 .abbonamento-bar-info strong { display: block; font-size: 15px; margin-bottom: 3px; }
 .abbonamento-bar-info span { font-size: 13px; opacity: 0.85; }
 .btn-rinnova { background: var(--oro); color: white; border: none; padding: 10px 22px; border-radius: 25px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; text-decoration: none; flex-shrink: 0; }
-.btn-rinnova:hover { background: var(--oro-chiaro); }
 .crediti-box { background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%); border: 1.5px solid var(--oro); border-radius: 16px; padding: 20px 22px; margin-bottom: 22px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
 .crediti-info strong { display: block; font-size: 15px; color: var(--blu-scuro); margin-bottom: 4px; }
 .crediti-info span { font-size: 13px; color: var(--grigio); }
 .crediti-num { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 900; color: var(--oro); text-align: center; }
 .crediti-num span { font-size: 14px; color: var(--grigio); font-family: 'Inter', sans-serif; font-weight: 400; display: block; }
-.btn-ricarica { background: var(--oro); color: white; border: none; padding: 10px 22px; border-radius: 25px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; }
-.btn-ricarica:hover { background: var(--oro-chiaro); }
+.btn-ricarica { background: var(--oro); color: white; border: none; padding: 10px 22px; border-radius: 25px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; }
 .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
 .stat-card { background: white; border-radius: 16px; padding: 20px; border: 1px solid #e5e7eb; transition: 0.3s; }
 .stat-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.07); transform: translateY(-2px); }
@@ -107,7 +105,6 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 .popup-prezzo-sub { font-size: 13px; color: var(--grigio); margin-bottom: 25px; }
 .popup-info { background: var(--grigio-chiaro); border-radius: 12px; padding: 14px 18px; font-size: 13px; color: var(--testo); line-height: 1.7; margin-bottom: 22px; text-align: left; }
 .btn-popup-main { width: 100%; padding: 15px; background: linear-gradient(135deg, var(--oro), var(--oro-chiaro)); color: white; border: none; border-radius: 14px; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; margin-bottom: 10px; }
-.btn-popup-main:hover { transform: translateY(-2px); }
 .btn-popup-cancel { width: 100%; padding: 13px; background: var(--grigio-chiaro); color: var(--grigio); border: none; border-radius: 14px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; }
 .recensione-popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
 .recensione-popup.show { display: flex; }
@@ -266,7 +263,7 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js';
 import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js';
-import { getFirestore, doc, getDoc, collection, query, where, limit, getDocs, updateDoc, addDoc, serverTimestamp, increment } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js';
+import { getFirestore, doc, getDoc, collection, query, limit, getDocs, updateDoc, addDoc, serverTimestamp, increment, where } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCQHoCYYfdmkXnV2CTGBSq3gpE986QOq2o",
@@ -303,7 +300,6 @@ function tempoFa(seconds) {
   return `${Math.floor(diff/86400)} giorni fa`;
 }
 
-// Legge il timestamp da qualsiasi campo disponibile
 function getTS(r) {
   if (r.timestamp && r.timestamp.seconds) return r.timestamp.seconds;
   if (r.creato && r.creato.seconds) return r.creato.seconds;
@@ -405,24 +401,20 @@ onAuthStateChanged(auth, async (user) => {
 
   const categoriePro = Array.isArray(dati.categorie) ? dati.categorie : (dati.categoria ? [dati.categoria] : []);
 
-  // ── RICHIESTE: cerca tutti gli stati possibili in parallelo ──
+  // ── RICHIESTE: carica TUTTE senza filtro stato ──
   try {
-    const [s1, s2, s3, s4] = await Promise.all([
-      getDocs(query(collection(db,'richieste'), where('stato','==','attiva'), limit(30))),
-      getDocs(query(collection(db,'richieste'), where('stato','==','aperta'), limit(30))),
-      getDocs(query(collection(db,'richieste'), where('stato','==','attesa'), limit(30))),
-      getDocs(query(collection(db,'richieste'), where('stato','==','pubblicata'), limit(30)))
-    ]);
+    const snapTutte = await getDocs(query(collection(db, 'richieste'), limit(50)));
 
-    // Unisci eliminando duplicati
-    const docsMap = new Map();
-    [...s1.docs, ...s2.docs, ...s3.docs, ...s4.docs].forEach(d => docsMap.set(d.id, d));
-    let docs = Array.from(docsMap.values());
+    // Escludi solo completate/eliminate/rifiutate
+    let docs = snapTutte.docs.filter(d => {
+      const stato = (d.data().stato || '').toLowerCase().trim();
+      return stato !== 'completata' && stato !== 'eliminata' && stato !== 'rifiutata' && stato !== 'chiusa';
+    });
 
-    // Ordina per timestamp/creato desc
+    // Ordina per timestamp desc
     docs.sort((a,b) => getTS(b.data()) - getTS(a.data()));
 
-    // Filtra per categoria se impostate
+    // Filtra per categoria solo se il professionista ne ha impostate
     if (categoriePro.length > 0) {
       docs = docs.filter(d => {
         const cat = (d.data().categoria || '').toLowerCase();
@@ -438,7 +430,7 @@ onAuthStateChanged(auth, async (user) => {
 
     const container = document.getElementById('richieste-container');
     if (docs.length === 0) {
-      container.innerHTML = '<div class="vuoto-msg">📭 Nessuna richiesta attiva al momento.</div>';
+      container.innerHTML = '<div class="vuoto-msg">📭 Nessuna richiesta disponibile al momento.</div>';
     } else {
       container.innerHTML = '';
       docs.forEach(docSnap => {
