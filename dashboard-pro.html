@@ -14,7 +14,6 @@
   --verde: #10B981; --rosso: #EF4444; --arancio: #F59E0B;
 }
 body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color: var(--testo); min-height: 100vh; }
-
 .navbar {
   background: var(--blu-scuro); padding: 14px 25px;
   display: flex; justify-content: space-between; align-items: center;
@@ -31,75 +30,40 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
   width: 18px; height: 18px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
 }
-.avatar {
-  width: 38px; height: 38px; background: var(--oro); border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 700; color: white; font-size: 16px; cursor: pointer;
-}
+.avatar { width: 38px; height: 38px; background: var(--oro); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; font-size: 16px; }
 .navbar-nome { color: white; font-size: 14px; font-weight: 600; }
 .abbonamento-badge { background: var(--verde); color: white; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
 .abbonamento-badge.scaduto { background: var(--rosso); }
-.btn-logout {
-  background: transparent; color: rgba(255,255,255,0.7);
-  border: 1px solid rgba(255,255,255,0.3);
-  padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;
-  cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s;
-}
+.btn-logout { background: transparent; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.3); padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s; }
 .btn-logout:hover { color: white; border-color: white; }
-
 .layout { display: flex; min-height: calc(100vh - 66px); }
-
 .sidebar { width: 240px; background: white; border-right: 1px solid #e5e7eb; padding: 20px 0; flex-shrink: 0; }
 .sidebar-menu { list-style: none; }
-.sidebar-item {
-  padding: 12px 22px; display: flex; align-items: center; gap: 12px;
-  cursor: pointer; transition: 0.2s; font-size: 14px; font-weight: 500;
-  color: var(--grigio); border-left: 3px solid transparent; text-decoration: none;
-}
+.sidebar-item { padding: 12px 22px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: 0.2s; font-size: 14px; font-weight: 500; color: var(--grigio); border-left: 3px solid transparent; }
 .sidebar-item:hover { background: var(--grigio-chiaro); color: var(--blu); }
 .sidebar-item.active { background: #EFF6FF; color: var(--blu); border-left-color: var(--oro); font-weight: 600; }
 .sidebar-item .icon { font-size: 18px; }
 .sidebar-divider { height: 1px; background: #e5e7eb; margin: 12px 22px; }
 .sidebar-label { font-size: 11px; font-weight: 700; color: #9CA3AF; text-transform: uppercase; letter-spacing: 1px; padding: 5px 22px; margin-top: 8px; }
 .sidebar-notifica { background: var(--rosso); color: white; font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; margin-left: auto; }
-
 .main { flex: 1; padding: 28px; overflow-y: auto; }
-.page-header { margin-bottom: 22px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 15px; }
-.page-header-left h1 { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--blu-scuro); margin-bottom: 4px; }
-.page-header-left p { color: var(--grigio); font-size: 14px; }
-
-.abbonamento-bar {
-  background: linear-gradient(135deg, var(--blu) 0%, var(--blu-chiaro) 100%);
-  border-radius: 16px; padding: 18px 22px; margin-bottom: 22px;
-  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
-}
+.page-header { margin-bottom: 22px; }
+.page-header h1 { font-family: 'Playfair Display', serif; font-size: 26px; color: var(--blu-scuro); margin-bottom: 4px; }
+.page-header p { color: var(--grigio); font-size: 14px; }
+.abbonamento-bar { background: linear-gradient(135deg, var(--blu) 0%, var(--blu-chiaro) 100%); border-radius: 16px; padding: 18px 22px; margin-bottom: 22px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
 .abbonamento-bar.scaduto { background: linear-gradient(135deg, var(--rosso) 0%, #DC2626 100%); }
 .abbonamento-bar-info { color: white; }
 .abbonamento-bar-info strong { display: block; font-size: 15px; margin-bottom: 3px; }
 .abbonamento-bar-info span { font-size: 13px; opacity: 0.85; }
-.btn-rinnova {
-  background: var(--oro); color: white; border: none; padding: 10px 22px;
-  border-radius: 25px; font-size: 13px; font-weight: 700; cursor: pointer;
-  transition: 0.3s; font-family: 'Inter', sans-serif; flex-shrink: 0; text-decoration: none;
-}
-.btn-rinnova:hover { background: var(--oro-chiaro); transform: translateY(-1px); }
-
-.crediti-box {
-  background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
-  border: 1.5px solid var(--oro); border-radius: 16px; padding: 20px 22px; margin-bottom: 22px;
-  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
-}
+.btn-rinnova { background: var(--oro); color: white; border: none; padding: 10px 22px; border-radius: 25px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; text-decoration: none; flex-shrink: 0; }
+.btn-rinnova:hover { background: var(--oro-chiaro); }
+.crediti-box { background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%); border: 1.5px solid var(--oro); border-radius: 16px; padding: 20px 22px; margin-bottom: 22px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
 .crediti-info strong { display: block; font-size: 15px; color: var(--blu-scuro); margin-bottom: 4px; }
 .crediti-info span { font-size: 13px; color: var(--grigio); }
 .crediti-num { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 900; color: var(--oro); text-align: center; }
 .crediti-num span { font-size: 14px; color: var(--grigio); font-family: 'Inter', sans-serif; font-weight: 400; display: block; }
-.btn-ricarica {
-  background: var(--oro); color: white; border: none; padding: 10px 22px;
-  border-radius: 25px; font-size: 13px; font-weight: 700; cursor: pointer;
-  transition: 0.3s; font-family: 'Inter', sans-serif;
-}
-.btn-ricarica:hover { background: var(--oro-chiaro); transform: translateY(-1px); }
-
+.btn-ricarica { background: var(--oro); color: white; border: none; padding: 10px 22px; border-radius: 25px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; }
+.btn-ricarica:hover { background: var(--oro-chiaro); }
 .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
 .stat-card { background: white; border-radius: 16px; padding: 20px; border: 1px solid #e5e7eb; transition: 0.3s; }
 .stat-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.07); transform: translateY(-2px); }
@@ -109,22 +73,13 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 .stat-card.oro .stat-num { color: var(--oro); }
 .stat-card.verde .stat-num { color: var(--verde); }
 .stat-card.rosso .stat-num { color: var(--rosso); }
-
 .sez-title { font-size: 16px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
 .count-badge { background: var(--blu); color: white; font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 10px; }
 .count-badge.rosso { background: var(--rosso); }
-
-.richiesta-card {
-  background: white; border-radius: 16px; padding: 20px 22px; margin-bottom: 14px;
-  border: 1px solid #e5e7eb; transition: 0.3s; position: relative;
-}
+.richiesta-card { background: white; border-radius: 16px; padding: 20px 22px; margin-bottom: 14px; border: 1px solid #e5e7eb; transition: 0.3s; position: relative; }
 .richiesta-card:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.08); border-color: var(--oro); }
 .richiesta-card.nuova { border-left: 4px solid var(--oro); }
-.nuovo-tag {
-  position: absolute; top: -8px; left: 18px;
-  background: var(--oro); color: white; font-size: 10px; font-weight: 700;
-  padding: 3px 10px; border-radius: 10px;
-}
+.nuovo-tag { position: absolute; top: -8px; left: 18px; background: var(--oro); color: white; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 10px; }
 .richiesta-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
 .richiesta-cat { display: inline-flex; align-items: center; gap: 6px; background: #EFF6FF; color: var(--blu); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
 .richiesta-tempo { font-size: 12px; color: var(--grigio); }
@@ -136,42 +91,23 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 .richiesta-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
 .costo-sblocco { font-size: 13px; color: var(--grigio); }
 .costo-sblocco strong { color: var(--blu-scuro); font-size: 16px; }
-.btn-sblocca {
-  background: linear-gradient(135deg, var(--oro) 0%, var(--oro-chiaro) 100%);
-  color: white; border: none; padding: 11px 24px; border-radius: 25px;
-  font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s;
-  font-family: 'Inter', sans-serif; box-shadow: 0 4px 12px rgba(184,151,42,0.3);
-}
-.btn-sblocca:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(184,151,42,0.4); }
+.btn-sblocca { background: linear-gradient(135deg, var(--oro) 0%, var(--oro-chiaro) 100%); color: white; border: none; padding: 11px 24px; border-radius: 25px; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; box-shadow: 0 4px 12px rgba(184,151,42,0.3); }
+.btn-sblocca:hover { transform: translateY(-2px); }
 .btn-sblocca.sbloccato { background: var(--verde); box-shadow: none; }
-
-.sopralluogo-card {
-  background: white; border-radius: 16px; padding: 20px 22px; margin-bottom: 14px;
-  border: 1px solid #e5e7eb; border-left: 4px solid var(--verde);
-}
+.sopralluogo-card { background: white; border-radius: 16px; padding: 20px 22px; margin-bottom: 14px; border: 1px solid #e5e7eb; border-left: 4px solid var(--verde); }
 .sopralluogo-stato { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 10px; }
 .sopralluogo-stato.confermato { background: #ECFDF5; color: var(--verde); }
 .sopralluogo-data { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 900; color: var(--blu-scuro); margin-bottom: 8px; }
 .sopralluogo-info { font-size: 13px; color: var(--grigio); line-height: 1.8; }
 .sopralluogo-info strong { color: var(--blu-scuro); }
-
-.recensione-card {
-  background: white; border-radius: 16px; padding: 18px 22px; margin-bottom: 12px;
-  border: 1px solid #e5e7eb; border-left: 4px solid var(--arancio);
-}
+.recensione-card { background: white; border-radius: 16px; padding: 18px 22px; margin-bottom: 12px; border: 1px solid #e5e7eb; border-left: 4px solid var(--arancio); }
 .rec-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 .rec-nome { font-weight: 700; color: var(--blu-scuro); font-size: 14px; }
 .rec-stelle { color: var(--arancio); font-size: 16px; }
 .rec-testo { font-size: 13px; color: var(--grigio); line-height: 1.6; }
 .rec-data { font-size: 11px; color: #9CA3AF; margin-top: 6px; }
-
 .vuoto-msg { text-align: center; padding: 30px; color: var(--grigio); font-size: 14px; background: white; border-radius: 16px; border: 1px dashed #e5e7eb; }
-
-.popup-overlay {
-  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.75); z-index: 9999;
-  justify-content: center; align-items: center; padding: 20px;
-}
+.popup-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
 .popup-overlay.show { display: flex; }
 .popup-box { background: white; border-radius: 24px; padding: 38px 32px; max-width: 430px; width: 100%; text-align: center; }
 .popup-icon { font-size: 56px; margin-bottom: 16px; }
@@ -180,25 +116,10 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 .popup-prezzo { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 900; color: var(--oro); margin-bottom: 6px; }
 .popup-prezzo-sub { font-size: 13px; color: var(--grigio); margin-bottom: 25px; }
 .popup-info { background: var(--grigio-chiaro); border-radius: 12px; padding: 14px 18px; font-size: 13px; color: var(--testo); line-height: 1.7; margin-bottom: 22px; text-align: left; }
-.btn-popup-main {
-  width: 100%; padding: 15px;
-  background: linear-gradient(135deg, var(--oro), var(--oro-chiaro));
-  color: white; border: none; border-radius: 14px; font-size: 16px; font-weight: 700;
-  cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; margin-bottom: 10px;
-}
-.btn-popup-main:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(184,151,42,0.35); }
-.btn-popup-cancel {
-  width: 100%; padding: 13px; background: var(--grigio-chiaro);
-  color: var(--grigio); border: none; border-radius: 14px; font-size: 14px; font-weight: 600;
-  cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s;
-}
-.btn-popup-cancel:hover { background: #e5e7eb; }
-
-.recensione-popup {
-  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.8); z-index: 9999;
-  justify-content: center; align-items: center; padding: 20px;
-}
+.btn-popup-main { width: 100%; padding: 15px; background: linear-gradient(135deg, var(--oro), var(--oro-chiaro)); color: white; border: none; border-radius: 14px; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; margin-bottom: 10px; }
+.btn-popup-main:hover { transform: translateY(-2px); }
+.btn-popup-cancel { width: 100%; padding: 13px; background: var(--grigio-chiaro); color: var(--grigio); border: none; border-radius: 14px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; }
+.recensione-popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
 .recensione-popup.show { display: flex; }
 .recensione-box { background: white; border-radius: 24px; padding: 38px 30px; max-width: 420px; width: 100%; text-align: center; }
 .recensione-box h2 { font-family: 'Playfair Display', serif; color: var(--blu-scuro); font-size: 22px; margin-bottom: 10px; }
@@ -206,27 +127,18 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 .stelle { display: flex; justify-content: center; gap: 10px; margin-bottom: 18px; }
 .stella { font-size: 36px; cursor: pointer; opacity: 0.3; transition: 0.2s; }
 .stella.attiva { opacity: 1; }
-.recensione-box textarea {
-  width: 100%; padding: 13px 16px; border: 1.5px solid #e5e7eb; border-radius: 12px;
-  font-size: 14px; font-family: 'Inter', sans-serif; margin-bottom: 14px;
-  min-height: 85px; resize: vertical; outline: none;
-}
-.recensione-box textarea:focus { border-color: var(--blu); }
-.btn-rec { width: 100%; padding: 14px; background: var(--blu); color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s; margin-bottom: 8px; }
-.btn-rec:hover { background: var(--blu-chiaro); }
+.recensione-box textarea { width: 100%; padding: 13px 16px; border: 1.5px solid #e5e7eb; border-radius: 12px; font-size: 14px; font-family: 'Inter', sans-serif; margin-bottom: 14px; min-height: 85px; resize: vertical; outline: none; }
+.btn-rec { width: 100%; padding: 14px; background: var(--blu); color: white; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; margin-bottom: 8px; }
 .btn-rec.oro { background: var(--oro); }
 .btn-rec.grigio { background: var(--grigio-chiaro); color: var(--grigio); }
-
 .two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 22px; }
 .loading-spinner { text-align: center; padding: 40px; color: var(--grigio); font-size: 14px; }
-
 @media (max-width: 900px) { .stats-row { grid-template-columns: repeat(2, 1fr); } .two-cols { grid-template-columns: 1fr; } }
 @media (max-width: 768px) { .sidebar { display: none; } .main { padding: 18px 14px; } .stats-row { grid-template-columns: repeat(2, 1fr); } .navbar-nome { display: none; } }
 </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
 <nav class="navbar">
   <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
   <div class="navbar-right">
@@ -238,10 +150,7 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
   </div>
 </nav>
 
-<!-- LAYOUT -->
 <div class="layout">
-
-  <!-- SIDEBAR -->
   <aside class="sidebar">
     <ul class="sidebar-menu">
       <li class="sidebar-item active"><span class="icon">🏠</span> Dashboard</li>
@@ -260,17 +169,12 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
     </ul>
   </aside>
 
-  <!-- MAIN -->
   <main class="main">
-
     <div class="page-header">
-      <div class="page-header-left">
-        <h1 id="saluto-nome">Caricamento...</h1>
-        <p id="data-oggi">—</p>
-      </div>
+      <h1 id="saluto-nome">Caricamento...</h1>
+      <p id="data-oggi">—</p>
     </div>
 
-    <!-- ABBONAMENTO BAR -->
     <div class="abbonamento-bar" id="abbonamento-bar">
       <div class="abbonamento-bar-info">
         <strong id="abbonamento-titolo">⏳ Verifica abbonamento...</strong>
@@ -279,17 +183,15 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
       <a href="pagamento.html" class="btn-rinnova">Gestisci abbonamento</a>
     </div>
 
-    <!-- CREDITI -->
     <div class="crediti-box">
       <div class="crediti-info">
         <strong>🔓 Crediti disponibili</strong>
         <span>Ogni credito sblocca il contatto di un cliente interessato</span>
       </div>
-      <div class="crediti-num" id="crediti-num">— <span>crediti</span></div>
+      <div class="crediti-num" id="crediti-num">0 <span>crediti</span></div>
       <button class="btn-ricarica" onclick="alert('Ricarica crediti in arrivo!')">+ Ricarica crediti</button>
     </div>
 
-    <!-- STATS -->
     <div class="stats-row">
       <div class="stat-card rosso">
         <div class="stat-icon">📋</div>
@@ -313,7 +215,6 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
       </div>
     </div>
 
-    <!-- DUE COLONNE -->
     <div class="two-cols">
       <div>
         <div class="sez-title">📅 Prossimo sopralluogo</div>
@@ -327,13 +228,11 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
       </div>
     </div>
 
-    <!-- RICHIESTE ZONA -->
     <div class="sez-title">
       📋 Nuove richieste nella tua zona
       <span class="count-badge rosso" id="count-richieste">0</span>
     </div>
     <div id="richieste-container"><div class="loading-spinner">⏳ Caricamento richieste...</div></div>
-
   </main>
 </div>
 
@@ -343,7 +242,7 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
     <div class="popup-icon">🔓</div>
     <h2>Sblocca il contatto</h2>
     <p>Stai per sbloccare il contatto del cliente per: <strong id="popup-lavoro"></strong></p>
-    <div class="popup-prezzo" id="popup-prezzo-val">1 credito</div>
+    <div class="popup-prezzo">1 credito</div>
     <div class="popup-prezzo-sub">addebito una tantum • contatto diretto immediato</div>
     <div class="popup-info">
       ✅ Accesso immediato alla chat privata<br>
@@ -396,108 +295,77 @@ let currentUID = null;
 let currentRichiestaId = null;
 let stelleSelezionate = 0;
 
-// ── LOGOUT ──
 window.eseguiLogout = async () => {
   await signOut(auth);
   localStorage.clear();
   window.location.href = 'index.html';
 };
 
-// ── HELPERS ──
 function dataOggi() {
-  return new Date().toLocaleDateString('it-IT', {
-    weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
-  });
+  return new Date().toLocaleDateString('it-IT', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
 }
 
 function tempoFa(seconds) {
   const diff = Math.floor(Date.now() / 1000) - seconds;
   if (diff < 60) return 'pochi secondi fa';
-  if (diff < 3600) return `${Math.floor(diff / 60)} min fa`;
-  if (diff < 86400) return `${Math.floor(diff / 3600)} ore fa`;
-  return `${Math.floor(diff / 86400)} giorni fa`;
+  if (diff < 3600) return `${Math.floor(diff/60)} min fa`;
+  if (diff < 86400) return `${Math.floor(diff/3600)} ore fa`;
+  return `${Math.floor(diff/86400)} giorni fa`;
 }
 
-// ── STELLE ──
 window.setStella = (n) => {
   stelleSelezionate = n;
-  document.querySelectorAll('.stella').forEach((s, i) => s.classList.toggle('attiva', i < n));
+  document.querySelectorAll('.stella').forEach((s,i) => s.classList.toggle('attiva', i < n));
 };
 
-// ── POPUP SBLOCCO ──
 window.apriPopupSblocco = (lavoro, richiestaId) => {
   document.getElementById('popup-lavoro').textContent = lavoro;
   currentRichiestaId = richiestaId;
   document.getElementById('popupSblocco').classList.add('show');
 };
-window.chiudiPopup = () => {
-  document.getElementById('popupSblocco').classList.remove('show');
-};
+window.chiudiPopup = () => document.getElementById('popupSblocco').classList.remove('show');
 
-// ── CONFERMA SBLOCCO ──
 document.getElementById('btn-conferma-sblocco').addEventListener('click', async () => {
   if (!currentUID || !currentRichiestaId) return;
   const btn = document.getElementById('btn-conferma-sblocco');
   btn.textContent = '⏳ Elaborazione...';
   btn.disabled = true;
-
   try {
     const utenteRef = doc(db, 'utenti', currentUID);
     const utenteSnap = await getDoc(utenteRef);
     const crediti = utenteSnap.data().crediti ?? 0;
-
     if (crediti < 1) {
       alert('⚠️ Crediti insufficienti! Ricarica prima di sbloccare il contatto.');
       btn.textContent = '✅ Conferma e sblocca';
       btn.disabled = false;
       return;
     }
-
-    // Scala 1 credito e aggiorna contatore
-    await updateDoc(utenteRef, {
-      crediti: increment(-1),
-      contattiSbloccati: increment(1)
-    });
-
-    // Registra lo sblocco sulla richiesta
+    await updateDoc(utenteRef, { crediti: increment(-1), contattiSbloccati: increment(1) });
     const richiestaRef = doc(db, 'richieste', currentRichiestaId);
     const richiestaSnap = await getDoc(richiestaRef);
     const sbloccatiDa = richiestaSnap.data().sbloccatiDa || [];
     if (!sbloccatiDa.includes(currentUID)) {
-      await updateDoc(richiestaRef, {
-        sbloccatiDa: [...sbloccatiDa, currentUID],
-        offerte: increment(1)
-      });
+      await updateDoc(richiestaRef, { sbloccatiDa: [...sbloccatiDa, currentUID], offerte: increment(1) });
     }
-
     chiudiPopup();
     window.location.href = `chat.html?richiesta=${currentRichiestaId}`;
-  } catch (e) {
-    alert('Errore durante lo sblocco: ' + e.message);
+  } catch(e) {
+    alert('Errore: ' + e.message);
     btn.textContent = '✅ Conferma e sblocca';
     btn.disabled = false;
   }
 });
 
-// ── RECENSIONE ──
 window.inviaRecensione = async () => {
   if (stelleSelezionate === 0) { alert('Seleziona almeno una stella!'); return; }
   const testo = document.getElementById('rec-testo').value.trim();
   try {
-    await addDoc(collection(db, 'recensioni'), {
-      daUID: currentUID,
-      stelle: stelleSelezionate,
-      testo,
-      timestamp: serverTimestamp()
-    });
+    await addDoc(collection(db, 'recensioni'), { daUID: currentUID, stelle: stelleSelezionate, testo, timestamp: serverTimestamp() });
     document.getElementById('recensionePopup').classList.remove('show');
     alert('Recensione inviata! Grazie.');
-  } catch (e) {
-    alert('Errore: ' + e.message);
-  }
+  } catch(e) { alert('Errore: ' + e.message); }
 };
 
-// ── AUTH & CARICAMENTO DATI ──
 onAuthStateChanged(auth, async (user) => {
   if (!user) { window.location.href = 'professionista.html?tab=accedi'; return; }
   currentUID = user.uid;
@@ -508,26 +376,22 @@ onAuthStateChanged(auth, async (user) => {
   if (dati.ruolo !== 'professionista') { window.location.href = 'dashboard-cliente.html'; return; }
 
   const nome = dati.ragioneSociale || dati.nome || 'Professionista';
-
-  // ── UI base ──
   document.getElementById('navbar-nome').textContent = nome;
   document.getElementById('navbar-avatar').textContent = nome.charAt(0).toUpperCase();
   document.getElementById('saluto-nome').innerHTML = `Ciao, <span style="color:var(--oro)">${nome}</span> 👋`;
   document.getElementById('data-oggi').textContent = dataOggi() + ' — Riepilogo attività';
   document.getElementById('sidebar-profilo').onclick = () => window.location.href = `profilo-pro.html?uid=${user.uid}`;
-  document.getElementById('link-richieste').onclick = () => document.getElementById('richieste-container').scrollIntoView({ behavior: 'smooth' });
+  document.getElementById('link-richieste').onclick = () => document.getElementById('richieste-container').scrollIntoView({ behavior:'smooth' });
 
   // ── Abbonamento ──
   const abbBar = document.getElementById('abbonamento-bar');
   const abbBadge = document.getElementById('abbonamento-badge');
   if (dati.abbonamento && dati.abbonamento.attivo) {
     const piano = dati.abbonamento.piano || 'mensile';
-    const scadenza = dati.abbonamento.scadenza
-      ? new Date(dati.abbonamento.scadenza.seconds * 1000).toLocaleDateString('it-IT') : '—';
+    const scadenza = dati.abbonamento.scadenza ? new Date(dati.abbonamento.scadenza.seconds * 1000).toLocaleDateString('it-IT') : '—';
     document.getElementById('abbonamento-titolo').textContent = `✅ Abbonamento ${piano} attivo`;
     document.getElementById('abbonamento-dettaglio').textContent = `Scade il ${scadenza}`;
     abbBadge.textContent = '✅ Attivo';
-    abbBadge.classList.remove('scaduto');
   } else {
     abbBar.classList.add('scaduto');
     document.getElementById('abbonamento-titolo').textContent = '⚠️ Abbonamento scaduto o non attivo';
@@ -537,34 +401,30 @@ onAuthStateChanged(auth, async (user) => {
   }
 
   // ── Crediti e stats ──
-  const crediti = dati.crediti ?? 0;
-  document.getElementById('crediti-num').innerHTML = `${crediti} <span>crediti</span>`;
+  document.getElementById('crediti-num').innerHTML = `${dati.crediti ?? 0} <span>crediti</span>`;
   document.getElementById('stat-sbloccati').textContent = dati.contattiSbloccati ?? 0;
   document.getElementById('stat-completati').textContent = dati.lavoriCompletati ?? 0;
   document.getElementById('stat-rating').textContent = dati.ratingMedio ? dati.ratingMedio.toFixed(1) : '—';
 
-  // ── Categorie del professionista ──
-  const categoriePro = Array.isArray(dati.categorie)
-    ? dati.categorie
-    : (dati.categoria ? [dati.categoria] : []);
+  const categoriePro = Array.isArray(dati.categorie) ? dati.categorie : (dati.categoria ? [dati.categoria] : []);
 
-  // ── RICHIESTE: query senza orderBy (evita indice composto) ──
+  // ── RICHIESTE: due query separate per 'attesa' e 'aperta' ──
+  // (Firestore non supporta OR su stesso campo senza indice)
   try {
-    const qRichieste = query(
-      collection(db, 'richieste'),
-      where('stato', '==', 'aperta'),
-      limit(50)
-    );
-    const snap = await getDocs(qRichieste);
+    const [snapAttesa, snapAperta] = await Promise.all([
+      getDocs(query(collection(db, 'richieste'), where('stato', '==', 'attesa'), limit(30))),
+      getDocs(query(collection(db, 'richieste'), where('stato', '==', 'aperta'), limit(30)))
+    ]);
 
-    // Ordina lato client per timestamp discendente
-    let docs = snap.docs.slice().sort((a, b) => {
-      const ta = a.data().timestamp?.seconds ?? 0;
-      const tb = b.data().timestamp?.seconds ?? 0;
-      return tb - ta;
-    });
+    // Unisci i risultati eliminando duplicati per ID
+    const docsMap = new Map();
+    [...snapAttesa.docs, ...snapAperta.docs].forEach(d => docsMap.set(d.id, d));
+    let docs = Array.from(docsMap.values());
 
-    // Filtra per categoria se il professionista ne ha impostate
+    // Ordina per timestamp discendente lato client
+    docs.sort((a, b) => (b.data().timestamp?.seconds ?? 0) - (a.data().timestamp?.seconds ?? 0));
+
+    // Filtra per categoria se impostate
     if (categoriePro.length > 0) {
       docs = docs.filter(d => {
         const cat = (d.data().categoria || '').toLowerCase();
@@ -586,18 +446,14 @@ onAuthStateChanged(auth, async (user) => {
       docs.forEach(docSnap => {
         const r = docSnap.data();
         const tempo = r.timestamp ? tempoFa(r.timestamp.seconds) : 'poco fa';
-        const chipUrgenza = r.urgente
-          ? '<span class="chip rosso">🔴 Urgente</span>'
-          : '<span class="chip verde">⏳ Tempi flessibili</span>';
+        const chipUrgenza = r.urgente ? '<span class="chip rosso">🔴 Urgente</span>' : '<span class="chip verde">⏳ Tempi flessibili</span>';
         const mqChip = r.mq ? `<span class="chip">📐 ${r.mq} mq</span>` : '';
         const quandoChip = r.quando ? `<span class="chip">🗓️ ${r.quando}</span>` : '';
         const giaSbloccato = (r.sbloccatiDa || []).includes(currentUID);
-        const catLabel = (r.categoria || '—').replace(/'/g, "\\'");
-
+        const catLabel = (r.categoria || 'Richiesta').replace(/'/g, "\\'");
         const btnHtml = giaSbloccato
           ? `<button class="btn-sblocca sbloccato" onclick="window.location.href='chat.html?richiesta=${docSnap.id}'">💬 Vai alla chat</button>`
           : `<button class="btn-sblocca" onclick="apriPopupSblocco('${catLabel}','${docSnap.id}')">🔓 Sblocca contatto</button>`;
-
         container.innerHTML += `
           <div class="richiesta-card nuova">
             ${!giaSbloccato ? '<div class="nuovo-tag">🆕 NUOVA</div>' : ''}
@@ -617,122 +473,60 @@ onAuthStateChanged(auth, async (user) => {
           </div>`;
       });
     }
-  } catch (e) {
+  } catch(e) {
     console.error(e);
-    document.getElementById('richieste-container').innerHTML =
-      `<div class="vuoto-msg">⚠️ Errore caricamento: ${e.message}</div>`;
+    document.getElementById('richieste-container').innerHTML = `<div class="vuoto-msg">⚠️ Errore: ${e.message}</div>`;
   }
 
-  // ── SOPRALLUOGHI: query senza orderBy ──
+  // ── SOPRALLUOGHI ──
   try {
-    const qSop = query(
-      collection(db, 'sopralluoghi'),
-      where('proUID', '==', user.uid),
-      where('stato', '==', 'confermato'),
-      limit(10)
-    );
-    const snapSop = await getDocs(qSop);
+    const snapSop = await getDocs(query(collection(db,'sopralluoghi'), where('proUID','==',user.uid), where('stato','==','confermato'), limit(10)));
     const sopCont = document.getElementById('sopralluogo-container');
-
     if (snapSop.empty) {
       sopCont.innerHTML = '<div class="vuoto-msg">📅 Nessun sopralluogo programmato.</div>';
     } else {
-      // Prendi il più vicino nel futuro
-      const sorted = snapSop.docs.sort((a, b) =>
-        (a.data().data?.seconds ?? 0) - (b.data().data?.seconds ?? 0));
+      const sorted = snapSop.docs.sort((a,b) => (a.data().data?.seconds??0) - (b.data().data?.seconds??0));
       const s = sorted[0].data();
-      const dataSop = s.data
-        ? new Date(s.data.seconds * 1000).toLocaleString('it-IT', {
-            weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
-            hour: '2-digit', minute: '2-digit'
-          })
-        : '—';
-      sopCont.innerHTML = `
-        <div class="sopralluogo-card">
-          <div class="sopralluogo-stato confermato">✅ Confermato</div>
-          <div class="sopralluogo-data">${dataSop}</div>
-          <div class="sopralluogo-info">
-            <strong>Cliente:</strong> ${s.clienteNome || '—'}<br>
-            <strong>Lavoro:</strong> ${s.lavoro || '—'}<br>
-            <strong>Indirizzo:</strong> ${s.indirizzo || '—'}
-          </div>
-        </div>`;
+      const dataSop = s.data ? new Date(s.data.seconds*1000).toLocaleString('it-IT',{weekday:'long',day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '—';
+      sopCont.innerHTML = `<div class="sopralluogo-card"><div class="sopralluogo-stato confermato">✅ Confermato</div><div class="sopralluogo-data">${dataSop}</div><div class="sopralluogo-info"><strong>Cliente:</strong> ${s.clienteNome||'—'}<br><strong>Lavoro:</strong> ${s.lavoro||'—'}<br><strong>Indirizzo:</strong> ${s.indirizzo||'—'}</div></div>`;
     }
-  } catch (e) {
-    document.getElementById('sopralluogo-container').innerHTML =
-      '<div class="vuoto-msg">📅 Nessun sopralluogo programmato.</div>';
+  } catch(e) {
+    document.getElementById('sopralluogo-container').innerHTML = '<div class="vuoto-msg">📅 Nessun sopralluogo programmato.</div>';
   }
 
-  // ── ULTIMO LAVORO COMPLETATO ──
+  // ── ULTIMO LAVORO ──
   try {
-    const qLav = query(
-      collection(db, 'sopralluoghi'),
-      where('proUID', '==', user.uid),
-      where('stato', '==', 'completato'),
-      limit(10)
-    );
-    const snapLav = await getDocs(qLav);
+    const snapLav = await getDocs(query(collection(db,'sopralluoghi'), where('proUID','==',user.uid), where('stato','==','completato'), limit(10)));
     const lavCont = document.getElementById('ultimo-lavoro-container');
-
     if (snapLav.empty) {
       lavCont.innerHTML = '<div class="vuoto-msg">✅ Nessun lavoro completato ancora.</div>';
     } else {
-      const sorted = snapLav.docs.sort((a, b) =>
-        (b.data().data?.seconds ?? 0) - (a.data().data?.seconds ?? 0));
+      const sorted = snapLav.docs.sort((a,b) => (b.data().data?.seconds??0) - (a.data().data?.seconds??0));
       const l = sorted[0].data();
-      const dataLav = l.data
-        ? new Date(l.data.seconds * 1000).toLocaleDateString('it-IT', {
-            day: 'numeric', month: 'long', year: 'numeric'
-          })
-        : '—';
-      lavCont.innerHTML = `
-        <div class="sopralluogo-card" style="border-left-color:var(--oro)">
-          <div class="sopralluogo-stato confermato" style="background:#FFFBEB;color:var(--oro)">✅ Completato</div>
-          <div class="sopralluogo-data">${dataLav}</div>
-          <div class="sopralluogo-info">
-            <strong>Cliente:</strong> ${l.clienteNome || '—'}<br>
-            <strong>Lavoro:</strong> ${l.lavoro || '—'}
-          </div>
-        </div>`;
+      const dataLav = l.data ? new Date(l.data.seconds*1000).toLocaleDateString('it-IT',{day:'numeric',month:'long',year:'numeric'}) : '—';
+      lavCont.innerHTML = `<div class="sopralluogo-card" style="border-left-color:var(--oro)"><div class="sopralluogo-stato confermato" style="background:#FFFBEB;color:var(--oro)">✅ Completato</div><div class="sopralluogo-data">${dataLav}</div><div class="sopralluogo-info"><strong>Cliente:</strong> ${l.clienteNome||'—'}<br><strong>Lavoro:</strong> ${l.lavoro||'—'}</div></div>`;
     }
-  } catch (e) {
-    document.getElementById('ultimo-lavoro-container').innerHTML =
-      '<div class="vuoto-msg">✅ Nessun lavoro completato ancora.</div>';
+  } catch(e) {
+    document.getElementById('ultimo-lavoro-container').innerHTML = '<div class="vuoto-msg">✅ Nessun lavoro completato ancora.</div>';
   }
 
-  // ── RECENSIONI RICEVUTE ──
+  // ── RECENSIONI ──
   try {
-    const qRec = query(
-      collection(db, 'recensioni'),
-      where('aUID', '==', user.uid),
-      limit(3)
-    );
-    const snapRec = await getDocs(qRec);
+    const snapRec = await getDocs(query(collection(db,'recensioni'), where('aUID','==',user.uid), limit(3)));
     const recCont = document.getElementById('recensioni-container');
-
     if (snapRec.empty) {
       recCont.innerHTML = '<div class="vuoto-msg">⭐ Nessuna recensione ricevuta ancora.</div>';
     } else {
       recCont.innerHTML = '';
-      snapRec.docs.forEach(docSnap => {
-        const rec = docSnap.data();
-        const stelle = '★'.repeat(rec.stelle || 0) + '☆'.repeat(5 - (rec.stelle || 0));
-        const data = rec.timestamp
-          ? new Date(rec.timestamp.seconds * 1000).toLocaleDateString('it-IT') : '—';
-        recCont.innerHTML += `
-          <div class="recensione-card">
-            <div class="rec-header">
-              <div class="rec-nome">${rec.daNome || 'Cliente'}</div>
-              <div class="rec-stelle">${stelle}</div>
-            </div>
-            <div class="rec-testo">${rec.testo || '—'}</div>
-            <div class="rec-data">${data}</div>
-          </div>`;
+      snapRec.docs.forEach(d => {
+        const rec = d.data();
+        const stelle = '★'.repeat(rec.stelle||0) + '☆'.repeat(5-(rec.stelle||0));
+        const data = rec.timestamp ? new Date(rec.timestamp.seconds*1000).toLocaleDateString('it-IT') : '—';
+        recCont.innerHTML += `<div class="recensione-card"><div class="rec-header"><div class="rec-nome">${rec.daNome||'Cliente'}</div><div class="rec-stelle">${stelle}</div></div><div class="rec-testo">${rec.testo||'—'}</div><div class="rec-data">${data}</div></div>`;
       });
     }
-  } catch (e) {
-    document.getElementById('recensioni-container').innerHTML =
-      '<div class="vuoto-msg">⭐ Nessuna recensione ricevuta ancora.</div>';
+  } catch(e) {
+    document.getElementById('recensioni-container').innerHTML = '<div class="vuoto-msg">⭐ Nessuna recensione ricevuta ancora.</div>';
   }
 
 });
