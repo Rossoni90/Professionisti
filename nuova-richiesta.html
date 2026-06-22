@@ -31,8 +31,6 @@ label { display: block; font-size: 13px; font-weight: 600; color: var(--blu-scur
 input, select, textarea { width: 100%; padding: 14px 18px; border: 1.5px solid #e5e7eb; border-radius: 12px; font-size: 15px; font-family: 'Inter', sans-serif; color: var(--testo); background: var(--grigio-chiaro); transition: 0.3s; outline: none; }
 input:focus, select:focus, textarea:focus { border-color: var(--blu); background: white; box-shadow: 0 0 0 3px rgba(27,58,107,0.08); }
 textarea { resize: vertical; min-height: 120px; }
-
-/* SEZIONI CATEGORIA */
 .sez-cat { margin-bottom: 16px; }
 .sez-cat-title { font-size: 12px; font-weight: 700; color: var(--grigio); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; padding-bottom: 5px; border-bottom: 1px solid #f0f0f0; }
 .categoria-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
@@ -41,11 +39,8 @@ textarea { resize: vertical; min-height: 120px; }
 .cat-btn.selected { background: var(--blu); color: white; border-color: var(--blu); font-weight: 600; }
 .cat-btn.escort { border-color: #FDA4AF; color: #9F1239; background: #FFF1F2; }
 .cat-btn.escort.selected { background: #F43F5E; border-color: #F43F5E; color: white; }
-
-/* CAMPI DINAMICI */
 .campo-extra { display: none; }
 .campo-extra.visible { display: block; }
-
 .btn-main { width: 100%; padding: 16px; background: var(--blu); color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.3s; margin-top: 10px; font-family: 'Inter', sans-serif; }
 .btn-main:hover { background: var(--blu-chiaro); transform: translateY(-1px); }
 .btn-main.oro { background: var(--oro); }
@@ -57,8 +52,6 @@ textarea { resize: vertical; min-height: 120px; }
 .success-box p { color: var(--grigio); font-size: 15px; line-height: 1.7; margin-bottom: 10px; }
 .highlight { background: var(--grigio-chiaro); border-radius: 12px; padding: 15px 20px; margin: 15px 0; font-size: 14px; color: var(--blu-scuro); font-weight: 600; text-align: left; line-height: 1.7; }
 .loading-screen { display: flex; align-items: center; justify-content: center; min-height: 60vh; font-size: 16px; color: var(--grigio); }
-
-/* POPUP ADULTI */
 .adult-popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.88); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
 .adult-popup.show { display: flex; }
 .adult-box { background: white; border-radius: 25px; padding: 45px 35px; max-width: 400px; width: 100%; text-align: center; }
@@ -69,7 +62,6 @@ textarea { resize: vertical; min-height: 120px; }
 .btn-adult-no { flex: 1; background: var(--grigio-chiaro); color: var(--grigio); border: none; padding: 14px; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s; }
 .btn-adult-si:hover { background: #DC2626; }
 .btn-adult-no:hover { background: #e5e7eb; }
-
 @media (max-width: 480px) {
   nav { padding: 15px 20px; }
   .card { padding: 25px 18px; }
@@ -95,19 +87,16 @@ textarea { resize: vertical; min-height: 120px; }
 
 <div class="container">
 
-  <!-- LOADING -->
   <div class="loading-screen" id="loadingScreen">
     <p>⏳ Caricamento...</p>
   </div>
 
-  <!-- FORM -->
   <div class="card" id="formCard" style="display:none">
     <div class="avviso-blu">
       <strong>👋 Ciao <span id="nome-cliente"></span>!</strong><br>
       Compila il form per inviare una nuova richiesta. I professionisti vedranno solo la descrizione e la città, mai i tuoi dati personali.
     </div>
 
-    <!-- SELEZIONE CATEGORIA -->
     <div class="form-group">
       <label>Categoria</label>
 
@@ -224,9 +213,9 @@ textarea { resize: vertical; min-height: 120px; }
         </div>
       </div>
 
-    </div><!-- fine form-group categoria -->
+    </div>
 
-    <!-- CAMPO MQ (visibile solo per edilizia) -->
+    <!-- CAMPO MQ solo edilizia -->
     <div class="form-group campo-extra" id="campo-mq">
       <label>Superficie (mq)</label>
       <input type="number" id="req-mq" placeholder="Es. 80">
@@ -250,19 +239,6 @@ textarea { resize: vertical; min-height: 120px; }
         <option>Entro questa settimana</option>
         <option>Entro questo mese</option>
         <option>Nessuna fretta, sto valutando</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>Budget indicativo</label>
-      <select id="req-budget">
-        <option value="">Seleziona...</option>
-        <option>Meno di €500</option>
-        <option>€500 - €2.000</option>
-        <option>€2.000 - €5.000</option>
-        <option>€5.000 - €15.000</option>
-        <option>€15.000 - €50.000</option>
-        <option>Oltre €50.000</option>
       </select>
     </div>
 
@@ -332,17 +308,14 @@ let categoriaSelezionata = null;
 let escortBtnPending = null;
 let utenteLoggato = null;
 
-// Seleziona categoria normale
 window.selezionaCategoria = function(btn) {
   document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
   categoriaSelezionata = btn.dataset.cat;
-  // Mostra campo mq solo per edilizia
   const campoMq = document.getElementById('campo-mq');
   campoMq.classList.toggle('visible', btn.dataset.sez === 'edilizia');
 };
 
-// Seleziona categoria escort → popup adulti
 window.selezionaEscort = function(btn) {
   escortBtnPending = btn;
   document.getElementById('adultPopup').classList.add('show');
@@ -364,7 +337,6 @@ window.denyAdult = function() {
   escortBtnPending = null;
 };
 
-// Leggi parametro ?cat= dall'URL e preseleziona
 function preselectFromURL() {
   const params = new URLSearchParams(window.location.search);
   const cat = params.get('cat');
@@ -382,7 +354,6 @@ function preselectFromURL() {
     escort: null
   };
   if (cat === 'escort') {
-    // Apri popup adulti
     const btn = document.querySelector('.cat-btn.escort');
     if (btn) { escortBtnPending = btn; document.getElementById('adultPopup').classList.add('show'); }
     return;
@@ -416,7 +387,6 @@ window.inviaRichiesta = async function() {
   const mq = mqEl ? mqEl.value.trim() : '';
   const desc = document.getElementById('req-descrizione').value.trim();
   const quando = document.getElementById('req-quando').value;
-  const budget = document.getElementById('req-budget').value;
   const urgente = document.getElementById('req-urgente').checked;
 
   if (!citta || !desc || !quando) { alert('⚠️ Compila tutti i campi obbligatori!'); return; }
@@ -435,7 +405,6 @@ window.inviaRichiesta = async function() {
       mq: mq ? parseInt(mq) : null,
       descrizione: desc,
       quando: quando,
-      budget: budget || null,
       urgente: urgente,
       stato: 'attesa',
       statoAdmin: 'attesa',
