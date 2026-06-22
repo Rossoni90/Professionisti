@@ -24,16 +24,28 @@ nav { display: flex; justify-content: space-between; align-items: center; paddin
 .page-hero h1 { font-family: 'Playfair Display', serif; font-size: 36px; color: white; margin-bottom: 10px; }
 .page-hero h1 span { color: var(--oro); }
 .page-hero p { color: #9CA3AF; font-size: 16px; }
-.container { max-width: 620px; margin: -30px auto 60px; padding: 0 20px; }
+.container { max-width: 680px; margin: -30px auto 60px; padding: 0 20px; }
 .card { background: white; border-radius: 20px; padding: 40px 35px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); border: 1px solid #e5e7eb; }
 .form-group { margin-bottom: 22px; }
 label { display: block; font-size: 13px; font-weight: 600; color: var(--blu-scuro); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
 input, select, textarea { width: 100%; padding: 14px 18px; border: 1.5px solid #e5e7eb; border-radius: 12px; font-size: 15px; font-family: 'Inter', sans-serif; color: var(--testo); background: var(--grigio-chiaro); transition: 0.3s; outline: none; }
 input:focus, select:focus, textarea:focus { border-color: var(--blu); background: white; box-shadow: 0 0 0 3px rgba(27,58,107,0.08); }
 textarea { resize: vertical; min-height: 120px; }
-.categoria-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
-.cat-btn { padding: 8px 16px; border: 1.5px solid #e5e7eb; border-radius: 20px; font-size: 13px; cursor: pointer; background: var(--grigio-chiaro); color: var(--testo); transition: 0.3s; font-family: 'Inter', sans-serif; }
-.cat-btn.selected { background: var(--blu); color: white; border-color: var(--blu); }
+
+/* SEZIONI CATEGORIA */
+.sez-cat { margin-bottom: 16px; }
+.sez-cat-title { font-size: 12px; font-weight: 700; color: var(--grigio); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 8px; padding-bottom: 5px; border-bottom: 1px solid #f0f0f0; }
+.categoria-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 4px; }
+.cat-btn { padding: 8px 15px; border: 1.5px solid #e5e7eb; border-radius: 20px; font-size: 13px; cursor: pointer; background: var(--grigio-chiaro); color: var(--testo); transition: 0.3s; font-family: 'Inter', sans-serif; white-space: nowrap; }
+.cat-btn:hover { border-color: var(--blu); color: var(--blu); background: #EFF6FF; }
+.cat-btn.selected { background: var(--blu); color: white; border-color: var(--blu); font-weight: 600; }
+.cat-btn.escort { border-color: #FDA4AF; color: #9F1239; background: #FFF1F2; }
+.cat-btn.escort.selected { background: #F43F5E; border-color: #F43F5E; color: white; }
+
+/* CAMPI DINAMICI */
+.campo-extra { display: none; }
+.campo-extra.visible { display: block; }
+
 .btn-main { width: 100%; padding: 16px; background: var(--blu); color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 700; cursor: pointer; transition: 0.3s; margin-top: 10px; font-family: 'Inter', sans-serif; }
 .btn-main:hover { background: var(--blu-chiaro); transform: translateY(-1px); }
 .btn-main.oro { background: var(--oro); }
@@ -45,9 +57,23 @@ textarea { resize: vertical; min-height: 120px; }
 .success-box p { color: var(--grigio); font-size: 15px; line-height: 1.7; margin-bottom: 10px; }
 .highlight { background: var(--grigio-chiaro); border-radius: 12px; padding: 15px 20px; margin: 15px 0; font-size: 14px; color: var(--blu-scuro); font-weight: 600; text-align: left; line-height: 1.7; }
 .loading-screen { display: flex; align-items: center; justify-content: center; min-height: 60vh; font-size: 16px; color: var(--grigio); }
+
+/* POPUP ADULTI */
+.adult-popup { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.88); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
+.adult-popup.show { display: flex; }
+.adult-box { background: white; border-radius: 25px; padding: 45px 35px; max-width: 400px; width: 100%; text-align: center; }
+.adult-box h2 { font-family: 'Playfair Display', serif; color: var(--blu-scuro); font-size: 24px; margin-bottom: 12px; }
+.adult-box p { color: var(--grigio); font-size: 14px; line-height: 1.7; margin-bottom: 28px; }
+.adult-buttons { display: flex; gap: 12px; }
+.btn-adult-si { flex: 1; background: var(--rosso); color: white; border: none; padding: 14px; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s; }
+.btn-adult-no { flex: 1; background: var(--grigio-chiaro); color: var(--grigio); border: none; padding: 14px; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s; }
+.btn-adult-si:hover { background: #DC2626; }
+.btn-adult-no:hover { background: #e5e7eb; }
+
 @media (max-width: 480px) {
   nav { padding: 15px 20px; }
-  .card { padding: 25px 20px; }
+  .card { padding: 25px 18px; }
+  .cat-btn { font-size: 12px; padding: 7px 12px; }
 }
 </style>
 </head>
@@ -69,45 +95,146 @@ textarea { resize: vertical; min-height: 120px; }
 
 <div class="container">
 
-  <!-- SCHERMATA LOADING -->
+  <!-- LOADING -->
   <div class="loading-screen" id="loadingScreen">
     <p>⏳ Caricamento...</p>
   </div>
 
-  <!-- FORM RICHIESTA -->
+  <!-- FORM -->
   <div class="card" id="formCard" style="display:none">
     <div class="avviso-blu">
       <strong>👋 Ciao <span id="nome-cliente"></span>!</strong><br>
       Compila il form per inviare una nuova richiesta. I professionisti vedranno solo la descrizione e la città, mai i tuoi dati personali.
     </div>
 
+    <!-- SELEZIONE CATEGORIA -->
     <div class="form-group">
       <label>Categoria</label>
-      <div class="categoria-grid" id="categoria-grid">
-        <button class="cat-btn" data-cat="Tinteggiatura" onclick="selezionaCategoria(this)">🎨 Tinteggiatura</button>
-        <button class="cat-btn" data-cat="Decorazioni" onclick="selezionaCategoria(this)">✨ Decorazioni</button>
-        <button class="cat-btn" data-cat="Ristrutturazione" onclick="selezionaCategoria(this)">🏗️ Ristrutturazione</button>
-        <button class="cat-btn" data-cat="Bagno" onclick="selezionaCategoria(this)">🚿 Bagno</button>
-        <button class="cat-btn" data-cat="Resina" onclick="selezionaCategoria(this)">🪣 Resina</button>
-        <button class="cat-btn" data-cat="Microcemento" onclick="selezionaCategoria(this)">🧱 Microcemento</button>
-        <button class="cat-btn" data-cat="SPC / Laminato" onclick="selezionaCategoria(this)">🪵 SPC / Laminato</button>
-        <button class="cat-btn" data-cat="Impermeabilizzazione" onclick="selezionaCategoria(this)">💧 Impermeabilizzazione</button>
-        <button class="cat-btn" data-cat="Cappotto termico" onclick="selezionaCategoria(this)">🧥 Cappotto termico</button>
-        <button class="cat-btn" data-cat="Cartongesso" onclick="selezionaCategoria(this)">📐 Cartongesso</button>
-        <button class="cat-btn" data-cat="Impianti elettrici" onclick="selezionaCategoria(this)">⚡ Impianti elettrici</button>
-        <button class="cat-btn" data-cat="Impianti idraulici" onclick="selezionaCategoria(this)">🔧 Impianti idraulici</button>
-        <button class="cat-btn" data-cat="Altro" onclick="selezionaCategoria(this)">📋 Altro</button>
+
+      <div class="sez-cat">
+        <div class="sez-cat-title">🏗️ Edilizia & Costruzioni</div>
+        <div class="categoria-grid">
+          <button class="cat-btn" data-cat="Tinteggiatura" data-sez="edilizia" onclick="selezionaCategoria(this)">🎨 Tinteggiatura</button>
+          <button class="cat-btn" data-cat="Ristrutturazione" data-sez="edilizia" onclick="selezionaCategoria(this)">🏗️ Ristrutturazione</button>
+          <button class="cat-btn" data-cat="Bagno" data-sez="edilizia" onclick="selezionaCategoria(this)">🚿 Bagno</button>
+          <button class="cat-btn" data-cat="Resina" data-sez="edilizia" onclick="selezionaCategoria(this)">🪣 Resina</button>
+          <button class="cat-btn" data-cat="Microcemento" data-sez="edilizia" onclick="selezionaCategoria(this)">🧱 Microcemento</button>
+          <button class="cat-btn" data-cat="SPC / Laminato" data-sez="edilizia" onclick="selezionaCategoria(this)">🪵 SPC / Laminato</button>
+          <button class="cat-btn" data-cat="Impermeabilizzazione" data-sez="edilizia" onclick="selezionaCategoria(this)">💧 Impermeabilizzazione</button>
+          <button class="cat-btn" data-cat="Cappotto termico" data-sez="edilizia" onclick="selezionaCategoria(this)">🧥 Cappotto termico</button>
+          <button class="cat-btn" data-cat="Cartongesso" data-sez="edilizia" onclick="selezionaCategoria(this)">📐 Cartongesso</button>
+          <button class="cat-btn" data-cat="Decorazioni" data-sez="edilizia" onclick="selezionaCategoria(this)">✨ Decorazioni</button>
+        </div>
       </div>
+
+      <div class="sez-cat">
+        <div class="sez-cat-title">⚡ Impianti</div>
+        <div class="categoria-grid">
+          <button class="cat-btn" data-cat="Impianti elettrici" data-sez="impianti" onclick="selezionaCategoria(this)">⚡ Impianti elettrici</button>
+          <button class="cat-btn" data-cat="Impianti idraulici" data-sez="impianti" onclick="selezionaCategoria(this)">🔧 Impianti idraulici</button>
+          <button class="cat-btn" data-cat="Riscaldamento" data-sez="impianti" onclick="selezionaCategoria(this)">🔥 Riscaldamento</button>
+          <button class="cat-btn" data-cat="Climatizzazione" data-sez="impianti" onclick="selezionaCategoria(this)">❄️ Climatizzazione</button>
+          <button class="cat-btn" data-cat="Pannelli solari" data-sez="impianti" onclick="selezionaCategoria(this)">☀️ Pannelli solari</button>
+        </div>
+      </div>
+
+      <div class="sez-cat">
+        <div class="sez-cat-title">🚗 Automotive</div>
+        <div class="categoria-grid">
+          <button class="cat-btn" data-cat="Meccanico" data-sez="automotive" onclick="selezionaCategoria(this)">🔩 Meccanico</button>
+          <button class="cat-btn" data-cat="Carrozzeria" data-sez="automotive" onclick="selezionaCategoria(this)">🚗 Carrozzeria</button>
+          <button class="cat-btn" data-cat="Gommista" data-sez="automotive" onclick="selezionaCategoria(this)">🛞 Gommista</button>
+          <button class="cat-btn" data-cat="Elettrauto" data-sez="automotive" onclick="selezionaCategoria(this)">🔌 Elettrauto</button>
+        </div>
+      </div>
+
+      <div class="sez-cat">
+        <div class="sez-cat-title">⚖️ Legale & Finanza</div>
+        <div class="categoria-grid">
+          <button class="cat-btn" data-cat="Avvocato" data-sez="legale" onclick="selezionaCategoria(this)">⚖️ Avvocato</button>
+          <button class="cat-btn" data-cat="Commercialista" data-sez="legale" onclick="selezionaCategoria(this)">📊 Commercialista</button>
+          <button class="cat-btn" data-cat="Notaio" data-sez="legale" onclick="selezionaCategoria(this)">📜 Notaio</button>
+          <button class="cat-btn" data-cat="Consulente finanziario" data-sez="legale" onclick="selezionaCategoria(this)">💼 Consulente finanziario</button>
+        </div>
+      </div>
+
+      <div class="sez-cat">
+        <div class="sez-cat-title">🩺 Salute & Benessere</div>
+        <div class="categoria-grid">
+          <button class="cat-btn" data-cat="Dentista" data-sez="salute" onclick="selezionaCategoria(this)">🦷 Dentista</button>
+          <button class="cat-btn" data-cat="Fisioterapista" data-sez="salute" onclick="selezionaCategoria(this)">💪 Fisioterapista</button>
+          <button class="cat-btn" data-cat="Nutrizionista" data-sez="salute" onclick="selezionaCategoria(this)">🥗 Nutrizionista</button>
+          <button class="cat-btn" data-cat="Personal trainer" data-sez="salute" onclick="selezionaCategoria(this)">🏋️ Personal trainer</button>
+          <button class="cat-btn" data-cat="Psicologo" data-sez="salute" onclick="selezionaCategoria(this)">🧠 Psicologo</button>
+        </div>
+      </div>
+
+      <div class="sez-cat">
+        <div class="sez-cat-title">💅 Estetica & Persona</div>
+        <div class="categoria-grid">
+          <button class="cat-btn" data-cat="Parrucchiere" data-sez="estetica" onclick="selezionaCategoria(this)">✂️ Parrucchiere</button>
+          <button class="cat-btn" data-cat="Estetista" data-sez="estetica" onclick="selezionaCategoria(this)">💅 Estetista</button>
+          <button class="cat-btn" data-cat="Nail artist" data-sez="estetica" onclick="selezionaCategoria(this)">💎 Nail artist</button>
+          <button class="cat-btn" data-cat="Tatuatore" data-sez="estetica" onclick="selezionaCategoria(this)">🖊️ Tatuatore</button>
+          <button class="cat-btn" data-cat="Massaggiatore" data-sez="estetica" onclick="selezionaCategoria(this)">🤲 Massaggiatore</button>
+        </div>
+      </div>
+
+      <div class="sez-cat">
+        <div class="sez-cat-title">🏠 Casa & Servizi</div>
+        <div class="categoria-grid">
+          <button class="cat-btn" data-cat="Pulizie" data-sez="casa" onclick="selezionaCategoria(this)">🧹 Pulizie</button>
+          <button class="cat-btn" data-cat="Badante" data-sez="casa" onclick="selezionaCategoria(this)">👴 Badante</button>
+          <button class="cat-btn" data-cat="Baby sitter" data-sez="casa" onclick="selezionaCategoria(this)">👶 Baby sitter</button>
+          <button class="cat-btn" data-cat="Dog sitter" data-sez="casa" onclick="selezionaCategoria(this)">🐶 Dog sitter</button>
+          <button class="cat-btn" data-cat="Cuoco a domicilio" data-sez="casa" onclick="selezionaCategoria(this)">👨‍🍳 Cuoco a domicilio</button>
+          <button class="cat-btn" data-cat="Tuttofare" data-sez="casa" onclick="selezionaCategoria(this)">🔨 Tuttofare</button>
+          <button class="cat-btn" data-cat="Traslochi" data-sez="casa" onclick="selezionaCategoria(this)">📦 Traslochi</button>
+          <button class="cat-btn" data-cat="Giardiniere" data-sez="casa" onclick="selezionaCategoria(this)">🌿 Giardiniere</button>
+        </div>
+      </div>
+
+      <div class="sez-cat">
+        <div class="sez-cat-title">💻 Digitale & Tech</div>
+        <div class="categoria-grid">
+          <button class="cat-btn" data-cat="Web designer" data-sez="digitale" onclick="selezionaCategoria(this)">🌐 Web designer</button>
+          <button class="cat-btn" data-cat="Grafico" data-sez="digitale" onclick="selezionaCategoria(this)">🎨 Grafico</button>
+          <button class="cat-btn" data-cat="Fotografo" data-sez="digitale" onclick="selezionaCategoria(this)">📷 Fotografo</button>
+          <button class="cat-btn" data-cat="Social media manager" data-sez="digitale" onclick="selezionaCategoria(this)">📱 Social media manager</button>
+          <button class="cat-btn" data-cat="Sviluppatore" data-sez="digitale" onclick="selezionaCategoria(this)">💻 Sviluppatore</button>
+          <button class="cat-btn" data-cat="Videomaker" data-sez="digitale" onclick="selezionaCategoria(this)">🎬 Videomaker</button>
+        </div>
+      </div>
+
+      <div class="sez-cat">
+        <div class="sez-cat-title">📚 Istruzione</div>
+        <div class="categoria-grid">
+          <button class="cat-btn" data-cat="Ripetizioni scolastiche" data-sez="istruzione" onclick="selezionaCategoria(this)">📚 Ripetizioni scolastiche</button>
+          <button class="cat-btn" data-cat="Lingue straniere" data-sez="istruzione" onclick="selezionaCategoria(this)">🌍 Lingue straniere</button>
+          <button class="cat-btn" data-cat="Musica" data-sez="istruzione" onclick="selezionaCategoria(this)">🎵 Musica</button>
+          <button class="cat-btn" data-cat="Coaching" data-sez="istruzione" onclick="selezionaCategoria(this)">🎯 Coaching</button>
+        </div>
+      </div>
+
+      <div class="sez-cat">
+        <div class="sez-cat-title">🔞 Escort & Accompagnatrici</div>
+        <div class="categoria-grid">
+          <button class="cat-btn escort" data-cat="Escort" data-sez="escort" onclick="selezionaEscort(this)">🔞 Escort</button>
+          <button class="cat-btn escort" data-cat="Accompagnatrice" data-sez="escort" onclick="selezionaEscort(this)">🔞 Accompagnatrice</button>
+        </div>
+      </div>
+
+    </div><!-- fine form-group categoria -->
+
+    <!-- CAMPO MQ (visibile solo per edilizia) -->
+    <div class="form-group campo-extra" id="campo-mq">
+      <label>Superficie (mq)</label>
+      <input type="number" id="req-mq" placeholder="Es. 80">
     </div>
 
     <div class="form-group">
       <label>Città / Zona</label>
       <input type="text" id="req-citta" placeholder="Es. Milano, Bergamo, Bologna...">
-    </div>
-
-    <div class="form-group">
-      <label>Superficie (mq)</label>
-      <input type="number" id="req-mq" placeholder="Es. 80">
     </div>
 
     <div class="form-group">
@@ -169,6 +296,19 @@ textarea { resize: vertical; min-height: 120px; }
 
 </div>
 
+<!-- POPUP ADULTI -->
+<div class="adult-popup" id="adultPopup">
+  <div class="adult-box">
+    <div style="font-size:52px;margin-bottom:15px">🔞</div>
+    <h2>Sezione riservata +18</h2>
+    <p>Questa sezione è accessibile solo a persone maggiorenni. Confermando dichiari di avere almeno 18 anni.</p>
+    <div class="adult-buttons">
+      <button class="btn-adult-no" onclick="denyAdult()">❌ Sono minorenne</button>
+      <button class="btn-adult-si" onclick="confirmAdult()">✅ Ho 18+ anni</button>
+    </div>
+  </div>
+</div>
+
 <script type="module" src="firebase-auth.js"></script>
 <script type="module">
 import { initializeApp, getApps } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js';
@@ -189,19 +329,73 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 let categoriaSelezionata = null;
+let escortBtnPending = null;
 let utenteLoggato = null;
 
+// Seleziona categoria normale
 window.selezionaCategoria = function(btn) {
   document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
   categoriaSelezionata = btn.dataset.cat;
+  // Mostra campo mq solo per edilizia
+  const campoMq = document.getElementById('campo-mq');
+  campoMq.classList.toggle('visible', btn.dataset.sez === 'edilizia');
 };
 
-onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    window.location.href = 'cliente.html?tab=accedi';
+// Seleziona categoria escort → popup adulti
+window.selezionaEscort = function(btn) {
+  escortBtnPending = btn;
+  document.getElementById('adultPopup').classList.add('show');
+};
+
+window.confirmAdult = function() {
+  document.getElementById('adultPopup').classList.remove('show');
+  if (escortBtnPending) {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
+    escortBtnPending.classList.add('selected');
+    categoriaSelezionata = escortBtnPending.dataset.cat;
+    document.getElementById('campo-mq').classList.remove('visible');
+    escortBtnPending = null;
+  }
+};
+
+window.denyAdult = function() {
+  document.getElementById('adultPopup').classList.remove('show');
+  escortBtnPending = null;
+};
+
+// Leggi parametro ?cat= dall'URL e preseleziona
+function preselectFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  const cat = params.get('cat');
+  if (!cat) return;
+  const map = {
+    edilizia: 'Ristrutturazione',
+    impianti: 'Impianti elettrici',
+    automotive: 'Meccanico',
+    legale: 'Avvocato',
+    salute: 'Dentista',
+    estetica: 'Parrucchiere',
+    casa: 'Pulizie',
+    digitale: 'Web designer',
+    istruzione: 'Ripetizioni scolastiche',
+    escort: null
+  };
+  if (cat === 'escort') {
+    // Apri popup adulti
+    const btn = document.querySelector('.cat-btn.escort');
+    if (btn) { escortBtnPending = btn; document.getElementById('adultPopup').classList.add('show'); }
     return;
   }
+  const targetCat = map[cat];
+  if (targetCat) {
+    const btn = document.querySelector(`.cat-btn[data-cat="${targetCat}"]`);
+    if (btn) { selezionaCategoria(btn); btn.scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+  }
+}
+
+onAuthStateChanged(auth, async (user) => {
+  if (!user) { window.location.href = 'cliente.html?tab=accedi'; return; }
   const snap = await getDoc(doc(db, 'utenti', user.uid));
   if (!snap.exists() || snap.data().ruolo !== 'cliente') {
     window.location.href = 'dashboard-pro.html';
@@ -212,12 +406,14 @@ onAuthStateChanged(auth, async (user) => {
   document.getElementById('navbar-benvenuto').textContent = '👤 ' + (utenteLoggato.nome || '');
   document.getElementById('loadingScreen').style.display = 'none';
   document.getElementById('formCard').style.display = 'block';
+  preselectFromURL();
 });
 
 window.inviaRichiesta = async function() {
   if (!categoriaSelezionata) { alert('⚠️ Seleziona una categoria!'); return; }
   const citta = document.getElementById('req-citta').value.trim();
-  const mq = document.getElementById('req-mq').value.trim();
+  const mqEl = document.getElementById('req-mq');
+  const mq = mqEl ? mqEl.value.trim() : '';
   const desc = document.getElementById('req-descrizione').value.trim();
   const quando = document.getElementById('req-quando').value;
   const budget = document.getElementById('req-budget').value;
@@ -246,7 +442,6 @@ window.inviaRichiesta = async function() {
       offerte: 0,
       timestamp: serverTimestamp()
     });
-
     document.getElementById('formCard').style.display = 'none';
     document.getElementById('successCard').style.display = 'block';
     window.scrollTo(0, 0);
@@ -257,6 +452,5 @@ window.inviaRichiesta = async function() {
   }
 };
 </script>
-
 </body>
 </html>
