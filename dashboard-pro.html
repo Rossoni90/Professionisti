@@ -225,11 +225,16 @@ const db = getFirestore(app);
 
 let currentUID = null;
 let currentRichiestaId = null;
-let stelleSelezionate = 0;
 
-window.eseguiLogout = async () => { await signOut(auth); localStorage.clear(); window.location.href = 'index.html'; };
+window.eseguiLogout = async () => {
+  await signOut(auth);
+  localStorage.clear();
+  window.location.href = 'index.html';
+};
 
-function dataOggi() { return new Date().toLocaleDateString('it-IT', { weekday:'long', day:'numeric', month:'long', year:'numeric' }); }
+function dataOggi() {
+  return new Date().toLocaleDateString('it-IT', { weekday:'long', day:'numeric', month:'long', year:'numeric' });
+}
 function tempoFa(s) {
   const d = Math.floor(Date.now()/1000) - s;
   if (d < 60) return 'pochi secondi fa';
@@ -255,65 +260,93 @@ document.getElementById('btn-conferma-sblocco').addEventListener('click', async 
   const btn = document.getElementById('btn-conferma-sblocco');
   btn.textContent = '⏳ Elaborazione...';
   btn.disabled = true;
+
   try {
+    // 1. Verifica crediti
     const utenteRef = doc(db, 'utenti', currentUID);
     const utenteSnap = await getDoc(utenteRef);
     const datiPro = utenteSnap.data();
     if ((datiPro.crediti ?? 0) < 1) {
-      alert('⚠️ Crediti insufficienti!');
+      alert('⚠️ Crediti insufficienti! Ricarica per sbloccare altri contatti.');
       btn.textContent = '✅ Conferma e sblocca';
       btn.disabled = false;
       return;
     }
-    await updateDoc(utenteRef, { crediti: increment(-1), contattiSbloccati: increment(1) });
 
+    // 2. Scala credito e incrementa contatti sbloccati
+    await updateDoc(utenteRef, {
+      crediti: increment(-1),
+      contattiSbloccati: increment(1)
+    });
+
+    // 3. Aggiorna la richiesta
     const richiestaRef = doc(db, 'richieste', currentRichiestaId);
     const richiestaSnap = await getDoc(richiestaRef);
     const richiestaData = richiestaSnap.data();
     const sbloccatiDa = richiestaData.sbloccatiDa || [];
     if (!sbloccatiDa.includes(currentUID)) {
-      await updateDoc(richiestaRef, { sbloccatiDa: [...sbloccatiDa, currentUID], offerte: increment(1) });
+      await updateDoc(richiestaRef, {
+        sbloccatiDa: [...sbloccatiDa, currentUID],
+        offerte: increment(1)
+      });
     }
 
-    const clienteUID = richiestaData.clienteUID || richiestaData.clienteId || '';
+    // 4. Dati per la chat
+    const clienteUID  = richiestaData.clienteUID  || richiestaData.clienteId  || '';
     const clienteNome = richiestaData.clienteNome || richiestaData.nomeCliente || 'Cliente';
-    const proNome = datiPro.ragioneSociale || datiPro.nome || 'Professionista';
+    const proNome     = datiPro.ragioneSociale    || datiPro.nome              || 'Professionista';
 
-    // Controlla se chat esiste già
+    // 5. Controlla se esiste già una chat per questa richiesta + professionista
     const chatQuery = await getDocs(query(
       collection(db, 'chat'),
-      where('richiestaID', '==', currentRichiestaId),
-      where('proUID', '==', currentUID)
+      where('richiestaID',        '==', currentRichiestaId),
+      where('professionistaUID',  '==', currentUID)
     ));
 
     let chatId;
     if (!chatQuery.empty) {
+      // Chat già esistente: riusa
       chatId = chatQuery.docs[0].id;
     } else {
+      // 6. Crea nuovo documento chat con campi coerenti con chat.html
       const nuovaChat = await addDoc(collection(db, 'chat'), {
-        richiestaID: currentRichiestaId,
+        richiestaID:          currentRichiestaId,
         richiestaDescrizione: richiestaData.descrizione || '—',
-        richiestaCategoria: richiestaData.categoria || '—',
-        clienteUID: clienteUID,
-        clienteNome: clienteNome,
-        proUID: currentUID,
-        proNome: proNome,
-        partecipanti: [currentUID, clienteUID],
-        stato: 'attiva',
-        ultimoMessaggio: '🔓 Contatto sbloccato',
-        ultimoTimestamp: serverTimestamp(),
-        creatoIl: serverTimestamp()
+        richiestaCategoria:   richiestaData.categoria   || '—',
+        clienteUID:           clienteUID,
+        clienteNome:          clienteNome,
+        professionistaUID:    currentUID,
+        professionistaNome:   proNome,
+        partecipanti:         [currentUID, clienteUID],
+        stato:                'attiva',
+        ultimoTesto:          '🔓 Contatto sbloccato',
+        ultimoMessaggio:      serverTimestamp(),
+        creatoIl:             serverTimestamp()
       });
       chatId = nuovaChat.id;
+
+      // 7. Messaggio di sistema iniziale
       await addDoc(collection(db, 'chat', chatId, 'messaggi'), {
-        testo: '🔓 Contatto sbloccato! Potete ora comunicare direttamente.',
-        mittente: 'sistema',
+        testo:       '🔓 Contatto sbloccato! Potete ora comunicare direttamente.',
+        mittente:    'sistema',
         mittentNome: 'Sistema',
-        timestamp: serverTimestamp(),
-        tipo: 'sistema'
+        timestamp:   serverTimestamp(),
+        tipo:        'sistema'
       });
+
+      // 8. Notifica in-app al cliente
+      if (clienteUID) {
+        await addDoc(collection(db, 'notifiche'), {
+          destinatario: clienteUID,
+          testo:        `🔓 ${proNome} ha sbloccato la tua richiesta e aperto la chat!`,
+          chatId:       chatId,
+          letta:        false,
+          timestamp:    serverTimestamp()
+        });
+      }
     }
 
+    // 9. Redirect alla chat
     chiudiPopup();
     window.location.href = 'chat.html?chat=' + chatId;
 
@@ -342,113 +375,209 @@ onAuthStateChanged(auth, async (user) => {
   document.getElementById('link-richieste').onclick = () => document.getElementById('richieste-container').scrollIntoView({ behavior:'smooth' });
 
   // Abbonamento
-  const abbBar = document.getElementById('abbonamento-bar');
+  const abbBar   = document.getElementById('abbonamento-bar');
   const abbBadge = document.getElementById('abbonamento-badge');
   if (dati.abbonamento && dati.abbonamento.attivo) {
-    const scadenza = dati.abbonamento.scadenza ? new Date(dati.abbonamento.scadenza.seconds*1000).toLocaleDateString('it-IT') : '—';
-    document.getElementById('abbonamento-titolo').textContent = '✅ Abbonamento ' + (dati.abbonamento.piano||'mensile') + ' attivo';
+    const scadenza = dati.abbonamento.scadenza
+      ? new Date(dati.abbonamento.scadenza.seconds * 1000).toLocaleDateString('it-IT') : '—';
+    document.getElementById('abbonamento-titolo').textContent  = '✅ Abbonamento ' + (dati.abbonamento.piano || 'mensile') + ' attivo';
     document.getElementById('abbonamento-dettaglio').textContent = 'Scade il ' + scadenza;
     abbBadge.textContent = '✅ Attivo';
   } else {
     abbBar.classList.add('scaduto');
-    document.getElementById('abbonamento-titolo').textContent = '⚠️ Abbonamento scaduto o non attivo';
+    document.getElementById('abbonamento-titolo').textContent    = '⚠️ Abbonamento scaduto o non attivo';
     document.getElementById('abbonamento-dettaglio').textContent = 'Rinnova ora per ricevere richieste';
     abbBadge.textContent = '⚠️ Scaduto';
     abbBadge.classList.add('scaduto');
   }
 
-  document.getElementById('crediti-num').innerHTML = (dati.crediti ?? 0) + ' <span>crediti</span>';
-  document.getElementById('stat-sbloccati').textContent = dati.contattiSbloccati ?? 0;
-  document.getElementById('stat-completati').textContent = dati.lavoriCompletati ?? 0;
-  document.getElementById('stat-rating').textContent = dati.ratingMedio ? dati.ratingMedio.toFixed(1) : '—';
+  document.getElementById('crediti-num').innerHTML   = (dati.crediti ?? 0) + ' <span>crediti</span>';
+  document.getElementById('stat-sbloccati').textContent  = dati.contattiSbloccati ?? 0;
+  document.getElementById('stat-completati').textContent = dati.lavoriCompletati  ?? 0;
+  document.getElementById('stat-rating').textContent     = dati.ratingMedio ? dati.ratingMedio.toFixed(1) : '—';
 
-  // Richieste
+  // ---- RICHIESTE ----
   try {
     const snap = await getDocs(query(collection(db, 'richieste'), limit(50)));
     let docs = snap.docs.filter(d => {
       const s = (d.data().stato || '').toLowerCase().trim();
       return s !== 'completata' && s !== 'eliminata' && s !== 'rifiutata' && s !== 'chiusa';
     });
-    docs.sort((a,b) => getTS(b.data()) - getTS(a.data()));
+    docs.sort((a, b) => getTS(b.data()) - getTS(a.data()));
     const n = docs.length;
-    document.getElementById('stat-richieste').textContent = n;
+    document.getElementById('stat-richieste').textContent  = n;
     document.getElementById('count-richieste').textContent = n;
-    document.getElementById('notifica-count').textContent = n;
+    document.getElementById('notifica-count').textContent  = n;
     document.getElementById('sidebar-notifica').textContent = n;
+
     const container = document.getElementById('richieste-container');
     if (n === 0) {
       container.innerHTML = '<div class="vuoto-msg">📭 Nessuna richiesta disponibile.</div>';
     } else {
       container.innerHTML = '';
       docs.forEach(docSnap => {
-        const r = docSnap.data();
-        const ts = getTS(r);
-        const tempo = ts ? tempoFa(ts) : 'poco fa';
-        const chipUrgenza = r.urgente ? '<span class="chip rosso">🔴 Urgente</span>' : '<span class="chip verde">⏳ Flessibile</span>';
-        const mqChip = r.mq ? '<span class="chip">📐 '+r.mq+' mq</span>' : '';
-        const quandoChip = r.quando ? '<span class="chip">🗓️ '+r.quando+'</span>' : '';
+        const r       = docSnap.data();
+        const ts      = getTS(r);
+        const tempo   = ts ? tempoFa(ts) : 'poco fa';
+        const chipUrgenza = r.urgente
+          ? '<span class="chip rosso">🔴 Urgente</span>'
+          : '<span class="chip verde">⏳ Flessibile</span>';
+        const mqChip    = r.mq     ? `<span class="chip">📐 ${r.mq} mq</span>`      : '';
+        const quandoChip = r.quando ? `<span class="chip">🗓️ ${r.quando}</span>` : '';
+
         const giaSbloccato = (r.sbloccatiDa || []).includes(currentUID);
-        const catLabel = (r.categoria || 'Richiesta').replace(/'/g,"\\'");
+        const catLabel     = (r.categoria || 'Richiesta').replace(/'/g, "\\'");
+
+        // Se già sbloccato: cerca la chatId corretta
         const btnHtml = giaSbloccato
-          ? '<button class="btn-sblocca sbloccato" onclick="window.location.href=\'chat.html?richiesta='+docSnap.id+'\'">💬 Vai alla chat</button>'
-          : '<button class="btn-sblocca" onclick="apriPopupSblocco(\''+catLabel+'\',\''+docSnap.id+'\')">🔓 Sblocca contatto</button>';
-        container.innerHTML += '<div class="richiesta-card nuova">'
-          + (giaSbloccato ? '' : '<div class="nuovo-tag">🆕 NUOVA</div>')
-          + '<div class="richiesta-header"><div class="richiesta-cat">🏗️ '+(r.categoria||'—')+'</div><div class="richiesta-tempo">⏰ '+tempo+'</div></div>'
-          + '<div class="richiesta-desc">'+(r.descrizione||'Nessuna descrizione.')+'</div>'
-          + '<div class="richiesta-chips"><span class="chip">📍 '+(r.citta||'—')+'</span>'+chipUrgenza+mqChip+quandoChip+'</div>'
-          + '<div class="richiesta-footer"><div class="costo-sblocco">Sblocco: <strong>1 credito</strong></div>'+btnHtml+'</div>'
-          + '</div>';
+          ? `<button class="btn-sblocca sbloccato" onclick="apriChatEsistente('${docSnap.id}')">💬 Vai alla chat</button>`
+          : `<button class="btn-sblocca" onclick="apriPopupSblocco('${catLabel}','${docSnap.id}')">🔓 Sblocca contatto</button>`;
+
+        container.innerHTML +=
+          `<div class="richiesta-card nuova">
+            ${giaSbloccato ? '' : '<div class="nuovo-tag">🆕 NUOVA</div>'}
+            <div class="richiesta-header">
+              <div class="richiesta-cat">🏗️ ${r.categoria || '—'}</div>
+              <div class="richiesta-tempo">⏰ ${tempo}</div>
+            </div>
+            <div class="richiesta-desc">${r.descrizione || 'Nessuna descrizione.'}</div>
+            <div class="richiesta-chips">
+              <span class="chip">📍 ${r.citta || '—'}</span>
+              ${chipUrgenza}${mqChip}${quandoChip}
+            </div>
+            <div class="richiesta-footer">
+              <div class="costo-sblocco">Sblocco: <strong>1 credito</strong></div>
+              ${btnHtml}
+            </div>
+          </div>`;
       });
     }
   } catch(e) {
-    document.getElementById('richieste-container').innerHTML = '<div class="vuoto-msg">⚠️ Errore: '+e.message+'</div>';
+    document.getElementById('richieste-container').innerHTML =
+      `<div class="vuoto-msg">⚠️ Errore caricamento richieste: ${e.message}</div>`;
   }
 
-  // Sopralluoghi
+  // ---- SOPRALLUOGHI ----
   try {
-    const snapSop = await getDocs(query(collection(db,'sopralluoghi'), where('proUID','==',user.uid), where('stato','==','confermato'), limit(10)));
+    const snapSop = await getDocs(query(
+      collection(db, 'sopralluoghi'),
+      where('proUID', '==', user.uid),
+      where('stato',  '==', 'confermato'),
+      limit(10)
+    ));
     const sopCont = document.getElementById('sopralluogo-container');
     if (snapSop.empty) {
       sopCont.innerHTML = '<div class="vuoto-msg">📅 Nessun sopralluogo programmato.</div>';
     } else {
-      const s = snapSop.docs.sort((a,b)=>(a.data().data?.seconds??0)-(b.data().data?.seconds??0))[0].data();
-      const dataSop = s.data ? new Date(s.data.seconds*1000).toLocaleString('it-IT',{weekday:'long',day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '—';
-      sopCont.innerHTML = '<div class="sopralluogo-card"><div class="sopralluogo-stato confermato">✅ Confermato</div><div class="sopralluogo-data">'+dataSop+'</div><div class="sopralluogo-info"><strong>Cliente:</strong> '+(s.clienteNome||'—')+'<br><strong>Lavoro:</strong> '+(s.lavoro||'—')+'<br><strong>Indirizzo:</strong> '+(s.indirizzo||'—')+'</div></div>';
+      const s = snapSop.docs
+        .sort((a, b) => (a.data().data?.seconds ?? 0) - (b.data().data?.seconds ?? 0))[0].data();
+      const dataSop = s.data
+        ? new Date(s.data.seconds * 1000).toLocaleString('it-IT', {
+            weekday:'long', day:'numeric', month:'long', year:'numeric',
+            hour:'2-digit', minute:'2-digit'
+          })
+        : '—';
+      sopCont.innerHTML =
+        `<div class="sopralluogo-card">
+          <div class="sopralluogo-stato confermato">✅ Confermato</div>
+          <div class="sopralluogo-data">${dataSop}</div>
+          <div class="sopralluogo-info">
+            <strong>Cliente:</strong> ${s.clienteNome || '—'}<br>
+            <strong>Lavoro:</strong> ${s.lavoro || '—'}<br>
+            <strong>Indirizzo:</strong> ${s.indirizzo || '—'}
+          </div>
+        </div>`;
     }
-  } catch(e) { document.getElementById('sopralluogo-container').innerHTML = '<div class="vuoto-msg">📅 Nessun sopralluogo programmato.</div>'; }
+  } catch(e) {
+    document.getElementById('sopralluogo-container').innerHTML =
+      '<div class="vuoto-msg">📅 Nessun sopralluogo programmato.</div>';
+  }
 
-  // Ultimo lavoro
+  // ---- ULTIMO LAVORO ----
   try {
-    const snapLav = await getDocs(query(collection(db,'sopralluoghi'), where('proUID','==',user.uid), where('stato','==','completato'), limit(10)));
+    const snapLav = await getDocs(query(
+      collection(db, 'sopralluoghi'),
+      where('proUID', '==', user.uid),
+      where('stato',  '==', 'completato'),
+      limit(10)
+    ));
     const lavCont = document.getElementById('ultimo-lavoro-container');
     if (snapLav.empty) {
       lavCont.innerHTML = '<div class="vuoto-msg">✅ Nessun lavoro completato ancora.</div>';
     } else {
-      const l = snapLav.docs.sort((a,b)=>(b.data().data?.seconds??0)-(a.data().data?.seconds??0))[0].data();
-      const dataLav = l.data ? new Date(l.data.seconds*1000).toLocaleDateString('it-IT',{day:'numeric',month:'long',year:'numeric'}) : '—';
-      lavCont.innerHTML = '<div class="sopralluogo-card" style="border-left-color:var(--oro)"><div class="sopralluogo-stato confermato" style="background:#FFFBEB;color:var(--oro)">✅ Completato</div><div class="sopralluogo-data">'+dataLav+'</div><div class="sopralluogo-info"><strong>Cliente:</strong> '+(l.clienteNome||'—')+'<br><strong>Lavoro:</strong> '+(l.lavoro||'—')+'</div></div>';
+      const l = snapLav.docs
+        .sort((a, b) => (b.data().data?.seconds ?? 0) - (a.data().data?.seconds ?? 0))[0].data();
+      const dataLav = l.data
+        ? new Date(l.data.seconds * 1000).toLocaleDateString('it-IT', {
+            day:'numeric', month:'long', year:'numeric'
+          })
+        : '—';
+      lavCont.innerHTML =
+        `<div class="sopralluogo-card" style="border-left-color:var(--oro)">
+          <div class="sopralluogo-stato confermato" style="background:#FFFBEB;color:var(--oro)">✅ Completato</div>
+          <div class="sopralluogo-data">${dataLav}</div>
+          <div class="sopralluogo-info">
+            <strong>Cliente:</strong> ${l.clienteNome || '—'}<br>
+            <strong>Lavoro:</strong> ${l.lavoro || '—'}
+          </div>
+        </div>`;
     }
-  } catch(e) { document.getElementById('ultimo-lavoro-container').innerHTML = '<div class="vuoto-msg">✅ Nessun lavoro completato ancora.</div>'; }
+  } catch(e) {
+    document.getElementById('ultimo-lavoro-container').innerHTML =
+      '<div class="vuoto-msg">✅ Nessun lavoro completato ancora.</div>';
+  }
 
-  // Recensioni
+  // ---- RECENSIONI ----
   try {
-    const snapRec = await getDocs(query(collection(db,'recensioni'), where('aUID','==',user.uid), limit(3)));
+    const snapRec = await getDocs(query(
+      collection(db, 'recensioni'),
+      where('aUID', '==', user.uid),
+      limit(3)
+    ));
     const recCont = document.getElementById('recensioni-container');
     if (snapRec.empty) {
       recCont.innerHTML = '<div class="vuoto-msg">⭐ Nessuna recensione ricevuta ancora.</div>';
     } else {
       recCont.innerHTML = '';
       snapRec.docs.forEach(d => {
-        const rec = d.data();
-        const stelle = '★'.repeat(rec.stelle||0)+'☆'.repeat(5-(rec.stelle||0));
-        const data = rec.timestamp ? new Date(rec.timestamp.seconds*1000).toLocaleDateString('it-IT') : '—';
-        recCont.innerHTML += '<div class="recensione-card"><div class="rec-header"><div class="rec-nome">'+(rec.daNome||'Cliente')+'</div><div class="rec-stelle">'+stelle+'</div></div><div class="rec-testo">'+(rec.testo||'—')+'</div><div class="rec-data">'+data+'</div></div>';
+        const rec   = d.data();
+        const stelle = '★'.repeat(rec.stelle || 0) + '☆'.repeat(5 - (rec.stelle || 0));
+        const data   = rec.timestamp
+          ? new Date(rec.timestamp.seconds * 1000).toLocaleDateString('it-IT') : '—';
+        recCont.innerHTML +=
+          `<div class="recensione-card">
+            <div class="rec-header">
+              <div class="rec-nome">${rec.daNome || 'Cliente'}</div>
+              <div class="rec-stelle">${stelle}</div>
+            </div>
+            <div class="rec-testo">${rec.testo || '—'}</div>
+            <div class="rec-data">${data}</div>
+          </div>`;
       });
     }
-  } catch(e) { document.getElementById('recensioni-container').innerHTML = '<div class="vuoto-msg">⭐ Nessuna recensione ricevuta ancora.</div>'; }
-
+  } catch(e) {
+    document.getElementById('recensioni-container').innerHTML =
+      '<div class="vuoto-msg">⭐ Nessuna recensione ricevuta ancora.</div>';
+  }
 });
+
+// Funzione per aprire una chat già esistente tramite richiestaID
+window.apriChatEsistente = async (richiestaId) => {
+  try {
+    const chatQuery = await getDocs(query(
+      collection(db, 'chat'),
+      where('richiestaID',       '==', richiestaId),
+      where('professionistaUID', '==', currentUID)
+    ));
+    if (!chatQuery.empty) {
+      window.location.href = 'chat.html?chat=' + chatQuery.docs[0].id;
+    } else {
+      alert('Chat non trovata. Riprova.');
+    }
+  } catch(e) {
+    alert('Errore: ' + e.message);
+  }
+};
 </script>
 </body>
 </html>
