@@ -18,8 +18,10 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 .logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: white; text-decoration: none; }
 .logo span { color: var(--oro); }
 .navbar-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.btn-back-nav { background: transparent; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.25); padding: 7px 16px; border-radius: 20px; font-size: 13px; cursor: pointer; font-family: 'Inter', sans-serif; text-decoration: none; color: rgba(255,255,255,0.7); }
+.btn-back-nav { background: transparent; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.25); padding: 7px 16px; border-radius: 20px; font-size: 13px; cursor: pointer; font-family: 'Inter', sans-serif; text-decoration: none; }
 .btn-back-nav:hover { color: var(--oro); border-color: var(--oro); }
+.notifica-nav { position: relative; cursor: pointer; font-size: 20px; color: white; }
+.notifica-nav .badge { position: absolute; top: -8px; right: -8px; background: var(--rosso); color: white; font-size: 10px; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 .btn-logout { background: transparent; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.3); padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; }
 .btn-logout:hover { color: white; border-color: white; }
 .chat-layout { display: flex; flex: 1; overflow: hidden; }
@@ -38,21 +40,25 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 .chat-item-preview { font-size: 12px; color: var(--grigio); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .chat-item-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; flex-shrink: 0; }
 .chat-item-time { font-size: 11px; color: var(--grigio); }
+.chat-item-badge { background: var(--rosso); color: white; font-size: 10px; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 .chat-vuota { padding: 30px 20px; text-align: center; color: var(--grigio); font-size: 13px; }
 .chat-main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 .chat-placeholder { flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 14px; color: var(--grigio); }
 .chat-placeholder .icon { font-size: 60px; }
 .chat-placeholder p { font-size: 15px; }
-.chat-header { background: white; padding: 15px 22px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; box-shadow: 0 1px 8px rgba(0,0,0,0.05); }
+.chat-header { background: white; padding: 15px 22px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; box-shadow: 0 1px 8px rgba(0,0,0,0.05); flex-wrap: wrap; gap: 10px; }
 .chat-header-info { display: flex; align-items: center; gap: 14px; }
 .chat-header-avatar { width: 46px; height: 46px; background: var(--blu); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--oro); font-size: 18px; }
 .chat-header-nome { font-size: 16px; font-weight: 700; color: var(--blu-scuro); }
 .chat-header-stato { font-size: 12px; color: var(--verde); display: flex; align-items: center; gap: 5px; margin-top: 2px; }
 .chat-header-stato::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--verde); display: inline-block; }
-.chat-header-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-.btn-header-action { background: var(--grigio-chiaro); border: none; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; color: var(--testo); }
+.chat-header-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.btn-header-action { background: var(--grigio-chiaro); border: none; padding: 8px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; color: var(--testo); }
 .btn-header-action.blu { background: var(--blu); color: white; }
 .btn-header-action.verde { background: var(--verde); color: white; }
+.btn-header-action.oro { background: var(--oro); color: white; }
+.btn-header-action.rosso { background: var(--rosso); color: white; }
+.btn-header-action:disabled { opacity: 0.4; cursor: not-allowed; }
 .richiesta-banner { background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); border-bottom: 1px solid #BFDBFE; padding: 12px 22px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; flex-wrap: wrap; gap: 8px; }
 .richiesta-banner-info { font-size: 13px; color: var(--blu-scuro); line-height: 1.6; }
 .richiesta-banner-info strong { display: block; font-size: 14px; margin-bottom: 2px; }
@@ -60,8 +66,12 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 .chip-small { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 15px; }
 .chip-small.blu { background: #DBEAFE; color: var(--blu); }
 .chip-small.verde { background: #ECFDF5; color: var(--verde); }
-.sopralluogo-banner { background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border-bottom: 1px solid #A7F3D0; padding: 14px 22px; flex-shrink: 0; }
+.chip-small.rosso { background: #FEF2F2; color: var(--rosso); }
+.sopralluogo-banner { border-bottom: 1px solid #A7F3D0; padding: 14px 22px; flex-shrink: 0; }
+.sopralluogo-banner.attesa { background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%); border-color: #F59E0B; }
+.sopralluogo-banner.confermato { background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border-color: #A7F3D0; }
 .sopralluogo-banner-title { font-size: 13px; font-weight: 700; color: #065F46; margin-bottom: 6px; }
+.sopralluogo-banner.attesa .sopralluogo-banner-title { color: #78350F; }
 .sopralluogo-banner-data { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 900; color: #065F46; margin-bottom: 4px; }
 .sopralluogo-banner-sub { font-size: 12px; color: #047857; }
 .sopralluogo-banner-actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
@@ -69,6 +79,11 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 .btn-sopralluogo.verde { background: var(--verde); color: white; }
 .btn-sopralluogo.rosso { background: var(--rosso); color: white; }
 .btn-sopralluogo.grigio { background: #e5e7eb; color: var(--grigio); }
+.btn-sopralluogo.oro { background: var(--oro); color: white; }
+.conferma-sopralluogo-banner { background: linear-gradient(135deg, #FEF2F2 0%, #FECACA 100%); border-bottom: 2px solid var(--rosso); padding: 14px 22px; flex-shrink: 0; }
+.conferma-sopralluogo-banner h4 { font-size: 14px; font-weight: 700; color: var(--rosso); margin-bottom: 8px; }
+.conferma-sopralluogo-banner p { font-size: 13px; color: #7F1D1D; margin-bottom: 10px; }
+.conferma-sopralluogo-banner .azioni { display: flex; gap: 8px; }
 .chat-messages { flex: 1; overflow-y: auto; padding: 20px 22px; display: flex; flex-direction: column; gap: 14px; }
 .msg { display: flex; gap: 10px; max-width: 75%; }
 .msg.inviato { align-self: flex-end; flex-direction: row-reverse; }
@@ -79,8 +94,14 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 .msg.ricevuto .msg-bubble { background: white; color: var(--testo); border: 1px solid #e5e7eb; border-radius: 4px 18px 18px 18px; }
 .msg.inviato .msg-bubble { background: linear-gradient(135deg, var(--blu), var(--blu-chiaro)); color: white; border-radius: 18px 4px 18px 18px; }
 .msg-time { font-size: 11px; color: var(--grigio); padding: 0 4px; }
-.msg-sistema { align-self: center; background: #FEF3C7; border: 1px solid #FDE68A; border-radius: 12px; padding: 10px 16px; font-size: 12px; color: #78350F; text-align: center; max-width: 85%; line-height: 1.6; }
+.msg-sistema { align-self: center; background: #FEF3C7; border: 1px solid #FDE68A; border-radius: 12px; padding: 10px 16px; font-size: 12px; color: #78350F; text-align: center; max-width: 90%; line-height: 1.6; }
 .msg-sistema.verde { background: #ECFDF5; border-color: #A7F3D0; color: #065F46; }
+.msg-sistema.rosso { background: #FEF2F2; border-color: #FECACA; color: #991B1B; }
+.msg-preventivo { background: white; border: 2px solid var(--oro); border-radius: 16px; padding: 16px 18px; align-self: center; width: 90%; max-width: 420px; }
+.msg-preventivo-title { font-size: 13px; font-weight: 700; color: var(--oro); margin-bottom: 8px; }
+.msg-preventivo-nome { font-size: 15px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 6px; }
+.msg-preventivo-info { font-size: 13px; color: var(--grigio); line-height: 1.6; margin-bottom: 10px; }
+.btn-scarica-preventivo { background: var(--oro); color: white; border: none; padding: 8px 18px; border-radius: 20px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; }
 .chat-input-area { background: white; border-top: 1px solid #e5e7eb; padding: 14px 20px; flex-shrink: 0; }
 .chat-input-row { display: flex; gap: 10px; align-items: flex-end; }
 .chat-input-box { flex: 1; padding: 12px 18px; border: 1.5px solid #e5e7eb; border-radius: 25px; font-size: 14px; font-family: 'Inter', sans-serif; outline: none; resize: none; max-height: 100px; line-height: 1.5; }
@@ -94,9 +115,12 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 .btn-quick.oro:hover { background: var(--oro); color: white; }
 .btn-quick.verde { background: #ECFDF5; border-color: var(--verde); color: var(--verde); }
 .btn-quick.verde:hover { background: var(--verde); color: white; }
+.btn-quick.rosso { background: #FEF2F2; border-color: var(--rosso); color: var(--rosso); }
+.btn-quick.rosso:hover { background: var(--rosso); color: white; }
+.btn-quick:disabled { opacity: 0.4; cursor: not-allowed; }
 .popup-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
 .popup-overlay.show { display: flex; }
-.popup-box { background: white; border-radius: 24px; padding: 35px 30px; max-width: 440px; width: 100%; max-height: 90vh; overflow-y: auto; }
+.popup-box { background: white; border-radius: 24px; padding: 35px 30px; max-width: 460px; width: 100%; max-height: 90vh; overflow-y: auto; }
 .popup-box h2 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--blu-scuro); margin-bottom: 8px; text-align: center; }
 .popup-box p { color: var(--grigio); font-size: 14px; line-height: 1.6; margin-bottom: 20px; text-align: center; }
 .form-group { margin-bottom: 16px; }
@@ -105,6 +129,7 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 .form-group textarea { min-height: 80px; resize: vertical; }
 .popup-avviso { background: #FEF3C7; border: 1px solid #FDE68A; border-radius: 12px; padding: 12px 15px; font-size: 13px; color: #78350F; line-height: 1.6; margin-bottom: 18px; }
 .popup-avviso.verde { background: #ECFDF5; border-color: #A7F3D0; color: #065F46; }
+.popup-avviso.rosso { background: #FEF2F2; border-color: #FECACA; color: #991B1B; }
 .btn-popup { width: 100%; padding: 14px; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; margin-bottom: 8px; }
 .btn-popup.blu { background: var(--blu); color: white; }
 .btn-popup.verde { background: var(--verde); color: white; }
@@ -116,8 +141,12 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 .stelle-wrap { display: flex; justify-content: center; gap: 10px; margin: 16px 0; }
 .stella-rec { font-size: 40px; cursor: pointer; opacity: 0.3; }
 .stella-rec.attiva { opacity: 1; }
+.disponibilita-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+.slot-btn { padding: 10px; border: 2px solid #e5e7eb; border-radius: 10px; background: white; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; text-align: center; transition: 0.2s; }
+.slot-btn:hover { border-color: var(--blu); background: #EFF6FF; }
+.slot-btn.selected { border-color: var(--oro); background: #FFFBEB; color: var(--oro); }
 .loading-chat { padding: 40px; text-align: center; color: var(--grigio); font-size: 14px; }
-@media (max-width: 768px) { .chat-list { display: none; } .navbar-right { gap: 6px; } }
+@media (max-width: 768px) { .chat-list { display: none; } .navbar-right { gap: 6px; } .chat-header { padding: 12px 15px; } }
 </style>
 </head>
 <body>
@@ -126,6 +155,7 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
   <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
   <div class="navbar-right">
     <span id="btn-dashboard"></span>
+    <div class="notifica-nav" id="notifica-nav" onclick="apriNotifiche()" style="display:none">🔔<div class="badge" id="notifica-count">0</div></div>
     <button class="btn-logout" onclick="eseguiLogout()">🚪 Esci</button>
   </div>
 </nav>
@@ -141,13 +171,14 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
     </div>
   </div>
 
-  <div class="chat-main" id="chatMain">
+  <div class="chat-main">
     <div class="chat-placeholder" id="chatPlaceholder">
       <div class="icon">💬</div>
       <p>Seleziona una conversazione</p>
     </div>
 
     <div id="chatAreaWrapper" style="display:none;flex:1;flex-direction:column;overflow:hidden;">
+
       <div class="chat-header">
         <div class="chat-header-info">
           <div class="chat-header-avatar" id="activeAvatar">?</div>
@@ -156,9 +187,8 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
             <div class="chat-header-stato">Online</div>
           </div>
         </div>
-        <div class="chat-header-actions">
-          <button class="btn-header-action blu" onclick="apriPopupSopralluogo()">📅 Sopralluogo</button>
-          <button class="btn-header-action verde" onclick="apriDichiaraCompletato()">✅ Completato</button>
+        <div class="chat-header-actions" id="chatHeaderActions">
+          <!-- Popolato dinamicamente in base al ruolo e stato -->
         </div>
       </div>
 
@@ -173,16 +203,8 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
         </div>
       </div>
 
-      <div class="sopralluogo-banner" id="sopralluogoBanner" style="display:none">
-        <div class="sopralluogo-banner-title">📅 Sopralluogo confermato</div>
-        <div class="sopralluogo-banner-data" id="sop-banner-data">—</div>
-        <div class="sopralluogo-banner-sub" id="sop-banner-sub">—</div>
-        <div class="sopralluogo-banner-actions">
-          <button class="btn-sopralluogo verde" onclick="apriDichiaraCompletato()">✅ Completato</button>
-          <button class="btn-sopralluogo rosso" onclick="apriRifiuto()">❌ Rifiuta</button>
-          <button class="btn-sopralluogo grigio" onclick="apriPopupSopralluogo()">✏️ Modifica</button>
-        </div>
-      </div>
+      <div id="sopralluogoBanner" style="display:none"></div>
+      <div id="confermaSopralluogoBanner" style="display:none"></div>
 
       <div class="chat-messages" id="chatMessages"></div>
 
@@ -191,39 +213,201 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
           <textarea class="chat-input-box" id="msgInput" placeholder="Scrivi un messaggio..." rows="1" onkeydown="handleEnter(event)"></textarea>
           <button class="btn-invia" onclick="inviaMessaggio()">➤</button>
         </div>
-        <div class="chat-input-actions">
-          <button class="btn-quick" onclick="inserisciTesto('Quando è disponibile per il sopralluogo?')">📅 Chiedi disponibilità</button>
-          <button class="btn-quick" onclick="inserisciTesto('Potrebbe inviarmi un preventivo dettagliato?')">💬 Chiedi preventivo</button>
-          <button class="btn-quick oro" onclick="apriPopupSopralluogo()">📅 Fissa sopralluogo</button>
-          <button class="btn-quick verde" onclick="apriDichiaraCompletato()">✅ Lavoro completato</button>
+        <div class="chat-input-actions" id="quickActions">
+          <!-- Popolato dinamicamente -->
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- POPUP SOPRALLUOGO -->
-<div class="popup-overlay" id="popupSopralluogo">
+<!-- POPUP NOTIFICHE -->
+<div class="popup-overlay" id="popupNotifiche">
+  <div class="popup-box">
+    <h2>🔔 Notifiche</h2>
+    <div id="notifiche-lista" style="max-height:400px;overflow-y:auto;"></div>
+    <button class="btn-popup grigio" onclick="chiudiPopup('popupNotifiche')" style="margin-top:10px">Chiudi</button>
+  </div>
+</div>
+
+<!-- POPUP PROPONI DISPONIBILITA (PROFESSIONISTA) -->
+<div class="popup-overlay" id="popupDisponibilita">
+  <div class="popup-box">
+    <h2>📅 Proponi disponibilità</h2>
+    <p>Proponi al cliente le tue date e orari disponibili per il sopralluogo.</p>
+    <div class="form-group">
+      <label>Data 1 *</label>
+      <input type="date" id="disp-data1">
+    </div>
+    <div class="form-group">
+      <label>Orari disponibili data 1 (seleziona uno o più)</label>
+      <div class="disponibilita-grid" id="orari-grid-1"></div>
+    </div>
+    <div class="form-group">
+      <label>Data 2 (facoltativa)</label>
+      <input type="date" id="disp-data2">
+    </div>
+    <div class="form-group">
+      <label>Orari disponibili data 2</label>
+      <div class="disponibilita-grid" id="orari-grid-2"></div>
+    </div>
+    <div class="form-group">
+      <label>Note aggiuntive</label>
+      <textarea id="disp-note" placeholder="Es. Sono disponibile dalle 9 in poi, preferibilmente mattina..."></textarea>
+    </div>
+    <div class="popup-avviso">⚠️ Il cliente sceglierà tra le tue disponibilità e metterà l'indirizzo del sopralluogo.</div>
+    <button class="btn-popup blu" onclick="inviaDisponibilita()">📅 Invia disponibilità</button>
+    <button class="btn-popup grigio" onclick="chiudiPopup('popupDisponibilita')">Annulla</button>
+  </div>
+</div>
+
+<!-- POPUP FISSA SOPRALLUOGO (CLIENTE) -->
+<div class="popup-overlay" id="popupFissaSopralluogo">
   <div class="popup-box">
     <h2>📅 Fissa il Sopralluogo</h2>
-    <p>Concorda la data e l'ora del sopralluogo gratuito.</p>
-    <div class="form-group"><label>Data *</label><input type="date" id="sop-data"></div>
+    <p>Scegli la data e l'ora proposta dal professionista e inserisci l'indirizzo.</p>
+    <div id="slot-disponibili" style="margin-bottom:16px;"></div>
+    <div class="form-group">
+      <label>Oppure proponi altra data</label>
+      <input type="date" id="sop-data-cliente">
+    </div>
     <div class="form-group">
       <label>Ora *</label>
-      <select id="sop-ora">
+      <select id="sop-ora-cliente">
         <option value="">Seleziona orario</option>
-        <option>08:00</option><option>08:30</option><option>09:00</option><option>09:30</option>
-        <option>10:00</option><option>10:30</option><option>11:00</option><option>11:30</option>
-        <option>12:00</option><option>14:00</option><option>14:30</option><option>15:00</option>
+        <option>07:00</option><option>07:30</option><option>08:00</option><option>08:30</option>
+        <option>09:00</option><option>09:30</option><option>10:00</option><option>10:30</option>
+        <option>11:00</option><option>11:30</option><option>12:00</option><option>12:30</option>
+        <option>13:00</option><option>14:00</option><option>14:30</option><option>15:00</option>
         <option>15:30</option><option>16:00</option><option>16:30</option><option>17:00</option>
-        <option>17:30</option><option>18:00</option>
+        <option>17:30</option><option>18:00</option><option>18:30</option><option>19:00</option>
+        <option>19:30</option><option>20:00</option><option>20:30</option><option>21:00</option>
+        <option>21:30</option><option>22:00</option>
       </select>
     </div>
-    <div class="form-group"><label>Indirizzo completo *</label><input type="text" id="sop-indirizzo" placeholder="Es. Via Roma 15, Milano"></div>
-    <div class="form-group"><label>Note aggiuntive</label><textarea id="sop-note" placeholder="Es. Suonare il campanello..."></textarea></div>
-    <div class="popup-avviso">⚠️ Fissando il sopralluogo ti impegni a essere presente.</div>
-    <button class="btn-popup blu" onclick="confermaSopralluogo()">✅ Conferma sopralluogo</button>
-    <button class="btn-popup grigio" onclick="chiudiPopup('popupSopralluogo')">Annulla</button>
+    <div class="form-group">
+      <label>Indirizzo completo del sopralluogo *</label>
+      <input type="text" id="sop-indirizzo-cliente" placeholder="Es. Via Roma 15, Treviglio (BG), 2° piano">
+    </div>
+    <div class="form-group">
+      <label>Note per il professionista</label>
+      <textarea id="sop-note-cliente" placeholder="Es. Citofono Rossi, parcheggio in cortile..."></textarea>
+    </div>
+    <div class="popup-avviso">⚠️ Presentarsi puntualmente. Assenza senza preavviso = segnalazione. 3 segnalazioni = ban definitivo.</div>
+    <button class="btn-popup blu" onclick="confermaSopralluogoCliente()">✅ Conferma sopralluogo</button>
+    <button class="btn-popup grigio" onclick="chiudiPopup('popupFissaSopralluogo')">Annulla</button>
+  </div>
+</div>
+
+<!-- POPUP CONFERMA SOPRALLUOGO (PROFESSIONISTA) -->
+<div class="popup-overlay" id="popupConfermaProSopralluogo">
+  <div class="popup-box">
+    <div class="popup-icon">📅</div>
+    <h2>Conferma sopralluogo</h2>
+    <p>Il cliente ha scelto questa data e indirizzo:</p>
+    <div class="conferma-dettagli" id="dettagli-conferma-sop">—</div>
+    <div class="popup-avviso">⚠️ Confermando ti impegni a presentarti. Assenza senza preavviso = segnalazione automatica.</div>
+    <button class="btn-popup verde" onclick="proConfermaSopralluogo()">✅ Confermo, sarò presente</button>
+    <button class="btn-popup rosso" onclick="proRifiutaSopralluogo()">❌ Non posso, disdico</button>
+    <button class="btn-popup grigio" onclick="chiudiPopup('popupConfermaProSopralluogo')">Decido dopo</button>
+  </div>
+</div>
+
+<!-- POPUP DISDETTA -->
+<div class="popup-overlay" id="popupDisdetta">
+  <div class="popup-box">
+    <div class="popup-icon">📆</div>
+    <h2>Disdici sopralluogo</h2>
+    <p>Stai disdettando il sopralluogo. Verrà notificato l'altro utente.</p>
+    <div class="form-group">
+      <label>Motivo *</label>
+      <select id="motivo-disdetta">
+        <option value="">Seleziona motivo</option>
+        <option>Imprevisto lavorativo</option>
+        <option>Imprevisto personale</option>
+        <option>Problemi di salute</option>
+        <option>Ho trovato un altro professionista</option>
+        <option>Ho cambiato idea sul lavoro</option>
+        <option>Altro</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Vuoi riprogrammare?</label>
+      <select id="vuoi-riprogrammare">
+        <option value="si">Sì, voglio riprogrammare</option>
+        <option value="no">No, chiudo la pratica</option>
+      </select>
+    </div>
+    <div class="popup-avviso verde">✅ Disdire con preavviso non comporta segnalazioni.</div>
+    <button class="btn-popup oro" onclick="confermaDisdetta()">📆 Conferma disdetta</button>
+    <button class="btn-popup grigio" onclick="chiudiPopup('popupDisdetta')">Annulla</button>
+  </div>
+</div>
+
+<!-- POPUP CONFERMA AVVENUTO SOPRALLUOGO -->
+<div class="popup-overlay" id="popupConfermaAvvenuto">
+  <div class="popup-box">
+    <div class="popup-icon">🏠</div>
+    <h2>Il sopralluogo è avvenuto?</h2>
+    <p id="testo-conferma-avvenuto">L'orario concordato è passato. Conferma se il sopralluogo è avvenuto regolarmente.</p>
+    <button class="btn-popup verde" onclick="confermaSopralluogoAvvenuto(true)">✅ Sì, il sopralluogo è avvenuto</button>
+    <button class="btn-popup rosso" onclick="confermaSopralluogoAvvenuto(false)">❌ No, non è avvenuto</button>
+  </div>
+</div>
+
+<!-- POPUP CAUSA MANCATA PRESENTAZIONE -->
+<div class="popup-overlay" id="popupCausaMancata">
+  <div class="popup-box">
+    <div class="popup-icon">⚠️</div>
+    <h2>Chi non si è presentato?</h2>
+    <div class="form-group">
+      <label>Causa mancata presentazione *</label>
+      <select id="causa-mancata">
+        <option value="">Seleziona</option>
+        <option value="professionista">Il professionista non si è presentato</option>
+        <option value="cliente">Io (cliente) non mi sono presentato</option>
+        <option value="entrambi">Nessuno dei due si è presentato</option>
+        <option value="altro">Altro problema</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Descrivi brevemente</label>
+      <textarea id="desc-mancata" placeholder="Cosa è successo?"></textarea>
+    </div>
+    <div class="popup-avviso rosso">⚠️ Il responsabile riceverà una segnalazione automatica. Alla 3ª segnalazione = ban definitivo.</div>
+    <button class="btn-popup blu" onclick="inviaCausaMancata()">📨 Invia segnalazione</button>
+  </div>
+</div>
+
+<!-- POPUP CARICA PREVENTIVO (PROFESSIONISTA) -->
+<div class="popup-overlay" id="popupCaricaPreventivo">
+  <div class="popup-box">
+    <div class="popup-icon">📋</div>
+    <h2>Carica Preventivo</h2>
+    <p>Carica il preventivo per il cliente. Può essere un PDF o un'immagine.</p>
+    <div class="form-group">
+      <label>Nome del preventivo *</label>
+      <input type="text" id="prev-nome" placeholder="Es. Preventivo Tinteggiatura Appartamento">
+    </div>
+    <div class="form-group">
+      <label>Importo totale (€)</label>
+      <input type="number" id="prev-importo" placeholder="Es. 1500">
+    </div>
+    <div class="form-group">
+      <label>Descrizione lavori *</label>
+      <textarea id="prev-desc" placeholder="Descrivi i lavori inclusi nel preventivo..."></textarea>
+    </div>
+    <div class="form-group">
+      <label>Validità preventivo</label>
+      <select id="prev-validita">
+        <option value="30">30 giorni</option>
+        <option value="60">60 giorni</option>
+        <option value="90">90 giorni</option>
+      </select>
+    </div>
+    <div class="popup-avviso verde">✅ Il preventivo verrà inviato direttamente nella chat.</div>
+    <button class="btn-popup oro" onclick="inviaPreventivo()">📋 Invia preventivo</button>
+    <button class="btn-popup grigio" onclick="chiudiPopup('popupCaricaPreventivo')">Annulla</button>
   </div>
 </div>
 
@@ -234,7 +418,7 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
     <h2>Dichiara lavoro completato</h2>
     <p>Il cliente riceverà una notifica e dovrà confermare il saldo.</p>
     <div class="conferma-dettagli" id="dettagli-completato">—</div>
-    <div class="popup-avviso verde">✅ Dopo la conferma del saldo si apriranno le recensioni reciproche.</div>
+    <div class="popup-avviso verde">✅ Dopo la conferma del saldo entrambi dovrete lasciare una recensione obbligatoria.</div>
     <button class="btn-popup verde" onclick="confermaLavoroCompletato()">✅ Sì, il lavoro è completato</button>
     <button class="btn-popup grigio" onclick="chiudiPopup('popupDichiaraCompletato')">Annulla</button>
   </div>
@@ -246,8 +430,8 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
     <div class="popup-icon">💰</div>
     <h2>Confermi di aver saldato?</h2>
     <div class="conferma-dettagli" id="dettagli-saldo">—</div>
-    <div class="popup-avviso verde">✅ Confermando si aprirà la schermata delle recensioni.</div>
-    <button class="btn-popup oro" onclick="confermaSaldo()">💰 Sì, ho saldato</button>
+    <div class="popup-avviso verde">✅ Dopo la conferma entrambi dovrete lasciare una recensione obbligatoria.</div>
+    <button class="btn-popup oro" onclick="confermaSaldo()">💰 Sì, ho saldato il professionista</button>
     <button class="btn-popup grigio" onclick="chiudiPopup('popupConfermaPageSaldo')">Non ancora</button>
   </div>
 </div>
@@ -257,7 +441,7 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
   <div class="popup-box">
     <div class="popup-icon">⭐</div>
     <h2>Lascia la tua recensione</h2>
-    <p id="popup-rec-testo">La recensione è <strong>obbligatoria</strong>.</p>
+    <p id="popup-rec-testo">La recensione è <strong>obbligatoria</strong> per mantenere l'account attivo.</p>
     <div class="stelle-wrap">
       <span class="stella-rec" onclick="setStella(1)">★</span>
       <span class="stella-rec" onclick="setStella(2)">★</span>
@@ -265,32 +449,12 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
       <span class="stella-rec" onclick="setStella(4)">★</span>
       <span class="stella-rec" onclick="setStella(5)">★</span>
     </div>
-    <div class="form-group"><label>Descrivi la tua esperienza *</label><textarea id="testo-rec" placeholder="Com'è andato il lavoro?"></textarea></div>
-    <div class="popup-avviso">⚠️ Hai 48 ore per completare la recensione.</div>
-    <button class="btn-popup oro" onclick="inviaRecensione()">⭐ Invia recensione</button>
-  </div>
-</div>
-
-<!-- POPUP RIFIUTO -->
-<div class="popup-overlay" id="popupRifiuto">
-  <div class="popup-box">
-    <div class="popup-icon">❌</div>
-    <h2>Rifiuta / Disdici</h2>
     <div class="form-group">
-      <label>Motivo *</label>
-      <select id="motivo-rifiuto">
-        <option value="">Seleziona motivo</option>
-        <option>Preventivo troppo alto</option>
-        <option>Ho trovato un altro professionista</option>
-        <option>Il professionista non si è presentato</option>
-        <option>Ho cambiato idea</option>
-        <option>Problemi di disponibilità</option>
-        <option>Altro</option>
-      </select>
+      <label>Descrivi la tua esperienza *</label>
+      <textarea id="testo-rec" placeholder="Com'è andato il lavoro? Puntualità, professionalità, qualità?"></textarea>
     </div>
-    <div class="form-group"><label>Note</label><textarea id="desc-rifiuto" placeholder="Spiega brevemente..."></textarea></div>
-    <button class="btn-popup rosso" onclick="confermaRifiuto()">❌ Conferma</button>
-    <button class="btn-popup grigio" onclick="chiudiPopup('popupRifiuto')">Annulla</button>
+    <div class="popup-avviso">⚠️ Hai 48 ore per completare la recensione obbligatoria.</div>
+    <button class="btn-popup oro" onclick="inviaRecensione()">⭐ Invia recensione</button>
   </div>
 </div>
 
@@ -298,7 +462,7 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 import { initializeApp, getApps } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js';
 import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js';
 import {
-  getFirestore, collection, doc, getDoc, getDocs, addDoc, updateDoc,
+  getFirestore, collection, doc, getDoc, getDocs, addDoc, updateDoc, increment,
   query, where, orderBy, onSnapshot, serverTimestamp, limit
 } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js';
 
@@ -319,61 +483,548 @@ let currentUID = null;
 let currentRuolo = null;
 let currentNome = null;
 let chatAttiva = null;
+let sopralluogoAttivo = null;
 let stelleSelezionate = 0;
 let unsubMessages = null;
-let tutteLeChat = [];
+let slotSelezionato = null;
 
 const urlParams = new URLSearchParams(window.location.search);
 const chatIdDaUrl = urlParams.get('chat');
 
+const ORARI = ['07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30','22:00'];
+
 window.eseguiLogout = async () => { await signOut(auth); localStorage.clear(); window.location.href = 'index.html'; };
 
-function tempoFa(secondi) {
-  if (!secondi) return '—';
-  const diff = Math.floor(Date.now()/1000) - secondi;
-  if (diff < 60) return 'Ora';
-  if (diff < 3600) return Math.floor(diff/60)+' min fa';
-  if (diff < 86400) return Math.floor(diff/3600)+' ore fa';
-  return new Date(secondi*1000).toLocaleDateString('it-IT',{day:'numeric',month:'short'});
+function tempoFa(s) {
+  if (!s) return '—';
+  const d = Math.floor(Date.now()/1000) - s;
+  if (d < 60) return 'Ora';
+  if (d < 3600) return Math.floor(d/60)+' min fa';
+  if (d < 86400) return Math.floor(d/3600)+' ore fa';
+  return new Date(s*1000).toLocaleDateString('it-IT',{day:'numeric',month:'short'});
 }
 
 function coloreRandom(str) {
-  const colori = ['#1B3A6B','#B8972A','#10B981','#2952A3','#F59E0B','#6366F1'];
+  const c = ['#1B3A6B','#B8972A','#10B981','#2952A3','#F59E0B','#6366F1'];
   let h = 0;
   for (let i = 0; i < str.length; i++) h = str.charCodeAt(i) + ((h << 5) - h);
-  return colori[Math.abs(h) % colori.length];
+  return c[Math.abs(h) % c.length];
 }
 
-window.filtraChat = (testo) => {
+window.filtraChat = (t) => {
   document.querySelectorAll('.chat-item').forEach(el => {
-    el.style.display = (el.dataset.nome||'').toLowerCase().includes(testo.toLowerCase()) ? '' : 'none';
+    el.style.display = (el.dataset.nome||'').toLowerCase().includes(t.toLowerCase()) ? '' : 'none';
   });
 };
 
 window.handleEnter = (e) => { if (e.key==='Enter' && !e.shiftKey) { e.preventDefault(); inviaMessaggio(); } };
-window.inserisciTesto = (t) => { const inp = document.getElementById('msgInput'); inp.value = t; inp.focus(); };
 window.chiudiPopup = (id) => document.getElementById(id).classList.remove('show');
-window.apriPopupSopralluogo = () => document.getElementById('popupSopralluogo').classList.add('show');
-window.apriRifiuto = () => document.getElementById('popupRifiuto').classList.add('show');
+window.setStella = (n) => { stelleSelezionate = n; document.querySelectorAll('.stella-rec').forEach((s,i) => s.classList.toggle('attiva', i<n)); };
+
+// Genera griglia orari
+function generaGrigliaOrari(containerId) {
+  const cont = document.getElementById(containerId);
+  cont.innerHTML = '';
+  ORARI.forEach(o => {
+    const btn = document.createElement('button');
+    btn.className = 'slot-btn';
+    btn.textContent = o;
+    btn.dataset.ora = o;
+    btn.onclick = () => btn.classList.toggle('selected');
+    cont.appendChild(btn);
+  });
+}
+
+// ── NOTIFICHE ──
+async function caricaNotifiche(uid) {
+  try {
+    const snap = await getDocs(query(collection(db,'notifiche'), where('destinatarioUID','==',uid), where('letta','==',false), limit(20)));
+    const count = snap.size;
+    const navEl = document.getElementById('notifica-nav');
+    const countEl = document.getElementById('notifica-count');
+    if (count > 0) { navEl.style.display = 'block'; countEl.textContent = count; }
+    else { navEl.style.display = 'none'; }
+  } catch(e) {}
+}
+
+window.apriNotifiche = async () => {
+  const lista = document.getElementById('notifiche-lista');
+  lista.innerHTML = '<div style="text-align:center;padding:20px;color:var(--grigio)">⏳ Caricamento...</div>';
+  document.getElementById('popupNotifiche').classList.add('show');
+  try {
+    const snap = await getDocs(query(collection(db,'notifiche'), where('destinatarioUID','==',currentUID), limit(30)));
+    if (snap.empty) { lista.innerHTML = '<div style="text-align:center;padding:20px;color:var(--grigio)">Nessuna notifica.</div>'; return; }
+    lista.innerHTML = '';
+    snap.docs.sort((a,b) => (b.data().timestamp?.seconds||0) - (a.data().timestamp?.seconds||0)).forEach(d => {
+      const n = d.data();
+      const data = n.timestamp ? new Date(n.timestamp.seconds*1000).toLocaleDateString('it-IT') : '—';
+      const bg = n.letta ? '#f9fafb' : '#EFF6FF';
+      lista.innerHTML += '<div style="padding:14px;border-bottom:1px solid #e5e7eb;background:'+bg+';border-radius:8px;margin-bottom:6px;">'
+        +'<div style="font-size:13px;font-weight:700;color:var(--blu-scuro);margin-bottom:4px;">'+n.titolo+'</div>'
+        +'<div style="font-size:12px;color:var(--grigio);">'+n.testo+'</div>'
+        +'<div style="font-size:11px;color:#9CA3AF;margin-top:4px;">'+data+'</div>'
+        +(n.chatID ? '<button onclick="window.location.href=\'chat.html?chat='+n.chatID+'\'" style="margin-top:8px;background:var(--blu);color:white;border:none;padding:6px 14px;border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;">Vai alla chat</button>' : '')
+        +'</div>';
+      if (!n.letta) updateDoc(d.ref, { letta: true });
+    });
+    caricaNotifiche(currentUID);
+  } catch(e) { lista.innerHTML = '<div style="color:red;padding:20px;">Errore: '+e.message+'</div>'; }
+};
+
+async function inviaNotifica(destinatarioUID, titolo, testo, chatID) {
+  try {
+    await addDoc(collection(db,'notifiche'), {
+      destinatarioUID, titolo, testo, chatID: chatID||null,
+      letta: false, timestamp: serverTimestamp()
+    });
+  } catch(e) { console.error('Errore notifica:', e); }
+}
+
+// ── PULSANTI DINAMICI ──
+function aggiornaPulsanti(statoSopralluogo, statoPrev) {
+  const actions = document.getElementById('chatHeaderActions');
+  const quick = document.getElementById('quickActions');
+  actions.innerHTML = '';
+  quick.innerHTML = '';
+
+  if (currentRuolo === 'professionista') {
+    if (!statoSopralluogo) {
+      // Nessun sopralluogo: proponi disponibilità
+      actions.innerHTML += '<button class="btn-header-action blu" onclick="apriDisponibilita()">📅 Proponi disponibilità</button>';
+      quick.innerHTML += '<button class="btn-quick" onclick="window.apriDisponibilita()">📅 Proponi date sopralluogo</button>';
+    } else if (statoSopralluogo === 'attesa-conferma-pro') {
+      // Cliente ha scelto, pro deve confermare
+      actions.innerHTML += '<button class="btn-header-action verde" onclick="apriConfermaProSopralluogo()">✅ Conferma sopralluogo</button>';
+      actions.innerHTML += '<button class="btn-header-action rosso" onclick="apriDisdetta()">❌ Disdici</button>';
+    } else if (statoSopralluogo === 'confermato') {
+      actions.innerHTML += '<button class="btn-header-action rosso" onclick="apriDisdetta()">📆 Disdici</button>';
+      actions.innerHTML += '<button class="btn-header-action verde" onclick="apriDichiaraCompletato()">✅ Completato</button>';
+      if (statoPrev === 'completato') {
+        actions.innerHTML += '<button class="btn-header-action oro" onclick="apriCaricaPreventivo()">📋 Carica preventivo</button>';
+        quick.innerHTML += '<button class="btn-quick oro" onclick="window.apriCaricaPreventivo()">📋 Carica preventivo</button>';
+      }
+    }
+  } else {
+    // CLIENTE
+    if (!statoSopralluogo || statoSopralluogo === 'disponibilita-inviate') {
+      actions.innerHTML += '<button class="btn-header-action blu" onclick="apriFissaSopralluogo()">📅 Fissa sopralluogo</button>';
+      quick.innerHTML += '<button class="btn-quick" onclick="window.apriFissaSopralluogo()">📅 Fissa sopralluogo</button>';
+    } else if (statoSopralluogo === 'confermato') {
+      actions.innerHTML += '<button class="btn-header-action rosso" onclick="apriDisdetta()">📆 Disdici</button>';
+      if (statoPrev === 'in-attesa-saldo') {
+        actions.innerHTML += '<button class="btn-header-action oro" onclick="apriConfermaSaldo()">💰 Conferma saldo</button>';
+      }
+    }
+  }
+}
+
+// ── DISPONIBILITA PROFESSIONISTA ──
+window.apriDisponibilita = () => {
+  generaGrigliaOrari('orari-grid-1');
+  generaGrigliaOrari('orari-grid-2');
+  const domani = new Date(); domani.setDate(domani.getDate()+1);
+  document.getElementById('disp-data1').min = domani.toISOString().split('T')[0];
+  document.getElementById('disp-data2').min = domani.toISOString().split('T')[0];
+  document.getElementById('popupDisponibilita').classList.add('show');
+};
+
+window.inviaDisponibilita = async () => {
+  if (!chatAttiva) return;
+  const data1 = document.getElementById('disp-data1').value;
+  if (!data1) { alert('Inserisci almeno la prima data!'); return; }
+  const orari1 = [...document.querySelectorAll('#orari-grid-1 .slot-btn.selected')].map(b => b.dataset.ora);
+  if (orari1.length === 0) { alert('Seleziona almeno un orario per la prima data!'); return; }
+  const data2 = document.getElementById('disp-data2').value;
+  const orari2 = data2 ? [...document.querySelectorAll('#orari-grid-2 .slot-btn.selected')].map(b => b.dataset.ora) : [];
+  const note = document.getElementById('disp-note').value.trim();
+
+  const slots = [];
+  orari1.forEach(o => slots.push({ data: data1, ora: o }));
+  orari2.forEach(o => slots.push({ data: data2, ora: o }));
+
+  chiudiPopup('popupDisponibilita');
+  try {
+    const data1Fmt = new Date(data1).toLocaleDateString('it-IT',{weekday:'long',day:'numeric',month:'long'});
+    let testoMsg = '📅 Il professionista propone le seguenti disponibilità:\n\n📆 '+data1Fmt+': '+orari1.join(', ');
+    if (data2 && orari2.length > 0) {
+      const data2Fmt = new Date(data2).toLocaleDateString('it-IT',{weekday:'long',day:'numeric',month:'long'});
+      testoMsg += '\n📆 '+data2Fmt+': '+orari2.join(', ');
+    }
+    if (note) testoMsg += '\n\n📝 Note: '+note;
+    testoMsg += '\n\nScegli una data/ora e inserisci l\'indirizzo del sopralluogo.';
+
+    await addDoc(collection(db,'chat',chatAttiva.id,'messaggi'), {
+      testo: testoMsg, mittente: 'sistema', mittentNome: 'Sistema',
+      timestamp: serverTimestamp(), tipo: 'disponibilita',
+      slots: slots
+    });
+    await updateDoc(doc(db,'chat',chatAttiva.id), {
+      stato: 'disponibilita-inviate', slotsDisponibili: slots,
+      ultimoMessaggio: '📅 Disponibilità inviate', ultimoTimestamp: serverTimestamp()
+    });
+
+    await inviaNotifica(chatAttiva.altroUID,
+      '📅 Disponibilità sopralluogo',
+      'Il professionista '+currentNome+' ha proposto le sue disponibilità. Scegli data e ora!',
+      chatAttiva.id
+    );
+    aggiornaPulsanti('disponibilita-inviate', null);
+  } catch(e) { alert('Errore: '+e.message); }
+};
+
+// ── FISSA SOPRALLUOGO CLIENTE ──
+window.apriFissaSopralluogo = async () => {
+  // Carica slot disponibili se esistono
+  const chatDoc = await getDoc(doc(db,'chat',chatAttiva.id));
+  const slots = chatDoc.data()?.slotsDisponibili || [];
+  const cont = document.getElementById('slot-disponibili');
+  if (slots.length > 0) {
+    cont.innerHTML = '<div style="font-size:13px;font-weight:600;margin-bottom:8px;">Disponibilità del professionista:</div>';
+    slots.forEach((s,i) => {
+      const dataFmt = new Date(s.data).toLocaleDateString('it-IT',{weekday:'short',day:'numeric',month:'short'});
+      cont.innerHTML += '<button class="slot-btn" id="slot-'+i+'" onclick="selezionaSlot('+i+',\''+s.data+'\',\''+s.ora+'\')" style="margin-bottom:6px;width:auto;display:inline-block;margin-right:6px;">'+dataFmt+' '+s.ora+'</button>';
+    });
+  } else {
+    cont.innerHTML = '<div style="font-size:12px;color:var(--grigio);margin-bottom:8px;">Nessuna disponibilità proposta dal professionista. Inserisci tu una data.</div>';
+  }
+  const domani = new Date(); domani.setDate(domani.getDate()+1);
+  document.getElementById('sop-data-cliente').min = domani.toISOString().split('T')[0];
+  document.getElementById('popupFissaSopralluogo').classList.add('show');
+};
+
+window.selezionaSlot = (idx, data, ora) => {
+  slotSelezionato = { data, ora };
+  document.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
+  document.getElementById('slot-'+idx).classList.add('selected');
+  document.getElementById('sop-data-cliente').value = data;
+  document.getElementById('sop-ora-cliente').value = ora;
+};
+
+window.confermaSopralluogoCliente = async () => {
+  if (!chatAttiva) return;
+  const data = document.getElementById('sop-data-cliente').value;
+  const ora = document.getElementById('sop-ora-cliente').value;
+  const indirizzo = document.getElementById('sop-indirizzo-cliente').value.trim();
+  const note = document.getElementById('sop-note-cliente').value.trim();
+  if (!data) { alert('Seleziona una data!'); return; }
+  if (!ora) { alert('Seleziona un orario!'); return; }
+  if (!indirizzo) { alert('Inserisci l\'indirizzo!'); return; }
+
+  const dataObj = new Date(data+'T'+ora);
+  const dataFmt = dataObj.toLocaleString('it-IT',{weekday:'long',day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  chiudiPopup('popupFissaSopralluogo');
+
+  try {
+    const sopRef = await addDoc(collection(db,'sopralluoghi'), {
+      chatID: chatAttiva.id,
+      clienteUID: currentUID, clienteNome: currentNome,
+      proUID: chatAttiva.altroUID, proNome: chatAttiva.altroNome,
+      lavoro: chatAttiva.richiestaDescrizione||'—',
+      indirizzo, note,
+      data: { seconds: Math.floor(dataObj.getTime()/1000) },
+      stato: 'attesa-conferma-pro', creatoIl: serverTimestamp()
+    });
+
+    await addDoc(collection(db,'chat',chatAttiva.id,'messaggi'), {
+      testo: '📅 Il cliente ha scelto: '+dataFmt+'\n📍 Indirizzo: '+indirizzo+(note?'\n📝 Note: '+note:''),
+      mittente: 'sistema', mittentNome: 'Sistema',
+      timestamp: serverTimestamp(), tipo: 'sistema'
+    });
+    await updateDoc(doc(db,'chat',chatAttiva.id), {
+      stato: 'attesa-conferma-pro', sopralluogoID: sopRef.id,
+      ultimoMessaggio: '📅 Sopralluogo in attesa conferma', ultimoTimestamp: serverTimestamp()
+    });
+
+    await inviaNotifica(chatAttiva.altroUID,
+      '📅 Conferma sopralluogo richiesta',
+      'Il cliente '+currentNome+' ha scelto: '+dataFmt+' — '+indirizzo+'. Conferma o rifiuta!',
+      chatAttiva.id
+    );
+    aggiornaPulsanti('attesa-conferma-pro', null);
+    caricaSopralluogoBanner(chatAttiva.id);
+  } catch(e) { alert('Errore: '+e.message); }
+};
+
+// ── CONFERMA PRO SOPRALLUOGO ──
+window.apriConfermaProSopralluogo = async () => {
+  try {
+    const snap = await getDocs(query(collection(db,'sopralluoghi'), where('chatID','==',chatAttiva.id), where('stato','==','attesa-conferma-pro'), limit(1)));
+    if (snap.empty) { alert('Nessun sopralluogo in attesa.'); return; }
+    const s = snap.docs[0].data();
+    const dataFmt = s.data ? new Date(s.data.seconds*1000).toLocaleString('it-IT',{weekday:'long',day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'}) : '—';
+    document.getElementById('dettagli-conferma-sop').innerHTML =
+      '<strong>Data:</strong> '+dataFmt+'<br><strong>Indirizzo:</strong> '+(s.indirizzo||'—')+'<br>'+(s.note?'<strong>Note:</strong> '+s.note:'');
+    sopralluogoAttivo = { id: snap.docs[0].id, ...s };
+    document.getElementById('popupConfermaProSopralluogo').classList.add('show');
+  } catch(e) { alert('Errore: '+e.message); }
+};
+
+window.proConfermaSopralluogo = async () => {
+  if (!sopralluogoAttivo) return;
+  chiudiPopup('popupConfermaProSopralluogo');
+  try {
+    await updateDoc(doc(db,'sopralluoghi',sopralluogoAttivo.id), { stato: 'confermato' });
+    const dataFmt = new Date(sopralluogoAttivo.data.seconds*1000).toLocaleString('it-IT',{weekday:'long',day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
+    await addDoc(collection(db,'chat',chatAttiva.id,'messaggi'), {
+      testo: '✅ Sopralluogo CONFERMATO!\n📅 '+dataFmt+'\n📍 '+sopralluogoAttivo.indirizzo,
+      mittente: 'sistema', mittentNome: 'Sistema',
+      timestamp: serverTimestamp(), tipo: 'sistema'
+    });
+    await updateDoc(doc(db,'chat',chatAttiva.id), { stato: 'sopralluogo-confermato', ultimoMessaggio: '✅ Sopralluogo confermato', ultimoTimestamp: serverTimestamp() });
+    await inviaNotifica(chatAttiva.altroUID, '✅ Sopralluogo confermato!', 'Il professionista '+currentNome+' ha confermato il sopralluogo per '+dataFmt, chatAttiva.id);
+    aggiornaPulsanti('confermato', null);
+    caricaSopralluogoBanner(chatAttiva.id);
+
+    // Programma verifica 1 ora dopo
+    programmVerificaDopoSopralluogo(sopralluogoAttivo.data.seconds, chatAttiva.id);
+  } catch(e) { alert('Errore: '+e.message); }
+};
+
+window.proRifiutaSopralluogo = async () => {
+  if (!sopralluogoAttivo) return;
+  chiudiPopup('popupConfermaProSopralluogo');
+  try {
+    await updateDoc(doc(db,'sopralluoghi',sopralluogoAttivo.id), { stato: 'rifiutato' });
+    await addDoc(collection(db,'chat',chatAttiva.id,'messaggi'), {
+      testo: '❌ Il professionista non è disponibile per la data scelta. Proponi un\'altra data.',
+      mittente: 'sistema', mittentNome: 'Sistema',
+      timestamp: serverTimestamp(), tipo: 'sistema'
+    });
+    await updateDoc(doc(db,'chat',chatAttiva.id), { stato: 'disponibilita-inviate', ultimoMessaggio: '❌ Data rifiutata', ultimoTimestamp: serverTimestamp() });
+    await inviaNotifica(chatAttiva.altroUID, '❌ Data rifiutata', 'Il professionista non è disponibile. Scegli un\'altra data.', chatAttiva.id);
+    aggiornaPulsanti('disponibilita-inviate', null);
+  } catch(e) { alert('Errore: '+e.message); }
+};
+
+// ── DISDETTA ──
+window.apriDisdetta = () => document.getElementById('popupDisdetta').classList.add('show');
+
+window.confermaDisdetta = async () => {
+  if (!chatAttiva) return;
+  const motivo = document.getElementById('motivo-disdetta').value;
+  if (!motivo) { alert('Seleziona un motivo!'); return; }
+  const riprogramma = document.getElementById('vuoi-riprogrammare').value;
+  chiudiPopup('popupDisdetta');
+  try {
+    const snap = await getDocs(query(collection(db,'sopralluoghi'), where('chatID','==',chatAttiva.id), where('stato','in',['confermato','attesa-conferma-pro']), limit(1)));
+    if (!snap.empty) await updateDoc(snap.docs[0].ref, { stato: 'disdetto', motivoDisdetta: motivo });
+    const testoMsg = '📆 '+currentNome+' ha disdetto il sopralluogo.\nMotivo: '+motivo+(riprogramma==='si'?'\n🔄 Vuole riprogrammare.':'\n❌ Non vuole riprogrammare.');
+    await addDoc(collection(db,'chat',chatAttiva.id,'messaggi'), {
+      testo: testoMsg, mittente: 'sistema', mittentNome: 'Sistema',
+      timestamp: serverTimestamp(), tipo: 'sistema'
+    });
+    const nuovoStato = riprogramma==='si' ? 'disponibilita-inviate' : 'chiusa';
+    await updateDoc(doc(db,'chat',chatAttiva.id), { stato: nuovoStato, ultimoMessaggio: '📆 Sopralluogo disdetto', ultimoTimestamp: serverTimestamp() });
+    await inviaNotifica(chatAttiva.altroUID, '📆 Sopralluogo disdetto', currentNome+' ha disdetto. Motivo: '+motivo, chatAttiva.id);
+    aggiornaPulsanti(riprogramma==='si' ? 'disponibilita-inviate' : null, null);
+    caricaSopralluogoBanner(chatAttiva.id);
+  } catch(e) { alert('Errore: '+e.message); }
+};
+
+// ── VERIFICA 1 ORA DOPO SOPRALLUOGO ──
+function programmVerificaDopoSopralluogo(dataSeconds, chatId) {
+  const oraDopoMs = (dataSeconds * 1000 + 3600000) - Date.now();
+  if (oraDopoMs > 0 && oraDopoMs < 86400000) {
+    setTimeout(async () => {
+      if (chatAttiva && chatAttiva.id === chatId) {
+        const snap = await getDocs(query(collection(db,'sopralluoghi'), where('chatID','==',chatId), where('stato','==','confermato'), limit(1)));
+        if (!snap.empty) {
+          document.getElementById('popupConfermaAvvenuto').classList.add('show');
+        }
+      }
+    }, oraDopoMs);
+  }
+}
+
+window.confermaSopralluogoAvvenuto = async (avvenuto) => {
+  chiudiPopup('popupConfermaAvvenuto');
+  if (avvenuto) {
+    try {
+      const snap = await getDocs(query(collection(db,'sopralluoghi'), where('chatID','==',chatAttiva.id), where('stato','==','confermato'), limit(1)));
+      if (!snap.empty) await updateDoc(snap.docs[0].ref, { ['confermaDa_'+currentUID]: true });
+      await addDoc(collection(db,'chat',chatAttiva.id,'messaggi'), {
+        testo: '✅ '+currentNome+' ha confermato che il sopralluogo è avvenuto.',
+        mittente: 'sistema', mittentNome: 'Sistema',
+        timestamp: serverTimestamp(), tipo: 'sistema'
+      });
+      aggiornaPulsanti('confermato', 'completato');
+    } catch(e) { console.error(e); }
+  } else {
+    document.getElementById('popupCausaMancata').classList.add('show');
+  }
+};
+
+window.inviaCausaMancata = async () => {
+  if (!chatAttiva) return;
+  const causa = document.getElementById('causa-mancata').value;
+  if (!causa) { alert('Seleziona la causa!'); return; }
+  const desc = document.getElementById('desc-mancata').value.trim();
+  chiudiPopup('popupCausaMancata');
+  try {
+    const snap = await getDocs(query(collection(db,'sopralluoghi'), where('chatID','==',chatAttiva.id), where('stato','==','confermato'), limit(1)));
+    const segnalatoUID = causa==='professionista' ? chatAttiva.altroUID : (causa==='cliente' ? currentUID : null);
+
+    if (!snap.empty) {
+      await updateDoc(snap.docs[0].ref, { stato: 'non-avvenuto', causa, descrizione: desc });
+      if (segnalatoUID) {
+        const uRef = doc(db,'utenti',segnalatoUID);
+        const uSnap = await getDoc(uRef);
+        const segnalazioni = (uSnap.data()?.segnalazioni||0) + 1;
+        await updateDoc(uRef, { segnalazioni: increment(1) });
+        if (segnalazioni >= 3) {
+          await updateDoc(uRef, { ban: true, banMotivo: 'Tre mancate presentazioni' });
+          await addDoc(collection(db,'chat',chatAttiva.id,'messaggi'), {
+            testo: '🚫 Account bannato per 3 mancate presentazioni.',
+            mittente: 'sistema', mittentNome: 'Sistema',
+            timestamp: serverTimestamp(), tipo: 'sistema'
+          });
+        } else {
+          await addDoc(collection(db,'chat',chatAttiva.id,'messaggi'), {
+            testo: '⚠️ Segnalazione inviata. ('+segnalazioni+'/3 — alla 3ª = ban definitivo)',
+            mittente: 'sistema', mittentNome: 'Sistema',
+            timestamp: serverTimestamp(), tipo: 'sistema'
+          });
+        }
+        await inviaNotifica(segnalatoUID, '⚠️ Segnalazione ricevuta', 'Hai ricevuto una segnalazione per mancata presentazione. ('+segnalazioni+'/3)', chatAttiva.id);
+      }
+    }
+    await addDoc(collection(db,'segnalazioni'), {
+      chatID: chatAttiva.id, segnalatoUID, segnalatore: currentUID,
+      causa, descrizione: desc, timestamp: serverTimestamp()
+    });
+    aggiornaPulsanti(null, null);
+  } catch(e) { alert('Errore: '+e.message); }
+};
+
+// ── PREVENTIVO ──
+window.apriCaricaPreventivo = () => document.getElementById('popupCaricaPreventivo').classList.add('show');
+
+window.inviaPreventivo = async () => {
+  if (!chatAttiva) return;
+  const nome = document.getElementById('prev-nome').value.trim();
+  const importo = document.getElementById('prev-importo').value;
+  const desc = document.getElementById('prev-desc').value.trim();
+  const validita = document.getElementById('prev-validita').value;
+  if (!nome) { alert('Inserisci il nome del preventivo!'); return; }
+  if (!desc) { alert('Descrivi i lavori!'); return; }
+  chiudiPopup('popupCaricaPreventivo');
+  try {
+    await addDoc(collection(db,'chat',chatAttiva.id,'messaggi'), {
+      mittente: currentUID, mittentNome: currentNome,
+      timestamp: serverTimestamp(), tipo: 'preventivo',
+      preventivo: { nome, importo: importo ? parseFloat(importo) : null, desc, validita: parseInt(validita) }
+    });
+    await updateDoc(doc(db,'chat',chatAttiva.id), { ultimoMessaggio: '📋 Preventivo inviato', ultimoTimestamp: serverTimestamp() });
+    await inviaNotifica(chatAttiva.altroUID, '📋 Preventivo ricevuto', 'Il professionista '+currentNome+' ha inviato un preventivo: '+nome, chatAttiva.id);
+  } catch(e) { alert('Errore: '+e.message); }
+};
+
+// ── COMPLETATO ──
 window.apriDichiaraCompletato = () => {
   if (!chatAttiva) return;
-  document.getElementById('dettagli-completato').innerHTML = '<strong>Con:</strong> '+chatAttiva.altroNome+'<br><strong>Richiesta:</strong> '+(chatAttiva.richiestaDescrizione||'—')+'<br><strong>Data:</strong> '+new Date().toLocaleDateString('it-IT');
+  document.getElementById('dettagli-completato').innerHTML = '<strong>Con:</strong> '+chatAttiva.altroNome+'<br><strong>Lavoro:</strong> '+(chatAttiva.richiestaDescrizione||'—');
   document.getElementById('popupDichiaraCompletato').classList.add('show');
 };
-window.setStella = (n) => {
-  stelleSelezionate = n;
-  document.querySelectorAll('.stella-rec').forEach((s,i) => s.classList.toggle('attiva', i < n));
+
+window.confermaLavoroCompletato = async () => {
+  if (!chatAttiva) return;
+  chiudiPopup('popupDichiaraCompletato');
+  try {
+    const snap = await getDocs(query(collection(db,'sopralluoghi'), where('chatID','==',chatAttiva.id), where('stato','==','confermato'), limit(1)));
+    if (!snap.empty) await updateDoc(snap.docs[0].ref, { stato: 'in-attesa-saldo' });
+    await addDoc(collection(db,'chat',chatAttiva.id,'messaggi'), {
+      testo: '🔧 Il professionista '+currentNome+' ha dichiarato il lavoro completato. Il cliente deve confermare il saldo.',
+      mittente: 'sistema', mittentNome: 'Sistema', timestamp: serverTimestamp(), tipo: 'sistema'
+    });
+    await updateDoc(doc(db,'chat',chatAttiva.id), { stato: 'in-attesa-saldo', ultimoMessaggio: '🔧 Lavoro completato', ultimoTimestamp: serverTimestamp() });
+    await inviaNotifica(chatAttiva.altroUID, '🔧 Lavoro completato!', 'Il professionista '+currentNome+' ha dichiarato il lavoro completato. Conferma il saldo!', chatAttiva.id);
+    aggiornaPulsanti('confermato', 'in-attesa-saldo');
+  } catch(e) { alert('Errore: '+e.message); }
 };
 
-const domani = new Date(); domani.setDate(domani.getDate()+1);
-document.getElementById('sop-data').min = domani.toISOString().split('T')[0];
+window.apriConfermaSaldo = () => {
+  if (!chatAttiva) return;
+  document.getElementById('dettagli-saldo').innerHTML = '<strong>Professionista:</strong> '+chatAttiva.altroNome+'<br><strong>Lavoro:</strong> '+(chatAttiva.richiestaDescrizione||'—');
+  document.getElementById('popupConfermaPageSaldo').classList.add('show');
+};
+
+window.confermaSaldo = async () => {
+  if (!chatAttiva) return;
+  chiudiPopup('popupConfermaPageSaldo');
+  try {
+    const snap = await getDocs(query(collection(db,'sopralluoghi'), where('chatID','==',chatAttiva.id), where('stato','==','in-attesa-saldo'), limit(1)));
+    if (!snap.empty) await updateDoc(snap.docs[0].ref, { stato: 'completato' });
+    await updateDoc(doc(db,'utenti',chatAttiva.altroUID), { lavoriCompletati: increment(1) });
+    await updateDoc(doc(db,'chat',chatAttiva.id), { stato: 'completato', ultimoMessaggio: '✅ Saldo confermato', ultimoTimestamp: serverTimestamp() });
+    await addDoc(collection(db,'chat',chatAttiva.id,'messaggi'), {
+      testo: '✅ Saldo confermato! Grazie. Ora lasciate una recensione reciproca obbligatoria.',
+      mittente: 'sistema', mittentNome: 'Sistema', timestamp: serverTimestamp(), tipo: 'sistema'
+    });
+    await inviaNotifica(chatAttiva.altroUID, '💰 Saldo confermato!', 'Il cliente '+currentNome+' ha confermato il saldo. Lascia la tua recensione!', chatAttiva.id);
+    document.getElementById('popupRecensione').classList.add('show');
+  } catch(e) { alert('Errore: '+e.message); }
+};
+
+window.inviaRecensione = async () => {
+  if (stelleSelezionate === 0) { alert('Seleziona almeno una stella!'); return; }
+  const testo = document.getElementById('testo-rec').value.trim();
+  if (!testo) { alert('Scrivi una recensione!'); return; }
+  try {
+    await addDoc(collection(db,'recensioni'), {
+      daUID: currentUID, daNome: currentNome,
+      aUID: chatAttiva.altroUID, aNome: chatAttiva.altroNome,
+      stelle: stelleSelezionate, testo, chatID: chatAttiva.id, timestamp: serverTimestamp()
+    });
+    chiudiPopup('popupRecensione');
+    await inviaNotifica(chatAttiva.altroUID, '⭐ Recensione ricevuta!', currentNome+' ti ha lasciato una recensione di '+stelleSelezionate+' stelle.', chatAttiva.id);
+    alert('✅ Recensione inviata! Grazie.');
+  } catch(e) { alert('Errore: '+e.message); }
+};
+
+// ── INVIA MESSAGGIO ──
+window.inviaMessaggio = async () => {
+  if (!chatAttiva) return;
+  const input = document.getElementById('msgInput');
+  const testo = input.value.trim();
+  if (!testo) return;
+  input.value = '';
+  try {
+    await addDoc(collection(db,'chat',chatAttiva.id,'messaggi'), {
+      testo, mittente: currentUID, mittentNome: currentNome,
+      timestamp: serverTimestamp(), tipo: 'messaggio'
+    });
+    await updateDoc(doc(db,'chat',chatAttiva.id), { ultimoMessaggio: testo, ultimoTimestamp: serverTimestamp() });
+    await inviaNotifica(chatAttiva.altroUID, '💬 Nuovo messaggio', currentNome+': '+testo.substring(0,60), chatAttiva.id);
+  } catch(e) { console.error(e); }
+};
+
+// ── BANNER SOPRALLUOGO ──
+async function caricaSopralluogoBanner(chatId) {
+  const banner = document.getElementById('sopralluogoBanner');
+  try {
+    const snap = await getDocs(query(collection(db,'sopralluoghi'), where('chatID','==',chatId), where('stato','in',['attesa-conferma-pro','confermato']), limit(1)));
+    if (!snap.empty) {
+      const s = snap.docs[0].data();
+      const stato = s.stato;
+      const dataStr = s.data ? new Date(s.data.seconds*1000).toLocaleString('it-IT',{weekday:'long',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'}) : '—';
+      banner.className = 'sopralluogo-banner ' + (stato==='confermato' ? 'confermato' : 'attesa');
+      banner.innerHTML = '<div class="sopralluogo-banner-title">'+(stato==='confermato'?'✅ Sopralluogo confermato':'⏳ In attesa di conferma professionista')+'</div>'
+        +'<div class="sopralluogo-banner-data">'+dataStr+'</div>'
+        +'<div class="sopralluogo-banner-sub">📍 '+(s.indirizzo||'—')+'</div>'
+        +(stato==='attesa-conferma-pro' && currentRuolo==='professionista' ? '<div class="sopralluogo-banner-actions"><button class="btn-sopralluogo verde" onclick="apriConfermaProSopralluogo()">✅ Conferma</button><button class="btn-sopralluogo rosso" onclick="proRifiutaSopralluogo()">❌ Rifiuta</button></div>' : '');
+      banner.style.display = 'block';
+      aggiornaPulsanti(stato, null);
+    } else {
+      banner.style.display = 'none';
+    }
+  } catch(e) { banner.style.display = 'none'; }
+}
 
 // ── APRI CHAT ──
-window.apriChat = (chatData) => {
+window.apriChat = async (chatData) => {
   chatAttiva = chatData;
   document.getElementById('chatPlaceholder').style.display = 'none';
-  const wrapper = document.getElementById('chatAreaWrapper');
-  wrapper.style.display = 'flex';
+  document.getElementById('chatAreaWrapper').style.display = 'flex';
 
   const altroNome = chatAttiva.altroNome || '—';
   document.getElementById('activeAvatar').textContent = altroNome.charAt(0).toUpperCase();
@@ -385,20 +1036,39 @@ window.apriChat = (chatData) => {
 
   document.querySelectorAll('.chat-item').forEach(el => el.classList.toggle('active', el.dataset.id === chatAttiva.id));
 
-  // Carica sopralluogo attivo
-  caricaSopralluogoBanner(chatAttiva.id);
+  await caricaSopralluogoBanner(chatAttiva.id);
 
-  // Ascolta messaggi in tempo reale
+  // Controlla se ci sono sopralluoghi da verificare (1h dopo orario)
+  try {
+    const snapSop = await getDocs(query(collection(db,'sopralluoghi'), where('chatID','==',chatAttiva.id), where('stato','==','confermato'), limit(1)));
+    if (!snapSop.empty) {
+      const s = snapSop.docs[0].data();
+      const oraDopoMs = (s.data.seconds * 1000 + 3600000) - Date.now();
+      if (oraDopoMs <= 0 && oraDopoMs > -86400000) {
+        const mioRuolo = currentRuolo==='professionista' ? 'confermaDa_pro' : 'confermaDa_cliente';
+        if (!s[mioRuolo]) {
+          document.getElementById('popupConfermaAvvenuto').classList.add('show');
+        }
+      }
+    }
+  } catch(e) {}
+
   if (unsubMessages) unsubMessages();
-  const msgRef = collection(db, 'chat', chatAttiva.id, 'messaggi');
-  unsubMessages = onSnapshot(query(msgRef, orderBy('timestamp','asc')), (snap) => {
+  unsubMessages = onSnapshot(query(collection(db,'chat',chatAttiva.id,'messaggi'), orderBy('timestamp','asc')), (snap) => {
     const container = document.getElementById('chatMessages');
     container.innerHTML = '';
     snap.docs.forEach(d => {
       const m = d.data();
       const ts = m.timestamp?.seconds ? tempoFa(m.timestamp.seconds) : '';
-      if (m.tipo === 'sistema') {
-        container.innerHTML += '<div class="msg-sistema verde">'+m.testo+'</div>';
+      if (m.tipo === 'sistema' || m.tipo === 'disponibilita') {
+        container.innerHTML += '<div class="msg-sistema verde">'+m.testo.replace(/\n/g,'<br>')+'</div>';
+      } else if (m.tipo === 'preventivo' && m.preventivo) {
+        const p = m.preventivo;
+        container.innerHTML += '<div class="msg-preventivo">'
+          +'<div class="msg-preventivo-title">📋 Preventivo</div>'
+          +'<div class="msg-preventivo-nome">'+p.nome+'</div>'
+          +'<div class="msg-preventivo-info">'+(p.importo?'💰 Importo: €'+p.importo+'<br>':'')+'📝 '+p.desc+'<br>⏳ Validità: '+p.validita+' giorni</div>'
+          +'</div>';
       } else {
         const mio = m.mittente === currentUID;
         const iniziale = (m.mittentNome||'?').charAt(0).toUpperCase();
@@ -413,174 +1083,33 @@ window.apriChat = (chatData) => {
   });
 };
 
-async function caricaSopralluogoBanner(chatId) {
-  try {
-    const snap = await getDocs(query(collection(db,'sopralluoghi'), where('chatID','==',chatId), where('stato','==','confermato'), limit(1)));
-    const banner = document.getElementById('sopralluogoBanner');
-    if (!snap.empty) {
-      const s = snap.docs[0].data();
-      const dataStr = s.data ? new Date(s.data.seconds*1000).toLocaleString('it-IT',{weekday:'long',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'}) : '—';
-      document.getElementById('sop-banner-data').textContent = dataStr;
-      document.getElementById('sop-banner-sub').textContent = 'Indirizzo: '+(s.indirizzo||'—');
-      banner.style.display = 'block';
-    } else {
-      banner.style.display = 'none';
-    }
-  } catch(e) { console.error(e); }
-}
-
-// ── INVIA MESSAGGIO ──
-window.inviaMessaggio = async () => {
-  if (!chatAttiva) return;
-  const input = document.getElementById('msgInput');
-  const testo = input.value.trim();
-  if (!testo) return;
-  input.value = '';
-  try {
-    await addDoc(collection(db,'chat',chatAttiva.id,'messaggi'), {
-      testo, mittente: currentUID, mittentNome: currentNome,
-      timestamp: serverTimestamp(), tipo: 'messaggio'
-    });
-    await updateDoc(doc(db,'chat',chatAttiva.id), {
-      ultimoMessaggio: testo, ultimoTimestamp: serverTimestamp()
-    });
-  } catch(e) { console.error(e); }
-};
-
-// ── SOPRALLUOGO ──
-window.confermaSopralluogo = async () => {
-  if (!chatAttiva) return;
-  const data = document.getElementById('sop-data').value;
-  const ora = document.getElementById('sop-ora').value;
-  const indirizzo = document.getElementById('sop-indirizzo').value.trim();
-  if (!data) { alert('Inserisci la data!'); return; }
-  if (!ora) { alert('Seleziona l\'orario!'); return; }
-  if (!indirizzo) { alert('Inserisci l\'indirizzo!'); return; }
-  const note = document.getElementById('sop-note').value.trim();
-  const dataObj = new Date(data+'T'+ora);
-  const dataFormattata = dataObj.toLocaleString('it-IT',{weekday:'long',day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
-  chiudiPopup('popupSopralluogo');
-  try {
-    await addDoc(collection(db,'sopralluoghi'), {
-      chatID: chatAttiva.id,
-      clienteUID: currentRuolo==='cliente' ? currentUID : chatAttiva.altroUID,
-      proUID: currentRuolo==='professionista' ? currentUID : chatAttiva.altroUID,
-      clienteNome: currentRuolo==='cliente' ? currentNome : chatAttiva.altroNome,
-      proNome: currentRuolo==='professionista' ? currentNome : chatAttiva.altroNome,
-      lavoro: chatAttiva.richiestaDescrizione||'—',
-      indirizzo, note,
-      data: { seconds: Math.floor(dataObj.getTime()/1000) },
-      stato: 'confermato', creatoIl: serverTimestamp()
-    });
-    await addDoc(collection(db,'chat',chatAttiva.id,'messaggi'), {
-      testo: '📅 Sopralluogo fissato per '+dataFormattata+' — Indirizzo: '+indirizzo+(note?' — Note: '+note:''),
-      mittente: 'sistema', mittentNome: 'Sistema',
-      timestamp: serverTimestamp(), tipo: 'sistema'
-    });
-    await updateDoc(doc(db,'chat',chatAttiva.id), { ultimoMessaggio: '📅 Sopralluogo fissato', ultimoTimestamp: serverTimestamp() });
-    caricaSopralluogoBanner(chatAttiva.id);
-  } catch(e) { alert('Errore: '+e.message); }
-};
-
-// ── COMPLETATO ──
-window.confermaLavoroCompletato = async () => {
-  if (!chatAttiva) return;
-  chiudiPopup('popupDichiaraCompletato');
-  try {
-    const snap = await getDocs(query(collection(db,'sopralluoghi'), where('chatID','==',chatAttiva.id), where('stato','==','confermato'), limit(1)));
-    if (!snap.empty) await updateDoc(snap.docs[0].ref, { stato: 'in-attesa-saldo' });
-    await addDoc(collection(db,'chat',chatAttiva.id,'messaggi'), {
-      testo: '🔧 Il professionista ha dichiarato il lavoro completato. Il cliente deve confermare il saldo.',
-      mittente: 'sistema', mittentNome: 'Sistema',
-      timestamp: serverTimestamp(), tipo: 'sistema'
-    });
-    await updateDoc(doc(db,'chat',chatAttiva.id), { stato: 'in-attesa-saldo', ultimoMessaggio: '🔧 Lavoro completato', ultimoTimestamp: serverTimestamp() });
-    if (currentRuolo === 'cliente') {
-      document.getElementById('dettagli-saldo').innerHTML = '<strong>Con:</strong> '+chatAttiva.altroNome+'<br><strong>Lavoro:</strong> '+(chatAttiva.richiestaDescrizione||'—');
-      document.getElementById('popupConfermaPageSaldo').classList.add('show');
-    }
-  } catch(e) { alert('Errore: '+e.message); }
-};
-
-window.confermaSaldo = async () => {
-  if (!chatAttiva) return;
-  chiudiPopup('popupConfermaPageSaldo');
-  try {
-    const snap = await getDocs(query(collection(db,'sopralluoghi'), where('chatID','==',chatAttiva.id), where('stato','==','in-attesa-saldo'), limit(1)));
-    if (!snap.empty) await updateDoc(snap.docs[0].ref, { stato: 'completato' });
-    await updateDoc(doc(db,'chat',chatAttiva.id), { stato: 'completato', ultimoMessaggio: '✅ Saldo confermato', ultimoTimestamp: serverTimestamp() });
-    await addDoc(collection(db,'chat',chatAttiva.id,'messaggi'), {
-      testo: '✅ Saldo confermato! Grazie. Lasciate una recensione reciproca.',
-      mittente: 'sistema', mittentNome: 'Sistema',
-      timestamp: serverTimestamp(), tipo: 'sistema'
-    });
-    document.getElementById('popup-rec-testo').innerHTML = 'Valuta la tua esperienza. La recensione è <strong>obbligatoria</strong>.';
-    document.getElementById('popupRecensione').classList.add('show');
-  } catch(e) { alert('Errore: '+e.message); }
-};
-
-window.inviaRecensione = async () => {
-  if (stelleSelezionate === 0) { alert('Seleziona almeno una stella!'); return; }
-  const testo = document.getElementById('testo-rec').value.trim();
-  if (!testo) { alert('Scrivi una recensione!'); return; }
-  try {
-    await addDoc(collection(db,'recensioni'), {
-      daUID: currentUID, daNome: currentNome,
-      aUID: chatAttiva.altroUID, aNome: chatAttiva.altroNome,
-      stelle: stelleSelezionate, testo,
-      chatID: chatAttiva.id, timestamp: serverTimestamp()
-    });
-    chiudiPopup('popupRecensione');
-    alert('✅ Recensione inviata! Grazie.');
-  } catch(e) { alert('Errore: '+e.message); }
-};
-
-window.confermaRifiuto = async () => {
-  if (!chatAttiva) return;
-  const motivo = document.getElementById('motivo-rifiuto').value;
-  if (!motivo) { alert('Seleziona un motivo!'); return; }
-  chiudiPopup('popupRifiuto');
-  try {
-    await updateDoc(doc(db,'chat',chatAttiva.id), { stato: 'rifiutata', ultimoMessaggio: '❌ '+motivo, ultimoTimestamp: serverTimestamp() });
-    await addDoc(collection(db,'chat',chatAttiva.id,'messaggi'), {
-      testo: '❌ Richiesta rifiutata. Motivo: '+motivo,
-      mittente: 'sistema', mittentNome: 'Sistema',
-      timestamp: serverTimestamp(), tipo: 'sistema'
-    });
-  } catch(e) { alert('Errore: '+e.message); }
-};
-
 // ── CARICA LISTA CHAT ──
 async function caricaListaChat(uid, ruolo) {
   const listContainer = document.getElementById('chatListItems');
   try {
-    const campo = ruolo === 'professionista' ? 'proUID' : 'clienteUID';
+    const campo = ruolo==='professionista' ? 'proUID' : 'clienteUID';
     const snap = await getDocs(query(collection(db,'chat'), where(campo,'==',uid), limit(50)));
-    tutteLeChat = snap.docs.map(d => {
+    const chats = snap.docs.map(d => {
       const dati = d.data();
-      const altroUID = ruolo==='professionista' ? dati.clienteUID : dati.proUID;
-      const altroNome = ruolo==='professionista' ? (dati.clienteNome||'Cliente') : (dati.proNome||'Professionista');
       return {
         id: d.id,
-        altroUID, altroNome,
+        altroUID: ruolo==='professionista' ? dati.clienteUID : dati.proUID,
+        altroNome: ruolo==='professionista' ? (dati.clienteNome||'Cliente') : (dati.proNome||'Professionista'),
         richiestaID: dati.richiestaID,
         richiestaDescrizione: dati.richiestaDescrizione,
         richiestaCategoria: dati.richiestaCategoria,
-        ultimoMessaggio: dati.ultimoMessaggio || '—',
-        ultimoTimestamp: dati.ultimoTimestamp?.seconds || 0,
-        stato: dati.stato || 'attiva'
+        ultimoMessaggio: dati.ultimoMessaggio||'—',
+        ultimoTimestamp: dati.ultimoTimestamp?.seconds||0,
+        stato: dati.stato||'attiva'
       };
-    });
+    }).sort((a,b) => b.ultimoTimestamp - a.ultimoTimestamp);
 
-    tutteLeChat.sort((a,b) => b.ultimoTimestamp - a.ultimoTimestamp);
-
-    if (tutteLeChat.length === 0) {
+    if (chats.length === 0) {
       listContainer.innerHTML = '<div class="chat-vuota">💬 Nessuna conversazione ancora.</div>';
       return;
     }
-
     listContainer.innerHTML = '';
-    tutteLeChat.forEach(c => {
+    chats.forEach(c => {
       const colore = coloreRandom(c.altroNome);
       const iniziale = c.altroNome.charAt(0).toUpperCase();
       const tempo = c.ultimoTimestamp ? tempoFa(c.ultimoTimestamp) : '';
@@ -595,16 +1124,12 @@ async function caricaListaChat(uid, ruolo) {
       listContainer.appendChild(item);
     });
 
-    // Se arriva da dashboard con chat specifica, aprila subito
     if (chatIdDaUrl) {
-      const chatDaAprire = tutteLeChat.find(c => c.id === chatIdDaUrl);
-      if (chatDaAprire) {
-        setTimeout(() => apriChat(chatDaAprire), 300);
-      }
+      const da = chats.find(c => c.id === chatIdDaUrl);
+      if (da) setTimeout(() => apriChat(da), 300);
     }
-
   } catch(e) {
-    listContainer.innerHTML = '<div class="chat-vuota">⚠️ Errore caricamento: '+e.message+'</div>';
+    listContainer.innerHTML = '<div class="chat-vuota">⚠️ Errore: '+e.message+'</div>';
   }
 }
 
@@ -612,20 +1137,19 @@ async function caricaListaChat(uid, ruolo) {
 onAuthStateChanged(auth, async (user) => {
   if (!user) { window.location.href = 'index.html'; return; }
   currentUID = user.uid;
-
   const utenteSnap = await getDoc(doc(db,'utenti',user.uid));
   if (!utenteSnap.exists()) { window.location.href = 'index.html'; return; }
   const dati = utenteSnap.data();
-  currentRuolo = dati.ruolo || 'cliente';
-  currentNome = dati.ragioneSociale || dati.nome || 'Utente';
+  if (dati.ban) { alert('Il tuo account è stato bannato.'); await signOut(auth); window.location.href = 'index.html'; return; }
+  currentRuolo = dati.ruolo||'cliente';
+  currentNome = dati.ragioneSociale||dati.nome||'Utente';
 
   const btnDash = document.getElementById('btn-dashboard');
-  if (currentRuolo === 'professionista') {
-    btnDash.innerHTML = '<a href="dashboard-pro.html" class="btn-back-nav">📋 Dashboard Pro</a>';
-  } else {
-    btnDash.innerHTML = '<a href="dashboard-cliente.html" class="btn-back-nav">📋 Dashboard</a>';
-  }
+  btnDash.innerHTML = currentRuolo==='professionista'
+    ? '<a href="dashboard-pro.html" class="btn-back-nav">📋 Dashboard Pro</a>'
+    : '<a href="dashboard-cliente.html" class="btn-back-nav">📋 Dashboard</a>';
 
+  await caricaNotifiche(user.uid);
   await caricaListaChat(user.uid, currentRuolo);
 });
 </script>
