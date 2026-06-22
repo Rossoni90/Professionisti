@@ -9,26 +9,20 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
   --blu: #1B3A6B; --blu-scuro: #0F2347; --blu-chiaro: #2952A3;
-  --oro: #B8972A; --oro-chiaro: #D4AF37; --bianco: #FFFFFF;
+  --oro: #B8972A; --oro-chiaro: #D4AF37;
   --grigio-chiaro: #F5F7FA; --grigio: #6B7280; --testo: #1A1A2E;
   --verde: #10B981; --rosso: #EF4444; --arancio: #F59E0B;
 }
 body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color: var(--testo); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
-
-/* ── NAVBAR ── */
 .navbar { background: var(--blu-scuro); padding: 14px 25px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; box-shadow: 0 2px 15px rgba(0,0,0,0.25); }
 .logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: white; text-decoration: none; }
 .logo span { color: var(--oro); }
 .navbar-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.btn-back-nav { background: transparent; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.25); padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; text-decoration: none; }
+.btn-back-nav { background: transparent; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.25); padding: 7px 16px; border-radius: 20px; font-size: 13px; cursor: pointer; font-family: 'Inter', sans-serif; text-decoration: none; color: rgba(255,255,255,0.7); }
 .btn-back-nav:hover { color: var(--oro); border-color: var(--oro); }
-.btn-logout { background: transparent; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.3); padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s; }
+.btn-logout { background: transparent; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.3); padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; }
 .btn-logout:hover { color: white; border-color: white; }
-
-/* ── LAYOUT ── */
 .chat-layout { display: flex; flex: 1; overflow: hidden; }
-
-/* ── LISTA CHAT ── */
 .chat-list { width: 300px; background: white; border-right: 1px solid #e5e7eb; display: flex; flex-direction: column; flex-shrink: 0; }
 .chat-list-header { padding: 18px 20px; border-bottom: 1px solid #e5e7eb; }
 .chat-list-header h3 { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--blu-scuro); margin-bottom: 10px; }
@@ -44,18 +38,11 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 .chat-item-preview { font-size: 12px; color: var(--grigio); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .chat-item-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 5px; flex-shrink: 0; }
 .chat-item-time { font-size: 11px; color: var(--grigio); }
-.chat-item-badge { background: var(--rosso); color: white; font-size: 10px; font-weight: 700; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-.chat-item-stato { font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 8px; }
-.chat-item-stato.attivo { background: #ECFDF5; color: var(--verde); }
-.chat-item-stato.attesa { background: #FEF3C7; color: var(--arancio); }
 .chat-vuota { padding: 30px 20px; text-align: center; color: var(--grigio); font-size: 13px; }
-
-/* ── CHAT MAIN ── */
 .chat-main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 .chat-placeholder { flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 14px; color: var(--grigio); }
 .chat-placeholder .icon { font-size: 60px; }
 .chat-placeholder p { font-size: 15px; }
-
 .chat-header { background: white; padding: 15px 22px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; box-shadow: 0 1px 8px rgba(0,0,0,0.05); }
 .chat-header-info { display: flex; align-items: center; gap: 14px; }
 .chat-header-avatar { width: 46px; height: 46px; background: var(--blu); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--oro); font-size: 18px; }
@@ -63,14 +50,9 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 .chat-header-stato { font-size: 12px; color: var(--verde); display: flex; align-items: center; gap: 5px; margin-top: 2px; }
 .chat-header-stato::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--verde); display: inline-block; }
 .chat-header-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-.btn-header-action { background: var(--grigio-chiaro); border: none; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; color: var(--testo); display: flex; align-items: center; gap: 6px; }
-.btn-header-action:hover { background: #e5e7eb; }
+.btn-header-action { background: var(--grigio-chiaro); border: none; padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; color: var(--testo); }
 .btn-header-action.blu { background: var(--blu); color: white; }
-.btn-header-action.blu:hover { background: var(--blu-chiaro); }
 .btn-header-action.verde { background: var(--verde); color: white; }
-.btn-header-action.verde:hover { background: #059669; }
-
-/* ── BANNER ── */
 .richiesta-banner { background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); border-bottom: 1px solid #BFDBFE; padding: 12px 22px; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; flex-wrap: wrap; gap: 8px; }
 .richiesta-banner-info { font-size: 13px; color: var(--blu-scuro); line-height: 1.6; }
 .richiesta-banner-info strong { display: block; font-size: 14px; margin-bottom: 2px; }
@@ -78,20 +60,15 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 .chip-small { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 15px; }
 .chip-small.blu { background: #DBEAFE; color: var(--blu); }
 .chip-small.verde { background: #ECFDF5; color: var(--verde); }
-.chip-small.oro { background: #FEF3C7; color: var(--arancio); }
-
 .sopralluogo-banner { background: linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%); border-bottom: 1px solid #A7F3D0; padding: 14px 22px; flex-shrink: 0; }
-.sopralluogo-banner-title { font-size: 13px; font-weight: 700; color: #065F46; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+.sopralluogo-banner-title { font-size: 13px; font-weight: 700; color: #065F46; margin-bottom: 6px; }
 .sopralluogo-banner-data { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 900; color: #065F46; margin-bottom: 4px; }
 .sopralluogo-banner-sub { font-size: 12px; color: #047857; }
 .sopralluogo-banner-actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
-.btn-sopralluogo { border: none; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; }
+.btn-sopralluogo { border: none; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; }
 .btn-sopralluogo.verde { background: var(--verde); color: white; }
 .btn-sopralluogo.rosso { background: var(--rosso); color: white; }
 .btn-sopralluogo.grigio { background: #e5e7eb; color: var(--grigio); }
-.btn-sopralluogo.oro { background: var(--oro); color: white; }
-
-/* ── MESSAGGI ── */
 .chat-messages { flex: 1; overflow-y: auto; padding: 20px 22px; display: flex; flex-direction: column; gap: 14px; }
 .msg { display: flex; gap: 10px; max-width: 75%; }
 .msg.inviato { align-self: flex-end; flex-direction: row-reverse; }
@@ -99,84 +76,52 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 .msg-content { display: flex; flex-direction: column; gap: 3px; }
 .msg.inviato .msg-content { align-items: flex-end; }
 .msg-bubble { padding: 11px 15px; border-radius: 18px; font-size: 14px; line-height: 1.6; }
-.msg.ricevuto .msg-bubble { background: white; color: var(--testo); border: 1px solid #e5e7eb; border-radius: 4px 18px 18px 18px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+.msg.ricevuto .msg-bubble { background: white; color: var(--testo); border: 1px solid #e5e7eb; border-radius: 4px 18px 18px 18px; }
 .msg.inviato .msg-bubble { background: linear-gradient(135deg, var(--blu), var(--blu-chiaro)); color: white; border-radius: 18px 4px 18px 18px; }
 .msg-time { font-size: 11px; color: var(--grigio); padding: 0 4px; }
-
 .msg-sistema { align-self: center; background: #FEF3C7; border: 1px solid #FDE68A; border-radius: 12px; padding: 10px 16px; font-size: 12px; color: #78350F; text-align: center; max-width: 85%; line-height: 1.6; }
 .msg-sistema.verde { background: #ECFDF5; border-color: #A7F3D0; color: #065F46; }
-.msg-sistema.blu { background: #EFF6FF; border-color: #BFDBFE; color: #1E40AF; }
-.msg-sistema.rosso { background: #FEF2F2; border-color: #FECACA; color: #991B1B; }
-
-.sopralluogo-msg { background: white; border: 2px solid var(--verde); border-radius: 16px; padding: 16px 18px; align-self: center; width: 90%; max-width: 420px; }
-.sopralluogo-msg-title { font-size: 13px; font-weight: 700; color: var(--verde); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
-.sopralluogo-msg-data { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 900; color: var(--blu-scuro); margin-bottom: 6px; }
-.sopralluogo-msg-info { font-size: 13px; color: var(--grigio); line-height: 1.7; margin-bottom: 12px; }
-.sopralluogo-msg-info strong { color: var(--blu-scuro); }
-
-.fine-lavori-card { background: white; border: 2px solid var(--oro); border-radius: 16px; padding: 20px 22px; align-self: center; width: 90%; max-width: 460px; }
-.fine-lavori-title { font-size: 14px; font-weight: 700; color: var(--oro); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
-.fine-lavori-sub { font-size: 13px; color: var(--grigio); line-height: 1.6; margin-bottom: 14px; }
-.fine-lavori-actions { display: flex; gap: 10px; }
-.btn-fine { flex: 1; padding: 11px; border: none; border-radius: 12px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s; }
-.btn-fine.oro { background: var(--oro); color: white; }
-.btn-fine.oro:hover { background: var(--oro-chiaro); }
-.btn-fine.grigio { background: var(--grigio-chiaro); color: var(--grigio); }
-
-/* ── INPUT ── */
 .chat-input-area { background: white; border-top: 1px solid #e5e7eb; padding: 14px 20px; flex-shrink: 0; }
 .chat-input-row { display: flex; gap: 10px; align-items: flex-end; }
-.chat-input-box { flex: 1; padding: 12px 18px; border: 1.5px solid #e5e7eb; border-radius: 25px; font-size: 14px; font-family: 'Inter', sans-serif; outline: none; resize: none; max-height: 100px; transition: 0.3s; line-height: 1.5; }
+.chat-input-box { flex: 1; padding: 12px 18px; border: 1.5px solid #e5e7eb; border-radius: 25px; font-size: 14px; font-family: 'Inter', sans-serif; outline: none; resize: none; max-height: 100px; line-height: 1.5; }
 .chat-input-box:focus { border-color: var(--blu); }
-.btn-invia { background: linear-gradient(135deg, var(--blu), var(--blu-chiaro)); border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; font-size: 18px; transition: 0.3s; flex-shrink: 0; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(27,58,107,0.3); color: white; }
+.btn-invia { background: linear-gradient(135deg, var(--blu), var(--blu-chiaro)); border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; font-size: 18px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; color: white; box-shadow: 0 4px 12px rgba(27,58,107,0.3); }
 .btn-invia:hover { transform: scale(1.05); }
 .chat-input-actions { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
-.btn-quick { background: var(--grigio-chiaro); border: 1px solid #e5e7eb; padding: 7px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; color: var(--testo); }
+.btn-quick { background: var(--grigio-chiaro); border: 1px solid #e5e7eb; padding: 7px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; color: var(--testo); }
 .btn-quick:hover { background: var(--blu); color: white; border-color: var(--blu); }
 .btn-quick.oro { background: #FFFBEB; border-color: var(--oro); color: var(--oro); }
 .btn-quick.oro:hover { background: var(--oro); color: white; }
 .btn-quick.verde { background: #ECFDF5; border-color: var(--verde); color: var(--verde); }
 .btn-quick.verde:hover { background: var(--verde); color: white; }
-
-/* ── POPUP ── */
 .popup-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
-.popup-overlay.show { display: flex; animation: fadeIn 0.25s ease; }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.popup-overlay.show { display: flex; }
 .popup-box { background: white; border-radius: 24px; padding: 35px 30px; max-width: 440px; width: 100%; max-height: 90vh; overflow-y: auto; }
 .popup-box h2 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--blu-scuro); margin-bottom: 8px; text-align: center; }
 .popup-box p { color: var(--grigio); font-size: 14px; line-height: 1.6; margin-bottom: 20px; text-align: center; }
 .form-group { margin-bottom: 16px; }
 .form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--testo); margin-bottom: 6px; }
-.form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 16px; border: 1.5px solid #e5e7eb; border-radius: 12px; font-size: 14px; font-family: 'Inter', sans-serif; outline: none; transition: 0.3s; }
-.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--blu); }
+.form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 16px; border: 1.5px solid #e5e7eb; border-radius: 12px; font-size: 14px; font-family: 'Inter', sans-serif; outline: none; }
 .form-group textarea { min-height: 80px; resize: vertical; }
 .popup-avviso { background: #FEF3C7; border: 1px solid #FDE68A; border-radius: 12px; padding: 12px 15px; font-size: 13px; color: #78350F; line-height: 1.6; margin-bottom: 18px; }
 .popup-avviso.verde { background: #ECFDF5; border-color: #A7F3D0; color: #065F46; }
-.btn-popup { width: 100%; padding: 14px; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; transition: 0.3s; margin-bottom: 8px; }
+.btn-popup { width: 100%; padding: 14px; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Inter', sans-serif; margin-bottom: 8px; }
 .btn-popup.blu { background: var(--blu); color: white; }
-.btn-popup.blu:hover { background: var(--blu-chiaro); }
 .btn-popup.verde { background: var(--verde); color: white; }
-.btn-popup.verde:hover { background: #059669; }
 .btn-popup.oro { background: var(--oro); color: white; }
-.btn-popup.oro:hover { background: var(--oro-chiaro); }
 .btn-popup.grigio { background: var(--grigio-chiaro); color: var(--grigio); }
 .btn-popup.rosso { background: var(--rosso); color: white; }
 .popup-icon { font-size: 56px; margin-bottom: 15px; text-align: center; }
 .conferma-dettagli { background: var(--grigio-chiaro); border-radius: 14px; padding: 16px 18px; font-size: 13px; color: var(--testo); line-height: 1.9; margin-bottom: 20px; text-align: left; }
-.conferma-dettagli strong { color: var(--blu-scuro); }
-
 .stelle-wrap { display: flex; justify-content: center; gap: 10px; margin: 16px 0; }
-.stella-rec { font-size: 40px; cursor: pointer; opacity: 0.3; transition: 0.2s; }
+.stella-rec { font-size: 40px; cursor: pointer; opacity: 0.3; }
 .stella-rec.attiva { opacity: 1; }
-
 .loading-chat { padding: 40px; text-align: center; color: var(--grigio); font-size: 14px; }
-
-@media (max-width: 768px) { .chat-list { display: none; } .richiesta-banner { flex-direction: column; align-items: flex-start; } .navbar-right { gap: 6px; } }
+@media (max-width: 768px) { .chat-list { display: none; } .navbar-right { gap: 6px; } }
 </style>
 </head>
 <body>
 
-<!-- NAVBAR -->
 <nav class="navbar">
   <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
   <div class="navbar-right">
@@ -186,27 +131,23 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 </nav>
 
 <div class="chat-layout">
-
-  <!-- LISTA CHAT -->
   <div class="chat-list">
     <div class="chat-list-header">
       <h3>💬 Le tue chat</h3>
-      <input type="text" class="chat-search" id="chatSearch" placeholder="🔍 Cerca conversazione..." oninput="filtraChat(this.value)">
+      <input type="text" class="chat-search" id="chatSearch" placeholder="🔍 Cerca..." oninput="filtraChat(this.value)">
     </div>
     <div class="chat-list-items" id="chatListItems">
-      <div class="loading-chat">⏳ Caricamento chat...</div>
+      <div class="loading-chat">⏳ Caricamento...</div>
     </div>
   </div>
 
-  <!-- CHAT PRINCIPALE -->
   <div class="chat-main" id="chatMain">
     <div class="chat-placeholder" id="chatPlaceholder">
       <div class="icon">💬</div>
       <p>Seleziona una conversazione</p>
     </div>
 
-    <!-- HEADER CHAT (nascosto finché non si seleziona) -->
-    <div id="chatAreaWrapper" style="display:none;flex:1;flex-direction:column;overflow:hidden;display:none">
+    <div id="chatAreaWrapper" style="display:none;flex:1;flex-direction:column;overflow:hidden;">
       <div class="chat-header">
         <div class="chat-header-info">
           <div class="chat-header-avatar" id="activeAvatar">?</div>
@@ -216,9 +157,8 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
           </div>
         </div>
         <div class="chat-header-actions">
-          <button class="btn-header-action" id="btnVediProfilo" onclick="">👤 Profilo</button>
           <button class="btn-header-action blu" onclick="apriPopupSopralluogo()">📅 Sopralluogo</button>
-          <button class="btn-header-action verde" id="btnCompletato" onclick="apriDichiaraCompletato()">✅ Completato</button>
+          <button class="btn-header-action verde" onclick="apriDichiaraCompletato()">✅ Completato</button>
         </div>
       </div>
 
@@ -238,15 +178,13 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
         <div class="sopralluogo-banner-data" id="sop-banner-data">—</div>
         <div class="sopralluogo-banner-sub" id="sop-banner-sub">—</div>
         <div class="sopralluogo-banner-actions">
-          <button class="btn-sopralluogo verde" onclick="apriDichiaraCompletato()">✅ Dichiara completato</button>
+          <button class="btn-sopralluogo verde" onclick="apriDichiaraCompletato()">✅ Completato</button>
           <button class="btn-sopralluogo rosso" onclick="apriRifiuto()">❌ Rifiuta</button>
-          <button class="btn-sopralluogo grigio" onclick="apriPopupSopralluogo()">✏️ Modifica data</button>
+          <button class="btn-sopralluogo grigio" onclick="apriPopupSopralluogo()">✏️ Modifica</button>
         </div>
       </div>
 
-      <div class="chat-messages" id="chatMessages">
-        <div class="loading-chat">⏳ Caricamento messaggi...</div>
-      </div>
+      <div class="chat-messages" id="chatMessages"></div>
 
       <div class="chat-input-area">
         <div class="chat-input-row">
@@ -264,15 +202,12 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
   </div>
 </div>
 
-<!-- POPUP FISSA SOPRALLUOGO -->
+<!-- POPUP SOPRALLUOGO -->
 <div class="popup-overlay" id="popupSopralluogo">
   <div class="popup-box">
     <h2>📅 Fissa il Sopralluogo</h2>
     <p>Concorda la data e l'ora del sopralluogo gratuito.</p>
-    <div class="form-group">
-      <label>Data sopralluogo *</label>
-      <input type="date" id="sop-data">
-    </div>
+    <div class="form-group"><label>Data *</label><input type="date" id="sop-data"></div>
     <div class="form-group">
       <label>Ora *</label>
       <select id="sop-ora">
@@ -284,44 +219,35 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
         <option>17:30</option><option>18:00</option>
       </select>
     </div>
-    <div class="form-group">
-      <label>Indirizzo completo *</label>
-      <input type="text" id="sop-indirizzo" placeholder="Es. Via Roma 15, Milano, 3° piano int. 8">
-    </div>
-    <div class="form-group">
-      <label>Note aggiuntive</label>
-      <textarea id="sop-note" placeholder="Es. Suonare il campanello, portare campioni colore..."></textarea>
-    </div>
-    <div class="popup-avviso">
-      ⚠️ Fissando il sopralluogo ti impegni a essere presente. Assenza senza preavviso = segnalazione. Tre segnalazioni = ban automatico.
-    </div>
+    <div class="form-group"><label>Indirizzo completo *</label><input type="text" id="sop-indirizzo" placeholder="Es. Via Roma 15, Milano"></div>
+    <div class="form-group"><label>Note aggiuntive</label><textarea id="sop-note" placeholder="Es. Suonare il campanello..."></textarea></div>
+    <div class="popup-avviso">⚠️ Fissando il sopralluogo ti impegni a essere presente.</div>
     <button class="btn-popup blu" onclick="confermaSopralluogo()">✅ Conferma sopralluogo</button>
     <button class="btn-popup grigio" onclick="chiudiPopup('popupSopralluogo')">Annulla</button>
   </div>
 </div>
 
-<!-- POPUP DICHIARA COMPLETATO -->
+<!-- POPUP COMPLETATO -->
 <div class="popup-overlay" id="popupDichiaraCompletato">
   <div class="popup-box">
     <div class="popup-icon">🔧</div>
     <h2>Dichiara lavoro completato</h2>
     <p>Il cliente riceverà una notifica e dovrà confermare il saldo.</p>
     <div class="conferma-dettagli" id="dettagli-completato">—</div>
-    <div class="popup-avviso verde">✅ Dopo la conferma del saldo si apriranno le recensioni reciproche obbligatorie.</div>
+    <div class="popup-avviso verde">✅ Dopo la conferma del saldo si apriranno le recensioni reciproche.</div>
     <button class="btn-popup verde" onclick="confermaLavoroCompletato()">✅ Sì, il lavoro è completato</button>
     <button class="btn-popup grigio" onclick="chiudiPopup('popupDichiaraCompletato')">Annulla</button>
   </div>
 </div>
 
-<!-- POPUP CONFERMA SALDO -->
+<!-- POPUP SALDO -->
 <div class="popup-overlay" id="popupConfermaPageSaldo">
   <div class="popup-box">
     <div class="popup-icon">💰</div>
     <h2>Confermi di aver saldato?</h2>
-    <p id="popup-saldo-testo">Confermi di aver saldato il professionista per il lavoro eseguito?</p>
     <div class="conferma-dettagli" id="dettagli-saldo">—</div>
-    <div class="popup-avviso verde">✅ Confermando il saldo si aprirà subito la schermata delle recensioni reciproche obbligatorie.</div>
-    <button class="btn-popup oro" onclick="confermaSaldo()">💰 Sì, ho saldato il professionista</button>
+    <div class="popup-avviso verde">✅ Confermando si aprirà la schermata delle recensioni.</div>
+    <button class="btn-popup oro" onclick="confermaSaldo()">💰 Sì, ho saldato</button>
     <button class="btn-popup grigio" onclick="chiudiPopup('popupConfermaPageSaldo')">Non ancora</button>
   </div>
 </div>
@@ -331,7 +257,7 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
   <div class="popup-box">
     <div class="popup-icon">⭐</div>
     <h2>Lascia la tua recensione</h2>
-    <p id="popup-rec-testo">La recensione è <strong>obbligatoria</strong> per mantenere l'account attivo.</p>
+    <p id="popup-rec-testo">La recensione è <strong>obbligatoria</strong>.</p>
     <div class="stelle-wrap">
       <span class="stella-rec" onclick="setStella(1)">★</span>
       <span class="stella-rec" onclick="setStella(2)">★</span>
@@ -339,38 +265,9 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
       <span class="stella-rec" onclick="setStella(4)">★</span>
       <span class="stella-rec" onclick="setStella(5)">★</span>
     </div>
-    <div class="form-group">
-      <label>Descrivi la tua esperienza *</label>
-      <textarea id="testo-rec" placeholder="Com'è andato il lavoro? Puntualità, professionalità, qualità?"></textarea>
-    </div>
+    <div class="form-group"><label>Descrivi la tua esperienza *</label><textarea id="testo-rec" placeholder="Com'è andato il lavoro?"></textarea></div>
     <div class="popup-avviso">⚠️ Hai 48 ore per completare la recensione.</div>
     <button class="btn-popup oro" onclick="inviaRecensione()">⭐ Invia recensione</button>
-  </div>
-</div>
-
-<!-- POPUP CONTESTAZIONE -->
-<div class="popup-overlay" id="popupContestazione">
-  <div class="popup-box">
-    <div class="popup-icon">❓</div>
-    <h2>Hai un problema?</h2>
-    <p>Il nostro team esaminerà la situazione entro 24 ore.</p>
-    <div class="form-group">
-      <label>Tipo di problema *</label>
-      <select id="tipo-contestazione">
-        <option value="">Seleziona</option>
-        <option>Lavoro non completato correttamente</option>
-        <option>Il professionista non si è presentato</option>
-        <option>Danni causati durante i lavori</option>
-        <option>Preventivo non rispettato</option>
-        <option>Altro</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label>Descrizione dettagliata *</label>
-      <textarea id="desc-contestazione" placeholder="Descrivi il problema in dettaglio..."></textarea>
-    </div>
-    <button class="btn-popup blu" onclick="inviaContestazione()">📨 Invia segnalazione al supporto</button>
-    <button class="btn-popup grigio" onclick="chiudiPopup('popupContestazione')">Annulla</button>
   </div>
 </div>
 
@@ -379,7 +276,6 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
   <div class="popup-box">
     <div class="popup-icon">❌</div>
     <h2>Rifiuta / Disdici</h2>
-    <p>Specifica il motivo del rifiuto o disdetta.</p>
     <div class="form-group">
       <label>Motivo *</label>
       <select id="motivo-rifiuto">
@@ -387,16 +283,12 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
         <option>Preventivo troppo alto</option>
         <option>Ho trovato un altro professionista</option>
         <option>Il professionista non si è presentato</option>
-        <option>Ho cambiato idea sul lavoro</option>
+        <option>Ho cambiato idea</option>
         <option>Problemi di disponibilità</option>
         <option>Altro</option>
       </select>
     </div>
-    <div class="form-group">
-      <label>Note (facoltative)</label>
-      <textarea id="desc-rifiuto" placeholder="Spiega brevemente..."></textarea>
-    </div>
-    <div class="popup-avviso">⚠️ Se il professionista non si è presentato senza preavviso, riceverà automaticamente una segnalazione.</div>
+    <div class="form-group"><label>Note</label><textarea id="desc-rifiuto" placeholder="Spiega brevemente..."></textarea></div>
     <button class="btn-popup rosso" onclick="confermaRifiuto()">❌ Conferma</button>
     <button class="btn-popup grigio" onclick="chiudiPopup('popupRifiuto')">Annulla</button>
   </div>
@@ -423,32 +315,26 @@ const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-// ── STATO GLOBALE ──
 let currentUID = null;
 let currentRuolo = null;
 let currentNome = null;
-let currentIniziale = '?';
-let chatAttiva = null; // { id, altroUID, altroNome, richiestaID, richiestaDescrizione }
+let chatAttiva = null;
 let stelleSelezionate = 0;
 let unsubMessages = null;
 let tutteLeChat = [];
 
-// ── LOGOUT ──
-window.eseguiLogout = async () => {
-  await signOut(auth);
-  localStorage.clear();
-  window.location.href = 'index.html';
-};
+const urlParams = new URLSearchParams(window.location.search);
+const chatIdDaUrl = urlParams.get('chat');
 
-// ── UTILITY ──
+window.eseguiLogout = async () => { await signOut(auth); localStorage.clear(); window.location.href = 'index.html'; };
+
 function tempoFa(secondi) {
   if (!secondi) return '—';
-  const diff = Math.floor(Date.now() / 1000) - secondi;
+  const diff = Math.floor(Date.now()/1000) - secondi;
   if (diff < 60) return 'Ora';
-  if (diff < 3600) return `${Math.floor(diff / 60)} min fa`;
-  if (diff < 86400) return `${Math.floor(diff / 3600)} ore fa`;
-  const d = new Date(secondi * 1000);
-  return d.toLocaleDateString('it-IT', { day: 'numeric', month: 'short' });
+  if (diff < 3600) return Math.floor(diff/60)+' min fa';
+  if (diff < 86400) return Math.floor(diff/3600)+' ore fa';
+  return new Date(secondi*1000).toLocaleDateString('it-IT',{day:'numeric',month:'short'});
 }
 
 function coloreRandom(str) {
@@ -459,47 +345,89 @@ function coloreRandom(str) {
 }
 
 window.filtraChat = (testo) => {
-  const items = document.querySelectorAll('.chat-item');
-  items.forEach(el => {
-    const nome = el.dataset.nome || '';
-    el.style.display = nome.toLowerCase().includes(testo.toLowerCase()) ? '' : 'none';
+  document.querySelectorAll('.chat-item').forEach(el => {
+    el.style.display = (el.dataset.nome||'').toLowerCase().includes(testo.toLowerCase()) ? '' : 'none';
   });
 };
 
-window.handleEnter = (e) => {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); inviaMessaggio(); }
-};
-
-window.inserisciTesto = (t) => {
-  const inp = document.getElementById('msgInput');
-  inp.value = t; inp.focus();
-};
-
-// ── POPUP ──
+window.handleEnter = (e) => { if (e.key==='Enter' && !e.shiftKey) { e.preventDefault(); inviaMessaggio(); } };
+window.inserisciTesto = (t) => { const inp = document.getElementById('msgInput'); inp.value = t; inp.focus(); };
 window.chiudiPopup = (id) => document.getElementById(id).classList.remove('show');
 window.apriPopupSopralluogo = () => document.getElementById('popupSopralluogo').classList.add('show');
 window.apriRifiuto = () => document.getElementById('popupRifiuto').classList.add('show');
 window.apriDichiaraCompletato = () => {
   if (!chatAttiva) return;
-  document.getElementById('dettagli-completato').innerHTML = `
-    <strong>Con:</strong> ${chatAttiva.altroNome}<br>
-    <strong>Richiesta:</strong> ${chatAttiva.richiestaDescrizione || '—'}<br>
-    <strong>Data:</strong> ${new Date().toLocaleDateString('it-IT')}`;
+  document.getElementById('dettagli-completato').innerHTML = '<strong>Con:</strong> '+chatAttiva.altroNome+'<br><strong>Richiesta:</strong> '+(chatAttiva.richiestaDescrizione||'—')+'<br><strong>Data:</strong> '+new Date().toLocaleDateString('it-IT');
   document.getElementById('popupDichiaraCompletato').classList.add('show');
-};
-window.apriContestazione = () => {
-  chiudiPopup('popupConfermaPageSaldo');
-  document.getElementById('popupContestazione').classList.add('show');
 };
 window.setStella = (n) => {
   stelleSelezionate = n;
-  document.querySelectorAll('.stella-rec').forEach((s, i) => s.classList.toggle('attiva', i < n));
+  document.querySelectorAll('.stella-rec').forEach((s,i) => s.classList.toggle('attiva', i < n));
 };
 
-// ── INIT DATA SOPRALLUOGO ──
-const domani = new Date();
-domani.setDate(domani.getDate() + 1);
+const domani = new Date(); domani.setDate(domani.getDate()+1);
 document.getElementById('sop-data').min = domani.toISOString().split('T')[0];
+
+// ── APRI CHAT ──
+window.apriChat = (chatData) => {
+  chatAttiva = chatData;
+  document.getElementById('chatPlaceholder').style.display = 'none';
+  const wrapper = document.getElementById('chatAreaWrapper');
+  wrapper.style.display = 'flex';
+
+  const altroNome = chatAttiva.altroNome || '—';
+  document.getElementById('activeAvatar').textContent = altroNome.charAt(0).toUpperCase();
+  document.getElementById('activeAvatar').style.background = coloreRandom(altroNome);
+  document.getElementById('activeNome').textContent = altroNome;
+  document.getElementById('banner-richiesta-titolo').textContent = chatAttiva.richiestaDescrizione || '—';
+  document.getElementById('banner-cat').textContent = chatAttiva.richiestaCategoria || '—';
+  document.getElementById('banner-sblocco-data').textContent = 'Chat attiva';
+
+  document.querySelectorAll('.chat-item').forEach(el => el.classList.toggle('active', el.dataset.id === chatAttiva.id));
+
+  // Carica sopralluogo attivo
+  caricaSopralluogoBanner(chatAttiva.id);
+
+  // Ascolta messaggi in tempo reale
+  if (unsubMessages) unsubMessages();
+  const msgRef = collection(db, 'chat', chatAttiva.id, 'messaggi');
+  unsubMessages = onSnapshot(query(msgRef, orderBy('timestamp','asc')), (snap) => {
+    const container = document.getElementById('chatMessages');
+    container.innerHTML = '';
+    snap.docs.forEach(d => {
+      const m = d.data();
+      const ts = m.timestamp?.seconds ? tempoFa(m.timestamp.seconds) : '';
+      if (m.tipo === 'sistema') {
+        container.innerHTML += '<div class="msg-sistema verde">'+m.testo+'</div>';
+      } else {
+        const mio = m.mittente === currentUID;
+        const iniziale = (m.mittentNome||'?').charAt(0).toUpperCase();
+        const colore = coloreRandom(m.mittentNome||'?');
+        container.innerHTML += '<div class="msg '+(mio?'inviato':'ricevuto')+'">'
+          +'<div class="msg-avatar" style="background:'+colore+'">'+iniziale+'</div>'
+          +'<div class="msg-content"><div class="msg-bubble">'+m.testo+'</div><div class="msg-time">'+ts+'</div></div>'
+          +'</div>';
+      }
+    });
+    container.scrollTop = container.scrollHeight;
+  });
+};
+
+async function caricaSopralluogoBanner(chatId) {
+  try {
+    const snap = await getDocs(query(collection(db,'sopralluoghi'), where('chatID','==',chatId), where('stato','==','confermato'), limit(1)));
+    const banner = document.getElementById('sopralluogoBanner');
+    if (!snap.empty) {
+      const s = snap.docs[0].data();
+      const dataStr = s.data ? new Date(s.data.seconds*1000).toLocaleString('it-IT',{weekday:'long',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'}) : '—';
+      document.getElementById('sop-banner-data').textContent = dataStr;
+      document.getElementById('sop-banner-sub').textContent = 'Indirizzo: '+(s.indirizzo||'—');
+      banner.style.display = 'block';
+    } else {
+      banner.style.display = 'none';
+    }
+  } catch(e) { console.error(e); }
+}
 
 // ── INVIA MESSAGGIO ──
 window.inviaMessaggio = async () => {
@@ -509,24 +437,17 @@ window.inviaMessaggio = async () => {
   if (!testo) return;
   input.value = '';
   try {
-    await addDoc(collection(db, 'chat', chatAttiva.id, 'messaggi'), {
-      testo,
-      mittente: currentUID,
-      mittentNome: currentNome,
-      timestamp: serverTimestamp(),
-      tipo: 'messaggio'
+    await addDoc(collection(db,'chat',chatAttiva.id,'messaggi'), {
+      testo, mittente: currentUID, mittentNome: currentNome,
+      timestamp: serverTimestamp(), tipo: 'messaggio'
     });
-    // Aggiorna preview nella lista chat
-    await updateDoc(doc(db, 'chat', chatAttiva.id), {
-      ultimoMessaggio: testo,
-      ultimoTimestamp: serverTimestamp()
+    await updateDoc(doc(db,'chat',chatAttiva.id), {
+      ultimoMessaggio: testo, ultimoTimestamp: serverTimestamp()
     });
-  } catch(e) {
-    console.error('Errore invio messaggio:', e);
-  }
+  } catch(e) { console.error(e); }
 };
 
-// ── CONFERMA SOPRALLUOGO ──
+// ── SOPRALLUOGO ──
 window.confermaSopralluogo = async () => {
   if (!chatAttiva) return;
   const data = document.getElementById('sop-data').value;
@@ -536,372 +457,176 @@ window.confermaSopralluogo = async () => {
   if (!ora) { alert('Seleziona l\'orario!'); return; }
   if (!indirizzo) { alert('Inserisci l\'indirizzo!'); return; }
   const note = document.getElementById('sop-note').value.trim();
-  const dataObj = new Date(data + 'T' + ora);
-  const dataFormattata = dataObj.toLocaleString('it-IT', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+  const dataObj = new Date(data+'T'+ora);
+  const dataFormattata = dataObj.toLocaleString('it-IT',{weekday:'long',day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
   chiudiPopup('popupSopralluogo');
   try {
-    // Salva sopralluogo su Firestore
-    await addDoc(collection(db, 'sopralluoghi'), {
+    await addDoc(collection(db,'sopralluoghi'), {
       chatID: chatAttiva.id,
-      clienteUID: currentRuolo === 'cliente' ? currentUID : chatAttiva.altroUID,
-      proUID: currentRuolo === 'professionista' ? currentUID : chatAttiva.altroUID,
-      clienteNome: currentRuolo === 'cliente' ? currentNome : chatAttiva.altroNome,
-      proNome: currentRuolo === 'professionista' ? currentNome : chatAttiva.altroNome,
-      lavoro: chatAttiva.richiestaDescrizione || '—',
-      indirizzo,
-      note,
-      data: { seconds: Math.floor(dataObj.getTime() / 1000) },
-      stato: 'confermato',
-      timestamp: serverTimestamp()
+      clienteUID: currentRuolo==='cliente' ? currentUID : chatAttiva.altroUID,
+      proUID: currentRuolo==='professionista' ? currentUID : chatAttiva.altroUID,
+      clienteNome: currentRuolo==='cliente' ? currentNome : chatAttiva.altroNome,
+      proNome: currentRuolo==='professionista' ? currentNome : chatAttiva.altroNome,
+      lavoro: chatAttiva.richiestaDescrizione||'—',
+      indirizzo, note,
+      data: { seconds: Math.floor(dataObj.getTime()/1000) },
+      stato: 'confermato', creatoIl: serverTimestamp()
     });
-    // Messaggio di sistema in chat
-    await addDoc(collection(db, 'chat', chatAttiva.id, 'messaggi'), {
-      tipo: 'sopralluogo',
-      testo: `📅 Sopralluogo concordato\n${dataFormattata.charAt(0).toUpperCase() + dataFormattata.slice(1)}\n📍 ${indirizzo}${note ? '\n📝 ' + note : ''}`,
-      mittente: 'sistema',
-      timestamp: serverTimestamp()
+    await addDoc(collection(db,'chat',chatAttiva.id,'messaggi'), {
+      testo: '📅 Sopralluogo fissato per '+dataFormattata+' — Indirizzo: '+indirizzo+(note?' — Note: '+note:''),
+      mittente: 'sistema', mittentNome: 'Sistema',
+      timestamp: serverTimestamp(), tipo: 'sistema'
     });
-    // Aggiorna banner
-    document.getElementById('sopralluogoBanner').style.display = '';
-    document.getElementById('sop-banner-data').textContent = dataFormattata.charAt(0).toUpperCase() + dataFormattata.slice(1);
-    document.getElementById('sop-banner-sub').textContent = `📍 ${indirizzo}`;
-  } catch(e) {
-    alert('Errore: ' + e.message);
-  }
+    await updateDoc(doc(db,'chat',chatAttiva.id), { ultimoMessaggio: '📅 Sopralluogo fissato', ultimoTimestamp: serverTimestamp() });
+    caricaSopralluogoBanner(chatAttiva.id);
+  } catch(e) { alert('Errore: '+e.message); }
 };
 
-// ── DICHIARA COMPLETATO ──
+// ── COMPLETATO ──
 window.confermaLavoroCompletato = async () => {
   if (!chatAttiva) return;
   chiudiPopup('popupDichiaraCompletato');
   try {
-    await addDoc(collection(db, 'chat', chatAttiva.id, 'messaggi'), {
-      tipo: 'fine_lavori',
-      testo: `🔧 ${currentNome} ha dichiarato il lavoro completato. Il cliente deve confermare il saldo.`,
-      mittente: currentUID,
-      richiestaDescrizione: chatAttiva.richiestaDescrizione,
-      timestamp: serverTimestamp()
+    const snap = await getDocs(query(collection(db,'sopralluoghi'), where('chatID','==',chatAttiva.id), where('stato','==','confermato'), limit(1)));
+    if (!snap.empty) await updateDoc(snap.docs[0].ref, { stato: 'in-attesa-saldo' });
+    await addDoc(collection(db,'chat',chatAttiva.id,'messaggi'), {
+      testo: '🔧 Il professionista ha dichiarato il lavoro completato. Il cliente deve confermare il saldo.',
+      mittente: 'sistema', mittentNome: 'Sistema',
+      timestamp: serverTimestamp(), tipo: 'sistema'
     });
-    await updateDoc(doc(db, 'chat', chatAttiva.id), { stato: 'completato_attesa_saldo' });
-  } catch(e) {
-    alert('Errore: ' + e.message);
-  }
+    await updateDoc(doc(db,'chat',chatAttiva.id), { stato: 'in-attesa-saldo', ultimoMessaggio: '🔧 Lavoro completato', ultimoTimestamp: serverTimestamp() });
+    if (currentRuolo === 'cliente') {
+      document.getElementById('dettagli-saldo').innerHTML = '<strong>Con:</strong> '+chatAttiva.altroNome+'<br><strong>Lavoro:</strong> '+(chatAttiva.richiestaDescrizione||'—');
+      document.getElementById('popupConfermaPageSaldo').classList.add('show');
+    }
+  } catch(e) { alert('Errore: '+e.message); }
 };
 
-// ── CONFERMA SALDO ──
 window.confermaSaldo = async () => {
+  if (!chatAttiva) return;
   chiudiPopup('popupConfermaPageSaldo');
   try {
-    await addDoc(collection(db, 'chat', chatAttiva.id, 'messaggi'), {
-      tipo: 'saldo_confermato',
-      testo: '💰 Saldo confermato dal cliente! Il lavoro è ufficialmente concluso. Entrambe le parti devono ora lasciare una recensione obbligatoria.',
-      mittente: currentUID,
-      timestamp: serverTimestamp()
+    const snap = await getDocs(query(collection(db,'sopralluoghi'), where('chatID','==',chatAttiva.id), where('stato','==','in-attesa-saldo'), limit(1)));
+    if (!snap.empty) await updateDoc(snap.docs[0].ref, { stato: 'completato' });
+    await updateDoc(doc(db,'chat',chatAttiva.id), { stato: 'completato', ultimoMessaggio: '✅ Saldo confermato', ultimoTimestamp: serverTimestamp() });
+    await addDoc(collection(db,'chat',chatAttiva.id,'messaggi'), {
+      testo: '✅ Saldo confermato! Grazie. Lasciate una recensione reciproca.',
+      mittente: 'sistema', mittentNome: 'Sistema',
+      timestamp: serverTimestamp(), tipo: 'sistema'
     });
-    await updateDoc(doc(db, 'chat', chatAttiva.id), { stato: 'completato' });
-    document.getElementById('popup-rec-testo').innerHTML = `Valuta <strong>${chatAttiva.altroNome}</strong>. La recensione è <strong>obbligatoria</strong> per mantenere l'account attivo.`;
-    setTimeout(() => document.getElementById('popupRecensione').classList.add('show'), 600);
-  } catch(e) {
-    alert('Errore: ' + e.message);
-  }
+    document.getElementById('popup-rec-testo').innerHTML = 'Valuta la tua esperienza. La recensione è <strong>obbligatoria</strong>.';
+    document.getElementById('popupRecensione').classList.add('show');
+  } catch(e) { alert('Errore: '+e.message); }
 };
 
-// ── INVIA RECENSIONE ──
 window.inviaRecensione = async () => {
   if (stelleSelezionate === 0) { alert('Seleziona almeno una stella!'); return; }
   const testo = document.getElementById('testo-rec').value.trim();
-  if (!testo) { alert('Scrivi una descrizione!'); return; }
+  if (!testo) { alert('Scrivi una recensione!'); return; }
   try {
-    await addDoc(collection(db, 'recensioni'), {
-      daUID: currentUID,
-      aUID: chatAttiva.altroUID,
-      daNome: currentNome,
-      proNome: currentRuolo === 'professionista' ? currentNome : chatAttiva.altroNome,
-      stelle: stelleSelezionate,
-      testo,
-      tipo: currentRuolo === 'professionista' ? 'pro-a-cliente' : 'cliente-a-pro',
-      chatID: chatAttiva.id,
-      timestamp: serverTimestamp()
-    });
-    await addDoc(collection(db, 'chat', chatAttiva.id, 'messaggi'), {
-      tipo: 'sistema',
-      testo: `⭐ ${currentNome} ha lasciato una recensione: ${'★'.repeat(stelleSelezionate)}${'☆'.repeat(5 - stelleSelezionate)}`,
-      mittente: 'sistema',
-      timestamp: serverTimestamp()
+    await addDoc(collection(db,'recensioni'), {
+      daUID: currentUID, daNome: currentNome,
+      aUID: chatAttiva.altroUID, aNome: chatAttiva.altroNome,
+      stelle: stelleSelezionate, testo,
+      chatID: chatAttiva.id, timestamp: serverTimestamp()
     });
     chiudiPopup('popupRecensione');
     alert('✅ Recensione inviata! Grazie.');
-  } catch(e) {
-    alert('Errore: ' + e.message);
-  }
+  } catch(e) { alert('Errore: '+e.message); }
 };
 
-// ── RIFIUTO ──
 window.confermaRifiuto = async () => {
+  if (!chatAttiva) return;
   const motivo = document.getElementById('motivo-rifiuto').value;
   if (!motivo) { alert('Seleziona un motivo!'); return; }
   chiudiPopup('popupRifiuto');
   try {
-    await addDoc(collection(db, 'chat', chatAttiva.id, 'messaggi'), {
-      tipo: 'sistema',
-      testo: `❌ Rifiuto registrato. Motivo: ${motivo}`,
-      mittente: 'sistema',
-      timestamp: serverTimestamp()
+    await updateDoc(doc(db,'chat',chatAttiva.id), { stato: 'rifiutata', ultimoMessaggio: '❌ '+motivo, ultimoTimestamp: serverTimestamp() });
+    await addDoc(collection(db,'chat',chatAttiva.id,'messaggi'), {
+      testo: '❌ Richiesta rifiutata. Motivo: '+motivo,
+      mittente: 'sistema', mittentNome: 'Sistema',
+      timestamp: serverTimestamp(), tipo: 'sistema'
     });
-  } catch(e) {}
+  } catch(e) { alert('Errore: '+e.message); }
 };
 
-// ── CONTESTAZIONE ──
-window.inviaContestazione = async () => {
-  const tipo = document.getElementById('tipo-contestazione').value;
-  const desc = document.getElementById('desc-contestazione').value.trim();
-  if (!tipo) { alert('Seleziona il tipo di problema!'); return; }
-  if (!desc) { alert('Descrivi il problema!'); return; }
-  chiudiPopup('popupContestazione');
+// ── CARICA LISTA CHAT ──
+async function caricaListaChat(uid, ruolo) {
+  const listContainer = document.getElementById('chatListItems');
   try {
-    await addDoc(collection(db, 'segnalazioni'), {
-      daUID: currentUID,
-      chatID: chatAttiva?.id,
-      tipo,
-      descrizione: desc,
-      timestamp: serverTimestamp()
+    const campo = ruolo === 'professionista' ? 'proUID' : 'clienteUID';
+    const snap = await getDocs(query(collection(db,'chat'), where(campo,'==',uid), limit(50)));
+    tutteLeChat = snap.docs.map(d => {
+      const dati = d.data();
+      const altroUID = ruolo==='professionista' ? dati.clienteUID : dati.proUID;
+      const altroNome = ruolo==='professionista' ? (dati.clienteNome||'Cliente') : (dati.proNome||'Professionista');
+      return {
+        id: d.id,
+        altroUID, altroNome,
+        richiestaID: dati.richiestaID,
+        richiestaDescrizione: dati.richiestaDescrizione,
+        richiestaCategoria: dati.richiestaCategoria,
+        ultimoMessaggio: dati.ultimoMessaggio || '—',
+        ultimoTimestamp: dati.ultimoTimestamp?.seconds || 0,
+        stato: dati.stato || 'attiva'
+      };
     });
-    alert('📨 Segnalazione inviata!\n\nIl nostro team esaminerà la situazione entro 24 ore.');
-  } catch(e) {
-    alert('Segnalazione inviata. Grazie.');
-  }
-};
 
-// ── APRI CHAT ──
-async function apriChat(chatDoc) {
-  const d = chatDoc.data();
-  const altroUID = d.partecipanti.find(u => u !== currentUID);
-  // Recupera nome dell'altro
-  let altroNome = '—';
-  try {
-    const altroSnap = await getDoc(doc(db, 'utenti', altroUID));
-    if (altroSnap.exists()) {
-      const ad = altroSnap.data();
-      altroNome = ad.ragioneSociale || ad.nome || '—';
+    tutteLeChat.sort((a,b) => b.ultimoTimestamp - a.ultimoTimestamp);
+
+    if (tutteLeChat.length === 0) {
+      listContainer.innerHTML = '<div class="chat-vuota">💬 Nessuna conversazione ancora.</div>';
+      return;
     }
-  } catch(e) {}
 
-  chatAttiva = {
-    id: chatDoc.id,
-    altroUID,
-    altroNome,
-    richiestaID: d.richiestaID || null,
-    richiestaDescrizione: d.richiestaDescrizione || '—'
-  };
-
-  // Aggiorna UI header
-  document.getElementById('chatPlaceholder').style.display = 'none';
-  const wrapper = document.getElementById('chatAreaWrapper');
-  wrapper.style.display = 'flex';
-  wrapper.style.flex = '1';
-  wrapper.style.flexDirection = 'column';
-  wrapper.style.overflow = 'hidden';
-
-  const iniziale = altroNome.charAt(0).toUpperCase();
-  document.getElementById('activeAvatar').textContent = iniziale;
-  document.getElementById('activeAvatar').style.background = coloreRandom(altroUID);
-  document.getElementById('activeNome').textContent = altroNome;
-
-  // Pulsante profilo
-  document.getElementById('btnVediProfilo').onclick = () => {
-    if (currentRuolo === 'cliente') window.location.href = `profilo-pro.html?uid=${altroUID}`;
-    else alert('Profilo cliente non disponibile');
-  };
-
-  // Banner richiesta
-  document.getElementById('banner-richiesta-titolo').textContent = `📋 ${d.richiestaDescrizione || 'Chat sbloccata'}`;
-  document.getElementById('banner-sblocco-data').textContent = d.dataCreazione
-    ? `Sbloccata il ${new Date(d.dataCreazione.seconds * 1000).toLocaleDateString('it-IT')}`
-    : 'Chat attiva';
-  document.getElementById('banner-cat').textContent = `🏗️ ${d.categoria || '—'}`;
-
-  // Sopralluogo banner
-  try {
-    const qSop = query(collection(db, 'sopralluoghi'), where('chatID', '==', chatDoc.id), where('stato', '==', 'confermato'), limit(1));
-    const snapSop = await getDocs(qSop);
-    if (!snapSop.empty) {
-      const s = snapSop.docs[0].data();
-      const dataStr = s.data ? new Date(s.data.seconds * 1000).toLocaleString('it-IT', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' }) : '—';
-      document.getElementById('sopralluogoBanner').style.display = '';
-      document.getElementById('sop-banner-data').textContent = dataStr.charAt(0).toUpperCase() + dataStr.slice(1);
-      document.getElementById('sop-banner-sub').textContent = `📍 ${s.indirizzo || '—'} · Con ${altroNome}`;
-    } else {
-      document.getElementById('sopralluogoBanner').style.display = 'none';
-    }
-  } catch(e) {
-    document.getElementById('sopralluogoBanner').style.display = 'none';
-  }
-
-  // Pulsante completato: visibile solo al professionista
-  document.getElementById('btnCompletato').style.display = currentRuolo === 'professionista' ? '' : 'none';
-
-  // Carica messaggi in realtime
-  if (unsubMessages) unsubMessages();
-  const qMsg = query(collection(db, 'chat', chatDoc.id, 'messaggi'), orderBy('timestamp', 'asc'));
-  unsubMessages = onSnapshot(qMsg, (snap) => {
-    const container = document.getElementById('chatMessages');
-    container.innerHTML = '';
-    snap.forEach(msgDoc => {
-      const m = msgDoc.data();
-      aggiungiMessaggio(container, m, currentUID, currentNome, currentIniziale, altroNome, altroUID);
+    listContainer.innerHTML = '';
+    tutteLeChat.forEach(c => {
+      const colore = coloreRandom(c.altroNome);
+      const iniziale = c.altroNome.charAt(0).toUpperCase();
+      const tempo = c.ultimoTimestamp ? tempoFa(c.ultimoTimestamp) : '';
+      const item = document.createElement('div');
+      item.className = 'chat-item';
+      item.dataset.id = c.id;
+      item.dataset.nome = c.altroNome;
+      item.innerHTML = '<div class="chat-avatar" style="background:'+colore+'">'+iniziale+'</div>'
+        +'<div class="chat-item-info"><div class="chat-item-nome">'+c.altroNome+'</div><div class="chat-item-preview">'+c.ultimoMessaggio+'</div></div>'
+        +'<div class="chat-item-meta"><div class="chat-item-time">'+tempo+'</div></div>';
+      item.addEventListener('click', () => apriChat(c));
+      listContainer.appendChild(item);
     });
-    container.scrollTop = container.scrollHeight;
-  });
+
+    // Se arriva da dashboard con chat specifica, aprila subito
+    if (chatIdDaUrl) {
+      const chatDaAprire = tutteLeChat.find(c => c.id === chatIdDaUrl);
+      if (chatDaAprire) {
+        setTimeout(() => apriChat(chatDaAprire), 300);
+      }
+    }
+
+  } catch(e) {
+    listContainer.innerHTML = '<div class="chat-vuota">⚠️ Errore caricamento: '+e.message+'</div>';
+  }
 }
 
-// ── RENDER MESSAGGIO ──
-function aggiungiMessaggio(container, m, myUID, myNome, myIniziale, altroNome, altroUID) {
-  const ora = m.timestamp ? new Date(m.timestamp.seconds * 1000).toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' }) : '—';
-
-  if (m.tipo === 'sistema' || m.mittente === 'sistema') {
-    const div = document.createElement('div');
-    div.className = 'msg-sistema blu';
-    div.innerHTML = m.testo.replace(/\n/g, '<br>');
-    container.appendChild(div);
-    return;
-  }
-
-  if (m.tipo === 'sopralluogo') {
-    const righe = m.testo.split('\n');
-    const div = document.createElement('div');
-    div.className = 'sopralluogo-msg';
-    div.innerHTML = `
-      <div class="sopralluogo-msg-title">📅 Sopralluogo concordato</div>
-      <div class="sopralluogo-msg-data">${righe[1] || '—'}</div>
-      <div class="sopralluogo-msg-info">${(righe[2] || '').replace('📍 ', '<strong>Indirizzo:</strong> ')}${righe[3] ? '<br>' + righe[3] : ''}</div>
-      <div class="msg-sistema verde" style="font-size:11px;margin-top:6px">✅ Sopralluogo salvato nel sistema.</div>`;
-    container.appendChild(div);
-    return;
-  }
-
-  if (m.tipo === 'fine_lavori') {
-    const div = document.createElement('div');
-    div.className = 'fine-lavori-card';
-    const èCliente = currentRuolo === 'cliente';
-    div.innerHTML = `
-      <div class="fine-lavori-title">🔧 Lavoro dichiarato completato</div>
-      <div class="fine-lavori-sub">${m.testo}</div>
-      ${èCliente ? `<div class="fine-lavori-actions">
-        <button class="btn-fine oro" onclick="apriConfermaPageSaldo()">💰 Confermo di aver saldato</button>
-        <button class="btn-fine grigio" onclick="apriContestazione()">❓ Ho un problema</button>
-      </div>` : ''}`;
-    container.appendChild(div);
-    return;
-  }
-
-  const inviato = m.mittente === myUID;
-  const inizialeAltr = altroNome.charAt(0).toUpperCase();
-  const div = document.createElement('div');
-  div.className = `msg ${inviato ? 'inviato' : 'ricevuto'}`;
-  div.innerHTML = `
-    <div class="msg-avatar" style="background:${inviato ? 'var(--blu-chiaro)' : coloreRandom(altroUID)}">${inviato ? myIniziale : inizialeAltr}</div>
-    <div class="msg-content">
-      <div class="msg-bubble">${m.testo}</div>
-      <span class="msg-time">${ora}</span>
-    </div>`;
-  container.appendChild(div);
-}
-
-window.apriConfermaPageSaldo = () => {
-  if (!chatAttiva) return;
-  document.getElementById('dettagli-saldo').innerHTML = `
-    <strong>Professionista:</strong> ${chatAttiva.altroNome}<br>
-    <strong>Lavoro:</strong> ${chatAttiva.richiestaDescrizione || '—'}<br>
-    <strong>Data:</strong> ${new Date().toLocaleDateString('it-IT')}`;
-  chiudiPopup('popupDichiaraCompletato');
-  document.getElementById('popupConfermaPageSaldo').classList.add('show');
-};
-
-// ── AUTH STATE ──
+// ── AUTH ──
 onAuthStateChanged(auth, async (user) => {
-  if (!user) { window.location.href = 'cliente.html?tab=accedi'; return; }
+  if (!user) { window.location.href = 'index.html'; return; }
   currentUID = user.uid;
 
-  const utenteSnap = await getDoc(doc(db, 'utenti', user.uid));
-  if (!utenteSnap.exists()) { window.location.href = 'cliente.html?tab=accedi'; return; }
+  const utenteSnap = await getDoc(doc(db,'utenti',user.uid));
+  if (!utenteSnap.exists()) { window.location.href = 'index.html'; return; }
   const dati = utenteSnap.data();
   currentRuolo = dati.ruolo || 'cliente';
   currentNome = dati.ragioneSociale || dati.nome || 'Utente';
-  currentIniziale = currentNome.charAt(0).toUpperCase();
 
-  // Bottone dashboard
-  const dashBtn = document.getElementById('btn-dashboard');
+  const btnDash = document.getElementById('btn-dashboard');
   if (currentRuolo === 'professionista') {
-    dashBtn.innerHTML = `<a href="dashboard-pro.html" class="btn-back-nav">💼 Dashboard Pro</a>`;
+    btnDash.innerHTML = '<a href="dashboard-pro.html" class="btn-back-nav">📋 Dashboard Pro</a>';
   } else {
-    dashBtn.innerHTML = `<a href="dashboard-cliente.html" class="btn-back-nav">👤 Dashboard Cliente</a>`;
+    btnDash.innerHTML = '<a href="dashboard-cliente.html" class="btn-back-nav">📋 Dashboard</a>';
   }
 
-  // Carica lista chat
-  const qChat = query(
-    collection(db, 'chat'),
-    where('partecipanti', 'array-contains', user.uid),
-    orderBy('ultimoTimestamp', 'desc')
-  );
-  onSnapshot(qChat, async (snap) => {
-    const listaCont = document.getElementById('chatListItems');
-    if (snap.empty) {
-      listaCont.innerHTML = '<div class="chat-vuota">📭 Nessuna chat ancora.<br>Sblocca un contatto per iniziare!</div>';
-      return;
-    }
-    listaCont.innerHTML = '';
-    tutteLeChat = snap.docs;
-    for (const chatDoc of snap.docs) {
-      const d = chatDoc.data();
-      const altroUID = d.partecipanti.find(u => u !== user.uid);
-      let altroNome = 'Utente';
-      try {
-        const altroSnap = await getDoc(doc(db, 'utenti', altroUID));
-        if (altroSnap.exists()) {
-          const ad = altroSnap.data();
-          altroNome = ad.ragioneSociale || ad.nome || 'Utente';
-        }
-      } catch(e) {}
-      const iniziale = altroNome.charAt(0).toUpperCase();
-      const preview = d.ultimoMessaggio || 'Nessun messaggio ancora';
-      const tempo = d.ultimoTimestamp ? tempoFa(d.ultimoTimestamp.seconds) : '—';
-      const isAttiva = chatAttiva && chatAttiva.id === chatDoc.id;
-
-      const item = document.createElement('div');
-      item.className = `chat-item${isAttiva ? ' active' : ''}`;
-      item.dataset.nome = altroNome;
-      item.innerHTML = `
-        <div class="chat-avatar" style="background:${coloreRandom(altroUID)}">${iniziale}</div>
-        <div class="chat-item-info">
-          <div class="chat-item-nome">${altroNome}</div>
-          <div class="chat-item-preview">${preview}</div>
-        </div>
-        <div class="chat-item-meta">
-          <span class="chat-item-time">${tempo}</span>
-          <span class="chat-item-stato ${d.stato === 'completato' ? 'attivo' : 'attesa'}">${d.stato === 'completato' ? '✅ Completato' : 'In corso'}</span>
-        </div>`;
-      item.onclick = () => {
-        document.querySelectorAll('.chat-item').forEach(i => i.classList.remove('active'));
-        item.classList.add('active');
-        apriChat(chatDoc);
-      };
-      listaCont.appendChild(item);
-    }
-    // Apri prima chat automaticamente
-    if (!chatAttiva && snap.docs.length > 0) {
-      listaCont.querySelector('.chat-item')?.click();
-    }
-  });
-});
-
-// ── CHIUDI POPUP CLICCANDO FUORI ──
-document.querySelectorAll('.popup-overlay').forEach(overlay => {
-  overlay.addEventListener('click', function(e) {
-    if (e.target === this) chiudiPopup(this.id);
-  });
-});
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') document.querySelectorAll('.popup-overlay.show').forEach(p => chiudiPopup(p.id));
+  await caricaListaChat(user.uid, currentRuolo);
 });
 </script>
 </body>
