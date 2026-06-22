@@ -112,7 +112,6 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 
 .sez-title { font-size: 16px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
 .count-badge { background: var(--blu); color: white; font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 10px; }
-.count-badge.oro { background: var(--oro); }
 .count-badge.rosso { background: var(--rosso); }
 
 .richiesta-card {
@@ -123,7 +122,8 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 .richiesta-card.nuova { border-left: 4px solid var(--oro); }
 .nuovo-tag {
   position: absolute; top: -8px; left: 18px;
-  background: var(--oro); color: white; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 10px;
+  background: var(--oro); color: white; font-size: 10px; font-weight: 700;
+  padding: 3px 10px; border-radius: 10px;
 }
 .richiesta-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
 .richiesta-cat { display: inline-flex; align-items: center; gap: 6px; background: #EFF6FF; color: var(--blu); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; }
@@ -132,7 +132,6 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 .richiesta-chips { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
 .chip { background: var(--grigio-chiaro); color: var(--testo); font-size: 12px; font-weight: 500; padding: 5px 12px; border-radius: 20px; }
 .chip.verde { background: #ECFDF5; color: var(--verde); font-weight: 600; }
-.chip.oro { background: #FFFBEB; color: var(--oro); font-weight: 600; }
 .chip.rosso { background: #FEF2F2; color: var(--rosso); font-weight: 600; }
 .richiesta-footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
 .costo-sblocco { font-size: 13px; color: var(--grigio); }
@@ -144,17 +143,14 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
   font-family: 'Inter', sans-serif; box-shadow: 0 4px 12px rgba(184,151,42,0.3);
 }
 .btn-sblocca:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(184,151,42,0.4); }
-.btn-sblocca:disabled { background: #e5e7eb; color: var(--grigio); box-shadow: none; cursor: not-allowed; transform: none; }
-.btn-sblocca.sbloccato { background: var(--verde); }
+.btn-sblocca.sbloccato { background: var(--verde); box-shadow: none; }
 
 .sopralluogo-card {
   background: white; border-radius: 16px; padding: 20px 22px; margin-bottom: 14px;
-  border: 1px solid #e5e7eb; border-left: 4px solid var(--verde); transition: 0.3s;
+  border: 1px solid #e5e7eb; border-left: 4px solid var(--verde);
 }
-.sopralluogo-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.07); }
 .sopralluogo-stato { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-bottom: 10px; }
 .sopralluogo-stato.confermato { background: #ECFDF5; color: var(--verde); }
-.sopralluogo-stato.attesa { background: #FEF3C7; color: var(--arancio); }
 .sopralluogo-data { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 900; color: var(--blu-scuro); margin-bottom: 8px; }
 .sopralluogo-info { font-size: 13px; color: var(--grigio); line-height: 1.8; }
 .sopralluogo-info strong { color: var(--blu-scuro); }
@@ -230,19 +226,22 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 </head>
 <body>
 
+<!-- NAVBAR -->
 <nav class="navbar">
   <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
   <div class="navbar-right">
     <div class="abbonamento-badge" id="abbonamento-badge">⏳ Caricamento...</div>
-    <div class="notifica-badge" id="notifica-btn">🔔<div class="badge" id="notifica-count">0</div></div>
+    <div class="notifica-badge">🔔<div class="badge" id="notifica-count">0</div></div>
     <div class="navbar-nome" id="navbar-nome">Caricamento...</div>
     <div class="avatar" id="navbar-avatar">?</div>
     <button class="btn-logout" onclick="eseguiLogout()">🚪 Esci</button>
   </div>
 </nav>
 
+<!-- LAYOUT -->
 <div class="layout">
 
+  <!-- SIDEBAR -->
   <aside class="sidebar">
     <ul class="sidebar-menu">
       <li class="sidebar-item active"><span class="icon">🏠</span> Dashboard</li>
@@ -261,6 +260,7 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
     </ul>
   </aside>
 
+  <!-- MAIN -->
   <main class="main">
 
     <div class="page-header">
@@ -270,37 +270,40 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
       </div>
     </div>
 
+    <!-- ABBONAMENTO BAR -->
     <div class="abbonamento-bar" id="abbonamento-bar">
       <div class="abbonamento-bar-info">
         <strong id="abbonamento-titolo">⏳ Verifica abbonamento...</strong>
         <span id="abbonamento-dettaglio"></span>
       </div>
-      <a href="pagamento.html" class="btn-rinnova" id="abbonamento-btn">Gestisci abbonamento</a>
+      <a href="pagamento.html" class="btn-rinnova">Gestisci abbonamento</a>
     </div>
 
+    <!-- CREDITI -->
     <div class="crediti-box">
       <div class="crediti-info">
         <strong>🔓 Crediti disponibili</strong>
-        <span>Ogni credito ti permette di sbloccare il contatto di un cliente interessato</span>
+        <span>Ogni credito sblocca il contatto di un cliente interessato</span>
       </div>
       <div class="crediti-num" id="crediti-num">— <span>crediti</span></div>
       <button class="btn-ricarica" onclick="alert('Ricarica crediti in arrivo!')">+ Ricarica crediti</button>
     </div>
 
+    <!-- STATS -->
     <div class="stats-row">
       <div class="stat-card rosso">
         <div class="stat-icon">📋</div>
-        <div class="stat-num" id="stat-richieste">—</div>
+        <div class="stat-num" id="stat-richieste">0</div>
         <div class="stat-label">Nuove richieste</div>
       </div>
       <div class="stat-card oro">
         <div class="stat-icon">🔓</div>
-        <div class="stat-num" id="stat-sbloccati">—</div>
+        <div class="stat-num" id="stat-sbloccati">0</div>
         <div class="stat-label">Contatti sbloccati</div>
       </div>
       <div class="stat-card verde">
         <div class="stat-icon">✅</div>
-        <div class="stat-num" id="stat-completati">—</div>
+        <div class="stat-num" id="stat-completati">0</div>
         <div class="stat-label">Lavori completati</div>
       </div>
       <div class="stat-card">
@@ -310,6 +313,7 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
       </div>
     </div>
 
+    <!-- DUE COLONNE -->
     <div class="two-cols">
       <div>
         <div class="sez-title">📅 Prossimo sopralluogo</div>
@@ -323,6 +327,7 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
       </div>
     </div>
 
+    <!-- RICHIESTE ZONA -->
     <div class="sez-title">
       📋 Nuove richieste nella tua zona
       <span class="count-badge rosso" id="count-richieste">0</span>
@@ -337,14 +342,14 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
   <div class="popup-box">
     <div class="popup-icon">🔓</div>
     <h2>Sblocca il contatto</h2>
-    <p>Stai per sbloccare il contatto del cliente per la richiesta: <strong id="popup-lavoro"></strong></p>
-    <div class="popup-prezzo" id="popup-prezzo-val"></div>
-    <div class="popup-prezzo-sub">addebito una tantum • pagamento sicuro</div>
+    <p>Stai per sbloccare il contatto del cliente per: <strong id="popup-lavoro"></strong></p>
+    <div class="popup-prezzo" id="popup-prezzo-val">1 credito</div>
+    <div class="popup-prezzo-sub">addebito una tantum • contatto diretto immediato</div>
     <div class="popup-info">
       ✅ Accesso immediato alla chat privata<br>
       📅 Concorda data e ora del sopralluogo<br>
       ⭐ Recensione reciproca dopo il lavoro<br>
-      ⚠️ Dopo lo sblocco sei obbligato a presentarti al sopralluogo
+      ⚠️ Presentati al sopralluogo concordato
     </div>
     <button class="btn-popup-main" id="btn-conferma-sblocco">✅ Conferma e sblocca</button>
     <button class="btn-popup-cancel" onclick="chiudiPopup()">Annulla</button>
@@ -355,7 +360,7 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 <div class="recensione-popup" id="recensionePopup">
   <div class="recensione-box">
     <h2>⭐ Lascia una Recensione</h2>
-    <p>Il lavoro è stato completato. Valuta il cliente per mantenere il tuo account attivo.</p>
+    <p>Valuta il cliente per mantenere il tuo profilo attivo e affidabile.</p>
     <div class="stelle">
       <span class="stella" onclick="setStella(1)">★</span>
       <span class="stella" onclick="setStella(2)">★</span>
@@ -372,7 +377,7 @@ body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js';
 import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js';
-import { getFirestore, doc, getDoc, collection, query, where, orderBy, limit, getDocs, updateDoc, addDoc, serverTimestamp, increment } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js';
+import { getFirestore, doc, getDoc, collection, query, where, limit, getDocs, updateDoc, addDoc, serverTimestamp, increment } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js';
 
 const firebaseConfig = {
   apiKey: "AIzaSyCQHoCYYfdmkXnV2CTGBSq3gpE986QOq2o",
@@ -388,9 +393,7 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 let currentUID = null;
-let currentUser = null;
 let currentRichiestaId = null;
-let currentRichiestaPrezzo = 0;
 let stelleSelezionate = 0;
 
 // ── LOGOUT ──
@@ -400,12 +403,13 @@ window.eseguiLogout = async () => {
   window.location.href = 'index.html';
 };
 
-// ── DATA OGGI ──
+// ── HELPERS ──
 function dataOggi() {
-  return new Date().toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  return new Date().toLocaleDateString('it-IT', {
+    weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+  });
 }
 
-// ── TEMPO FA ──
 function tempoFa(seconds) {
   const diff = Math.floor(Date.now() / 1000) - seconds;
   if (diff < 60) return 'pochi secondi fa';
@@ -421,14 +425,14 @@ window.setStella = (n) => {
 };
 
 // ── POPUP SBLOCCO ──
-window.apriPopupSblocco = (lavoro, prezzoTxt, richiestaId, prezzoNum) => {
+window.apriPopupSblocco = (lavoro, richiestaId) => {
   document.getElementById('popup-lavoro').textContent = lavoro;
-  document.getElementById('popup-prezzo-val').textContent = prezzoTxt;
   currentRichiestaId = richiestaId;
-  currentRichiestaPrezzo = prezzoNum;
   document.getElementById('popupSblocco').classList.add('show');
 };
-window.chiudiPopup = () => document.getElementById('popupSblocco').classList.remove('show');
+window.chiudiPopup = () => {
+  document.getElementById('popupSblocco').classList.remove('show');
+};
 
 // ── CONFERMA SBLOCCO ──
 document.getElementById('btn-conferma-sblocco').addEventListener('click', async () => {
@@ -436,38 +440,39 @@ document.getElementById('btn-conferma-sblocco').addEventListener('click', async 
   const btn = document.getElementById('btn-conferma-sblocco');
   btn.textContent = '⏳ Elaborazione...';
   btn.disabled = true;
+
   try {
     const utenteRef = doc(db, 'utenti', currentUID);
     const utenteSnap = await getDoc(utenteRef);
     const crediti = utenteSnap.data().crediti ?? 0;
 
-    if (crediti < currentRichiestaPrezzo) {
+    if (crediti < 1) {
       alert('⚠️ Crediti insufficienti! Ricarica prima di sbloccare il contatto.');
       btn.textContent = '✅ Conferma e sblocca';
       btn.disabled = false;
       return;
     }
 
-    // Scala i crediti
+    // Scala 1 credito e aggiorna contatore
     await updateDoc(utenteRef, {
-      crediti: increment(-currentRichiestaPrezzo),
+      crediti: increment(-1),
       contattiSbloccati: increment(1)
     });
 
-    // Segna la richiesta come sbloccata da questo professionista
+    // Registra lo sblocco sulla richiesta
     const richiestaRef = doc(db, 'richieste', currentRichiestaId);
     const richiestaSnap = await getDoc(richiestaRef);
-    const sbloccati = richiestaSnap.data().sbloccatiDa || [];
-    if (!sbloccati.includes(currentUID)) {
+    const sbloccatiDa = richiestaSnap.data().sbloccatiDa || [];
+    if (!sbloccatiDa.includes(currentUID)) {
       await updateDoc(richiestaRef, {
-        sbloccatiDa: [...sbloccati, currentUID],
+        sbloccatiDa: [...sbloccatiDa, currentUID],
         offerte: increment(1)
       });
     }
 
     chiudiPopup();
     window.location.href = `chat.html?richiesta=${currentRichiestaId}`;
-  } catch(e) {
+  } catch (e) {
     alert('Errore durante lo sblocco: ' + e.message);
     btn.textContent = '✅ Conferma e sblocca';
     btn.disabled = false;
@@ -487,172 +492,160 @@ window.inviaRecensione = async () => {
     });
     document.getElementById('recensionePopup').classList.remove('show');
     alert('Recensione inviata! Grazie.');
-  } catch(e) {
-    alert('Errore invio recensione: ' + e.message);
+  } catch (e) {
+    alert('Errore: ' + e.message);
   }
 };
 
-// ── AUTH STATE ──
+// ── AUTH & CARICAMENTO DATI ──
 onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    window.location.href = 'professionista.html?tab=accedi';
-    return;
-  }
+  if (!user) { window.location.href = 'professionista.html?tab=accedi'; return; }
   currentUID = user.uid;
-  currentUser = user;
 
   const utenteDoc = await getDoc(doc(db, 'utenti', user.uid));
-  if (!utenteDoc.exists()) {
-    window.location.href = 'professionista.html?tab=accedi';
-    return;
-  }
+  if (!utenteDoc.exists()) { window.location.href = 'professionista.html?tab=accedi'; return; }
   const dati = utenteDoc.data();
-
-  if (dati.ruolo !== 'professionista') {
-    window.location.href = 'dashboard-cliente.html';
-    return;
-  }
+  if (dati.ruolo !== 'professionista') { window.location.href = 'dashboard-cliente.html'; return; }
 
   const nome = dati.ragioneSociale || dati.nome || 'Professionista';
-  const iniziale = nome.charAt(0).toUpperCase();
 
+  // ── UI base ──
   document.getElementById('navbar-nome').textContent = nome;
-  document.getElementById('navbar-avatar').textContent = iniziale;
+  document.getElementById('navbar-avatar').textContent = nome.charAt(0).toUpperCase();
   document.getElementById('saluto-nome').innerHTML = `Ciao, <span style="color:var(--oro)">${nome}</span> 👋`;
-  document.getElementById('data-oggi').textContent = dataOggi() + ' — Ecco il riepilogo della tua attività';
-
+  document.getElementById('data-oggi').textContent = dataOggi() + ' — Riepilogo attività';
   document.getElementById('sidebar-profilo').onclick = () => window.location.href = `profilo-pro.html?uid=${user.uid}`;
   document.getElementById('link-richieste').onclick = () => document.getElementById('richieste-container').scrollIntoView({ behavior: 'smooth' });
 
   // ── Abbonamento ──
   const abbBar = document.getElementById('abbonamento-bar');
-  const abbTitolo = document.getElementById('abbonamento-titolo');
-  const abbDettaglio = document.getElementById('abbonamento-dettaglio');
   const abbBadge = document.getElementById('abbonamento-badge');
-
   if (dati.abbonamento && dati.abbonamento.attivo) {
     const piano = dati.abbonamento.piano || 'mensile';
     const scadenza = dati.abbonamento.scadenza
-      ? new Date(dati.abbonamento.scadenza.seconds * 1000).toLocaleDateString('it-IT')
-      : '—';
-    const prezzo = piano === 'annuale' ? '€888/anno' : piano === 'mensile' ? '€99/mese' : '€10/mese';
-    abbTitolo.textContent = `✅ Abbonamento ${piano} attivo`;
-    abbDettaglio.textContent = `Scade il ${scadenza} • ${prezzo} • Rinnovo automatico attivo`;
-    abbBadge.textContent = '✅ Abbonamento attivo';
+      ? new Date(dati.abbonamento.scadenza.seconds * 1000).toLocaleDateString('it-IT') : '—';
+    document.getElementById('abbonamento-titolo').textContent = `✅ Abbonamento ${piano} attivo`;
+    document.getElementById('abbonamento-dettaglio').textContent = `Scade il ${scadenza}`;
+    abbBadge.textContent = '✅ Attivo';
     abbBadge.classList.remove('scaduto');
   } else {
     abbBar.classList.add('scaduto');
-    abbTitolo.textContent = '⚠️ Abbonamento scaduto o non attivo';
-    abbDettaglio.textContent = 'Rinnova ora per continuare a ricevere richieste dalla tua zona';
-    abbBadge.textContent = '⚠️ Abbonamento scaduto';
+    document.getElementById('abbonamento-titolo').textContent = '⚠️ Abbonamento scaduto o non attivo';
+    document.getElementById('abbonamento-dettaglio').textContent = 'Rinnova ora per ricevere richieste';
+    abbBadge.textContent = '⚠️ Scaduto';
     abbBadge.classList.add('scaduto');
   }
 
-  // ── Crediti ──
+  // ── Crediti e stats ──
   const crediti = dati.crediti ?? 0;
   document.getElementById('crediti-num').innerHTML = `${crediti} <span>crediti</span>`;
-
-  // ── Stats base ──
   document.getElementById('stat-sbloccati').textContent = dati.contattiSbloccati ?? 0;
   document.getElementById('stat-completati').textContent = dati.lavoriCompletati ?? 0;
   document.getElementById('stat-rating').textContent = dati.ratingMedio ? dati.ratingMedio.toFixed(1) : '—';
 
-  // ── Categorie professionista ──
-  const categoriePro = Array.isArray(dati.categorie) ? dati.categorie : (dati.categoria ? [dati.categoria] : []);
+  // ── Categorie del professionista ──
+  const categoriePro = Array.isArray(dati.categorie)
+    ? dati.categorie
+    : (dati.categoria ? [dati.categoria] : []);
 
-  // ── Richieste in zona ──
+  // ── RICHIESTE: query senza orderBy (evita indice composto) ──
   try {
     const qRichieste = query(
       collection(db, 'richieste'),
       where('stato', '==', 'aperta'),
-      orderBy('timestamp', 'desc'),
-      limit(30)
+      limit(50)
     );
-    const snapRichieste = await getDocs(qRichieste);
+    const snap = await getDocs(qRichieste);
 
-    // Filtra per categoria se il professionista ne ha
-    const richFiltrate = snapRichieste.docs.filter(d => {
-      const r = d.data();
-      // Se il professionista ha categorie impostate, filtra; altrimenti mostra tutto
-      if (categoriePro.length === 0) return true;
-      return categoriePro.some(c => r.categoria && r.categoria.toLowerCase().includes(c.toLowerCase()));
+    // Ordina lato client per timestamp discendente
+    let docs = snap.docs.slice().sort((a, b) => {
+      const ta = a.data().timestamp?.seconds ?? 0;
+      const tb = b.data().timestamp?.seconds ?? 0;
+      return tb - ta;
     });
 
-    const nRichieste = richFiltrate.length;
-    document.getElementById('stat-richieste').textContent = nRichieste;
-    document.getElementById('count-richieste').textContent = nRichieste;
-    document.getElementById('notifica-count').textContent = nRichieste;
-    document.getElementById('sidebar-notifica').textContent = nRichieste;
+    // Filtra per categoria se il professionista ne ha impostate
+    if (categoriePro.length > 0) {
+      docs = docs.filter(d => {
+        const cat = (d.data().categoria || '').toLowerCase();
+        return categoriePro.some(c => cat.includes(c.toLowerCase()));
+      });
+    }
+
+    const n = docs.length;
+    document.getElementById('stat-richieste').textContent = n;
+    document.getElementById('count-richieste').textContent = n;
+    document.getElementById('notifica-count').textContent = n;
+    document.getElementById('sidebar-notifica').textContent = n;
 
     const container = document.getElementById('richieste-container');
-    if (richFiltrate.length === 0) {
-      container.innerHTML = '<div class="vuoto-msg">📭 Nessuna richiesta attiva nella tua zona al momento.</div>';
+    if (docs.length === 0) {
+      container.innerHTML = '<div class="vuoto-msg">📭 Nessuna richiesta attiva al momento.</div>';
     } else {
       container.innerHTML = '';
-      richFiltrate.forEach(docSnap => {
+      docs.forEach(docSnap => {
         const r = docSnap.data();
         const tempo = r.timestamp ? tempoFa(r.timestamp.seconds) : 'poco fa';
-
-        // Prezzo sblocco fisso a 1 credito
-        const prezzoCrediti = 1;
-        const prezzoTxt = '1 credito';
-
         const chipUrgenza = r.urgente
           ? '<span class="chip rosso">🔴 Urgente</span>'
           : '<span class="chip verde">⏳ Tempi flessibili</span>';
-
         const mqChip = r.mq ? `<span class="chip">📐 ${r.mq} mq</span>` : '';
         const quandoChip = r.quando ? `<span class="chip">🗓️ ${r.quando}</span>` : '';
+        const giaSbloccato = (r.sbloccatiDa || []).includes(currentUID);
+        const catLabel = (r.categoria || '—').replace(/'/g, "\\'");
 
-        // Verifica se già sbloccato
-        const giasSbloccato = (r.sbloccatiDa || []).includes(currentUID);
-        const btnHtml = giasSbloccato
+        const btnHtml = giaSbloccato
           ? `<button class="btn-sblocca sbloccato" onclick="window.location.href='chat.html?richiesta=${docSnap.id}'">💬 Vai alla chat</button>`
-          : `<button class="btn-sblocca" onclick="apriPopupSblocco('${(r.categoria || 'Richiesta').replace(/'/g,"\\'")}','${prezzoTxt}','${docSnap.id}',${prezzoCrediti})">🔓 Sblocca contatto</button>`;
+          : `<button class="btn-sblocca" onclick="apriPopupSblocco('${catLabel}','${docSnap.id}')">🔓 Sblocca contatto</button>`;
 
         container.innerHTML += `
           <div class="richiesta-card nuova">
-            ${!giasSbloccato ? '<div class="nuovo-tag">🆕 NUOVA</div>' : ''}
+            ${!giaSbloccato ? '<div class="nuovo-tag">🆕 NUOVA</div>' : ''}
             <div class="richiesta-header">
               <div class="richiesta-cat">🏗️ ${r.categoria || '—'}</div>
               <div class="richiesta-tempo">⏰ ${tempo}</div>
             </div>
-            <div class="richiesta-desc">${r.descrizione || 'Nessuna descrizione fornita.'}</div>
+            <div class="richiesta-desc">${r.descrizione || 'Nessuna descrizione.'}</div>
             <div class="richiesta-chips">
               <span class="chip">📍 ${r.citta || '—'}</span>
-              ${chipUrgenza}
-              ${mqChip}
-              ${quandoChip}
+              ${chipUrgenza}${mqChip}${quandoChip}
             </div>
             <div class="richiesta-footer">
-              <div class="costo-sblocco">Sblocco: <strong>${prezzoTxt}</strong></div>
+              <div class="costo-sblocco">Sblocco: <strong>1 credito</strong></div>
               ${btnHtml}
             </div>
           </div>`;
       });
     }
-  } catch(e) {
-    console.error('Errore richieste:', e);
-    document.getElementById('richieste-container').innerHTML = '<div class="vuoto-msg">⚠️ Errore caricamento richieste.</div>';
+  } catch (e) {
+    console.error(e);
+    document.getElementById('richieste-container').innerHTML =
+      `<div class="vuoto-msg">⚠️ Errore caricamento: ${e.message}</div>`;
   }
 
-  // ── Prossimo Sopralluogo ──
+  // ── SOPRALLUOGHI: query senza orderBy ──
   try {
     const qSop = query(
       collection(db, 'sopralluoghi'),
       where('proUID', '==', user.uid),
       where('stato', '==', 'confermato'),
-      orderBy('data', 'asc'),
-      limit(1)
+      limit(10)
     );
     const snapSop = await getDocs(qSop);
     const sopCont = document.getElementById('sopralluogo-container');
+
     if (snapSop.empty) {
       sopCont.innerHTML = '<div class="vuoto-msg">📅 Nessun sopralluogo programmato.</div>';
     } else {
-      const s = snapSop.docs[0].data();
+      // Prendi il più vicino nel futuro
+      const sorted = snapSop.docs.sort((a, b) =>
+        (a.data().data?.seconds ?? 0) - (b.data().data?.seconds ?? 0));
+      const s = sorted[0].data();
       const dataSop = s.data
-        ? new Date(s.data.seconds * 1000).toLocaleString('it-IT', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+        ? new Date(s.data.seconds * 1000).toLocaleString('it-IT', {
+            weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
+            hour: '2-digit', minute: '2-digit'
+          })
         : '—';
       sopCont.innerHTML = `
         <div class="sopralluogo-card">
@@ -661,32 +654,36 @@ onAuthStateChanged(auth, async (user) => {
           <div class="sopralluogo-info">
             <strong>Cliente:</strong> ${s.clienteNome || '—'}<br>
             <strong>Lavoro:</strong> ${s.lavoro || '—'}<br>
-            <strong>Indirizzo:</strong> ${s.indirizzo || '—'}<br>
-            ${s.note ? `<strong>Note:</strong> ${s.note}` : ''}
+            <strong>Indirizzo:</strong> ${s.indirizzo || '—'}
           </div>
         </div>`;
     }
-  } catch(e) {
-    document.getElementById('sopralluogo-container').innerHTML = '<div class="vuoto-msg">📅 Nessun sopralluogo programmato.</div>';
+  } catch (e) {
+    document.getElementById('sopralluogo-container').innerHTML =
+      '<div class="vuoto-msg">📅 Nessun sopralluogo programmato.</div>';
   }
 
-  // ── Ultimo Lavoro Completato ──
+  // ── ULTIMO LAVORO COMPLETATO ──
   try {
     const qLav = query(
       collection(db, 'sopralluoghi'),
       where('proUID', '==', user.uid),
       where('stato', '==', 'completato'),
-      orderBy('data', 'desc'),
-      limit(1)
+      limit(10)
     );
     const snapLav = await getDocs(qLav);
     const lavCont = document.getElementById('ultimo-lavoro-container');
+
     if (snapLav.empty) {
       lavCont.innerHTML = '<div class="vuoto-msg">✅ Nessun lavoro completato ancora.</div>';
     } else {
-      const l = snapLav.docs[0].data();
+      const sorted = snapLav.docs.sort((a, b) =>
+        (b.data().data?.seconds ?? 0) - (a.data().data?.seconds ?? 0));
+      const l = sorted[0].data();
       const dataLav = l.data
-        ? new Date(l.data.seconds * 1000).toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' })
+        ? new Date(l.data.seconds * 1000).toLocaleDateString('it-IT', {
+            day: 'numeric', month: 'long', year: 'numeric'
+          })
         : '—';
       lavCont.innerHTML = `
         <div class="sopralluogo-card" style="border-left-color:var(--oro)">
@@ -698,28 +695,30 @@ onAuthStateChanged(auth, async (user) => {
           </div>
         </div>`;
     }
-  } catch(e) {
-    document.getElementById('ultimo-lavoro-container').innerHTML = '<div class="vuoto-msg">✅ Nessun lavoro completato ancora.</div>';
+  } catch (e) {
+    document.getElementById('ultimo-lavoro-container').innerHTML =
+      '<div class="vuoto-msg">✅ Nessun lavoro completato ancora.</div>';
   }
 
-  // ── Recensioni ricevute ──
+  // ── RECENSIONI RICEVUTE ──
   try {
     const qRec = query(
       collection(db, 'recensioni'),
       where('aUID', '==', user.uid),
-      orderBy('timestamp', 'desc'),
       limit(3)
     );
     const snapRec = await getDocs(qRec);
     const recCont = document.getElementById('recensioni-container');
+
     if (snapRec.empty) {
       recCont.innerHTML = '<div class="vuoto-msg">⭐ Nessuna recensione ricevuta ancora.</div>';
     } else {
       recCont.innerHTML = '';
-      snapRec.forEach(docSnap => {
+      snapRec.docs.forEach(docSnap => {
         const rec = docSnap.data();
         const stelle = '★'.repeat(rec.stelle || 0) + '☆'.repeat(5 - (rec.stelle || 0));
-        const data = rec.timestamp ? new Date(rec.timestamp.seconds * 1000).toLocaleDateString('it-IT') : '—';
+        const data = rec.timestamp
+          ? new Date(rec.timestamp.seconds * 1000).toLocaleDateString('it-IT') : '—';
         recCont.innerHTML += `
           <div class="recensione-card">
             <div class="rec-header">
@@ -731,8 +730,9 @@ onAuthStateChanged(auth, async (user) => {
           </div>`;
       });
     }
-  } catch(e) {
-    document.getElementById('recensioni-container').innerHTML = '<div class="vuoto-msg">⭐ Nessuna recensione ricevuta ancora.</div>';
+  } catch (e) {
+    document.getElementById('recensioni-container').innerHTML =
+      '<div class="vuoto-msg">⭐ Nessuna recensione ricevuta ancora.</div>';
   }
 
 });
