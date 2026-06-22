@@ -1,470 +1,825 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professionisti - Admin Rossoni</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root {
-            --blu: #1B3A6B; --blu-scuro: #0F2347; --blu-chiaro: #2952A3;
-            --oro: #B8972A; --oro-chiaro: #D4AF37; --bianco: #FFFFFF;
-            --grigio-chiaro: #F5F7FA; --grigio: #6B7280; --testo: #1A1A2E;
-            --verde: #10B981; --rosso: #EF4444; --arancio: #F59E0B;
-        }
-        body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color: var(--testo); min-height: 100vh; }
-
-        /* ===== NAVBAR AGGIORNATA ===== */
-        .navbar {
-            background: var(--blu-scuro);
-            padding: 14px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.25);
-        }
-        .navbar-left { display: flex; align-items: center; gap: 14px; }
-        .logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: white; text-decoration: none; }
-        .logo span { color: var(--oro); }
-        .admin-badge { background: var(--oro); color: var(--blu-scuro); font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; letter-spacing: 1px; }
-        .navbar-right { display: flex; align-items: center; gap: 12px; }
-        .btn-nav { background: transparent; color: rgba(255,255,255,0.75); border: 1px solid rgba(255,255,255,0.2); padding: 7px 14px; border-radius: 20px; font-size: 13px; font-weight: 500; cursor: pointer; transition: 0.3s; text-decoration: none; font-family: 'Inter', sans-serif; }
-        .btn-nav:hover { color: var(--oro); border-color: var(--oro); }
-        .avatar { width: 36px; height: 36px; background: var(--oro); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--blu-scuro); font-size: 15px; flex-shrink: 0; }
-        .navbar-nome { color: white; font-size: 14px; font-weight: 600; }
-
-        /* LAYOUT */
-        .dashboard-layout { display: flex; min-height: calc(100vh - 65px); }
-
-        /* SIDEBAR */
-        .sidebar { width: 240px; background: white; border-right: 1px solid #e5e7eb; padding: 25px 0; flex-shrink: 0; }
-        .sidebar-menu { list-style: none; }
-        .sidebar-item { padding: 12px 25px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: 0.2s; font-size: 14px; font-weight: 500; color: var(--grigio); border-left: 3px solid transparent; }
-        .sidebar-item:hover { background: var(--grigio-chiaro); color: var(--blu); }
-        .sidebar-item.active { background: #EFF6FF; color: var(--blu); border-left-color: var(--blu); font-weight: 600; }
-        .sidebar-item .icon { font-size: 18px; }
-        .sidebar-divider { height: 1px; background: #e5e7eb; margin: 15px 25px; }
-        .sidebar-label { font-size: 11px; font-weight: 700; color: #9CA3AF; text-transform: uppercase; letter-spacing: 1px; padding: 5px 25px; margin-top: 10px; }
-
-        /* MAIN */
-        .main-content { flex: 1; padding: 30px; overflow-y: auto; }
-        .page-header { margin-bottom: 25px; }
-        .page-header h1 { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--blu-scuro); margin-bottom: 5px; }
-        .page-header p { color: var(--grigio); font-size: 14px; }
-
-        /* STATS */
-        .stats-row { display: flex; gap: 20px; margin-bottom: 30px; flex-wrap: wrap; }
-        .stat-card { background: white; border-radius: 16px; padding: 20px 25px; flex: 1; min-width: 140px; border: 1px solid #e5e7eb; transition: 0.3s; }
-        .stat-card:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.08); transform: translateY(-2px); }
-        .stat-card-icon { font-size: 28px; margin-bottom: 10px; }
-        .stat-card-numero { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 900; color: var(--blu-scuro); margin-bottom: 5px; }
-        .stat-card-label { font-size: 13px; color: var(--grigio); }
-        .stat-card.oro .stat-card-numero { color: var(--oro); }
-        .stat-card.verde .stat-card-numero { color: var(--verde); }
-        .stat-card.rosso .stat-card-numero { color: var(--rosso); }
-
-        /* ZONE */
-        .zone-banner { display: flex; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
-        .zona-card { background: white; border-radius: 14px; padding: 15px 20px; border: 2px solid #e5e7eb; flex: 1; min-width: 200px; }
-        .zona-card.lombardia { border-color: var(--blu); }
-        .zona-card.emilia { border-color: var(--oro); }
-        .zona-title { font-size: 14px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 5px; display: flex; align-items: center; gap: 8px; }
-        .zona-desc { font-size: 12px; color: var(--grigio); line-height: 1.5; }
-
-        /* FILTRI */
-        .filtri-bar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
-        .filtro-btn { padding: 8px 16px; border: 1.5px solid #e5e7eb; border-radius: 20px; font-size: 13px; cursor: pointer; background: white; color: var(--grigio); transition: 0.3s; font-family: 'Inter', sans-serif; font-weight: 500; }
-        .filtro-btn.active { background: var(--blu); color: white; border-color: var(--blu); }
-        .filtro-btn:hover { border-color: var(--blu); color: var(--blu); }
-
-        .sezione-title { font-size: 16px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .count-badge { background: var(--blu); color: white; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; }
-        .count-badge.oro { background: var(--oro); }
-        .count-badge.rosso { background: var(--rosso); }
-
-        /* RICHIESTA CARD */
-        .richiesta-admin-card { background: white; border-radius: 16px; padding: 22px 25px; margin-bottom: 15px; border: 1px solid #e5e7eb; transition: 0.3s; position: relative; }
-        .richiesta-admin-card:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
-        .richiesta-admin-card.lombardia { border-left: 5px solid var(--blu); }
-        .richiesta-admin-card.emilia { border-left: 5px solid var(--oro); }
-        .regione-badge { position: absolute; top: -10px; left: 20px; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 10px; color: white; }
-        .regione-badge.lombardia { background: var(--blu); }
-        .regione-badge.emilia { background: var(--oro); }
-        .richiesta-admin-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
-        .richiesta-categoria { display: inline-flex; align-items: center; gap: 6px; background: #EFF6FF; color: var(--blu); font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; }
-        .richiesta-tempo { font-size: 12px; color: var(--grigio); }
-        .richiesta-luogo { font-size: 15px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 8px; }
-        .richiesta-descrizione { font-size: 14px; color: var(--grigio); line-height: 1.6; margin-bottom: 15px; }
-        .richiesta-dettagli { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 15px; }
-        .dettaglio-chip { background: var(--grigio-chiaro); color: var(--testo); font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
-        .dettaglio-chip.grande { background: #FEF3C7; color: #92400E; }
-        .richiesta-admin-footer { display: flex; gap: 12px; flex-wrap: wrap; }
-
-        /* BOTTONI */
-        .btn-tieni { background: var(--blu); color: white; border: none; padding: 10px 22px; border-radius: 25px; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; }
-        .btn-tieni:hover { background: var(--blu-chiaro); transform: translateY(-1px); }
-        .btn-pubblica { background: var(--verde); color: white; border: none; padding: 10px 22px; border-radius: 25px; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; }
-        .btn-pubblica:hover { background: #059669; transform: translateY(-1px); }
-        .btn-elimina { background: transparent; color: var(--rosso); border: 1.5px solid var(--rosso); padding: 10px 18px; border-radius: 25px; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; }
-        .btn-elimina:hover { background: var(--rosso); color: white; }
-
-        /* TIMER */
-        .timer-badge { background: #FEF3C7; color: #92400E; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; display: inline-flex; align-items: center; gap: 5px; }
-
-        /* POPUP */
-        .popup-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
-        .popup-overlay.show { display: flex; }
-        .popup-box { background: white; border-radius: 25px; padding: 40px 35px; max-width: 480px; width: 100%; box-shadow: 0 25px 60px rgba(0,0,0,0.3); text-align: center; }
-        .popup-box h2 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--blu-scuro); margin-bottom: 15px; }
-        .popup-box p { color: var(--grigio); font-size: 14px; line-height: 1.6; margin-bottom: 25px; }
-        .popup-buttons { display: flex; gap: 12px; }
-        .popup-buttons button { flex: 1; padding: 14px; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; border: none; font-family: 'Inter', sans-serif; transition: 0.3s; }
-        .btn-conferma-blu { background: var(--blu); color: white; }
-        .btn-conferma-blu:hover { background: var(--blu-chiaro); }
-        .btn-conferma-verde { background: var(--verde); color: white; }
-        .btn-conferma-verde:hover { background: #059669; }
-        .btn-annulla-gray { background: var(--grigio-chiaro); color: var(--grigio); }
-
-        @media (max-width: 768px) {
-            .sidebar { display: none; }
-            .main-content { padding: 20px 15px; }
-            .navbar { padding: 12px 16px; }
-            .navbar-nome { display: none; }
-            .btn-nav { font-size: 11px; padding: 5px 10px; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professionisti — Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --blu: #1B3A6B; --blu-scuro: #0F2347; --blu-chiaro: #2952A3;
+  --oro: #B8972A; --oro-chiaro: #D4AF37; --bianco: #FFFFFF;
+  --grigio-chiaro: #F5F7FA; --grigio: #6B7280; --testo: #1A1A2E;
+  --verde: #10B981; --rosso: #EF4444; --arancio: #F59E0B;
+}
+body { font-family: 'Inter', sans-serif; background: var(--grigio-chiaro); color: var(--testo); min-height: 100vh; }
+.navbar { background: var(--blu-scuro); padding: 14px 30px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 15px rgba(0,0,0,0.25); }
+.logo { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: white; text-decoration: none; }
+.logo span { color: var(--oro); }
+.admin-badge { background: var(--oro); color: var(--blu-scuro); font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 20px; letter-spacing: 1px; }
+.navbar-left { display: flex; align-items: center; gap: 14px; }
+.navbar-right { display: flex; align-items: center; gap: 12px; }
+.btn-nav { background: transparent; color: rgba(255,255,255,0.75); border: 1px solid rgba(255,255,255,0.2); padding: 7px 14px; border-radius: 20px; font-size: 13px; cursor: pointer; transition: 0.3s; text-decoration: none; font-family: 'Inter', sans-serif; }
+.btn-nav:hover { color: var(--oro); border-color: var(--oro); }
+.avatar { width: 36px; height: 36px; background: var(--oro); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--blu-scuro); font-size: 15px; }
+.dashboard-layout { display: flex; min-height: calc(100vh - 65px); }
+.sidebar { width: 240px; background: white; border-right: 1px solid #e5e7eb; padding: 25px 0; flex-shrink: 0; }
+.sidebar-menu { list-style: none; }
+.sidebar-item { padding: 12px 25px; display: flex; align-items: center; gap: 12px; cursor: pointer; transition: 0.2s; font-size: 14px; font-weight: 500; color: var(--grigio); border-left: 3px solid transparent; }
+.sidebar-item:hover { background: var(--grigio-chiaro); color: var(--blu); }
+.sidebar-item.active { background: #EFF6FF; color: var(--blu); border-left-color: var(--blu); font-weight: 600; }
+.sidebar-item .icon { font-size: 18px; }
+.sidebar-divider { height: 1px; background: #e5e7eb; margin: 15px 25px; }
+.sidebar-label { font-size: 11px; font-weight: 700; color: #9CA3AF; text-transform: uppercase; letter-spacing: 1px; padding: 5px 25px; margin-top: 10px; }
+.sidebar-badge { background: var(--rosso); color: white; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 10px; margin-left: auto; }
+.main-content { flex: 1; padding: 30px; overflow-y: auto; }
+.page-header { margin-bottom: 25px; }
+.page-header h1 { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--blu-scuro); margin-bottom: 5px; }
+.page-header p { color: var(--grigio); font-size: 14px; }
+.sezione-admin { display: none; }
+.sezione-admin.active { display: block; }
+.stats-row { display: flex; gap: 20px; margin-bottom: 30px; flex-wrap: wrap; }
+.stat-card { background: white; border-radius: 16px; padding: 20px 25px; flex: 1; min-width: 140px; border: 1px solid #e5e7eb; transition: 0.3s; }
+.stat-card:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.08); transform: translateY(-2px); }
+.stat-card-icon { font-size: 28px; margin-bottom: 10px; }
+.stat-card-numero { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 900; color: var(--blu-scuro); margin-bottom: 5px; }
+.stat-card-label { font-size: 13px; color: var(--grigio); }
+.stat-card.oro .stat-card-numero { color: var(--oro); }
+.stat-card.verde .stat-card-numero { color: var(--verde); }
+.stat-card.rosso .stat-card-numero { color: var(--rosso); }
+.zone-banner { display: flex; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
+.zona-card { background: white; border-radius: 14px; padding: 15px 20px; border: 2px solid #e5e7eb; flex: 1; min-width: 200px; }
+.zona-card.lombardia { border-color: var(--blu); }
+.zona-card.emilia { border-color: var(--oro); }
+.zona-title { font-size: 14px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 5px; }
+.zona-desc { font-size: 12px; color: var(--grigio); line-height: 1.5; }
+.filtri-bar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
+.filtro-btn { padding: 8px 16px; border: 1.5px solid #e5e7eb; border-radius: 20px; font-size: 13px; cursor: pointer; background: white; color: var(--grigio); transition: 0.3s; font-family: 'Inter', sans-serif; font-weight: 500; }
+.filtro-btn.active { background: var(--blu); color: white; border-color: var(--blu); }
+.filtro-btn:hover { border-color: var(--blu); color: var(--blu); }
+.sezione-title { font-size: 16px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+.count-badge { background: var(--blu); color: white; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; }
+.count-badge.oro { background: var(--oro); }
+.count-badge.rosso { background: var(--rosso); }
+.count-badge.verde { background: var(--verde); }
+.richiesta-admin-card { background: white; border-radius: 16px; padding: 22px 25px; margin-bottom: 15px; border: 1px solid #e5e7eb; transition: 0.3s; position: relative; }
+.richiesta-admin-card:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
+.richiesta-admin-card.lombardia { border-left: 5px solid var(--blu); }
+.richiesta-admin-card.emilia { border-left: 5px solid var(--oro); }
+.richiesta-admin-card.altra { border-left: 5px solid var(--verde); }
+.regione-badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 10px; color: white; margin-bottom: 10px; }
+.regione-badge.lombardia { background: var(--blu); }
+.regione-badge.emilia { background: var(--oro); }
+.regione-badge.altra { background: var(--verde); }
+.richiesta-admin-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; flex-wrap: wrap; gap: 10px; }
+.richiesta-categoria { display: inline-flex; align-items: center; gap: 6px; background: #EFF6FF; color: var(--blu); font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; }
+.richiesta-tempo { font-size: 12px; color: var(--grigio); }
+.richiesta-luogo { font-size: 15px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 8px; }
+.richiesta-descrizione { font-size: 14px; color: var(--grigio); line-height: 1.6; margin-bottom: 15px; }
+.richiesta-dettagli { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 15px; }
+.dettaglio-chip { background: var(--grigio-chiaro); color: var(--testo); font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
+.dettaglio-chip.grande { background: #FEF3C7; color: #92400E; }
+.richiesta-admin-footer { display: flex; gap: 12px; flex-wrap: wrap; }
+.timer-badge { background: #FEF3C7; color: #92400E; font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 20px; display: inline-flex; align-items: center; gap: 5px; }
+.btn-tieni { background: var(--blu); color: white; border: none; padding: 10px 22px; border-radius: 25px; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; }
+.btn-tieni:hover { background: var(--blu-chiaro); transform: translateY(-1px); }
+.btn-pubblica { background: var(--verde); color: white; border: none; padding: 10px 22px; border-radius: 25px; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; }
+.btn-pubblica:hover { background: #059669; transform: translateY(-1px); }
+.btn-elimina { background: transparent; color: var(--rosso); border: 1.5px solid var(--rosso); padding: 10px 18px; border-radius: 25px; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; }
+.btn-elimina:hover { background: var(--rosso); color: white; }
+.utente-card { background: white; border-radius: 16px; padding: 20px 25px; margin-bottom: 12px; border: 1px solid #e5e7eb; display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
+.utente-avatar { width: 46px; height: 46px; border-radius: 50%; background: var(--blu); color: white; display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; flex-shrink: 0; }
+.utente-avatar.oro { background: var(--oro); color: var(--blu-scuro); }
+.utente-info { flex: 1; }
+.utente-nome { font-size: 15px; font-weight: 700; color: var(--blu-scuro); margin-bottom: 3px; }
+.utente-dettagli { font-size: 13px; color: var(--grigio); }
+.utente-badge { font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 10px; }
+.utente-badge.cliente { background: #EFF6FF; color: var(--blu); }
+.utente-badge.pro { background: #FFFBEB; color: #92400E; }
+.utente-badge.bannato { background: #FEF2F2; color: var(--rosso); }
+.utente-badge.verificato { background: #ECFDF5; color: #065F46; }
+.utente-azioni { display: flex; gap: 8px; flex-wrap: wrap; }
+.btn-ban { background: var(--rosso); color: white; border: none; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; }
+.btn-ban:hover { background: #DC2626; }
+.btn-unban { background: var(--verde); color: white; border: none; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; }
+.btn-approva { background: var(--verde); color: white; border: none; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; }
+.btn-rifiuta { background: var(--rosso); color: white; border: none; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; cursor: pointer; transition: 0.3s; font-family: 'Inter', sans-serif; }
+.segnalazione-card { background: white; border-radius: 16px; padding: 20px 25px; margin-bottom: 12px; border: 1px solid #e5e7eb; border-left: 5px solid var(--rosso); }
+.segnalazione-tipo { font-size: 12px; font-weight: 700; background: #FEF2F2; color: var(--rosso); padding: 4px 12px; border-radius: 20px; display: inline-block; margin-bottom: 10px; }
+.segnalazione-testo { font-size: 14px; color: var(--grigio); line-height: 1.6; margin-bottom: 12px; }
+.ricerca-input { width: 100%; padding: 12px 18px; border: 1.5px solid #e5e7eb; border-radius: 12px; font-size: 14px; font-family: 'Inter', sans-serif; outline: none; margin-bottom: 20px; transition: 0.3s; }
+.ricerca-input:focus { border-color: var(--blu); }
+.empty-state { text-align: center; padding: 60px 20px; color: var(--grigio); }
+.empty-state .icon { font-size: 48px; margin-bottom: 15px; }
+.empty-state p { font-size: 15px; }
+.loading { text-align: center; padding: 40px; color: var(--grigio); font-size: 14px; }
+.popup-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999; justify-content: center; align-items: center; padding: 20px; }
+.popup-overlay.show { display: flex; }
+.popup-box { background: white; border-radius: 25px; padding: 40px 35px; max-width: 480px; width: 100%; box-shadow: 0 25px 60px rgba(0,0,0,0.3); text-align: center; }
+.popup-box h2 { font-family: 'Playfair Display', serif; font-size: 24px; color: var(--blu-scuro); margin-bottom: 15px; }
+.popup-box p { color: var(--grigio); font-size: 14px; line-height: 1.6; margin-bottom: 25px; }
+.popup-buttons { display: flex; gap: 12px; }
+.popup-buttons button { flex: 1; padding: 14px; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; border: none; font-family: 'Inter', sans-serif; transition: 0.3s; }
+.btn-conferma-blu { background: var(--blu); color: white; }
+.btn-conferma-verde { background: var(--verde); color: white; }
+.btn-conferma-rosso { background: var(--rosso); color: white; }
+.btn-annulla-gray { background: var(--grigio-chiaro); color: var(--grigio); }
+.telegram-badge { background: #229ED9; color: white; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 10px; display: inline-flex; align-items: center; gap: 5px; }
+.log-item { background: white; border-radius: 12px; padding: 14px 18px; margin-bottom: 8px; border: 1px solid #e5e7eb; display: flex; align-items: center; gap: 12px; font-size: 13px; }
+.log-icon { font-size: 20px; flex-shrink: 0; }
+.log-testo { flex: 1; color: var(--testo); }
+.log-tempo { color: var(--grigio); font-size: 12px; flex-shrink: 0; }
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .main-content { padding: 20px 15px; }
+  .navbar { padding: 12px 16px; }
+}
+</style>
 </head>
 <body>
 
-<!-- NAVBAR AGGIORNATA -->
 <nav class="navbar">
-    <div class="navbar-left">
-        <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
-        <span class="admin-badge">🔧 ADMIN</span>
-    </div>
-    <div class="navbar-right">
-        <a href="dashboard-pro.html" class="btn-nav">📊 Dashboard Pro</a>
-        <a href="index.html" class="btn-nav">🏠 Home</a>
-        <span class="navbar-nome">Rossoni</span>
-        <div class="avatar">R</div>
-    </div>
+  <div class="navbar-left">
+    <a href="index.html" class="logo">PROFES<span>SIONISTI</span></a>
+    <span class="admin-badge">🔧 ADMIN</span>
+  </div>
+  <div class="navbar-right">
+    <span class="telegram-badge">📱 Telegram attivo</span>
+    <span id="navbar-nome" style="color:white;font-size:14px;font-weight:600;">Rossoni</span>
+    <div class="avatar">R</div>
+    <button class="btn-nav" onclick="eseguiLogout()">🚪 Esci</button>
+  </div>
 </nav>
 
 <div class="dashboard-layout">
+  <aside class="sidebar">
+    <ul class="sidebar-menu">
+      <li class="sidebar-item active" onclick="mostraSezione('richieste', this)">
+        <span class="icon">📋</span> Richieste
+        <span class="sidebar-badge" id="badge-richieste">0</span>
+      </li>
+      <li class="sidebar-item" onclick="mostraSezione('utenti', this)">
+        <span class="icon">👥</span> Utenti
+      </li>
+      <li class="sidebar-item" onclick="mostraSezione('professionisti', this)">
+        <span class="icon">✅</span> Approva Pro
+        <span class="sidebar-badge" id="badge-pro">0</span>
+      </li>
+      <li class="sidebar-item" onclick="mostraSezione('segnalazioni', this)">
+        <span class="icon">🚨</span> Segnalazioni
+        <span class="sidebar-badge" id="badge-segn">0</span>
+      </li>
+      <li class="sidebar-item" onclick="mostraSezione('statistiche', this)">
+        <span class="icon">📊</span> Statistiche
+      </li>
+      <li class="sidebar-item" onclick="mostraSezione('log', this)">
+        <span class="icon">📝</span> Log attività
+      </li>
+      <div class="sidebar-divider"></div>
+      <li class="sidebar-item" onclick="window.location.href='dashboard-pro.html'">
+        <span class="icon">💼</span> Dashboard Pro
+      </li>
+      <li class="sidebar-item" onclick="eseguiLogout()">
+        <span class="icon">🚪</span> Esci
+      </li>
+    </ul>
+  </aside>
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-        <ul class="sidebar-menu">
-            <li class="sidebar-item active">
-                <span class="icon">📋</span> Richieste Priority
-            </li>
-            <li class="sidebar-item" onclick="alert('In arrivo!')">
-                <span class="icon">✅</span> Richieste pubblicate
-            </li>
-            <li class="sidebar-item" onclick="alert('In arrivo!')">
-                <span class="icon">💼</span> Lavori miei
-            </li>
-            <div class="sidebar-divider"></div>
-            <div class="sidebar-label">Piattaforma</div>
-            <li class="sidebar-item" onclick="alert('In arrivo!')">
-                <span class="icon">👥</span> Utenti
-            </li>
-            <li class="sidebar-item" onclick="alert('In arrivo!')">
-                <span class="icon">🚫</span> Ban list
-            </li>
-            <li class="sidebar-item" onclick="alert('In arrivo!')">
-                <span class="icon">💰</span> Guadagni
-            </li>
-            <li class="sidebar-item" onclick="alert('In arrivo!')">
-                <span class="icon">📊</span> Statistiche
-            </li>
-            <div class="sidebar-divider"></div>
-            <li class="sidebar-item" onclick="window.location.href='index.html'">
-                <span class="icon">🚪</span> Esci
-            </li>
-        </ul>
-    </aside>
+  <main class="main-content">
 
-    <!-- MAIN -->
-    <main class="main-content">
-
-        <div class="page-header">
-            <h1>🔧 Pannello <span style="color:var(--oro)">Admin</span></h1>
-            <p>Le richieste arrivano prima a te — decidi cosa tenere e cosa pubblicare</p>
+    <!-- SEZIONE RICHIESTE -->
+    <div class="sezione-admin active" id="sezione-richieste">
+      <div class="page-header">
+        <h1>📋 Richieste <span style="color:var(--oro)">in arrivo</span></h1>
+        <p>Le richieste arrivano prima a te — decidi cosa tenere e cosa pubblicare</p>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card oro">
+          <div class="stat-card-icon">⏳</div>
+          <div class="stat-card-numero" id="stat-attesa">0</div>
+          <div class="stat-card-label">In attesa</div>
         </div>
-
-        <!-- STATS -->
-        <div class="stats-row">
-            <div class="stat-card oro">
-                <div class="stat-card-icon">⏳</div>
-                <div class="stat-card-numero">5</div>
-                <div class="stat-card-label">In attesa di decisione</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-card-icon">💼</div>
-                <div class="stat-card-numero">3</div>
-                <div class="stat-card-label">Tenute per te</div>
-            </div>
-            <div class="stat-card verde">
-                <div class="stat-card-icon">✅</div>
-                <div class="stat-card-numero">12</div>
-                <div class="stat-card-label">Pubblicate</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-card-icon">📊</div>
-                <div class="stat-card-numero">87</div>
-                <div class="stat-card-label">Totale richieste gestite</div>
-            </div>
+        <div class="stat-card">
+          <div class="stat-card-icon">💼</div>
+          <div class="stat-card-numero" id="stat-tenute">0</div>
+          <div class="stat-card-label">Tenute per me</div>
         </div>
-
-        <!-- ZONE -->
-        <div class="zone-banner">
-            <div class="zona-card lombardia">
-                <div class="zona-title">🔵 Lombardia</div>
-                <div class="zona-desc">Tutte le richieste delle tue categorie arrivano prima a te, indipendentemente dai mq.</div>
-            </div>
-            <div class="zona-card emilia">
-                <div class="zona-title">🟡 Emilia Romagna</div>
-                <div class="zona-desc">Solo richieste oltre <strong>200mq calpestabili</strong> arrivano prima a te.</div>
-            </div>
-            <div class="zona-card">
-                <div class="zona-title">📋 Le tue categorie</div>
-                <div class="zona-desc">Tinteggiatura • Decorazioni • Ristrutturazioni • Bagno • Resine • Microcemento • SPC • Laminato • Impermeabilizzazioni • Cappotti • Cartongesso • Isolamenti</div>
-            </div>
+        <div class="stat-card verde">
+          <div class="stat-card-icon">✅</div>
+          <div class="stat-card-numero" id="stat-pubblicate">0</div>
+          <div class="stat-card-label">Pubblicate</div>
         </div>
-
-        <!-- FILTRI -->
-        <div class="filtri-bar">
-            <button class="filtro-btn active" onclick="filtra(this)">Tutte (5)</button>
-            <button class="filtro-btn" onclick="filtra(this)">🔵 Lombardia (3)</button>
-            <button class="filtro-btn" onclick="filtra(this)">🟡 Emilia R. (2)</button>
-            <button class="filtro-btn" onclick="filtra(this)">🏗️ Ristrutturazioni</button>
-            <button class="filtro-btn" onclick="filtra(this)">🎨 Tinteggiatura</button>
-            <button class="filtro-btn" onclick="filtra(this)">🚿 Bagno</button>
+        <div class="stat-card">
+          <div class="stat-card-icon">📊</div>
+          <div class="stat-card-numero" id="stat-totale">0</div>
+          <div class="stat-card-label">Totale gestite</div>
         </div>
-
-        <div class="sezione-title">
-            ⏳ In attesa di decisione
-            <span class="count-badge oro">5 nuove</span>
+      </div>
+      <div class="zone-banner">
+        <div class="zona-card lombardia">
+          <div class="zona-title">🔵 Lombardia</div>
+          <div class="zona-desc">Tutte le richieste delle tue categorie arrivano prima a te.</div>
         </div>
-
-        <!-- RICHIESTA 1 -->
-        <div class="richiesta-admin-card lombardia">
-            <div class="regione-badge lombardia">🔵 LOMBARDIA</div>
-            <div class="richiesta-admin-header">
-                <span class="richiesta-categoria">🏗️ Ristrutturazione completa</span>
-                <div style="display:flex;gap:10px;align-items:center">
-                    <span class="timer-badge">⏰ 45 min rimasti</span>
-                    <span class="richiesta-tempo">Arrivata 15 min fa</span>
-                </div>
-            </div>
-            <div class="richiesta-luogo">📍 Milano — Zona Brera</div>
-            <div class="richiesta-descrizione">Ristrutturazione completa appartamento 320mq al piano nobile. Rifacimento completo di tutti i pavimenti, tinteggiatura totale con finiture pregiate, ristrutturazione 3 bagni, nuovo impianto elettrico e idraulico. Budget importante, cercano azienda seria e referenziata.</div>
-            <div class="richiesta-dettagli">
-                <span class="dettaglio-chip grande">📐 320mq calpestabili</span>
-                <span class="dettaglio-chip">🔴 Urgente</span>
-                <span class="dettaglio-chip">💰 Budget elevato</span>
-                <span class="dettaglio-chip">🏠 Piano nobile</span>
-            </div>
-            <div class="richiesta-admin-footer">
-                <button class="btn-tieni" onclick="apriPopup('tieni', 'Ristrutturazione 320mq — Brera, Milano')">💼 Tengo per me</button>
-                <button class="btn-pubblica" onclick="apriPopup('pubblica', 'Ristrutturazione 320mq — Brera, Milano')">✅ Pubblica sulla piattaforma</button>
-                <button class="btn-elimina" onclick="eliminaRichiesta(this)">🗑️ Elimina</button>
-            </div>
+        <div class="zona-card emilia">
+          <div class="zona-title">🟡 Emilia Romagna</div>
+          <div class="zona-desc">Solo richieste oltre <strong>200mq</strong> arrivano prima a te.</div>
         </div>
-
-        <!-- RICHIESTA 2 -->
-        <div class="richiesta-admin-card lombardia">
-            <div class="regione-badge lombardia">🔵 LOMBARDIA</div>
-            <div class="richiesta-admin-header">
-                <span class="richiesta-categoria">🎨 Tinteggiatura e decorazioni</span>
-                <div style="display:flex;gap:10px;align-items:center">
-                    <span class="timer-badge">⏰ 2 ore rimaste</span>
-                    <span class="richiesta-tempo">Arrivata 1 ora fa</span>
-                </div>
-            </div>
-            <div class="richiesta-luogo">📍 Bergamo — Città Alta</div>
-            <div class="richiesta-descrizione">Tinteggiatura completa villa bifamiliare con decorazioni particolari in soggiorno. Totale circa 280mq. Pitture pregiate, effetti decorativi sulle pareti principali. Sopralluogo urgente richiesto.</div>
-            <div class="richiesta-dettagli">
-                <span class="dettaglio-chip grande">📐 280mq calpestabili</span>
-                <span class="dettaglio-chip">🔴 Urgente</span>
-                <span class="dettaglio-chip">✨ Decorazioni speciali</span>
-            </div>
-            <div class="richiesta-admin-footer">
-                <button class="btn-tieni" onclick="apriPopup('tieni', 'Tinteggiatura villa 280mq — Bergamo')">💼 Tengo per me</button>
-                <button class="btn-pubblica" onclick="apriPopup('pubblica', 'Tinteggiatura villa 280mq — Bergamo')">✅ Pubblica sulla piattaforma</button>
-                <button class="btn-elimina" onclick="eliminaRichiesta(this)">🗑️ Elimina</button>
-            </div>
+        <div class="zona-card">
+          <div class="zona-title">📋 Categorie</div>
+          <div class="zona-desc">Tinteggiatura • Decorazioni • Ristrutturazioni • Bagno • Resine • Microcemento • SPC • Laminato • Impermeabilizzazioni • Cappotti • Cartongesso</div>
         </div>
+      </div>
+      <div class="filtri-bar">
+        <button class="filtro-btn active" onclick="filtraRichieste('tutte', this)">Tutte</button>
+        <button class="filtro-btn" onclick="filtraRichieste('lombardia', this)">🔵 Lombardia</button>
+        <button class="filtro-btn" onclick="filtraRichieste('emilia', this)">🟡 Emilia R.</button>
+        <button class="filtro-btn" onclick="filtraRichieste('attesa', this)">⏳ In attesa</button>
+      </div>
+      <div class="sezione-title">
+        ⏳ In attesa di decisione
+        <span class="count-badge oro" id="badge-attesa">0</span>
+      </div>
+      <div id="lista-richieste">
+        <div class="loading">⏳ Caricamento richieste...</div>
+      </div>
+    </div>
 
-        <!-- RICHIESTA 3 -->
-        <div class="richiesta-admin-card emilia">
-            <div class="regione-badge emilia">🟡 EMILIA ROMAGNA</div>
-            <div class="richiesta-admin-header">
-                <span class="richiesta-categoria">🚿 Ristrutturazione bagno</span>
-                <div style="display:flex;gap:10px;align-items:center">
-                    <span class="timer-badge">⏰ 3 ore rimaste</span>
-                    <span class="richiesta-tempo">Arrivata 2 ore fa</span>
-                </div>
-            </div>
-            <div class="richiesta-luogo">📍 Bologna — Centro</div>
-            <div class="richiesta-descrizione">Villa con 4 bagni da ristrutturare completamente, più tinteggiatura totale dell'immobile. Superficie totale 450mq. Cercano impresa unica per tutto il lavoro. Progetto da avviare il prima possibile.</div>
-            <div class="richiesta-dettagli">
-                <span class="dettaglio-chip grande">📐 450mq — Sopra soglia 200mq ✅</span>
-                <span class="dettaglio-chip">🔴 Urgente</span>
-                <span class="dettaglio-chip">🏠 4 bagni</span>
-                <span class="dettaglio-chip">💰 Budget importante</span>
-            </div>
-            <div class="richiesta-admin-footer">
-                <button class="btn-tieni" onclick="apriPopup('tieni', 'Villa 450mq 4 bagni — Bologna')">💼 Tengo per me</button>
-                <button class="btn-pubblica" onclick="apriPopup('pubblica', 'Villa 450mq 4 bagni — Bologna')">✅ Pubblica sulla piattaforma</button>
-                <button class="btn-elimina" onclick="eliminaRichiesta(this)">🗑️ Elimina</button>
-            </div>
+    <!-- SEZIONE UTENTI -->
+    <div class="sezione-admin" id="sezione-utenti">
+      <div class="page-header">
+        <h1>👥 Gestione <span style="color:var(--oro)">Utenti</span></h1>
+        <p>Lista completa di tutti gli utenti registrati</p>
+      </div>
+      <input type="text" class="ricerca-input" placeholder="🔍 Cerca per nome o email..." oninput="cercaUtenti(this.value)">
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-card-icon">👤</div>
+          <div class="stat-card-numero" id="stat-clienti">0</div>
+          <div class="stat-card-label">Clienti</div>
         </div>
-
-        <!-- RICHIESTA 4 -->
-        <div class="richiesta-admin-card lombardia">
-            <div class="regione-badge lombardia">🔵 LOMBARDIA</div>
-            <div class="richiesta-admin-header">
-                <span class="richiesta-categoria">🧱 Resina e microcemento</span>
-                <div style="display:flex;gap:10px;align-items:center">
-                    <span class="timer-badge">⏰ 4 ore rimaste</span>
-                    <span class="richiesta-tempo">Arrivata 3 ore fa</span>
-                </div>
-            </div>
-            <div class="richiesta-luogo">📍 Monza — Zona residenziale</div>
-            <div class="richiesta-descrizione">Posa resina epossidica su pavimento garage e zona living open space. Microcemento su pareti bagno padronale. Circa 150mq totali. Cercano professionisti esperti con portfolio.</div>
-            <div class="richiesta-dettagli">
-                <span class="dettaglio-chip">📐 150mq</span>
-                <span class="dettaglio-chip">🟡 Entro questo mese</span>
-                <span class="dettaglio-chip">🎨 Resina + Microcemento</span>
-            </div>
-            <div class="richiesta-admin-footer">
-                <button class="btn-tieni" onclick="apriPopup('tieni', 'Resina e microcemento 150mq — Monza')">💼 Tengo per me</button>
-                <button class="btn-pubblica" onclick="apriPopup('pubblica', 'Resina e microcemento 150mq — Monza')">✅ Pubblica sulla piattaforma</button>
-                <button class="btn-elimina" onclick="eliminaRichiesta(this)">🗑️ Elimina</button>
-            </div>
+        <div class="stat-card oro">
+          <div class="stat-card-icon">🔧</div>
+          <div class="stat-card-numero" id="stat-pro">0</div>
+          <div class="stat-card-label">Professionisti</div>
         </div>
-
-        <!-- RICHIESTA 5 -->
-        <div class="richiesta-admin-card emilia">
-            <div class="regione-badge emilia">🟡 EMILIA ROMAGNA</div>
-            <div class="richiesta-admin-header">
-                <span class="richiesta-categoria">🏗️ Impermeabilizzazione + Cappotto</span>
-                <div style="display:flex;gap:10px;align-items:center">
-                    <span class="timer-badge">⏰ 5 ore rimaste</span>
-                    <span class="richiesta-tempo">Arrivata 4 ore fa</span>
-                </div>
-            </div>
-            <div class="richiesta-luogo">📍 Modena — Zona industriale</div>
-            <div class="richiesta-descrizione">Capannone industriale da impermeabilizzare sul tetto (800mq) e cappotto termico sulle pareti esterne. Superficie totale edificio 600mq. Lavoro urgente per infiltrazioni evidenti.</div>
-            <div class="richiesta-dettagli">
-                <span class="dettaglio-chip grande">📐 600mq — Sopra soglia 200mq ✅</span>
-                <span class="dettaglio-chip">🔴 Urgente — Infiltrazioni</span>
-                <span class="dettaglio-chip">🏭 Industriale</span>
-                <span class="dettaglio-chip">💰 Budget elevato</span>
-            </div>
-            <div class="richiesta-admin-footer">
-                <button class="btn-tieni" onclick="apriPopup('tieni', 'Impermeabilizzazione capannone 600mq — Modena')">💼 Tengo per me</button>
-                <button class="btn-pubblica" onclick="apriPopup('pubblica', 'Impermeabilizzazione capannone 600mq — Modena')">✅ Pubblica sulla piattaforma</button>
-                <button class="btn-elimina" onclick="eliminaRichiesta(this)">🗑️ Elimina</button>
-            </div>
+        <div class="stat-card rosso">
+          <div class="stat-card-icon">🚫</div>
+          <div class="stat-card-numero" id="stat-bannati">0</div>
+          <div class="stat-card-label">Bannati</div>
         </div>
+      </div>
+      <div id="lista-utenti">
+        <div class="loading">⏳ Caricamento utenti...</div>
+      </div>
+    </div>
 
-    </main>
+    <!-- SEZIONE APPROVA PROFESSIONISTI -->
+    <div class="sezione-admin" id="sezione-professionisti">
+      <div class="page-header">
+        <h1>✅ Approva <span style="color:var(--oro)">Professionisti</span></h1>
+        <p>Verifica documenti e approva i nuovi professionisti</p>
+      </div>
+      <div id="lista-professionisti">
+        <div class="loading">⏳ Caricamento...</div>
+      </div>
+    </div>
+
+    <!-- SEZIONE SEGNALAZIONI -->
+    <div class="sezione-admin" id="sezione-segnalazioni">
+      <div class="page-header">
+        <h1>🚨 Gestione <span style="color:var(--oro)">Segnalazioni</span></h1>
+        <p>Gestisci i report e applica ban se necessario</p>
+      </div>
+      <div id="lista-segnalazioni">
+        <div class="loading">⏳ Caricamento...</div>
+      </div>
+    </div>
+
+    <!-- SEZIONE STATISTICHE -->
+    <div class="sezione-admin" id="sezione-statistiche">
+      <div class="page-header">
+        <h1>📊 <span style="color:var(--oro)">Statistiche</span></h1>
+        <p>Panoramica completa della piattaforma</p>
+      </div>
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-card-icon">👥</div>
+          <div class="stat-card-numero" id="stat-tot-utenti">0</div>
+          <div class="stat-card-label">Utenti totali</div>
+        </div>
+        <div class="stat-card oro">
+          <div class="stat-card-icon">📋</div>
+          <div class="stat-card-numero" id="stat-tot-richieste">0</div>
+          <div class="stat-card-label">Richieste totali</div>
+        </div>
+        <div class="stat-card verde">
+          <div class="stat-card-icon">💬</div>
+          <div class="stat-card-numero" id="stat-tot-chat">0</div>
+          <div class="stat-card-label">Chat attive</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-icon">⭐</div>
+          <div class="stat-card-numero" id="stat-tot-rec">0</div>
+          <div class="stat-card-label">Recensioni</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEZIONE LOG -->
+    <div class="sezione-admin" id="sezione-log">
+      <div class="page-header">
+        <h1>📝 Log <span style="color:var(--oro)">Attività</span></h1>
+        <p>Ultime azioni sulla piattaforma</p>
+      </div>
+      <div id="lista-log">
+        <div class="loading">⏳ Caricamento log...</div>
+      </div>
+    </div>
+
+  </main>
 </div>
 
 <!-- POPUP TIENI -->
 <div class="popup-overlay" id="popupTieni">
-    <div class="popup-box">
-        <div style="font-size:60px;margin-bottom:15px">💼</div>
-        <h2>Tieni per te</h2>
-        <p id="popup-tieni-text">Stai per tenere questa richiesta per la tua impresa. Non sarà visibile agli altri professionisti sulla piattaforma.</p>
-        <div class="popup-buttons">
-            <button class="btn-annulla-gray" onclick="chiudiPopup('popupTieni')">Annulla</button>
-            <button class="btn-conferma-blu" onclick="confermaAzione('tieni')">💼 Confermo, è mia!</button>
-        </div>
+  <div class="popup-box">
+    <div style="font-size:60px;margin-bottom:15px">💼</div>
+    <h2>Tieni per te</h2>
+    <p id="popup-tieni-text">Stai per tenere questa richiesta per la tua impresa.</p>
+    <div class="popup-buttons">
+      <button class="btn-annulla-gray" onclick="chiudiPopup('popupTieni')">Annulla</button>
+      <button class="btn-conferma-blu" onclick="confermaAzione('tieni')">💼 Confermo!</button>
     </div>
+  </div>
 </div>
 
 <!-- POPUP PUBBLICA -->
 <div class="popup-overlay" id="popupPubblica">
-    <div class="popup-box">
-        <div style="font-size:60px;margin-bottom:15px">✅</div>
-        <h2>Pubblica sulla piattaforma</h2>
-        <p id="popup-pubblica-text">Stai per pubblicare questa richiesta. Sarà visibile a tutti i professionisti della zona che potranno acquistare il contatto.</p>
-        <div class="popup-buttons">
-            <button class="btn-annulla-gray" onclick="chiudiPopup('popupPubblica')">Annulla</button>
-            <button class="btn-conferma-verde" onclick="confermaAzione('pubblica')">✅ Pubblica ora</button>
-        </div>
+  <div class="popup-box">
+    <div style="font-size:60px;margin-bottom:15px">✅</div>
+    <h2>Pubblica sulla piattaforma</h2>
+    <p id="popup-pubblica-text">Questa richiesta sarà visibile a tutti i professionisti della zona.</p>
+    <div class="popup-buttons">
+      <button class="btn-annulla-gray" onclick="chiudiPopup('popupPubblica')">Annulla</button>
+      <button class="btn-conferma-verde" onclick="confermaAzione('pubblica')">✅ Pubblica ora</button>
     </div>
+  </div>
 </div>
 
-<script>
-    let richiestaCorrente = '';
-    let cardCorrente = null;
+<!-- POPUP BAN -->
+<div class="popup-overlay" id="popupBan">
+  <div class="popup-box">
+    <div style="font-size:60px;margin-bottom:15px">🚫</div>
+    <h2>Banna utente</h2>
+    <p id="popup-ban-text">Sei sicuro di voler bannare questo utente?</p>
+    <div class="popup-buttons">
+      <button class="btn-annulla-gray" onclick="chiudiPopup('popupBan')">Annulla</button>
+      <button class="btn-conferma-rosso" onclick="confermaBan()">🚫 Banna</button>
+    </div>
+  </div>
+</div>
 
-    function filtra(btn) {
-        document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-    }
+<script type="module">
+import { initializeApp, getApps } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-app.js';
+import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-auth.js';
+import { getFirestore, collection, doc, getDoc, getDocs, updateDoc, deleteDoc, query, where, orderBy, limit, onSnapshot, serverTimestamp, addDoc } from 'https://www.gstatic.com/firebasejs/11.0.0/firebase-firestore.js';
 
-    function apriPopup(tipo, richiesta) {
-        richiestaCorrente = richiesta;
-        cardCorrente = event.target.closest('.richiesta-admin-card');
-        if (tipo === 'tieni') {
-            document.getElementById('popup-tieni-text').textContent =
-                'Stai per tenere per te: "' + richiesta + '". Non sarà visibile agli altri professionisti.';
-            document.getElementById('popupTieni').classList.add('show');
-        } else {
-            document.getElementById('popup-pubblica-text').textContent =
-                'Stai per pubblicare: "' + richiesta + '". Sarà visibile a tutti i professionisti della zona.';
-            document.getElementById('popupPubblica').classList.add('show');
-        }
-    }
+const firebaseConfig = {
+  apiKey: "AIzaSyCQHoCYYfdmkXnV2CTGBSq3gpE986QOq2o",
+  authDomain: "rossoni-f069a.firebaseapp.com",
+  projectId: "rossoni-f069a",
+  storageBucket: "rossoni-f069a.firebasestorage.app",
+  messagingSenderId: "708686815315",
+  appId: "1:708686815315:web:0810734346e679e7c066a6"
+};
 
-    function chiudiPopup(id) {
-        document.getElementById(id).classList.remove('show');
-    }
+const ADMIN_EMAIL = "rossoni_edilizia@outlook.it";
+const TELEGRAM_TOKEN = "8762052936:AAEnoDRjM0bBYPmyy1r57ZZH0FdJ0FW-L0";
+const TELEGRAM_CHAT_ID = "5710972025";
 
-    function confermaAzione(tipo) {
-        chiudiPopup(tipo === 'tieni' ? 'popupTieni' : 'popupPubblica');
-        if (cardCorrente) {
-            cardCorrente.style.opacity = '0';
-            cardCorrente.style.transform = 'translateX(20px)';
-            cardCorrente.style.transition = '0.3s';
-            setTimeout(() => {
-                cardCorrente.remove();
-                if (tipo === 'tieni') {
-                    alert('✅ Richiesta assegnata a Rossoni Edilizia!\n\nLa trovi nella sezione "Lavori miei".');
-                } else {
-                    alert('✅ Richiesta pubblicata sulla piattaforma!\n\nI professionisti della zona possono ora vederla.');
-                }
-            }, 300);
-        }
-    }
+const TUE_ZONE = {
+  lombardia: { attivo: true, soglia: 0 },
+  emilia: { attivo: true, soglia: 200 }
+};
+const TUE_CATEGORIE = ['tinteggiatura','decorazioni','ristrutturazione','bagno','resina','microcemento','spc','laminato','impermeabilizzazione','cappotto','cartongesso','isolamento'];
 
-    function eliminaRichiesta(btn) {
-        const card = btn.closest('.richiesta-admin-card');
-        if (confirm('Sei sicuro di voler eliminare questa richiesta?')) {
-            card.style.opacity = '0';
-            card.style.transform = 'translateX(-20px)';
-            card.style.transition = '0.3s';
-            setTimeout(() => card.remove(), 300);
-        }
-    }
+const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-    // Chiudi popup con ESC
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            chiudiPopup('popupTieni');
-            chiudiPopup('popupPubblica');
-        }
+let tutteRichieste = [];
+let tuttiUtenti = [];
+let richiestaCorrenteId = null;
+let cardCorrente = null;
+let utenteCorrenteId = null;
+
+// ── TELEGRAM ──
+async function inviaNotificaTelegram(messaggio) {
+  try {
+    const url = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
+    await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: TELEGRAM_CHAT_ID,
+        text: messaggio,
+        parse_mode: 'HTML'
+      })
     });
+  } catch(e) { console.log('Telegram error:', e); }
+}
+
+function richiestaDiInteresse(dati) {
+  const cat = (dati.categoria || '').toLowerCase();
+  const citta = (dati.citta || '').toLowerCase();
+  const regione = (dati.regione || '').toLowerCase();
+  const mq = parseInt(dati.mq || dati.superficie || 0);
+  const catOk = TUE_CATEGORIE.some(c => cat.includes(c));
+  if (!catOk) return false;
+  if (citta.includes('lombar') || regione.includes('lombar') ||
+      ['milano','bergamo','brescia','monza','como','varese','lecco','lodi','cremona','mantova','pavia','sondrio'].some(c => citta.includes(c))) {
+    return true;
+  }
+  if (citta.includes('emilia') || regione.includes('emilia') ||
+      ['bologna','modena','parma','reggio','ferrara','ravenna','forlì','rimini','piacenza'].some(c => citta.includes(c))) {
+    return mq >= 200;
+  }
+  return false;
+}
+
+// ── LOGOUT ──
+window.eseguiLogout = async function() {
+  await signOut(auth);
+  localStorage.clear();
+  window.location.href = 'index.html';
+};
+
+// ── NAVIGAZIONE ──
+window.mostraSezione = function(nome, el) {
+  document.querySelectorAll('.sezione-admin').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
+  document.getElementById('sezione-' + nome).classList.add('active');
+  if (el) el.classList.add('active');
+  if (nome === 'utenti') caricaUtenti();
+  if (nome === 'professionisti') caricaProfessionisti();
+  if (nome === 'segnalazioni') caricaSegnalazioni();
+  if (nome === 'statistiche') caricaStatistiche();
+  if (nome === 'log') caricaLog();
+};
+
+// ── FILTRI RICHIESTE ──
+window.filtraRichieste = function(tipo, btn) {
+  document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const cards = document.querySelectorAll('.richiesta-admin-card');
+  cards.forEach(card => {
+    if (tipo === 'tutte') { card.style.display = ''; return; }
+    if (tipo === 'lombardia') { card.style.display = card.classList.contains('lombardia') ? '' : 'none'; return; }
+    if (tipo === 'emilia') { card.style.display = card.classList.contains('emilia') ? '' : 'none'; return; }
+    if (tipo === 'attesa') { card.style.display = card.dataset.stato === 'attesa' ? '' : 'none'; return; }
+  });
+};
+
+// ── CARICA RICHIESTE ──
+function caricaRichieste() {
+  const q = query(collection(db, 'richieste'), orderBy('timestamp', 'desc'), limit(50));
+  onSnapshot(q, (snap) => {
+    tutteRichieste = [];
+    let attesa = 0, tenute = 0, pubblicate = 0;
+    snap.forEach(d => {
+      const dati = { id: d.id, ...d.data() };
+      tutteRichieste.push(dati);
+      if (dati.statoAdmin === 'tenuta') tenute++;
+      else if (dati.statoAdmin === 'pubblicata') pubblicate++;
+      else attesa++;
+    });
+    document.getElementById('stat-attesa').textContent = attesa;
+    document.getElementById('stat-tenute').textContent = tenute;
+    document.getElementById('stat-pubblicate').textContent = pubblicate;
+    document.getElementById('stat-totale').textContent = snap.size;
+    document.getElementById('badge-richieste').textContent = attesa;
+    document.getElementById('badge-attesa').textContent = attesa + ' nuove';
+    renderRichieste(tutteRichieste);
+  });
+}
+
+function renderRichieste(lista) {
+  const el = document.getElementById('lista-richieste');
+  const attesa = lista.filter(r => !r.statoAdmin || r.statoAdmin === 'attesa');
+  if (attesa.length === 0) {
+    el.innerHTML = '<div class="empty-state"><div class="icon">📭</div><p>Nessuna richiesta in attesa</p></div>';
+    return;
+  }
+  el.innerHTML = attesa.map(r => {
+    const regione = getRegione(r.citta || '');
+    const tempo = r.timestamp ? tempoFa(r.timestamp.seconds) : 'poco fa';
+    return `
+    <div class="richiesta-admin-card ${regione}" data-stato="attesa" data-id="${r.id}">
+      <span class="regione-badge ${regione}">${regione === 'lombardia' ? '🔵 LOMBARDIA' : regione === 'emilia' ? '🟡 EMILIA ROMAGNA' : '🟢 ALTRA ZONA'}</span>
+      <div class="richiesta-admin-header">
+        <span class="richiesta-categoria">🏗️ ${r.categoria || 'Non specificata'}</span>
+        <span class="richiesta-tempo">Arrivata ${tempo}</span>
+      </div>
+      <div class="richiesta-luogo">📍 ${r.citta || 'Città non specificata'}</div>
+      <div class="richiesta-descrizione">${r.descrizione || 'Nessuna descrizione'}</div>
+      <div class="richiesta-dettagli">
+        ${r.mq ? `<span class="dettaglio-chip grande">📐 ${r.mq}mq</span>` : ''}
+        ${r.urgente ? '<span class="dettaglio-chip">🔴 Urgente</span>' : ''}
+        ${r.budget ? `<span class="dettaglio-chip">💰 ${r.budget}</span>` : ''}
+      </div>
+      <div class="richiesta-admin-footer">
+        <button class="btn-tieni" onclick="apriPopupAzione('tieni', '${r.id}', '${(r.categoria||'').replace(/'/g,"\\'")} — ${(r.citta||'').replace(/'/g,"\\'")}', this)">💼 Tengo per me</button>
+        <button class="btn-pubblica" onclick="apriPopupAzione('pubblica', '${r.id}', '${(r.categoria||'').replace(/'/g,"\\'")} — ${(r.citta||'').replace(/'/g,"\\'")}', this)">✅ Pubblica</button>
+        <button class="btn-elimina" onclick="eliminaRichiesta('${r.id}', this)">🗑️ Elimina</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function getRegione(citta) {
+  const c = citta.toLowerCase();
+  if (['milano','bergamo','brescia','monza','como','varese','lecco','lodi','cremona','mantova','pavia','sondrio','lombar'].some(x => c.includes(x))) return 'lombardia';
+  if (['bologna','modena','parma','reggio','ferrara','ravenna','forlì','rimini','piacenza','emilia'].some(x => c.includes(x))) return 'emilia';
+  return 'altra';
+}
+
+// ── POPUP AZIONI ──
+window.apriPopupAzione = function(tipo, id, nome, btn) {
+  richiestaCorrenteId = id;
+  cardCorrente = btn ? btn.closest('.richiesta-admin-card') : null;
+  if (tipo === 'tieni') {
+    document.getElementById('popup-tieni-text').textContent = `Stai per tenere per te: "${nome}". Non sarà visibile agli altri professionisti.`;
+    document.getElementById('popupTieni').classList.add('show');
+  } else {
+    document.getElementById('popup-pubblica-text').textContent = `Stai per pubblicare: "${nome}". Sarà visibile a tutti i professionisti della zona.`;
+    document.getElementById('popupPubblica').classList.add('show');
+  }
+};
+
+window.chiudiPopup = function(id) {
+  document.getElementById(id).classList.remove('show');
+};
+
+window.confermaAzione = async function(tipo) {
+  chiudiPopup(tipo === 'tieni' ? 'popupTieni' : 'popupPubblica');
+  if (!richiestaCorrenteId) return;
+  await updateDoc(doc(db, 'richieste', richiestaCorrenteId), {
+    statoAdmin: tipo === 'tieni' ? 'tenuta' : 'pubblicata',
+    stato: tipo === 'pubblica' ? 'aperta' : 'riservata'
+  });
+  await addDoc(collection(db, 'adminLog'), {
+    azione: tipo === 'tieni' ? 'Richiesta tenuta' : 'Richiesta pubblicata',
+    richiestaId: richiestaCorrenteId,
+    timestamp: serverTimestamp()
+  });
+  if (cardCorrente) {
+    cardCorrente.style.opacity = '0';
+    cardCorrente.style.transition = '0.3s';
+    setTimeout(() => cardCorrente.remove(), 300);
+  }
+  alert(tipo === 'tieni' ? '✅ Richiesta assegnata a Rossoni Edilizia!' : '✅ Richiesta pubblicata sulla piattaforma!');
+};
+
+window.eliminaRichiesta = async function(id, btn) {
+  if (!confirm('Eliminare questa richiesta?')) return;
+  await deleteDoc(doc(db, 'richieste', id));
+  const card = btn.closest('.richiesta-admin-card');
+  card.style.opacity = '0'; card.style.transition = '0.3s';
+  setTimeout(() => card.remove(), 300);
+};
+
+// ── CARICA UTENTI ──
+async function caricaUtenti() {
+  document.getElementById('lista-utenti').innerHTML = '<div class="loading">⏳ Caricamento...</div>';
+  const snap = await getDocs(collection(db, 'utenti'));
+  tuttiUtenti = [];
+  let clienti = 0, pro = 0, bannati = 0;
+  snap.forEach(d => {
+    const dati = { id: d.id, ...d.data() };
+    tuttiUtenti.push(dati);
+    if (dati.ruolo === 'cliente') clienti++;
+    else if (dati.ruolo === 'professionista') pro++;
+    if (dati.bannato || dati.ban) bannati++;
+  });
+  document.getElementById('stat-clienti').textContent = clienti;
+  document.getElementById('stat-pro').textContent = pro;
+  document.getElementById('stat-bannati').textContent = bannati;
+  renderUtenti(tuttiUtenti);
+}
+
+function renderUtenti(lista) {
+  const el = document.getElementById('lista-utenti');
+  if (lista.length === 0) { el.innerHTML = '<div class="empty-state"><div class="icon">👥</div><p>Nessun utente trovato</p></div>'; return; }
+  el.innerHTML = lista.map(u => {
+    const nome = u.nome || u.ragioneSociale || 'Sconosciuto';
+    const iniziale = nome.charAt(0).toUpperCase();
+    const bannato = u.bannato || u.ban;
+    return `
+    <div class="utente-card">
+      <div class="utente-avatar ${u.ruolo === 'professionista' ? 'oro' : ''}">${iniziale}</div>
+      <div class="utente-info">
+        <div class="utente-nome">${nome} 
+          <span class="utente-badge ${u.ruolo === 'professionista' ? 'pro' : 'cliente'}">${u.ruolo === 'professionista' ? '🔧 Pro' : '👤 Cliente'}</span>
+          ${bannato ? '<span class="utente-badge bannato">🚫 Bannato</span>' : ''}
+          ${u.verificato ? '<span class="utente-badge verificato">✅ Verificato</span>' : ''}
+        </div>
+        <div class="utente-dettagli">${u.email || ''} • ${u.citta || ''} • ${u.categoria || ''}</div>
+      </div>
+      <div class="utente-azioni">
+        ${bannato
+          ? `<button class="btn-unban" onclick="sbannaUtente('${u.id}')">✅ Sbanna</button>`
+          : `<button class="btn-ban" onclick="apriPopupBan('${u.id}', '${nome.replace(/'/g,"\\'")}')">🚫 Banna</button>`
+        }
+      </div>
+    </div>`;
+  }).join('');
+}
+
+window.cercaUtenti = function(testo) {
+  const filtrati = tuttiUtenti.filter(u => {
+    const nome = (u.nome || u.ragioneSociale || '').toLowerCase();
+    const email = (u.email || '').toLowerCase();
+    return nome.includes(testo.toLowerCase()) || email.includes(testo.toLowerCase());
+  });
+  renderUtenti(filtrati);
+};
+
+window.apriPopupBan = function(id, nome) {
+  utenteCorrenteId = id;
+  document.getElementById('popup-ban-text').textContent = `Sei sicuro di voler bannare "${nome}"? Non potrà più accedere alla piattaforma.`;
+  document.getElementById('popupBan').classList.add('show');
+};
+
+window.confermaBan = async function() {
+  chiudiPopup('popupBan');
+  if (!utenteCorrenteId) return;
+  await updateDoc(doc(db, 'utenti', utenteCorrenteId), { bannato: true });
+  await addDoc(collection(db, 'adminLog'), { azione: 'Utente bannato', utenteId: utenteCorrenteId, timestamp: serverTimestamp() });
+  caricaUtenti();
+  alert('✅ Utente bannato!');
+};
+
+window.sbannaUtente = async function(id) {
+  if (!confirm('Sbannare questo utente?')) return;
+  await updateDoc(doc(db, 'utenti', id), { bannato: false });
+  await addDoc(collection(db, 'adminLog'), { azione: 'Utente sbannato', utenteId: id, timestamp: serverTimestamp() });
+  caricaUtenti();
+  alert('✅ Utente sbannato!');
+};
+
+// ── CARICA PROFESSIONISTI DA APPROVARE ──
+async function caricaProfessionisti() {
+  document.getElementById('lista-professionisti').innerHTML = '<div class="loading">⏳ Caricamento...</div>';
+  const q = query(collection(db, 'utenti'), where('ruolo', '==', 'professionista'), where('verificato', '==', false));
+  const snap = await getDocs(q);
+  document.getElementById('badge-pro').textContent = snap.size;
+  if (snap.empty) {
+    document.getElementById('lista-professionisti').innerHTML = '<div class="empty-state"><div class="icon">✅</div><p>Nessun professionista in attesa di approvazione</p></div>';
+    return;
+  }
+  let html = '';
+  snap.forEach(d => {
+    const u = { id: d.id, ...d.data() };
+    html += `
+    <div class="utente-card">
+      <div class="utente-avatar oro">${(u.ragioneSociale || 'P').charAt(0)}</div>
+      <div class="utente-info">
+        <div class="utente-nome">${u.ragioneSociale || 'Sconosciuto'} <span class="utente-badge pro">🔧 Pro</span></div>
+        <div class="utente-dettagli">${u.email || ''} • ${u.categoria || ''} • ${u.citta || ''} • P.IVA: ${u.piva || 'N/D'}</div>
+      </div>
+      <div class="utente-azioni">
+        <button class="btn-approva" onclick="approvaPro('${u.id}', '${(u.ragioneSociale||'').replace(/'/g,"\\'")}')">✅ Approva</button>
+        <button class="btn-rifiuta" onclick="rifiutaPro('${u.id}')">❌ Rifiuta</button>
+      </div>
+    </div>`;
+  });
+  document.getElementById('lista-professionisti').innerHTML = html;
+}
+
+window.approvaPro = async function(id, nome) {
+  await updateDoc(doc(db, 'utenti', id), { verificato: true });
+  await addDoc(collection(db, 'adminLog'), { azione: `Professionista approvato: ${nome}`, utenteId: id, timestamp: serverTimestamp() });
+  caricaProfessionisti();
+  alert(`✅ ${nome} approvato!`);
+};
+
+window.rifiutaPro = async function(id) {
+  if (!confirm('Rifiutare questo professionista?')) return;
+  await updateDoc(doc(db, 'utenti', id), { bannato: true, motivoBan: 'Documenti non validi' });
+  caricaProfessionisti();
+  alert('❌ Professionista rifiutato.');
+};
+
+// ── CARICA SEGNALAZIONI ──
+async function caricaSegnalazioni() {
+  document.getElementById('lista-segnalazioni').innerHTML = '<div class="loading">⏳ Caricamento...</div>';
+  const q = query(collection(db, 'segnalazioni'), where('stato', '==', 'aperta'), orderBy('timestamp', 'desc'));
+  const snap = await getDocs(q);
+  document.getElementById('badge-segn').textContent = snap.size;
+  if (snap.empty) {
+    document.getElementById('lista-segnalazioni').innerHTML = '<div class="empty-state"><div class="icon">✅</div><p>Nessuna segnalazione aperta</p></div>';
+    return;
+  }
+  let html = '';
+  snap.forEach(d => {
+    const s = { id: d.id, ...d.data() };
+    html += `
+    <div class="segnalazione-card">
+      <span class="segnalazione-tipo">🚨 ${s.tipo || 'Segnalazione'}</span>
+      <div class="segnalazione-testo">${s.descrizione || 'Nessuna descrizione'}</div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn-ban" onclick="banDaSegnalazione('${s.id}', '${s.aUID}')">🚫 Banna utente</button>
+        <button class="btn-unban" onclick="archiviaSegnalazione('${s.id}')">✅ Archivia</button>
+      </div>
+    </div>`;
+  });
+  document.getElementById('lista-segnalazioni').innerHTML = html;
+}
+
+window.banDaSegnalazione = async function(segnalazioneId, utenteId) {
+  if (!confirm('Bannare questo utente?')) return;
+  await updateDoc(doc(db, 'utenti', utenteId), { bannato: true });
+  await updateDoc(doc(db, 'segnalazioni', segnalazioneId), { stato: 'chiusa', banApplicato: true });
+  caricaSegnalazioni();
+  alert('✅ Utente bannato e segnalazione chiusa!');
+};
+
+window.archiviaSegnalazione = async function(id) {
+  await updateDoc(doc(db, 'segnalazioni', id), { stato: 'archiviata' });
+  caricaSegnalazioni();
+};
+
+// ── STATISTICHE ──
+async function caricaStatistiche() {
+  const [utenti, richieste, chat, recensioni] = await Promise.all([
+    getDocs(collection(db, 'utenti')),
+    getDocs(collection(db, 'richieste')),
+    getDocs(collection(db, 'chat')),
+    getDocs(collection(db, 'recensioni'))
+  ]);
+  document.getElementById('stat-tot-utenti').textContent = utenti.size;
+  document.getElementById('stat-tot-richieste').textContent = richieste.size;
+  document.getElementById('stat-tot-chat').textContent = chat.size;
+  document.getElementById('stat-tot-rec').textContent = recensioni.size;
+}
+
+// ── LOG ──
+async function caricaLog() {
+  document.getElementById('lista-log').innerHTML = '<div class="loading">⏳ Caricamento...</div>';
+  const q = query(collection(db, 'adminLog'), orderBy('timestamp', 'desc'), limit(30));
+  const snap = await getDocs(q);
+  if (snap.empty) { document.getElementById('lista-log').innerHTML = '<div class="empty-state"><div class="icon">📝</div><p>Nessuna attività registrata</p></div>'; return; }
+  let html = '';
+  snap.forEach(d => {
+    const l = d.data();
+    const tempo = l.timestamp ? tempoFa(l.timestamp.seconds) : '';
+    html += `<div class="log-item"><span class="log-icon">📌</span><span class="log-testo">${l.azione}</span><span class="log-tempo">${tempo}</span></div>`;
+  });
+  document.getElementById('lista-log').innerHTML = html;
+}
+
+// ── UTILITY ──
+function tempoFa(seconds) {
+  const diff = Math.floor(Date.now() / 1000) - seconds;
+  if (diff < 60) return 'poco fa';
+  if (diff < 3600) return Math.floor(diff/60) + ' min fa';
+  if (diff < 86400) return Math.floor(diff/3600) + ' ore fa';
+  return Math.floor(diff/86400) + ' giorni fa';
+}
+
+// ── AUTH ──
+onAuthStateChanged(auth, async (user) => {
+  if (!user) { window.location.href = 'cliente.html?tab=accedi'; return; }
+  const snap = await getDoc(doc(db, 'utenti', user.uid));
+  if (!snap.exists()) { window.location.href = 'index.html'; return; }
+  const dati = snap.data();
+  if (user.email !== ADMIN_EMAIL) {
+    alert('⛔ Accesso negato. Area riservata all\'amministratore.');
+    window.location.href = dati.ruolo === 'professionista' ? 'dashboard-pro.html' : 'dashboard-cliente.html';
+    return;
+  }
+  caricaRichieste();
+
+  // Ascolta nuove richieste e invia notifica Telegram
+  const q = query(collection(db, 'richieste'), where('statoAdmin', '==', null), orderBy('timestamp', 'desc'), limit(1));
+  onSnapshot(collection(db, 'richieste'), (snap) => {
+    snap.docChanges().forEach(change => {
+      if (change.type === 'added') {
+        const r = change.doc.data();
+        if (richiestaDiInteresse(r)) {
+          const msg = `🔔 <b>NUOVA RICHIESTA DI INTERESSE!</b>\n\n📍 <b>${r.citta || 'N/D'}</b>\n🏗️ ${r.categoria || 'N/D'}\n📐 ${r.mq ? r.mq + 'mq' : 'N/D'}\n💰 ${r.budget || 'N/D'}\n${r.urgente ? '🔴 URGENTE' : ''}\n\n📝 ${(r.descrizione || '').substring(0, 200)}\n\n👉 Vai su admin.html per gestirla!`;
+          inviaNotificaTelegram(msg);
+        }
+      }
+    });
+  });
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    ['popupTieni','popupPubblica','popupBan'].forEach(chiudiPopup);
+  }
+});
 </script>
 </body>
 </html>
